@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
+// todo
 //            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
         }
@@ -56,13 +57,15 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             }
         });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//todo
 //                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
@@ -102,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
+// todo
 //                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 //                                    startActivity(intent);
                                     finish();
