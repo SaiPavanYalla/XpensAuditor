@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "834268064930",
+    "project_id": "xpensauditor",
+    "storage_bucket": "xpensauditor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834268064930:android:ed94d18a5fe1b5af847bfb",
+        "android_client_info": {
+          "package_name": "com.xa.xpensauditor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834268064930-61n4gfn186ut3otliteef3dj9r0eg3f5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xa.xpensauditor",
+            "certificate_hash": "aa4628bc7ba6714ff495e5cbd0cfbb52e33dfd46"
+          }
+        },
+        {
+          "client_id": "834268064930-f2hkh23fop10socp95k4s6upk1o5nce5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuGQVAFdECVVBMNvNNg2trEyYLtaIkg-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834268064930-f2hkh23fop10socp95k4s6upk1o5nce5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
