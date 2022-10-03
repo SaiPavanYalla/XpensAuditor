@@ -1,5 +1,7 @@
 package com.xa.xpensauditor;
 
+import androidx.annotation.AnyRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
@@ -7,8 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.AnyRes;
-import android.support.annotation.NonNull;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -51,10 +52,10 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        Firebase.setAndroidContext(this);
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        mRootRef = new Firebase("https://expense-2a69a.firebaseio.com/");
+        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
         storageReference = FirebaseStorage.getInstance().getReference();
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
@@ -70,8 +71,7 @@ public class SignupActivity extends AppCompatActivity {
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-// todo
-//                startActivity(new Intent(SignupActivity.this, ResetPasswordActivity.class));
+                startActivity(new Intent(SignupActivity.this, ResetPasswordActivity.class));
             }
         });
 

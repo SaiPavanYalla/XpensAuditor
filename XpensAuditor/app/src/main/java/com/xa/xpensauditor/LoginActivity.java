@@ -33,15 +33,16 @@ public class LoginActivity extends AppCompatActivity {
 
         if (auth.getCurrentUser() != null) {
 // todo
-//            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString() , Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, Dummy.class));
             finish();
         }
-
+//
         // set the view now
         setContentView(R.layout.activity_login);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
 
         inputEmail = (EditText) findViewById(R.id.email);
@@ -57,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             }
         });
@@ -65,8 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//todo
-//                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
 
@@ -106,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 } else {
 // todo
-//                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                                    startActivity(intent);
+                                    Intent intent = new Intent(LoginActivity.this, Dummy.class);
+                                    startActivity(intent);
                                     finish();
                                 }
                             }
