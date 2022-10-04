@@ -33,7 +33,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
     private Firebase mRootRef;
     private Firebase RefUid;
-    private Firebase RefTran1, RefCatSum1, RefCat;
+    private Firebase RefTran1, RefCatSum1, RefCat, UnCatTran;
     private String Tid;
     private ArrayList<String> Catg = new ArrayList<>();
     private Button AddTran;
@@ -59,6 +59,8 @@ public class AddTransactionActivity extends AppCompatActivity {
         RefUid = mRootRef.child(Uid);
 
         RefCat = RefUid.child("Categories");
+        UnCatTran = RefUid.child("UnCatTran");
+
         AddTran = (Button) findViewById(R.id.btAddTransaction);
         Amnt = (EditText) findViewById(R.id.addTransAmt);
         ShpNm = (EditText) findViewById(R.id.addShopName);
@@ -165,6 +167,16 @@ public class AddTransactionActivity extends AppCompatActivity {
                         RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Month").setValue(month);
                         RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Year").setValue(year);
 
+                        if (SelCat == "Uncategorised") {
+                            UnCatTran.child(Tid);
+                            UnCatTran.child(Tid).child("Amount").setValue(Amount);
+                            UnCatTran.child(Tid).child("Category").setValue(SelCat);
+                            UnCatTran.child(Tid).child("Shop Name").setValue(ShopName);
+                            UnCatTran.child(Tid).child("ZMessage").setValue("Entered Manually...");
+                            UnCatTran.child(Tid).child("Day").setValue(day);
+                            UnCatTran.child(Tid).child("Month").setValue(month);
+                            UnCatTran.child(Tid).child("Year").setValue(year);
+                        }
 
 
                         RefTran1 = RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions");
