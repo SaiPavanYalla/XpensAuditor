@@ -5,20 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Telephony;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -26,14 +20,10 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -143,7 +133,11 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot DS) {
                 String n = DS.getValue(String.class);
                 NameView.setText(n);
-                tvHeaderName.setText(n);
+                try {
+                    tvHeaderName.setText(n);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -156,7 +150,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot DS) {
                 String n = DS.getValue().toString().trim();
-                tvHeaderMail.setText(n);
+                try {
+                    tvHeaderMail.setText(n);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 EmailView.setText(n);
             }
 
@@ -237,7 +235,7 @@ public class ProfileActivity extends AppCompatActivity {
         editProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ProfileActivity.this, EditProfile.class);
+                Intent i = new Intent(ProfileActivity.this, EditProfileActivity.class);
                 i.putExtra("NAME", NameView.getText().toString().trim());
                 i.putExtra("EMAIL", EmailView.getText().toString().trim());
                 i.putExtra("PHONE", PhnView.getText().toString().trim());
@@ -269,7 +267,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent i = new Intent(ProfileActivity.this, HomeActivity.class);
+        startActivity(i);
+//        super.onBackPressed();
     }
 
 }
