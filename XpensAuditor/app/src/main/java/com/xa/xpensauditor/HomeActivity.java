@@ -213,11 +213,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         //noinspection SimplifiableIfStatement
         if (id == R.id.account_settings) {
+
+
             Intent i=new Intent(this,AccountSettingsActivity.class);
             startActivity(i);
         }
         else if(id== R.id.action_settings)
         {
+            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
 //todo prefSettings
 //            Intent i=new Intent(this,PrefSettingsActivity.class);
 //            startActivity(i);
@@ -226,7 +229,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         else if(id==R.id.action_contact_us){
             Intent i=new Intent(this,ContactUs.class);
             startActivity(i);
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -265,13 +267,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
+            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
 // todo
 //            Intent i=new Intent(this,AnalysisActivity.class);
 //            startActivity(i);
 
         } else if (id == R.id.nav_settings) {
-            Intent i=new Intent(this,SettingsActivity.class);
-            startActivity(i);
+            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+//todo
+//            Intent i=new Intent(this,SettingsActivity.class);
+//            startActivity(i);
 
         } else if (id == R.id.nav_logout) {
             auth.signOut();

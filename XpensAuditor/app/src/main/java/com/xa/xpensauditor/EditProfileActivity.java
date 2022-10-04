@@ -74,7 +74,6 @@ public class EditProfileActivity extends AppCompatActivity {
         RefEmail=RefUid.child("Email");
         RefPhnnum=RefUid.child("Phone Number");
 
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
