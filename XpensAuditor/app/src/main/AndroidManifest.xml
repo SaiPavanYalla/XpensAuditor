@@ -61,6 +61,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_profile"
+            android:exported="false" >
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+        </activity>
+        <activity
             android:name=".EditProfile"
             android:exported="false" >
             <meta-data

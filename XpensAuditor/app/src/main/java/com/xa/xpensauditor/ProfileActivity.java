@@ -136,30 +136,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         }*/
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View navHeaderView =  navigationView.getHeaderView(0);
-        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
-        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
-        userImageNavHead = (ImageView)navHeaderView.findViewById(R.id.imageView);
-
-        changePic = (ImageButton) findViewById(R.id.changePic);
-        changePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*if (view.getId() == R.id.changePic) {*/
-                Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
-                gallery.setType("image/*");
-                startActivityForResult(gallery, galleryReq);
-                 /*else if (view.getId() == R.id.editProfile) {
-                    Intent i = new Intent(ProfileActivity.this, EditProfile.class);
-                    startActivity(i);
-                }*/
-            }
-
-
-        });
-
-
         RefName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot DS) {
@@ -271,22 +247,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-
         try {
             final File localFile = File.createTempFile("images", "jpg");
             storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -302,8 +262,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
         } catch (IOException e ) {}
-//        TODO
-//        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -315,14 +273,6 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        TODO
-//        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
     }
 
 }
