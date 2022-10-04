@@ -283,9 +283,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_suggest) {
-//todo
-//            Intent i=new Intent(this,Suggest.class);
-//            startActivity(i);
+            Intent i=new Intent(this,Suggest.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_share) {
 

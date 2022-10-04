@@ -24,6 +24,13 @@
         android:theme="@style/Theme.XpensAuditor"
         tools:targetApi="31">
         <activity
+            android:name=".Suggest"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SMSTransacShowActivity"
             android:exported="false">
             <meta-data
