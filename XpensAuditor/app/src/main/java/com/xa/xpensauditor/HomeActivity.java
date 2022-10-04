@@ -87,9 +87,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                todo
-//                Intent i=new Intent(getApplicationContext(),Transac.class);
-//                startActivity(i);
+                Intent i=new Intent(getApplicationContext(),AddTransactionActivity.class);
+                startActivity(i);
             }
         });
 
