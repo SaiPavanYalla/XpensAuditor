@@ -132,11 +132,10 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/profile"
+            android:id="@+id/add_preferences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:text="Profile" />
+            android:text="@string/add_preferences" />
 
         <Button
             android:id="@+id/change_email_button"

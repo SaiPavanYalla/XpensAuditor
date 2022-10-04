@@ -3,6 +3,7 @@ package com.xa.xpensauditor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class AccountSettingsActivity extends AppCompatActivity {
 
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, signOut,profile,AddTran;
+            changeEmail, changePassword, sendEmail, remove, signOut,addPreferences,AddTran;
     private Firebase mRootRef;
     private Firebase RefUid;
     private EditText oldEmail, newEmail, password, newPassword;
@@ -28,6 +29,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         sendEmail = (Button) findViewById(R.id.send);
         remove = (Button) findViewById(R.id.remove);
         signOut = (Button) findViewById(R.id.sign_out);
-        profile= (Button) findViewById(R.id.profile);
+        addPreferences= (Button) findViewById(R.id.add_preferences);
         //AddTran= (Button) findViewById(R.id.addTran);
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
@@ -88,10 +90,12 @@ public class AccountSettingsActivity extends AppCompatActivity {
         }
 
 
-        profile.setOnClickListener(new View.OnClickListener() {
+        addPreferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountSettingsActivity.this, ProfileManagement.class));
+//                startActivity(new Intent(AccountSettingsActivity.this, ProfileManagement.class));
+                Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -232,7 +236,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-
                                         Toast.makeText(AccountSettingsActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(AccountSettingsActivity.this, SignupActivity.class));
                                         finish();

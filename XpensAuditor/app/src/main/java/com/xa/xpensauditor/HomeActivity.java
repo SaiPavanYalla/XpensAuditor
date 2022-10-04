@@ -220,7 +220,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(id== R.id.action_settings)
         {
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
 //todo prefSettings
 //            Intent i=new Intent(this,PrefSettingsActivity.class);
 //            startActivity(i);

@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,7 +24,7 @@ public class ProfileManagement extends AppCompatActivity {
     private TextView NameView,EmailView,PhnView,AddressView;
     private Button Func;
     private ListView catView;
-    private ArrayList<String> Catg=new ArrayList<>();
+//    private ArrayList<String> Catg=new ArrayList<>();
     private Firebase mRootRef;
     private Firebase RefUid;
     private Firebase RefName,RefEmail,RefPhnnum;
@@ -47,15 +48,16 @@ public class ProfileManagement extends AppCompatActivity {
             public void onClick(View v) {
 //                TODO
 //                startActivity(new Intent(ProfileManagement.this,Functionalities.class));
+                Toast.makeText(getApplicationContext(),"To be updated in later version",Toast.LENGTH_SHORT).show();
             }
         });
 
 
 
         catView = (ListView) findViewById((R.id.Cat));
-        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,Catg);
+//        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,Catg);
 
-        catView.setAdapter(arrayAdapter);
+//        catView.setAdapter(arrayAdapter);
         //mRootRef= FirebaseDatabase.getInstance().getReference();
         mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
 
@@ -119,8 +121,8 @@ public class ProfileManagement extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String value= dataSnapshot.getKey().trim();
-                Catg.add(value);
-                arrayAdapter.notifyDataSetChanged();
+//                Catg.add(value);
+//                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
