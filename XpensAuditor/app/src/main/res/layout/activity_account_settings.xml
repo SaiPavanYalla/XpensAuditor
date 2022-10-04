@@ -17,7 +17,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
+            android:visibility="gone"
+            android:background="@color/emeraldgreen"
             app:layout_scrollFlags="scroll|enterAlways"
             android:theme="@style/Theme.XpensAuditor.PopupOverlay"
             />
@@ -89,7 +90,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
@@ -100,7 +101,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_change"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
@@ -111,7 +112,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_send"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <ProgressBar
@@ -128,14 +129,14 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_remove"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:textColor="@android:color/black"
             android:text="Profile" />
 
         <Button
@@ -183,7 +184,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/colorPrimary"
             android:text="@string/btn_sign_out"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
     </LinearLayout>

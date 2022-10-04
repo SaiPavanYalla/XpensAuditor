@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textSize="10dp"
+        android:visibility="invisible"
         android:textStyle="bold"  />
 
     <TextView
