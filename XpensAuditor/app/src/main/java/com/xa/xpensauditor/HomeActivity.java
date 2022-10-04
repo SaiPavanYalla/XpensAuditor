@@ -223,9 +223,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if(id==R.id.action_contact_us){
-//todo contact us
-//            Intent i=new Intent(this,ContactUs.class);
-//            startActivity(i);
+            Intent i=new Intent(this,ContactUs.class);
+            startActivity(i);
 
         }
         return super.onOptionsItemSelected(item);
