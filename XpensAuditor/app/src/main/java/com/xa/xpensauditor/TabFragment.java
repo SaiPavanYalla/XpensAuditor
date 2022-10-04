@@ -39,11 +39,9 @@ public class TabFragment extends Fragment {
     private ArrayList<String> CatgTF=new ArrayList<>();
     private ArrayAdapter<String> arrayAdapterTF;
     private ListView changeCatTF;
-    //todo
-    //private List<Transaction> TransactionList = new ArrayList<>();
+    private List<Transaction> TransactionList = new ArrayList<>();
     private RecyclerView recyclerView;
-    //todo
-    //private TransAdapter mAdapter1;
+    private TransAdapter mAdapter1;
 
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
@@ -63,7 +61,6 @@ public class TabFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tab, container, false);
 
-
     }
 
     @Override
@@ -72,14 +69,11 @@ public class TabFragment extends Fragment {
 
         //Toast.makeText(view.getContext(),"position: "+position,Toast.LENGTH_SHORT).show();
 
-
-
-
         Calendar calendar = Calendar.getInstance();
         currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
         currentMonth = (calendar.get(Calendar.MONTH)+1);
         currentYear = (calendar.get(Calendar.YEAR));
-        mRootRef=new Firebase("https://expense-2a69a.firebaseio.com/");
+        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -91,7 +85,6 @@ public class TabFragment extends Fragment {
         RefCat = RefUid.child("Categories");
 
         arrayAdapterTF=new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1,CatgTF);
-
 
         RefCat.addChildEventListener(new ChildEventListener() {
             @Override
@@ -131,30 +124,28 @@ public class TabFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-//  todo
-//        mAdapter1 = new TransAdapter(TransactionList);
-//        recyclerView.setAdapter(mAdapter1);
+        mAdapter1 = new TransAdapter(TransactionList);
+        recyclerView.setAdapter(mAdapter1);
         prepareTransactionData();
 
 
         registerForContextMenu(recyclerView);
 
-// todo
-//        mAdapter1.setOnItemClickListener(new TransAdapter.ClickListener() {
-//            @Override
-//            public void OnItemClick(int position, View v) {
-//                //Toast.makeText(getActivity(),TransactionList.get(position).getTid(),Toast.LENGTH_SHORT).show();
-//                Intent i = new Intent(getActivity(),SMScat.class);
-//                i.putExtra("indexPos",TransactionList.get(position).getTid());
-//                startActivity(i);
-//            }
-//
-//            @Override
-//            public void OnItemLongClick(int position, View v) {
-//                Log.i("yoyoyo","Here: "+position);
-//                pos=position;
-//            }
-//        });
+        mAdapter1.setOnItemClickListener(new TransAdapter.ClickListener() {
+            @Override
+            public void OnItemClick(int position, View v) {
+                //Toast.makeText(getActivity(),TransactionList.get(position).getTid(),Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(),SMSDBFetchActivity.class);
+                i.putExtra("indexPos",TransactionList.get(position).getTid());
+                startActivity(i);
+            }
+
+            @Override
+            public void OnItemLongClick(int position, View v) {
+                Log.i("yoyoyo","Here: "+position);
+                pos=position;
+            }
+        });
 
     }
 
@@ -165,10 +156,10 @@ public class TabFragment extends Fragment {
         {
             case 11:{
                 int show = item.getGroupId();
-                // todo
-//                tagId=TransactionList.get(show).getTid();
-//                delCategory = TransactionList.get(show).getT_cat();
-//                delAmt = TransactionList.get(show).getT_amt();
+
+                tagId=TransactionList.get(show).getTid();
+                delCategory = TransactionList.get(show).getT_cat();
+                delAmt = TransactionList.get(show).getT_amt();
 
                 // Toast.makeText(getActivity(),tagId+"-"+"Delete it",Toast.LENGTH_SHORT).show();
 
@@ -192,8 +183,8 @@ public class TabFragment extends Fragment {
 
                     }
                 });
-//todo
-//                TransactionList.clear();
+
+                TransactionList.clear();
                 prepareTransactionData();
 
 
@@ -338,11 +329,11 @@ public class TabFragment extends Fragment {
                     i++;
                 }
                 String shdate= shDay+" - "+shMonth+" - "+shYear;
-// todo
-//                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
-//                //Toast.makeText(getApplicationContext(),transaction.getT_amt(),Toast.LENGTH_SHORT).show();
-//                TransactionList.add(transaction);
-//                mAdapter1.notifyDataSetChanged();
+
+                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
+                //Toast.makeText(getApplicationContext(),transaction.getT_amt(),Toast.LENGTH_SHORT).show();
+                TransactionList.add(transaction);
+                mAdapter1.notifyDataSetChanged();
             }
 
             @Override

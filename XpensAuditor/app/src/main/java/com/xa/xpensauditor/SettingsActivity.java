@@ -51,7 +51,8 @@ public class SettingsActivity extends AppCompatActivity {
     private Firebase RefUid;
     private Firebase RefName,RefEmail;
     TextView tvHeaderName, tvHeaderMail;
-    StorageReference storageReference, filepath,storageRef;
+    // todo
+//    StorageReference storageReference, filepath,storageRef;
     Uri imageUri = null;
     String Uid;
 

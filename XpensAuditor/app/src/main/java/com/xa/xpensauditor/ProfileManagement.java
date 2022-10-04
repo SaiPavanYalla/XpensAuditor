@@ -57,7 +57,7 @@ public class ProfileManagement extends AppCompatActivity {
 
         catView.setAdapter(arrayAdapter);
         //mRootRef= FirebaseDatabase.getInstance().getReference();
-        mRootRef=new Firebase("https://expense-2a69a.firebaseio.com/");
+        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
 
         mRootRef.keepSynced(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();

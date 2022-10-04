@@ -59,7 +59,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Firebase RefUid;
     private Firebase RefName,RefEmail;
     TextView tvHeaderName, tvHeaderMail;
-    StorageReference storageReference, filepath,storageRef;
+    //todo
+    //StorageReference storageReference, filepath,storageRef;
     Uri imageUri = null;
     String Uid;
 
@@ -123,27 +124,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
         tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
         userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
-        storageReference = FirebaseStorage.getInstance().getReference();
-        storageRef=storageReference.child("Profile Image").child(Uid+".jpg");
-
-
-        try {
-            final File localFile = File.createTempFile("images", "jpg");
-            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    userImage.setImageBitmap(bitmap);
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                }
-            });
-        } catch (IOException e ) {}
+// todo
+//        storageReference = FirebaseStorage.getInstance().getReference();
+//        storageRef=storageReference.child("Profile Image").child(Uid+".jpg");
 
 //todo
+//        try {
+//            final File localFile = File.createTempFile("images", "jpg");
+//            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                    userImage.setImageBitmap(bitmap);
+//
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//                }
+//            });
+//        } catch (IOException e ) {}
+
+
         navigationView.setNavigationItemSelectedListener(this);
 
 

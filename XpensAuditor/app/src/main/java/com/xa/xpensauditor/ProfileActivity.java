@@ -50,7 +50,8 @@ public class ProfileActivity extends AppCompatActivity {
     private String day, month, year;
     public static Uri downloadUrl;
     private static final int galleryReq = 1;
-    StorageReference storageReference, filepath,storageRef;
+    //todo
+    //StorageReference storageReference, filepath,storageRef;
     ImageButton changePic;
     ImageView userImage;
     TextView tvHeaderName, tvHeaderMail;
@@ -76,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
         auth= FirebaseAuth.getInstance();
 
 
-        mRootRef = new Firebase("https://expense-2a69a.firebaseio.com/");
+        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
         mRootRef.keepSynced(true);
         Uid = auth.getUid();
         RefUid = mRootRef.child(Uid);
@@ -87,14 +88,14 @@ public class ProfileActivity extends AppCompatActivity {
         RefDay = RefUid.child("Day");
         RefMonth = RefUid.child("Month");
         RefYear = RefUid.child("Year");
+//todo
+//        storageReference = FirebaseStorage.getInstance().getReference();
+//
+//        userImage = (ImageView) findViewById(R.id.userImage);
 
-        storageReference = FirebaseStorage.getInstance().getReference();
 
-        userImage = (ImageView) findViewById(R.id.userImage);
-
-
-
-        storageRef=storageReference.child("Profile Image").child(Uid+".jpg");
+// todo
+        //storageRef=storageReference.child("Profile Image").child(Uid+".jpg");
         /*storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -104,22 +105,23 @@ public class ProfileActivity extends AppCompatActivity {
         });
 */
 
-
-        try {
-            final File localFile = File.createTempFile("images", "jpg");
-            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    userImage.setImageBitmap(bitmap);
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                }
-            });
-        } catch (IOException e ) {}
+// todo
+//        try {
+//            final File localFile = File.createTempFile("images", "jpg");
+//
+//            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                    userImage.setImageBitmap(bitmap);
+//
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//                }
+//            });
+//        } catch (IOException e ) {}
 
 
         //userImage.setImageURI(storageReference.child("Profile Image").child(Uid+".jpg").getDownloadUrl().getResult());
@@ -246,22 +248,22 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        try {
-            final File localFile = File.createTempFile("images", "jpg");
-            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    userImageNavHead.setImageBitmap(bitmap);
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                }
-            });
-        } catch (IOException e ) {}
+//todo
+//        try {
+//            final File localFile = File.createTempFile("images", "jpg");
+//            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                    userImageNavHead.setImageBitmap(bitmap);
+//
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//                }
+//            });
+//        } catch (IOException e ) {}
 
     }
 

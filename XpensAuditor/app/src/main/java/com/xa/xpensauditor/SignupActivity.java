@@ -57,7 +57,8 @@ public class SignupActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
-        storageReference = FirebaseStorage.getInstance().getReference();
+        //todo
+        //storageReference = FirebaseStorage.getInstance().getReference();
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);

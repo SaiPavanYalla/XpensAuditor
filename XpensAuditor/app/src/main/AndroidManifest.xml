@@ -24,6 +24,20 @@
         android:theme="@style/Theme.XpensAuditor"
         tools:targetApi="31">
         <activity
+            android:name=".SMSTransacShowActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SMSDBFetchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddTransactionActivity"
             android:exported="false">
             <meta-data
