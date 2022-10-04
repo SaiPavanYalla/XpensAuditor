@@ -134,12 +134,9 @@ public class ProfileActivity extends AppCompatActivity {
                 String n = DS.getValue(String.class);
                 NameView.setText(n);
                 try {
-                    System.out.print("printing n value:");
-                    System.out.print(n);
                     tvHeaderName.setText(n);
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    tvHeaderName.setText("");
                 }
             }
 
@@ -154,12 +151,9 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot DS) {
                 String n = DS.getValue().toString().trim();
                 try {
-                    System.out.print("printing n value:");
-                    System.out.print(n);
                     tvHeaderMail.setText(n);
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    tvHeaderMail.setText("");
                 }
                 EmailView.setText(n);
             }
