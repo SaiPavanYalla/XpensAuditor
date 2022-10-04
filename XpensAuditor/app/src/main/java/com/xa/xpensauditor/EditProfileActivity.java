@@ -9,12 +9,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
     DatePicker dob;
     Button submit;
@@ -98,7 +97,7 @@ public class EditProfile extends AppCompatActivity {
                 RefUid.child("Year").setValue(year);
 
                 //Toast.makeText(getApplicationContext(),name+","+addr+","+phone+","+email,Toast.LENGTH_LONG).show();
-                startActivity(new Intent(EditProfile.this,ProfileActivity.class));
+                startActivity(new Intent(EditProfileActivity.this,ProfileActivity.class));
             }
         });
     }
