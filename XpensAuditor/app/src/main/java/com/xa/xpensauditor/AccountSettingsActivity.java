@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -226,37 +228,106 @@ public class AccountSettingsActivity extends AppCompatActivity {
         btnRemoveUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                if (user != null) {
-                    String Uid = auth.getUid();
-                    RefUid=mRootRef.child(Uid);
-
-                    user.delete()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        RefUid.removeValue();
-                                        startActivity(new Intent(AccountSettingsActivity.this, SignupActivity.class));
-                                        Toast.makeText(AccountSettingsActivity.this, "Your profile is deleted:( Create an account now!", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                        progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        Toast.makeText(AccountSettingsActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                }
-                            });
-                }
+                AlertDialog diaBox = AskRemoveUserOption(user);
+                diaBox.show();
             }
         });
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signOut();
+                AlertDialog diaBox = AskSignOutOption();
+                diaBox.show();
+
             }
         });
+
+    }
+
+    private AlertDialog AskRemoveUserOption(FirebaseUser user)
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                // set message, title, and icon
+                .setTitle("Remove User")
+                .setMessage("All Data will be Lost, Do you Really want to Remove ?")
+                //.setIcon(R.drawable.delete)
+
+                .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                        RemoveUser(user);
+
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+
+        return myQuittingDialogBox;
+    }
+
+
+
+    private AlertDialog AskSignOutOption()
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                // set message, title, and icon
+                .setTitle("SignOut")
+                .setMessage("Do you Really want to SignOut ?")
+                //.setIcon(R.drawable.delete)
+
+                .setPositiveButton("SignOut", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+                        dialog.dismiss();
+                        signOut();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+
+        return myQuittingDialogBox;
+    }
+
+    //remove user method
+    private void RemoveUser(FirebaseUser  user) {
+        progressBar.setVisibility(View.VISIBLE);
+        if (user != null) {
+            String Uid = auth.getUid();
+            RefUid=mRootRef.child(Uid);
+
+            user.delete()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                RefUid.removeValue();
+                                startActivity(new Intent(AccountSettingsActivity.this, SignupActivity.class));
+                                Toast.makeText(AccountSettingsActivity.this, "Your profile is deleted:( Create an account now!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                progressBar.setVisibility(View.GONE);
+                            } else {
+                                Toast.makeText(AccountSettingsActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+        }
 
     }
 
