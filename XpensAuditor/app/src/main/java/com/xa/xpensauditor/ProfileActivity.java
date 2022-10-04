@@ -222,7 +222,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot DS) {
                 year = DS.getValue().toString().trim();
-                UserDOB.setText(day + "/" + month + "/" + year);
+                UserDOB.setText(month + "/" + day + "/" + year);
             }
 
             @Override
