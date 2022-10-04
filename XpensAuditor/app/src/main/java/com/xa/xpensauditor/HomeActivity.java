@@ -110,9 +110,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         Firebase.setAndroidContext(this);
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) {
+            //Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString() , Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+            finish();
+        }
         mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
         mRootRef.keepSynced(true);
-        auth = FirebaseAuth.getInstance();
         Uid=auth.getUid();
         RefUid= mRootRef.child(Uid);
         RefName = RefUid.child("Name");
@@ -152,7 +157,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().reload();
+                }
+                if (auth.getCurrentUser()!=null) {
+                    tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
+                }
             }
 
             @Override
@@ -164,7 +174,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefEmail.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().reload();
+                }
+                if (auth.getCurrentUser()!=null) {
+                    Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
+                    tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
+                }
             }
 
             @Override

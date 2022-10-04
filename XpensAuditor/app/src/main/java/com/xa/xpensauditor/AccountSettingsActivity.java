@@ -230,14 +230,15 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 if (user != null) {
                     String Uid = auth.getUid();
                     RefUid=mRootRef.child(Uid);
-                    RefUid.removeValue();
+
                     user.delete()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(AccountSettingsActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
+                                        RefUid.removeValue();
                                         startActivity(new Intent(AccountSettingsActivity.this, SignupActivity.class));
+                                        Toast.makeText(AccountSettingsActivity.this, "Your profile is deleted:( Create an account now!", Toast.LENGTH_SHORT).show();
                                         finish();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
