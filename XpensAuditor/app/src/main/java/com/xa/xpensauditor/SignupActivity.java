@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -29,9 +30,9 @@ import com.google.firebase.storage.UploadTask;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText inputEmail;
-    private EditText inputName;
-    private EditText inputPhnnum;
+    private TextInputEditText inputEmail;
+    private TextInputEditText inputName;
+    private TextInputEditText inputPhnnum;
 
 
     private Firebase mRootRef;
@@ -60,9 +61,9 @@ public class SignupActivity extends AppCompatActivity {
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputName = (EditText) findViewById(R.id.Name);
-        inputPhnnum = (EditText) findViewById(R.id.phnum);
+        inputEmail = (TextInputEditText) findViewById(R.id.email);
+        inputName = (TextInputEditText) findViewById(R.id.Name);
+        inputPhnnum = (TextInputEditText) findViewById(R.id.phnum);
 
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -170,27 +171,28 @@ public class SignupActivity extends AppCompatActivity {
                                     RefHomeNeeds.setValue("");
                                     RefOthers=RefCat.child("Others");
                                     RefOthers.setValue("");
-                                    //RefUncat=RefCat.child("Uncategorised");
-                                    //RefUncat.setValue("");
-                                    filepath=storageReference.child("Profile Image").child(Uid+".jpg");
-
-                                    Uri imuri=getUriToDrawable(getApplicationContext(),R.drawable.def_profile_pic);
-
-                                    StorageReference storageReference= FirebaseStorage.getInstance().getReference();
-
-                                    final StorageReference ref = storageReference.child("picture.jpg");
-                                    filepath.putFile(imuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                @Override
-                                                public void onSuccess(Uri uri) {
-                                                    final Uri downloadUrl = uri;
-                                                }
-                                            });
-                                        }
-                                    });
-                                    // auth.signOut();
+                                        RefUncat=RefCat.child("Uncategorised");
+                                        RefUncat.setValue("");
+// todo profile picture
+//                                        filepath=storageReference.child("Profile Image").child(Uid+".jpg");
+//
+//                                        Uri imuri=getUriToDrawable(getApplicationContext(),R.drawable.def_profile_pic);
+//
+//                                        StorageReference storageReference= FirebaseStorage.getInstance().getReference();
+//
+//                                        final StorageReference ref = storageReference.child("picture.jpg");
+//                                        filepath.putFile(imuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                                            @Override
+//                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                                    @Override
+//                                                    public void onSuccess(Uri uri) {
+//                                                        final Uri downloadUrl = uri;
+//                                                    }
+//                                                });
+//                                            }
+//                                        });
+                                    auth.signOut();
 //                                    startActivity(new Intent(SignupActivity.this, SignSetCatBudget.class));
                                     finish();
                                 }

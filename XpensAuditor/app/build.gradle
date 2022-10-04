@@ -53,7 +53,7 @@ dependencies {
     implementation 'com.firebase:firebase-client-android:2.4.0'
     implementation 'com.google.firebase:firebase-storage:20.0.2'
     implementation "androidx.drawerlayout:drawerlayout:1.1.1"
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 }

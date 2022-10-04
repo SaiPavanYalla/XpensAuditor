@@ -11,22 +11,7 @@
     <color name="colorPrimaryDark">#0097a7</color>
     <color name="colorAccent">#f77e71</color>
 
-    <color name="bg_login">#26ae90</color>
-    <color name="bg_register">#2e3237</color>
-    <color name="bg_main">#428bca</color>
-
-    <color name="input_login">#222222</color>
-    <color name="input_login_hint">#999999</color>
-    <color name="input_register">#888888</color>
-    <color name="input_register_bg">#3b4148</color>
-    <color name="input_register_hint">#5e6266</color>
-    <color name="btn_login">#26ae90</color>
-    <color name="btn_login_bg">#ffffff</color>
-    <color name="lbl_name">#333333</color>
-    <color name="btn_logut_bg">#ff6861</color>
     <color name="graylight">#fafafa</color>
-    <color name="year">#999999</color>
-    <color name="title">#222222</color>
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
 </resources>
