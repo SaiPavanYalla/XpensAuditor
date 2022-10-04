@@ -12,6 +12,8 @@
     <color name="colorAccent">#f77e71</color>
 
     <color name="graylight">#fafafa</color>
+    <color name="year">#999999</color>
+    <color name="title">#222222</color>
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
 </resources>
