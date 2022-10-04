@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.xa.xpensauditor.Rate"
     tools:showIn="@layout/activity_rate"
-    android:background="@android:color/holo_red_dark">
+    android:background="@android:color/white">
 
     <RatingBar
         android:stepSize="0.5"
