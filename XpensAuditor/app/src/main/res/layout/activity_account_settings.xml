@@ -4,18 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AccountSettingsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:theme="@style/Theme.XpensAuditor.AppBarOverlay"
         app:elevation="0dp">
-<!--        android:theme="@style/AppTheme.AppBarOverlay"-->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,24 +20,26 @@
             android:background="@color/colorPrimaryDark"
             app:layout_scrollFlags="scroll|enterAlways"
             android:theme="@style/Theme.XpensAuditor.PopupOverlay"
-             />
-<!--        app:popupTheme="@style/AppTheme.PopupOverlay"-->
-
+            />
     </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/old_email"
@@ -168,7 +166,6 @@
             android:textStyle="bold" />
 
 
-
         <Button
             android:id="@+id/remove_user_button"
             style="?android:textAppearanceSmall"
@@ -190,6 +187,7 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

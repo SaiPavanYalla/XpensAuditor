@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// todo auto gen code
+// todo delete
 //     binding = ActivityHomeBinding.inflate(getLayoutInflater());
 //     setContentView(binding.getRoot());
 //
@@ -119,7 +119,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefEmail=RefUid.child("Email");
         //old code
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        
+
         View navHeaderView =  navigationView.getHeaderView(0);
         tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
         tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
@@ -144,8 +144,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             });
         } catch (IOException e ) {}
 
-
-        //navigationView.setNavigationItemSelectedListener(this);
+//todo
+        navigationView.setNavigationItemSelectedListener(this);
 
 
         RefName.addValueEventListener(new ValueEventListener() {
@@ -191,8 +191,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new TabFragment(),"ALL TRANSACTION");
-        //todo
-        //adapter.addFragment(new UncategorisedFragment(),"UNCATEGORISED TRANSACTION");
+        adapter.addFragment(new UncategorisedFragment(),"UNCATEGORISED TRANSACTION");
         viewPager.setAdapter(adapter);
     }
 
@@ -213,9 +212,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         //noinspection SimplifiableIfStatement
         if (id == R.id.account_settings) {
-//todo account settings
-//            Intent i=new Intent(this,MainActivity.class);
-//            startActivity(i);
+            Intent i=new Intent(this,AccountSettingsActivity.class);
+            startActivity(i);
         }
         else if(id== R.id.action_settings)
         {
@@ -263,9 +261,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_profile) {
-// todo
-//            Intent i=new Intent(this,ProfileActivity.class);
-//            startActivity(i);
+            Intent i=new Intent(this,ProfileActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
 // todo
@@ -273,9 +270,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //            startActivity(i);
 
         } else if (id == R.id.nav_settings) {
-// todo
-//            Intent i=new Intent(this,SettingsActivity.class);
-//            startActivity(i);
+            Intent i=new Intent(this,SettingsActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_logout) {
             auth.signOut();
