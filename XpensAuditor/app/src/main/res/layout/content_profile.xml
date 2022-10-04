@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="350dp">
             <LinearLayout
-                android:background="@drawable/gradientbackground"
+                android:background="@color/emeraldgreen"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="50dp"
@@ -22,7 +22,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/userImage"
-                    android:src="@drawable/prof_pic"
+                    android:src="@mipmap/ic_launcher"
 
                     android:layout_marginTop="45dp"
                     android:layout_gravity="center_horizontal"
@@ -35,13 +35,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
-                    <ImageButton
-                        android:id="@+id/changePic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/prof_pic"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"/>
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/changePic"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:src="@drawable/prof_pic"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:background="@android:color/transparent"/>-->
 
                     <ImageButton
                         android:id="@+id/editProfile"
@@ -59,8 +59,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pramothini Sekar"
-                    android:textColor="#fff"
+                    android:text="Mithila Reddy"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="21sp"/>
 
