@@ -123,7 +123,6 @@ public class UncategorisedFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerViewUF.setLayoutManager(mLayoutManager);
         recyclerViewUF.setItemAnimator(new DefaultItemAnimator());
-
         mAdapterUF = new TransactionAdapter(TransactionListUF);
         recyclerViewUF.setAdapter(mAdapterUF);
         prepareTransactionData();
@@ -202,76 +201,76 @@ public class UncategorisedFragment extends Fragment {
                 });
             }break;
 
-            case 22:{
-                int show = item.getGroupId();
-                tagId=TransactionListUF.get(show).getTid();
-                final Transaction updateTransac = new Transaction(TransactionListUF.get(show)); //Transaction to be modified
-
-                Toast.makeText(getActivity(),tagId+"-"+"Change it",Toast.LENGTH_SHORT).show();
-
-                final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.custom_dialog);
-                dialog.setTitle("Title...");
-
-                changeCat= (ListView) dialog.findViewById(R.id.CatgList);
-                changeCat.setAdapter(arrayAdapter);
-                dialog.show();
-                changeCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        catChangeTo = adapterView.getItemAtPosition(i).toString().trim();
-                        Toast.makeText(getActivity(),catChangeTo,Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-
-                        //Deleting from everywhere
-                        RefTran.child(tagId).removeValue();
-
-                        //Adding to the new category
-
-                        String tempDate = updateTransac.getT_date();
-                        String[] dateSet = tempDate.split(" - ");
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Amount").setValue(updateTransac.getT_amt());
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Category").setValue(catChangeTo);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Day").setValue(dateSet[0]);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Month").setValue(dateSet[1]);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Shop Name").setValue(updateTransac.getT_shopname());
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Year").setValue(dateSet[2]);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("ZMessage").setValue(updateTransac.getT_msg());
-
-                        //Adding to CatTran
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Amount").setValue(updateTransac.getT_amt());
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Category").setValue(catChangeTo);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Day").setValue(dateSet[0]);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Month").setValue(dateSet[1]);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Shop Name").setValue(updateTransac.getT_shopname());
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Year").setValue(dateSet[2]);
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("ZMessage").setValue(updateTransac.getT_msg());
-
-                        //Changing CatSum
-                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatSum").child(catChangeTo).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                String sumCat = dataSnapshot.getValue().toString().trim();
-                                intSum = Integer.parseInt(sumCat);
-                                Integer newDelAmt = Integer.parseInt(updateTransac.getT_amt());
-                                intSum = intSum + newDelAmt;
-                                if(intSum==0)
-                                    dataSnapshot.getRef().removeValue();
-                                else
-                                    dataSnapshot.getRef().setValue(String.valueOf(intSum));
-                            }
-
-                            @Override
-                            public void onCancelled(FirebaseError firebaseError) {
-
-                            }
-
-                        });
-
-                    }
-                });
-
-            }break;
+//            case 22:{
+//                int show = item.getGroupId();
+//                tagId=TransactionListUF.get(show).getTid();
+//                final Transaction updateTransac = new Transaction(TransactionListUF.get(show)); //Transaction to be modified
+//
+//                Toast.makeText(getActivity(),tagId+"-"+"Change it",Toast.LENGTH_SHORT).show();
+//
+//                final Dialog dialog = new Dialog(getContext());
+//                dialog.setContentView(R.layout.custom_dialog);
+//                dialog.setTitle("Title...");
+//
+//                changeCat= (ListView) dialog.findViewById(R.id.CatgList);
+//                changeCat.setAdapter(arrayAdapter);
+//                dialog.show();
+//                changeCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                        catChangeTo = adapterView.getItemAtPosition(i).toString().trim();
+//                        Toast.makeText(getActivity(),catChangeTo,Toast.LENGTH_SHORT).show();
+//                        dialog.dismiss();
+//
+//                        //Deleting from everywhere
+//                        RefTran.child(tagId).removeValue();
+//
+//                        //Adding to the new category
+//
+//                        String tempDate = updateTransac.getT_date();
+//                        String[] dateSet = tempDate.split(" - ");
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Amount").setValue(updateTransac.getT_amt());
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Category").setValue(catChangeTo);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Day").setValue(dateSet[0]);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Month").setValue(dateSet[1]);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Shop Name").setValue(updateTransac.getT_shopname());
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("Year").setValue(dateSet[2]);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("Transactions").child(tagId).child("ZMessage").setValue(updateTransac.getT_msg());
+//
+//                        //Adding to CatTran
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Amount").setValue(updateTransac.getT_amt());
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Category").setValue(catChangeTo);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Day").setValue(dateSet[0]);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Month").setValue(dateSet[1]);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Shop Name").setValue(updateTransac.getT_shopname());
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("Year").setValue(dateSet[2]);
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatTran").child(catChangeTo).child(tagId).child("ZMessage").setValue(updateTransac.getT_msg());
+//
+//                        //Changing CatSum
+//                        RefUid.child("DateRange").child(dateSet[1]+"-"+dateSet[2]).child("CatSum").child(catChangeTo).addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                String sumCat = dataSnapshot.getValue().toString().trim();
+//                                intSum = Integer.parseInt(sumCat);
+//                                Integer newDelAmt = Integer.parseInt(updateTransac.getT_amt());
+//                                intSum = intSum + newDelAmt;
+//                                if(intSum==0)
+//                                    dataSnapshot.getRef().removeValue();
+//                                else
+//                                    dataSnapshot.getRef().setValue(String.valueOf(intSum));
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(FirebaseError firebaseError) {
+//
+//                            }
+//
+//                        });
+//
+//                    }
+//                });
+//
+//            }break;
         }
         return super.onContextItemSelected(item);
     }
