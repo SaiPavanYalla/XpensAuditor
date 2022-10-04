@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_action_home"
+            android:title="HOME" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="PROFILE" />
+        <item
+            android:id="@+id/nav_show_analysis"
+            android:icon="@drawable/ic_action_analysis"
+            android:title="ANALYSIS" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_action_settings"
+            android:title="SETTINGS" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_action_logout"
+            android:title="LOGOUT" />
+
+        <item android:title="Communicate">
+            <menu>
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_share"
+                    android:title="Share" />
+
+            </menu>
+        </item>
+
+        <item android:title="Feedback">
+            <menu>
+                <item
+                    android:id="@+id/nav_rate"
+                    android:icon="@drawable/ic_rate_review"
+                    android:title="Rate" />
+                <item
+                    android:id="@+id/nav_suggest"
+                    android:icon="@drawable/ic_insert_comment"
+                    android:title="Suggestions" />
+            </menu>
+        </item>
+    </group>
+</menu>
