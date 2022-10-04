@@ -23,13 +23,12 @@ public class EditProfile extends AppCompatActivity {
     private Firebase RefUid;
     private Firebase RefName,RefEmail,RefPhnnum;
     String day,month,year;
+    Integer yr_int,month_int,day_int;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         dob = (DatePicker)findViewById(R.id.userDOB);
         submit = (Button)findViewById(R.id.submitButton);
@@ -46,9 +45,28 @@ public class EditProfile extends AppCompatActivity {
         day=intent.getStringExtra("DAY");
         month=intent.getStringExtra("MONTH");
         year=intent.getStringExtra("YEAR");
-        dob.init(Integer.parseInt(year),Integer.parseInt(month)-1,Integer.parseInt(day),null);
+        try {
+            yr_int = Integer.parseInt(year);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            yr_int = 0;
+        }
+        try {
+            month_int = Integer.parseInt(month);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            month_int = 0;
+        }
+        try {
+            day_int = Integer.parseInt(day);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            day_int = 0;
+        }
+        dob.init(yr_int,month_int-1,day_int,null);
+
         Toast.makeText(getApplicationContext(),day+month+year,Toast.LENGTH_SHORT).show();
-        mRootRef=new Firebase("https://expense-2a69a.firebaseio.com/");
+        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
         String Uid=auth.getUid();
@@ -80,16 +98,8 @@ public class EditProfile extends AppCompatActivity {
                 RefUid.child("Year").setValue(year);
 
                 //Toast.makeText(getApplicationContext(),name+","+addr+","+phone+","+email,Toast.LENGTH_LONG).show();
-//                TODO
-//                startActivity(new Intent(EditProfile.this,ProfileActivity.class));
+                startActivity(new Intent(EditProfile.this,ProfileActivity.class));
             }
-
-
         });
-
-
-
-
     }
-
 }
