@@ -10,10 +10,12 @@
     <color name="colorPrimary">#00bcd4</color>
     <color name="colorPrimaryDark">#0097a7</color>
     <color name="colorAccent">#f77e71</color>
-
+    <color name="transcolordark">#FF000000</color>
+    <color name="transcolorlight">#FFFFFFFF</color>
     <color name="graylight">#fafafa</color>
     <color name="year">#999999</color>
     <color name="title">#222222</color>
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
+    <color name="emeraldgreen">#50C878</color>
 </resources>
