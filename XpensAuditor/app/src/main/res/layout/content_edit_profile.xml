@@ -8,7 +8,8 @@
     tools:context=".EditProfileActivity"
     tools:showIn="@layout/activity_edit_profile"
     android:background="@color/graylight"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/Theme.XpensAuditor.PopupOverlay">
 
     <LinearLayout
         android:layout_height="match_parent"
@@ -18,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingTop="25dp"
-            android:background="@drawable/gradientbackground">
+            android:background="@color/emeraldgreen">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Pramothini Sekar"
+                    android:text="Mithila Reddy"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -63,7 +64,8 @@
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@drawable/ic_date" />
+                    android:src="@drawable/ic_date"
+                    android:layout_gravity="center"/>
 
                 <DatePicker
                     android:id="@+id/userDOB"
@@ -87,7 +89,7 @@
                     android:id="@+id/userAddress"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="Sungam, Coimbatore, TN"/>
@@ -106,7 +108,7 @@
                     android:id="@+id/userEmail"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="13pramo@gmail.com"/>
@@ -125,7 +127,7 @@
                     android:id="@+id/userPhone"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:text="+91 9445280954"/>
