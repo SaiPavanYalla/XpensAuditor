@@ -8,20 +8,34 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Transaction Info"
+            android:textColor="@color/emeraldgreen"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
 
         <TableLayout
             android:id="@+id/Table"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:stretchColumns="2"
             android:shrinkColumns="1">
             <TableRow
                 android:layout_gravity="right">
                 <TextView
-                    android:text="Transaction ID:"
+                    android:text="Transaction ID"
+                    android:textColor="@color/emeraldgreen"
                     android:padding="3dip"/>
+
+            </TableRow>
+
+            <TableRow>
                 <TextView
                     android:gravity="left"
                     android:padding="3dip"
@@ -30,8 +44,12 @@
 
             <TableRow>
                 <TextView
-                    android:text="Transaction amount:"
+                    android:text="Transaction amount"
+                    android:textColor="@color/emeraldgreen"
                     android:padding="3dip" />
+            </TableRow>
+
+            <TableRow>
                 <TextView
                     android:gravity="left"
                     android:padding="3dip"
@@ -39,8 +57,12 @@
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Shop Name:"
+                    android:text="Shop Name"
+                    android:textColor="@color/emeraldgreen"
                     android:padding="3dip" />
+            </TableRow>
+
+            <TableRow>
                 <TextView
                     android:gravity="left"
                     android:padding="3dip"
@@ -48,8 +70,12 @@
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Category:"
+                    android:text="Category"
+                    android:textColor="@color/emeraldgreen"
                     android:padding="3dip" />
+            </TableRow>
+
+            <TableRow>
                 <TextView
                     android:gravity="left"
                     android:padding="3dip"
@@ -57,8 +83,12 @@
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Date:"
+                    android:text="Date"
+                    android:textColor="@color/emeraldgreen"
                     android:padding="3dip" />
+            </TableRow>
+
+            <TableRow>
                 <TextView
                     android:gravity="left"
                     android:padding="3dip"
@@ -66,8 +96,12 @@
             </TableRow>
             <TableRow>
                 <TextView
-                    android:text="Message:"
+                    android:text="Message"
+                    android:textColor="@color/emeraldgreen"
                     android:padding="3dip" />
+            </TableRow>
+
+            <TableRow>
                 <TextView
                     android:gravity="left"
                     android:padding="3dip"
