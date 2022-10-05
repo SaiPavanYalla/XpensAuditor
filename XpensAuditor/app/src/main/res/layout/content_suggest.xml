@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.xa.xpensauditor.Suggest"
-    tools:showIn="@layout/activity_suggest"
-    android:background="@android:color/white">
+    tools:showIn="@layout/activity_suggest">
 
     <EditText
         android:id="@+id/editText5"
