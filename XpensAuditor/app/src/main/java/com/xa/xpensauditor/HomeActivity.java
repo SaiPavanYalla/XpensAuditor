@@ -178,7 +178,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     auth.getCurrentUser().reload();
                 }
                 if (auth.getCurrentUser()!=null) {
-                    Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
                     tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
                 }
             }
@@ -230,13 +230,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.account_settings) {
 
-
             Intent i=new Intent(this,AccountSettingsActivity.class);
             startActivity(i);
         }
         else if(id== R.id.action_settings)
         {
-//            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
 //todo prefSettings
 //            Intent i=new Intent(this,PrefSettingsActivity.class);
 //            startActivity(i);

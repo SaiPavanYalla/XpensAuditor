@@ -19,7 +19,7 @@
         android:id="@+id/imageView"
         android:contentDescription="@string/nav_header_desc"
         app:srcCompat="@mipmap/ic_launcher_round"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_width="70dp"
         android:layout_height="70dp"
         app:civ_border_width="2dp"
@@ -31,6 +31,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_header_title"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/black"/>
 
@@ -38,6 +40,7 @@
         android:id="@+id/headerEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
         android:text="@string/nav_header_subtitle"
         android:textColor="@color/black"/>
 </LinearLayout>

@@ -118,7 +118,7 @@ public class TabFragment extends Fragment {
 
 
 
-        Toast.makeText(getContext(),currentMonth+"/"+currentYear,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),currentMonth+"/"+currentYear,Toast.LENGTH_SHORT).show();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());

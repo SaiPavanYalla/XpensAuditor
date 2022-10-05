@@ -6,11 +6,11 @@
         android:orderInCategory="100"
         android:title="Account Settings"
         android:icon="@drawable/ic_account"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Preference Settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_contact_us"
