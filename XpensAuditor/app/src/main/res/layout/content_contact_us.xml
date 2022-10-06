@@ -137,8 +137,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/RelativeView5"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:onClick="SendMailmithila"
             android:padding="@dimen/activity_horizontal_margin">
 
 <!--            <ImageView-->
@@ -167,8 +169,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/RelativeView4"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:onClick="SendMailpavan"
+
+
             android:padding="@dimen/activity_horizontal_margin">
 
 <!--            <ImageView-->
@@ -197,8 +203,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/RelativeView7"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:onClick="SendMailsahiti"
             android:padding="@dimen/activity_horizontal_margin">
 
             <!--            <ImageView-->
@@ -229,6 +237,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:onClick="SendMailsunandini"
+            android:id="@+id/RelativeView6"
             android:padding="@dimen/activity_horizontal_margin">
 
             <!--            <ImageView-->
@@ -258,6 +268,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:onClick="SendMailvineeth"
+            android:id="@+id/RelativeView3"
             android:padding="@dimen/activity_horizontal_margin">
 
             <!--            <ImageView-->

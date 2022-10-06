@@ -48,8 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_star_black_24dp"
+        android:src="@drawable/ic_phone_black_24dp"
         app:layout_anchor="@id/app_bar"
+        android:onClick="callSupport"
         app:layout_anchorGravity="bottom|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

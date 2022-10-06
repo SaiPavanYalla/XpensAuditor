@@ -2,15 +2,12 @@ package com.xa.xpensauditor;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class ContactUs extends AppCompatActivity implements View.OnClickListener{
@@ -27,6 +24,8 @@ public class ContactUs extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+
+
 //        SMS = (Button) findViewById(R.id.sendSMS);
 //        Call = (Button)findViewById(R.id.call);
 //        Email = (Button)findViewById(R.id.sendEmail);
@@ -35,6 +34,7 @@ public class ContactUs extends AppCompatActivity implements View.OnClickListener
 //        Call.setOnClickListener(this);
 //        Email.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View view) {
@@ -86,5 +86,55 @@ public class ContactUs extends AppCompatActivity implements View.OnClickListener
 ////            }
 ////            break;
 //        }
+    }
+
+
+
+    private void sendmail(String mail) {
+        String mailto = "mailto:"+mail +
+                "?cc=" +
+                "&subject=" + Uri.encode("Support Needed") +
+                "&body=" + Uri.encode("i need support");
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse(mailto));
+
+        try {
+            startActivity(emailIntent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "Error to open email app", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void SendMailvineeth(View view) {
+        sendmail("vineethdasi22@gmail.com");
+    }
+
+
+
+    public void SendMailsunandini(View view) {
+        sendmail("sunandini.medisetti@gmail.com");
+
+    }
+
+    public void SendMailsahiti(View view) {
+        sendmail("sahithi.ammana@gmail.com");
+
+    }
+
+    public void SendMailpavan(View view) {
+        sendmail("ysaipavan99@gmail.com");
+
+    }
+
+    public void SendMailmithila(View view) {
+        sendmail("mithilareddy1999@gmail.com");
+
+    }
+
+    public void callSupport(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:0123456789"));
+        startActivity(intent);
     }
 }
