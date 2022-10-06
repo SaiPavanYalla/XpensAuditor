@@ -157,6 +157,9 @@ public class SignupActivity extends AppCompatActivity {
                                     RefUid.child("Month").setValue("0");
                                     RefUid.child("Year").setValue("0");
 
+                                    RefUid.child("LastRefreshDate");
+                                    RefUid.child("LastRefreshDate").setValue(0);
+
                                     RefCat=RefUid.child("Categories");
                                     RefFood=RefCat.child("Food");
                                     RefFood.setValue("");

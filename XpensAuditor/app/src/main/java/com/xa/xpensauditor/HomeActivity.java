@@ -55,14 +55,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     FirebaseAuth auth;
     ImageView userImage;
 
-    private Firebase mRootRef;
+    private Firebase mRootRef,LastRefreshDate;
     private Firebase RefUid;
     private Firebase RefName,RefEmail;
     TextView tvHeaderName, tvHeaderMail;
     //todo
     //StorageReference storageReference, filepath,storageRef;
     Uri imageUri = null;
-    String Uid;
+    String Uid,StrLastRefDate="0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +122,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefUid= mRootRef.child(Uid);
         RefName = RefUid.child("Name");
         RefEmail=RefUid.child("Email");
-        //old code
+        LastRefreshDate = RefUid.child("LastRefreshDate");
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         View navHeaderView =  navigationView.getHeaderView(0);
@@ -181,6 +182,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     //Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
                     tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
                 }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+        LastRefreshDate.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                StrLastRefDate=dataSnapshot.getValue().toString().trim();
             }
 
             @Override
@@ -314,6 +326,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "XpensAuditor");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
+        } else if (id == R.id.nav_refresh) {
+            Intent i=new Intent(this,SMSReaderActivity.class);
+            i.putExtra("StrLastRefDate", StrLastRefDate);
+            startActivity(i);
+
         }
 
 
