@@ -105,6 +105,7 @@
                 <TextView
                     android:gravity="left"
                     android:padding="3dip"
+                    android:layout_width="wrap_content"
                     android:id="@+id/sms"/>
             </TableRow>
         </TableLayout>

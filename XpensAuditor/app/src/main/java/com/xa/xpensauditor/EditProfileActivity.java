@@ -62,7 +62,13 @@ public class EditProfileActivity extends AppCompatActivity {
             e.printStackTrace();
             day_int = 0;
         }
-        dob.init(yr_int,month_int-1,day_int,null);
+        if (yr_int == 0)
+        {
+            dob.init(2000,0,1,null);
+        }
+        else{
+            dob.init(yr_int,month_int-1,day_int,null);
+        }
 
         Toast.makeText(getApplicationContext(),day+month+year,Toast.LENGTH_SHORT).show();
         mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
