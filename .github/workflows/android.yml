@@ -62,7 +62,8 @@ jobs:
         run: ./gradlew test --stacktrace
 
       - name: Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v3
+        uses: reactivecircus/android-emulator-runner@v2.26.0
+        
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
