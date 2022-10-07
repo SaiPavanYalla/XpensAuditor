@@ -175,8 +175,8 @@ public class SignupActivity extends AppCompatActivity {
                                     RefHomeNeeds.setValue("");
                                     RefOthers=RefCat.child("Others");
                                     RefOthers.setValue("");
-                                        RefUncat=RefCat.child("Uncategorised");
-                                        RefUncat.setValue("");
+//                                        RefUncat=RefCat.child("Uncategorised");
+//                                        RefUncat.setValue("");
 // todo profile picture
 //                                        filepath=storageReference.child("Profile Image").child(Uid+".jpg");
 //

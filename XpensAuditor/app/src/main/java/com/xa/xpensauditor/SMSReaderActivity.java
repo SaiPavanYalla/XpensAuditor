@@ -112,7 +112,7 @@ public class SMSReaderActivity extends AppCompatActivity {
                         RefUid.child("LastRefreshDate").setValue(MaxDate);
                         Tid = UUID.randomUUID().toString();
                         RefUid.child("UnCatTran").child(Tid);
-                        RefUid.child("UnCatTran").child(Tid).child("Amount").setValue((String.valueOf(Math.round(amt))));
+                        RefUid.child("UnCatTran").child(Tid).child("Amount").setValue(amt);
                         RefUid.child("UnCatTran").child(Tid).child("Category").setValue("Uncategorised");
                         RefUid.child("UnCatTran").child(Tid).child("Shop Name").setValue(shopName);
                         RefUid.child("UnCatTran").child(Tid).child("ZMessage").setValue(smsMessagestr);
