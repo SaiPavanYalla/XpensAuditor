@@ -188,7 +188,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
                 if (auth.getCurrentUser()!=null) {
                     //Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
-                    tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
+                    try {
+                        tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -201,7 +205,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (auth.getCurrentUser()!=null) {
-                    StrLastRefDate = dataSnapshot.getValue().toString().trim();
+                    try {
+                        StrLastRefDate = dataSnapshot.getValue().toString().trim();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
