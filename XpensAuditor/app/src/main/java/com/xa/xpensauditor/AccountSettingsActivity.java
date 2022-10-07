@@ -249,7 +249,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
                 // set message, title, and icon
                 .setTitle("Remove User")
-                .setMessage("All Data will be Lost, Do you Really want to Remove ?")
+                .setMessage("All data will be lost, do you really want to remove?")
                 //.setIcon(R.drawable.delete)
 
                 .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
@@ -257,7 +257,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         dialog.dismiss();
                         RemoveUser(user);
-
                     }
 
                 })
@@ -322,6 +321,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                                 finish();
                                 progressBar.setVisibility(View.GONE);
                             } else {
+                                task.getException().printStackTrace();
                                 Toast.makeText(AccountSettingsActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                             }
