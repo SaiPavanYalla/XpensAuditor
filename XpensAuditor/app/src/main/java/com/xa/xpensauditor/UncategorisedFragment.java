@@ -31,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DateFormatSymbols;
 
 
 public class UncategorisedFragment extends Fragment {
@@ -319,7 +320,8 @@ public class UncategorisedFragment extends Fragment {
                     //transList.add(transaction);
                     i++;
                 }
-                String shdate= shDay+" - "+shMonth+" - "+shYear;
+                String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth)-1];
+                String shdate= shDay+" " + monthString.substring(0,3).toUpperCase() +" "+shYear;
 
                 Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
                 //Toast.makeText(getApplicationContext(),transaction.getT_amt(),Toast.LENGTH_SHORT).show();

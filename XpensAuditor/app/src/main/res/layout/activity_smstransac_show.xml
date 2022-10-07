@@ -8,98 +8,107 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Transaction ID: "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/smstid" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Transaction Info"
+            android:textColor="@color/emeraldgreen"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
 
-        </LinearLayout>
+        <TableLayout
+            android:id="@+id/Table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:stretchColumns="2"
+            android:shrinkColumns="1">
+            <TableRow
+                android:layout_gravity="right">
+                <TextView
+                    android:text="Transaction ID"
+                    android:textColor="@color/emeraldgreen"
+                    android:padding="3dip"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Trasaction amount: "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/smstamnt" />
+            </TableRow>
 
-        </LinearLayout>
+            <TableRow>
+                <TextView
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:id="@+id/smstid" />
+            </TableRow>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shop Name: "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/smsshpname" />
+            <TableRow>
+                <TextView
+                    android:text="Transaction amount"
+                    android:textColor="@color/emeraldgreen"
+                    android:padding="3dip" />
+            </TableRow>
 
-        </LinearLayout>
+            <TableRow>
+                <TextView
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:id="@+id/smstamnt"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Shop Name"
+                    android:textColor="@color/emeraldgreen"
+                    android:padding="3dip" />
+            </TableRow>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category: "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/smscat" />
+            <TableRow>
+                <TextView
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:id="@+id/smsshpname"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Category"
+                    android:textColor="@color/emeraldgreen"
+                    android:padding="3dip" />
+            </TableRow>
 
-        </LinearLayout>
+            <TableRow>
+                <TextView
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:id="@+id/smscat"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Date"
+                    android:textColor="@color/emeraldgreen"
+                    android:padding="3dip" />
+            </TableRow>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date: "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/smsdate" />
+            <TableRow>
+                <TextView
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:id="@+id/smsdate"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="Message"
+                    android:textColor="@color/emeraldgreen"
+                    android:padding="3dip" />
+            </TableRow>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Message: "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/sms" />
-
-        </LinearLayout>
+            <TableRow>
+                <TextView
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:id="@+id/sms"/>
+            </TableRow>
+        </TableLayout>
 
     </LinearLayout>
 

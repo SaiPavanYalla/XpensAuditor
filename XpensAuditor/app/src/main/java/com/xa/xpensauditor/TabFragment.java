@@ -29,6 +29,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.text.DateFormatSymbols;
+import java.util.Locale;
 
 public class TabFragment extends Fragment {
     private Firebase mRootRef;
@@ -333,7 +335,8 @@ public class TabFragment extends Fragment {
                     //transList.add(transaction);
                     i++;
                 }
-                String shdate= shMonth+"/"+shDay+"/"+shYear;
+                String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth)-1];
+                String shdate= shDay+" " + monthString.substring(0,3).toUpperCase() +" "+shYear;
 
                 Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
                 //Toast.makeText(getApplicationContext(),transaction.getT_amt(),Toast.LENGTH_SHORT).show();
