@@ -200,7 +200,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         LastRefreshDate.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                StrLastRefDate=dataSnapshot.getValue().toString().trim();
+                if (auth.getCurrentUser()!=null) {
+                    StrLastRefDate = dataSnapshot.getValue().toString().trim();
+                }
             }
 
             @Override
