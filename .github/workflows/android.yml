@@ -70,4 +70,10 @@ jobs:
           arch: x86
           profile: Nexus 6
           script: ./gradlew connectedCheck --stacktrace
+      
+      - name: Upload coverage to Codecov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov
 
