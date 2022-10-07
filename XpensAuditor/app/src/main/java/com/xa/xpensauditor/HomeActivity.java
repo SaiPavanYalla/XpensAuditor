@@ -1,10 +1,14 @@
 package com.xa.xpensauditor;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -25,6 +29,8 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -45,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int SMS_PERMISSION_CODE =101;
     //todo delete
     //private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
@@ -215,6 +222,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -329,8 +338,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
         } else if (id == R.id.nav_refresh) {
             Intent i=new Intent(this,SMSReaderActivity.class);
-            i.putExtra("StrLastRefDate", StrLastRefDate);
-            startActivity(i);
+            if(isSmsPermissionGranted())
+            {
+                i.putExtra("StrLastRefDate", StrLastRefDate);
+                startActivity(i);
+            }
+            else
+            {
+                requestReadAndSendSmsPermission();
+            }
+
 
         }
 
@@ -338,5 +355,41 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public boolean isSmsPermissionGranted() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestReadAndSendSmsPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS},SMS_PERMISSION_CODE);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case SMS_PERMISSION_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Intent i = new Intent(this, SMSReaderActivity.class);
+                    i.putExtra("StrLastRefDate", StrLastRefDate);
+                    startActivity(i);
+
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "SMS read permission is required for this feature to work, Enabled it in under app settings", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(this, HomeActivity.class);
+                    startActivity(i);
+                }
+                return;
+            }
+
+        }
     }
 }
