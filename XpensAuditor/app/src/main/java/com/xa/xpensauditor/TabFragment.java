@@ -25,6 +25,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,7 +33,8 @@ import java.util.List;
 public class TabFragment extends Fragment {
     private Firebase mRootRef;
     private Firebase RefUid,RefTran,RefCatTran,RefCatSum, RefCat;
-    int pos, intSum, currentDay,currentMonth,currentYear;
+    int pos, currentDay,currentMonth,currentYear;
+    double intSum;
     private String tagId, delCategory, delAmt, catChangeTo;
     private TextView textView;
 
@@ -169,13 +171,16 @@ public class TabFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String sumCat = dataSnapshot.getValue().toString().trim();
-                        intSum = Integer.parseInt(sumCat);
-                        Integer newDelAmt = Integer.parseInt(delAmt);
-                        intSum = intSum - newDelAmt;
-                        if(intSum==0)
+                        intSum = Double.parseDouble((sumCat));
+                        double newDelAmt =  Double.parseDouble((delAmt));
+                        intSum = Math.round((intSum - newDelAmt)*100.0)/100.0;
+                        if(intSum==0.00) {
                             dataSnapshot.getRef().removeValue();
+                            mAdapter1.notifyDataSetChanged();
+                        }
                         else
                             dataSnapshot.getRef().setValue(String.valueOf(intSum));
+
                     }
 
                     @Override
@@ -328,7 +333,7 @@ public class TabFragment extends Fragment {
                     //transList.add(transaction);
                     i++;
                 }
-                String shdate= shDay+" - "+shMonth+" - "+shYear;
+                String shdate= shMonth+"/"+shDay+"/"+shYear;
 
                 Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
                 //Toast.makeText(getApplicationContext(),transaction.getT_amt(),Toast.LENGTH_SHORT).show();

@@ -2,8 +2,12 @@ package com.xa.xpensauditor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.apache.commons.collections4.map.MultiValueMap;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -44,12 +50,14 @@ public class AddTransactionActivity extends AppCompatActivity {
     private DatePicker dateTransac;
     String day, month, year;
     int d, m, y;
+    Activity activity;
     MultiValueMap<String, String> catgTrans1 = MultiValueMap.multiValueMap(new LinkedHashMap<String, Collection<String>>(), (Class<LinkedHashSet<String>>) (Class<?>) LinkedHashSet.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
+        activity = this;
 
         mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
 
@@ -72,6 +80,45 @@ public class AddTransactionActivity extends AppCompatActivity {
         year = String.valueOf(dateTransac.getYear());
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Catg);
         catView.setAdapter(arrayAdapter);
+
+        Amnt.addTextChangedListener(new TextWatcher() {
+            private String current = "";
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().equals(current)) {
+                    Amnt.removeTextChangedListener(this);
+
+                    String replaceable = String.format("[%s,.\\s]", NumberFormat.getInstance().getCurrency().getSymbol());
+                    String cleanString = s.toString().replaceAll(replaceable, "");
+
+                    double parsed;
+                    try {
+                        parsed = Double.parseDouble((cleanString));
+                    } catch (NumberFormatException e) {
+                        parsed = 0.00;
+                    }
+                    String formatted = NumberFormat.getInstance().format((parsed/100));
+
+                    current = formatted;
+                    Amnt.setText(formatted);
+                    Amnt.setSelection(formatted.length());
+                    Amnt.addTextChangedListener(this);
+                }
+            }
+        });
+
         catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -125,7 +172,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
                 if (f) {
-                    Amount = Amnt.getText().toString().trim();
+                    Amount = Amnt.getText().toString().trim().replaceAll(",","");
                     ShopName = ShpNm.getText().toString().trim();
                     if (!Amount.isEmpty() && !ShopName.isEmpty()) {
                         Tid = UUID.randomUUID().toString();

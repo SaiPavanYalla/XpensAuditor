@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
@@ -70,7 +71,7 @@ public class SMSReceiver extends BroadcastReceiver {
                 for (int k = 0; k < words.length; k++) {
                     if (words[k].contains("Rs")) {
                         word = words[k].replaceAll(",", "");
-                        amt = Double.parseDouble(word.substring(2));
+                        amt = Double.parseDouble((word.substring(2)));
                         break;
                     }
                 }

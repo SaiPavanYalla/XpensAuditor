@@ -37,7 +37,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
         Transaction trans = transList.get(position);
         holder.tid.setText(trans.getTid());
         holder.tcat.setText(trans.getT_cat());
-        holder.tamt.setText(trans.getT_amt());
+        holder.tamt.setText("$"+trans.getT_amt());
         holder.tshopname.setText(trans.getT_shopname());
         holder.tdate.setText(trans.getT_date());
 
