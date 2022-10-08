@@ -133,35 +133,7 @@ public class ProfileActivityTest {
                         isDisplayed()));
         appCompatImageButton2.perform(click());
         SystemClock.sleep(1000);
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.userPhone), withText("+19842863741"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        3),
-                                1)));
-        appCompatEditText3.perform(scrollTo(), replaceText("+19842863741"));
-        SystemClock.sleep(2000);
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.userPhone), withText("+19842863741"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        3),
-                                1),
-                        isDisplayed()));
-        appCompatEditText4.perform(closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.submitButton), withText("Submit"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                2)));
-        materialButton2.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        pressBack();
         ViewInteraction imageButton2 = onView(
                 allOf(withId(R.id.editProfile),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
