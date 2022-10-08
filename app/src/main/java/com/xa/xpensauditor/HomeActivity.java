@@ -1,6 +1,8 @@
 package com.xa.xpensauditor;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -220,11 +222,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-// todo delete
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
-
         viewPager = (ViewPager) findViewById(R.id.viewpager);
             /*ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
             viewPager.setAdapter(adapter);*/
@@ -253,12 +250,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         //noinspection SimplifiableIfStatement
         if (id == R.id.account_settings) {
 
@@ -268,9 +261,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         else if(id== R.id.action_settings)
         {
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
-//todo prefSettings
-//            Intent i=new Intent(this,PrefSettingsActivity.class);
-//            startActivity(i);
         }
 
         else if(id==R.id.action_contact_us){
@@ -290,19 +280,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
-//        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
-
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
 
         if (id == R.id.nav_home) {
 
@@ -315,20 +296,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_show_analysis) {
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
-// todo
-//            Intent i=new Intent(this,AnalysisActivity.class);
-//            startActivity(i);
 
         } else if (id == R.id.nav_settings) {
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
-//todo
-//            Intent i=new Intent(this,SettingsActivity.class);
-//            startActivity(i);
 
         } else if (id == R.id.nav_logout) {
-            auth.signOut();
-            Intent i = new Intent(this,LoginActivity.class);
-            startActivity(i);
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Are you sure you want to LogOut?");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            auth.signOut();
+                            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                            startActivity(i);
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
         }
         else if (id == R.id.nav_rate) {
             Intent i = new Intent(this, Rate.class);
@@ -365,6 +361,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private AlertDialog AskSignOutOption()
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(getApplicationContext())
+                // set message, title, and icon
+                .setTitle("SignOut")
+                .setMessage("Do you Really want to SignOut ?")
+
+                .setPositiveButton("SignOut", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                        auth.signOut();
+                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(i);
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+
+        return myQuittingDialogBox;
     }
 
 
