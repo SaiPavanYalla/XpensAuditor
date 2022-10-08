@@ -52,9 +52,6 @@ public class ShowTransActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        //prepareTransData();
-
-
 
         RefTran.addChildEventListener(new ChildEventListener() {
             String amount,cat,shname,shDay,shMonth,shYear,shMsg;
@@ -65,9 +62,7 @@ public class ShowTransActivity extends AppCompatActivity {
                 String tid = dataSnapshot.getKey().toString().trim();
 
                 for (DataSnapshot S:dataSnapshot.getChildren()) {
-                    //String t_id=S.getValue().toString().trim();
-                    //Toast.makeText(getApplicationContext(),"->"+i,Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(),t_id,Toast.LENGTH_SHORT).show();
+
                     switch(i)
                     {
                         case 0:
@@ -92,8 +87,7 @@ public class ShowTransActivity extends AppCompatActivity {
                             shMsg=S.getValue().toString().trim();
                             break;
                     }
-                    //Transaction transaction=S.getValue(Transaction.class);
-                    //transList.add(transaction);
+
                     i++;
                 }
                 String shdate= shDay+" - "+shMonth+" - "+shYear;
@@ -102,7 +96,6 @@ public class ShowTransActivity extends AppCompatActivity {
                 cat="";
                 shname="";
                 shdate="";
-                //Toast.makeText(getApplicationContext(),transaction.getT_amt(),Toast.LENGTH_SHORT).show();
                 transList.add(transaction);
                 mAdapter.notifyDataSetChanged();
             }
@@ -129,8 +122,5 @@ public class ShowTransActivity extends AppCompatActivity {
         });
 
     }
-    private void prepareTransData() {
-        //Transaction transaction = new Transaction("1234","FOOD","Zucca");
-        //transList.add(transaction);
-    }
+
 }

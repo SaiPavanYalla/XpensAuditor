@@ -1,5 +1,7 @@
 package com.xa.xpensauditor;
 
+import static java.lang.System.currentTimeMillis;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -175,28 +177,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                     Amount = Amnt.getText().toString().trim().replaceAll(",","");
                     ShopName = ShpNm.getText().toString().trim();
                     if (!Amount.isEmpty() && !ShopName.isEmpty()) {
-                        Tid = UUID.randomUUID().toString();
-                        /*RefTran.child(Tid);
-                        RefTran.child(Tid).child("Shop Name");
-                        RefTran.child(Tid).child("Amount");
-                        RefTran.child(Tid).child("Category");
-                        RefTran.child(Tid).child("Amount").setValue(Amount);
-                        RefTran.child(Tid).child("Category").setValue(SelCat);
-                        RefTran.child(Tid).child("Shop Name").setValue(ShopName);
-                        RefTran.child(Tid).child("ZMessage").setValue("Entered Manually...");
-                        RefTran.child(Tid).child("Day").setValue(day);
-                        RefTran.child(Tid).child("Month").setValue(month);
-                        RefTran.child(Tid).child("Year").setValue(year);
-
-                        RefUid.child("CatTran").child(SelCat).child(Tid);
-                        RefUid.child("CatTran").child(SelCat).child(Tid).child("Amount").setValue(Amount);
-                        RefUid.child("CatTran").child(SelCat).child(Tid).child("Category").setValue(SelCat);
-                        RefUid.child("CatTran").child(SelCat).child(Tid).child("Shop Name").setValue(ShopName);
-                        RefUid.child("CatTran").child(SelCat).child(Tid).child("ZMessage").setValue("Entered Manually...");
-                        RefUid.child("CatTran").child(SelCat).child(Tid).child("Day").setValue(day);
-                        RefUid.child("CatTran").child(SelCat).child(Tid).child("Month").setValue(month);
-                        RefUid.child("CatTran").child(SelCat).child(Tid).child("Year").setValue(year);*/
-
+                        Tid = String.valueOf(currentTimeMillis());;
 
                         RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Amount").setValue(Amount);
                         RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Category").setValue(SelCat);
@@ -239,9 +220,6 @@ public class AddTransactionActivity extends AppCompatActivity {
                         ShpNm.setText("");
                         Toast.makeText(getApplicationContext(),"Add one more transaction or press back",Toast.LENGTH_LONG).show();
 
-                        //Toast.makeText(getApplicationContext(), Amount + ":" + ShopName + ":" + day + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
-
-                        // startActivity(new Intent(AddTransactionActivity.this, ProfileManagement.class));
                     } else {
                         Toast.makeText(getApplicationContext(), "Enter valid Amount and Shopname", Toast.LENGTH_LONG).show();
                     }
@@ -338,7 +316,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
             while (mapIter1.hasNext()) {
                 String key = mapIter1.next();
-//                    Toast.makeText(getApplicationContext(), "Value: " + key + ":" + catgTrans.get(key), Toast.LENGTH_SHORT).show();
+
                 Collection<String> val = catgTrans1.getCollection(key);
                 SumTrans obj = new SumTrans();
                 RefCatSum1.child(key).setValue(obj.computeSum(val).toString());

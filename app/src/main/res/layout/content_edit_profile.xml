@@ -94,25 +94,7 @@
                     android:paddingLeft="20dp"
                     android:text="Sungam, Coimbatore, TN"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingLeft="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_email"/>
-                <EditText
-                    android:id="@+id/userEmail"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:text="13pramo@gmail.com"/>
-            </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="25dp"
                 android:orientation="horizontal"

@@ -19,7 +19,7 @@ public class Suggest extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggest);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
 
 
         e=(EditText)findViewById(R.id.editText5);

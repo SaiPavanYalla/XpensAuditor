@@ -54,8 +54,7 @@ import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SMS_PERMISSION_CODE =101;
-    //todo delete
-    //private AppBarConfiguration mAppBarConfiguration;
+
     private ActivityHomeBinding binding;
 
     private Toolbar toolbar;
@@ -76,19 +75,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// todo delete
-//     binding = ActivityHomeBinding.inflate(getLayoutInflater());
-//     setContentView(binding.getRoot());
-//
-//        setSupportActionBar(binding.appBarHome.toolbar);
-//        binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //todo
-//                //Intent i=new Intent(getApplicationContext(),Transac.class);
-//                //startActivity(i);
-//            }
-//        });
+
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("XpensAuditor");
@@ -102,16 +89,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
             }
         });
-
-// todo
-//        DrawerLayout drawer = binding.drawerLayout;
-//        NavigationView navigationView = binding.navView;
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home)
-//                .setOpenableLayout(drawer)
-//                .build();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -143,8 +120,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 // todo
 //        storageReference = FirebaseStorage.getInstance().getReference();
 //        storageRef=storageReference.child("Profile Image").child(Uid+".jpg");
-
-//todo
+//
+//
 //        try {
 //            final File localFile = File.createTempFile("images", "jpg");
 //            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -189,7 +166,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     auth.getCurrentUser().reload();
                 }
                 if (auth.getCurrentUser()!=null) {
-                    //Toast.makeText(getApplicationContext(), auth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
+
                     try {
                         tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
                     } catch (Exception e) {
@@ -223,8 +200,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-            /*ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
-            viewPager.setAdapter(adapter);*/
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -279,6 +254,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

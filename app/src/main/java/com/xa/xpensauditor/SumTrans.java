@@ -18,8 +18,6 @@ public class SumTrans {
 
             String value = entry.next();
             sum = sum+ Double.parseDouble((value));
-            //Log.wtf("afSDFsdfEWSFSDcWEESFsedfSEDFwesedf",sum.toString());
-
         }
         return sum;
     }
