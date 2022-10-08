@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -83,43 +84,69 @@ public class AddTransactionActivity extends AppCompatActivity {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Catg);
         catView.setAdapter(arrayAdapter);
 
-        Amnt.addTextChangedListener(new TextWatcher() {
-            private String current = "";
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+        InputFilter filter = new InputFilter() {
 
-            }
+            final int maxDigitsBeforeDecimalPoint=8;
+            final int maxDigitsAfterDecimalPoint=2;
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-                // TODO Auto-generated method stub
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                StringBuilder builder = new StringBuilder(dest);
+                builder.replace(dstart, dend, source
+                        .subSequence(start, end).toString());
+                if (!builder.toString().matches(
+                        "(([1-9]{1})([0-9]{0,"+(maxDigitsBeforeDecimalPoint-1)+"})?)?(\\.[0-9]{0,"+maxDigitsAfterDecimalPoint+"})?"
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!s.toString().equals(current)) {
-                    Amnt.removeTextChangedListener(this);
-
-                    String replaceable = String.format("[%s,.\\s]", NumberFormat.getInstance().getCurrency().getSymbol());
-                    String cleanString = s.toString().replaceAll(replaceable, "");
-
-                    double parsed;
-                    try {
-                        parsed = Double.parseDouble((cleanString));
-                    } catch (NumberFormatException e) {
-                        parsed = 0.00;
-                    }
-                    String formatted = NumberFormat.getInstance().format((parsed/100));
-
-                    current = formatted;
-                    Amnt.setText(formatted);
-                    Amnt.setSelection(formatted.length());
-                    Amnt.addTextChangedListener(this);
+                )) {
+                    if(source.length()==0)
+                        return dest.subSequence(dstart, dend);
+                    return "";
                 }
+                return null;
+
             }
-        });
+        };
+
+
+        Amnt.setFilters(new InputFilter[] { filter });
+
+//        Amnt.addTextChangedListener(new TextWatcher() {
+//            private String current = "";
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count,
+//                                          int after) {
+//                // TODO Auto-generated method stub
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (!s.toString().equals(current)) {
+//                    Amnt.removeTextChangedListener(this);
+//
+//                    String replaceable = String.format("[%s,.\\s]", NumberFormat.getInstance().getCurrency().getSymbol());
+//                    String cleanString = s.toString().replaceAll(replaceable, "");
+//
+//                    double parsed;
+//                    try {
+//                        parsed = Double.parseDouble((cleanString));
+//                    } catch (NumberFormatException e) {
+//                        parsed = 0.00;
+//                    }
+//                    String formatted = NumberFormat.getInstance().format((parsed/100));
+//
+//                    current = formatted;
+//                    Amnt.setText(formatted);
+//                    Amnt.setSelection(formatted.length());
+//                    Amnt.addTextChangedListener(this);
+//                }
+//            }
+//        });
 
         catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

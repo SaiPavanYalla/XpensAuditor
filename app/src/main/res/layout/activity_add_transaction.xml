@@ -22,7 +22,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Amount"
+                android:hint="Amount in $"
                 android:inputType="numberDecimal"
                 android:id="@+id/addTransAmt"/>
 
