@@ -41,6 +41,17 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    packagingOptions {
+        exclude '**res/anim/*'
+        exclude '**res/animator/*'
+        exclude '**res/color/*'
+        exclude '**res/drawable/*'
+        exclude '**res/interpolator/*'
+        exclude '**res/layout/*'
+        exclude 'resources.arsc'
+        exclude 'AndroidManifest.xml'
+    }
 }
 
 dependencies {
@@ -74,6 +85,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'org.apache.commons:commons-collections4:4.1'
+    implementation files('library/android.jar')
 }
 
 apply plugin: 'jacoco'
