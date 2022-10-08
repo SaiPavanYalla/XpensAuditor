@@ -2,6 +2,7 @@ package com.xa.xpensauditor;
 
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
@@ -36,14 +37,14 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class ContactUsTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(LoginActivity.class);
 
     @Test
-    public void loginActivityTest() {
+    public void contactUsTest() {
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText = onView(
@@ -67,6 +68,7 @@ public class LoginActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("123456"), closeSoftKeyboard());
+
         SystemClock.sleep(2000);
 
         ViewInteraction materialButton = onView(
@@ -81,19 +83,6 @@ public class LoginActivityTest {
 
         SystemClock.sleep(5000);
 
-        ViewInteraction imageView = onView(
-                allOf(withContentDescription("More options"),
-                        withParent(withParent(withId(R.id.toolbar))),
-                        isDisplayed()));
-        imageView.check(matches(isDisplayed()));
-
-        ViewInteraction imageButton2 = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        withParent(allOf(withId(R.id.toolbar),
-                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
-                        isDisplayed()));
-        imageButton2.check(matches(isDisplayed()));
-
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -104,9 +93,10 @@ public class LoginActivityTest {
                         isDisplayed()));
         overflowMenuButton.perform(click());
 
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
+
         ViewInteraction materialTextView = onView(
-                allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
+                allOf(withId(androidx.recyclerview.R.id.title), withText("Contact Us"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(androidx.constraintlayout.widget.R.id.content),
@@ -114,7 +104,55 @@ public class LoginActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+
+        SystemClock.sleep(2000);
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.tvNumber5), withText("mithilareddy1999@gmail.com"),
+                        withParent(allOf(withId(R.id.RelativeView5),
+                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                        isDisplayed()));
+        textView.check(matches(withText("mithilareddy1999@gmail.com")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.tvNumber7), withText("sahithi.ammana@gmail.com"),
+                        withParent(allOf(withId(R.id.RelativeView7),
+                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                        isDisplayed()));
+        textView2.check(matches(withText("sahithi.ammana@gmail.com")));
+
+        ViewInteraction imageButton = onView(
+                allOf(withId(R.id.fab),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        imageButton.check(matches(isDisplayed()));
+
+        SystemClock.sleep(2000);
+
+        pressBack();
+
+        SystemClock.sleep(2000);
+        ViewInteraction overflowMenuButton2 = onView(
+                allOf(withContentDescription("More options"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.toolbar),
+                                        2),
+                                0),
+                        isDisplayed()));
+        overflowMenuButton2.perform(click());
+
+        SystemClock.sleep(2000);
+        ViewInteraction materialTextView33 = onView(
+                allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(androidx.constraintlayout.widget.R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        materialTextView33.perform(click());
+        SystemClock.sleep(2000);
 
         ViewInteraction materialButton4 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
@@ -125,12 +163,12 @@ public class LoginActivityTest {
                                 12),
                         isDisplayed()));
         materialButton4.perform(click());
-        SystemClock.sleep(1000);
-        ViewInteraction textView2 = onView(
+        SystemClock.sleep(2000);
+        ViewInteraction textView22 = onView(
                 allOf(withId(android.R.id.message), withText("Do you Really want to SignOut ?"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("Do you Really want to SignOut ?")));
+        textView22.check(matches(withText("Do you Really want to SignOut ?")));
 
         ViewInteraction materialButton5 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
@@ -140,7 +178,7 @@ public class LoginActivityTest {
                                         0),
                                 3)));
         materialButton5.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
     }
 
     private static Matcher<View> childAtPosition(
