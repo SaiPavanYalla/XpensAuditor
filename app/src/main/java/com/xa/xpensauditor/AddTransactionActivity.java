@@ -1,5 +1,7 @@
 package com.xa.xpensauditor;
 
+import static java.lang.System.currentTimeMillis;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -175,7 +177,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                     Amount = Amnt.getText().toString().trim().replaceAll(",","");
                     ShopName = ShpNm.getText().toString().trim();
                     if (!Amount.isEmpty() && !ShopName.isEmpty()) {
-                        Tid = UUID.randomUUID().toString();
+                        Tid = String.valueOf(currentTimeMillis());;
 
                         RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Amount").setValue(Amount);
                         RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Category").setValue(SelCat);

@@ -165,6 +165,7 @@ public class TabFragment extends Fragment {
 
                 RefTran.child(tagId).removeValue();
                 RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatTran").child(delCategory).child(tagId).removeValue();
+                RefUid.child("UnCatTran").child(tagId).removeValue();
                 RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatSum").child(delCategory).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -202,14 +203,13 @@ public class TabFragment extends Fragment {
         RefTran.addChildEventListener(new ChildEventListener() {
             String amount,cat,shname,shDay,shMonth,shYear,shMsg;
 
-
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 int i=0;
 
                 String tid = dataSnapshot.getKey().toString().trim();
                 for (DataSnapshot S:dataSnapshot.getChildren()) {
-                    Log.d("yomon",i+":"+S.getValue().toString().trim());
+                    //Log.d("yomon",i+":"+S.getValue().toString().trim());
                     switch(i)
                     {
                         case 0:
@@ -234,17 +234,21 @@ public class TabFragment extends Fragment {
                             shMsg=S.getValue().toString().trim();
                             break;
                     }
-
                     i++;
                 }
+                try{
+                    String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth)-1];
+                    String shdate= shDay+" " + monthString.substring(0,3).toUpperCase() +" "+shYear;
 
-                String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth)-1];
-                String shdate= shDay+" " + monthString.substring(0,3).toUpperCase() +" "+shYear;
+                    Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
 
-                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
+                    TransactionList.add(transaction);
+                    mAdapter1.notifyDataSetChanged();
+                }
+                catch (Exception e){
 
-                TransactionList.add(transaction);
-                mAdapter1.notifyDataSetChanged();
+                }
+
             }
 
             @Override

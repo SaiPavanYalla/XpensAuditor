@@ -36,10 +36,11 @@ import java.text.DateFormatSymbols;
 
 public class UncategorisedFragment extends Fragment {
 
-    private String tagId, catChangeTo ;
+    private String tagId, catChangeTo, tagDate;
+    private String [] tagDateSplit;
     private Firebase mRootRef;
     private Firebase RefUid,RefTran,RefCat;
-    int pos, intSum;
+    int pos, intSum,mm,yyyy;
     private TextView textView;
     private ArrayList<String> Catg=new ArrayList<>();
     private ArrayAdapter<String> arrayAdapter;
@@ -156,8 +157,38 @@ public class UncategorisedFragment extends Fragment {
             case 21:{
                 int show = item.getGroupId();
                 tagId=TransactionListUF.get(show).getTid();
-                Toast.makeText(getActivity(),tagId+"-"+"Delete it",Toast.LENGTH_SHORT).show();
-
+                tagDate = TransactionListUF.get(show).getT_date();
+                tagDateSplit = tagDate.split(" ");
+                switch (tagDateSplit[1]){
+                    case "JAN":
+                        mm=1;
+                    case "FEB":
+                        mm=2;
+                    case "MAR":
+                        mm=3;
+                    case "APR":
+                        mm=4;
+                    case "MAY":
+                        mm=5;
+                    case "JUN":
+                        mm=6;
+                    case "JUL":
+                        mm=7;
+                    case "AUG":
+                        mm=8;
+                    case "SEP":
+                        mm=9;
+                    case "OCT":
+                        mm=10;
+                    case "NOV":
+                        mm=11;
+                    case "DEC":
+                        mm=12;
+                }
+                yyyy=Integer.parseInt(tagDateSplit[2]);
+                RefUid.child("DateRange").child(mm+"-"+yyyy).child(tagId).removeValue();
+                //Log.d("yoDate",tagDate);
+                //Toast.makeText(getActivity(),tagId+"-"+"Delete it",Toast.LENGTH_SHORT).show();
 
                 RefTran.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -243,14 +274,20 @@ public class UncategorisedFragment extends Fragment {
 
                     i++;
                 }
-                Log.d("yomon",Integer.parseInt(shMonth)-1+" ");
-                String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth)-1];
-                String shdate= shDay+" " + monthString.substring(0,3).toUpperCase() +" "+shYear;
+                //Log.d("yomon",Integer.parseInt(shMonth)-1+" ");
+                try{
+                    String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth)-1];
+                    String shdate= shDay+" " + monthString.substring(0,3).toUpperCase() +" "+shYear;
 
-                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
+                    Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
 
-                TransactionListUF.add(transaction);
-                mAdapterUF.notifyDataSetChanged();
+                    TransactionListUF.add(transaction);
+                    mAdapterUF.notifyDataSetChanged();
+                }
+                catch (Exception e){
+
+                }
+
             }
 
             @Override

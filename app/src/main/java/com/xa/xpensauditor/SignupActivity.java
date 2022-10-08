@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,8 +109,9 @@ public class SignupActivity extends AppCompatActivity {
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(SignupActivity.this, "Please enter valid Email and Password" + task.getException(),
+                                    Toast.makeText(SignupActivity.this, task.getException().toString().substring(task.getException().toString().lastIndexOf(":") + 1),
                                             Toast.LENGTH_SHORT).show();
+                                    //Log.d("yotask", task.getException().toString());
                                 } else {
 
                                     auth.sendPasswordResetEmail(email)
@@ -144,8 +146,8 @@ public class SignupActivity extends AppCompatActivity {
                                     RefUid.child("Month").setValue("0");
                                     RefUid.child("Year").setValue("0");
 
-                                    RefUid.child("LastRefreshDate");
-                                    RefUid.child("LastRefreshDate").setValue(0);
+//                                    RefUid.child("LastRefreshDate");
+//                                    RefUid.child("LastRefreshDate").setValue(0);
 
                                     RefCat=RefUid.child("Categories");
                                     RefFood=RefCat.child("Food");

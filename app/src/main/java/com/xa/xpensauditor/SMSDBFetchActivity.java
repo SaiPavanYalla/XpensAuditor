@@ -26,7 +26,7 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_smsdbfetch);
         Intent i = getIntent();
         String tid = i.getStringExtra("indexPos");
-        Toast.makeText(getApplicationContext()," yo : "+tid,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext()," yo : "+tid,Toast.LENGTH_SHORT).show();
         smstid=findViewById(R.id.smstid);
         smstid.setText(tid);
         smstamnt=findViewById(R.id.smstamnt);
