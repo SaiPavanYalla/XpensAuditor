@@ -56,15 +56,15 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test --stacktrace
 
-      - name: Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v2.26.0
+#       - name: Instrumentation Tests
+#         uses: reactivecircus/android-emulator-runner@v2.26.0
         
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86
-          profile: Nexus 6
-          script: ./gradlew connectedCheck --stacktrace
+#         with:
+#           api-level: ${{ matrix.api-level }}
+#           target: ${{ matrix.target }}
+#           arch: x86
+#           profile: Nexus 6
+#           script: ./gradlew connectedCheck --stacktrace
       
       - name: Upload coverage to Codecov
         run: |
