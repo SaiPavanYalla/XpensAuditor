@@ -45,6 +45,7 @@ public class RateActivityTest {
 
     @Test
     public void rateActivityTest() {
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.email),
                         childAtPosition(
@@ -54,7 +55,7 @@ public class RateActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -64,7 +65,7 @@ public class RateActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -81,7 +82,7 @@ public class RateActivityTest {
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         imageButton.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -92,14 +93,14 @@ public class RateActivityTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction checkedTextView = onView(
                 allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("Rate"),
                         withParent(allOf(withId(R.id.nav_rate),
                                 withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
                         isDisplayed()));
         checkedTextView.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_rate),
                         childAtPosition(
@@ -110,15 +111,15 @@ public class RateActivityTest {
                                 12),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction ratingBar = onView(
                 allOf(withId(R.id.ratingBar),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
         ratingBar.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         pressBack();
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -128,7 +129,7 @@ public class RateActivityTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -138,7 +139,7 @@ public class RateActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -148,7 +149,7 @@ public class RateActivityTest {
                                 12),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -157,7 +158,7 @@ public class RateActivityTest {
                                         0),
                                 3)));
         materialButton3.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),

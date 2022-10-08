@@ -44,6 +44,8 @@ public class SuggestActivityTest {
 
     @Test
     public void suggestActivityTest() {
+        SystemClock.sleep(2000);
+
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.email),
                         childAtPosition(
@@ -53,7 +55,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -63,7 +65,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -80,7 +82,7 @@ public class SuggestActivityTest {
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         imageButton.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -91,14 +93,14 @@ public class SuggestActivityTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction checkedTextView = onView(
                 allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("Suggestions"),
                         withParent(allOf(withId(R.id.nav_suggest),
                                 withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
                         isDisplayed()));
         checkedTextView.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_suggest),
                         childAtPosition(
@@ -109,13 +111,13 @@ public class SuggestActivityTest {
                                 13),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction editText = onView(
                 allOf(withId(R.id.editText5),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
         editText.check(matches(withText("")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.editText5),
                         childAtPosition(
@@ -125,7 +127,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("good"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.button3), withText("DONE"),
                         childAtPosition(
@@ -135,14 +137,14 @@ public class SuggestActivityTest {
                                 2),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction textView = onView(
                 allOf(withText("XpensAuditor"),
                         withParent(allOf(withId(R.id.toolbar),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         textView.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -152,7 +154,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -162,7 +164,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -172,7 +174,7 @@ public class SuggestActivityTest {
                                 12),
                         isDisplayed()));
         materialButton3.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction materialButton4 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -181,7 +183,7 @@ public class SuggestActivityTest {
                                         0),
                                 3)));
         materialButton4.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(2000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),

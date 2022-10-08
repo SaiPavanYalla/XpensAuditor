@@ -143,16 +143,7 @@ public class ProfileActivityTest {
                                 1)));
         appCompatEditText3.perform(scrollTo(), replaceText("+19842863741"));
         SystemClock.sleep(2000);
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.userPhone), withText("+19842863741"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        3),
-                                1),
-                        isDisplayed()));
-        appCompatEditText4.perform(closeSoftKeyboard());
-        SystemClock.sleep(1000);
+
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.submitButton), withText("Submit"),
                         childAtPosition(
