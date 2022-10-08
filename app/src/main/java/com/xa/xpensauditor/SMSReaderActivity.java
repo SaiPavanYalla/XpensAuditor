@@ -173,18 +173,18 @@ public class SMSReaderActivity extends AppCompatActivity {
 
         Iterator<String> mapIter1 = catgTrans1.keySet().iterator();
         Log.d("yokey",String.valueOf(mapIter1.hasNext()));
-        RefCatSum1= RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatSum");
-        if(mapIter1.hasNext()) {
-
-            while (mapIter1.hasNext()) {
-                String key = mapIter1.next();
-
-                Collection<String> val = catgTrans1.getCollection(key);
-                SumTrans obj = new SumTrans();
-                RefCatSum1.child(key).setValue(obj.computeSum(val).toString());
-
-            }
-        }
+        //RefCatSum1= RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatSum");
+//        if(mapIter1.hasNext()) {
+//
+//            while (mapIter1.hasNext()) {
+//                String key = mapIter1.next();
+//
+//                Collection<String> val = catgTrans1.getCollection(key);
+//                SumTrans obj = new SumTrans();
+//                RefCatSum1.child(key).setValue(obj.computeSum(val).toString());
+//
+//            }
+//        }
 
         Intent i=new Intent(getApplicationContext(),HomeActivity.class);
         startActivity(i);

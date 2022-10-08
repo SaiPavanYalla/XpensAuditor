@@ -212,7 +212,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
                         RefTran1 = RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions");
 
-                        RefCatSum1= RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatSum");
+                        //RefCatSum1= RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatSum");
 
 
                         Toast.makeText(getApplicationContext(),"Transaction added",Toast.LENGTH_SHORT).show();
@@ -228,51 +228,51 @@ public class AddTransactionActivity extends AppCompatActivity {
                 }
 
 
-                RefTran1.addChildEventListener(new com.firebase.client.ChildEventListener() {
-                    String amount, cat, shname, shDay, shMonth, shYear;
-
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        int i = 0;
-
-                        for (DataSnapshot S : dataSnapshot.getChildren()) {
-
-                            switch (i) {
-                                case 0:
-                                    amount = S.getValue().toString().trim();
-                                    break;
-                                case 1:
-                                    cat = S.getValue().toString().trim();
-                                    break;
-
-                            }
-
-                            i++;
-                        }
-                        catgTrans1.put(cat, amount);
-
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
-                });
+//                RefTran1.addChildEventListener(new com.firebase.client.ChildEventListener() {
+//                    String amount, cat, shname, shDay, shMonth, shYear;
+//
+//                    @Override
+//                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                        int i = 0;
+//
+//                        for (DataSnapshot S : dataSnapshot.getChildren()) {
+//
+//                            switch (i) {
+//                                case 0:
+//                                    amount = S.getValue().toString().trim();
+//                                    break;
+//                                case 1:
+//                                    cat = S.getValue().toString().trim();
+//                                    break;
+//
+//                            }
+//
+//                            i++;
+//                        }
+//                        catgTrans1.put(cat, amount);
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(FirebaseError firebaseError) {
+//
+//                    }
+//                });
 
 
             }
@@ -306,23 +306,23 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void onBackPressed() {
-        Iterator<String> mapIter1 = catgTrans1.keySet().iterator();
 
 
-        if(mapIter1.hasNext()) {
-
-            while (mapIter1.hasNext()) {
-                String key = mapIter1.next();
-
-                Collection<String> val = catgTrans1.getCollection(key);
-                SumTrans obj = new SumTrans();
-                RefCatSum1.child(key).setValue(obj.computeSum(val).toString());
-
-            }
-        }
+//    public void onBackPressed() {
+////        Iterator<String> mapIter1 = catgTrans1.keySet().iterator();
+////
+////
+////        if(mapIter1.hasNext()) {
+////
+////            while (mapIter1.hasNext()) {
+////                String key = mapIter1.next();
+////
+////                Collection<String> val = catgTrans1.getCollection(key);
+////                SumTrans obj = new SumTrans();
+////                RefCatSum1.child(key).setValue(obj.computeSum(val).toString());
+////
+////            }
+//        }
 
         Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
         startActivity(i);

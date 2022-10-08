@@ -84,7 +84,7 @@ public class TabFragment extends Fragment {
         RefUid= mRootRef.child(Uid);
         RefTran = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("Transactions");
         RefCatTran = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatTran");
-        RefCatSum = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatSum");
+        //RefCatSum = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatSum");
         RefCat = RefUid.child("Categories");
 
         arrayAdapterTF=new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1,CatgTF);
@@ -166,30 +166,30 @@ public class TabFragment extends Fragment {
                 RefTran.child(tagId).removeValue();
                 RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatTran").child(delCategory).child(tagId).removeValue();
                 RefUid.child("UnCatTran").child(tagId).removeValue();
-                RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatSum").child(delCategory).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String sumCat = dataSnapshot.getValue().toString().trim();
-                        intSum = Double.parseDouble((sumCat));
-                        double newDelAmt =  Double.parseDouble((delAmt));
-                        intSum = Math.round((intSum - newDelAmt)*100.0)/100.0;
-                        if(intSum==0.00) {
-                            dataSnapshot.getRef().removeValue();
-                            mAdapter1.notifyDataSetChanged();
-                        }
-                        else
-                            dataSnapshot.getRef().setValue(String.valueOf(intSum));
-
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
-                });
-
-                TransactionList.clear();
-                prepareTransactionData();
+//                RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatSum").child(delCategory).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        String sumCat = dataSnapshot.getValue().toString().trim();
+//                        intSum = Double.parseDouble((sumCat));
+//                        double newDelAmt =  Double.parseDouble((delAmt));
+//                        intSum = Math.round((intSum - newDelAmt)*100.0)/100.0;
+//                        if(intSum==0.00) {
+//                            dataSnapshot.getRef().removeValue();
+//                            mAdapter1.notifyDataSetChanged();
+//                        }
+//                        else
+//                            dataSnapshot.getRef().setValue(String.valueOf(intSum));
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(FirebaseError firebaseError) {
+//
+//                    }
+//                });
+//
+//                TransactionList.clear();
+//                prepareTransactionData();
 
 
             }break;
