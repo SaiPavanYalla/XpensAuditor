@@ -54,7 +54,7 @@ public class ProfileActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
-
+        SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -64,7 +64,7 @@ public class ProfileActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-
+        SystemClock.sleep(1000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -74,14 +74,14 @@ public class ProfileActivityTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(3000);
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(allOf(withId(R.id.toolbar),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         imageButton.check(matches(isDisplayed()));
-
+        SystemClock.sleep(1000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -99,7 +99,7 @@ public class ProfileActivityTest {
                                 withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
                         isDisplayed()));
         checkedTextView.check(matches(isDisplayed()));
-
+        SystemClock.sleep(1000);
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_profile),
                         childAtPosition(
@@ -116,13 +116,13 @@ public class ProfileActivityTest {
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class))),
                         isDisplayed()));
         textView.check(matches(withText("mithila")));
-
+        SystemClock.sleep(1000);
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
         textView2.check(matches(withText("mithilareddy1999@gmail.com")));
-
+        SystemClock.sleep(1000);
         ViewInteraction appCompatImageButton2 = onView(
                 allOf(withId(R.id.editProfile),
                         childAtPosition(
@@ -142,7 +142,7 @@ public class ProfileActivityTest {
                                         3),
                                 1)));
         appCompatEditText3.perform(scrollTo(), replaceText("+19842863741"));
-
+        SystemClock.sleep(2000);
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.userPhone), withText("+19842863741"),
                         childAtPosition(

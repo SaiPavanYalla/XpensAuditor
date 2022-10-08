@@ -53,7 +53,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
-
+        SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -63,7 +63,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-
+        SystemClock.sleep(1000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -80,7 +80,7 @@ public class SuggestActivityTest {
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         imageButton.check(matches(isDisplayed()));
-
+        SystemClock.sleep(1000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -98,7 +98,7 @@ public class SuggestActivityTest {
                                 withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
                         isDisplayed()));
         checkedTextView.check(matches(isDisplayed()));
-
+        SystemClock.sleep(1000);
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_suggest),
                         childAtPosition(
@@ -125,7 +125,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("good"), closeSoftKeyboard());
-
+        SystemClock.sleep(1000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.button3), withText("DONE"),
                         childAtPosition(

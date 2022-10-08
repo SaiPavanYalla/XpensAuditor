@@ -54,7 +54,7 @@ public class RateActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
-
+        SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -64,7 +64,7 @@ public class RateActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-
+        SystemClock.sleep(1000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -74,14 +74,14 @@ public class RateActivityTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(3000);
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(allOf(withId(R.id.toolbar),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         imageButton.check(matches(isDisplayed()));
-
+        SystemClock.sleep(1000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -99,7 +99,7 @@ public class RateActivityTest {
                                 withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
                         isDisplayed()));
         checkedTextView.check(matches(isDisplayed()));
-
+        SystemClock.sleep(1000);
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_rate),
                         childAtPosition(
@@ -116,7 +116,7 @@ public class RateActivityTest {
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
         ratingBar.check(matches(isDisplayed()));
-
+        SystemClock.sleep(1000);
         pressBack();
         SystemClock.sleep(1000);
         ViewInteraction overflowMenuButton = onView(
