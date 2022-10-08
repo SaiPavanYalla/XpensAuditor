@@ -109,16 +109,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
 
                 Tid = UUID.randomUUID().toString();
-                /*RefTran.child(Tid);
-                RefTran.child(Tid).child("Shop Name");
-                RefTran.child(Tid).child("Amount");
-                RefTran.child(Tid).child("Category");
-                RefTran.child(Tid).child("Amount").setValue((String.valueOf(Math.round(amt))));
-                RefTran.child(Tid).child("Category").setValue("Uncategorised");
-                RefTran.child(Tid).child("Shop Name").setValue(shopName);
-                RefTran.child(Tid).child("Day").setValue(String.valueOf(day));
-                RefTran.child(Tid).child("Month").setValue(String.valueOf(month));
-                RefTran.child(Tid).child("Year").setValue(String.valueOf(year));*/
+
                 UnCatTran.child(Tid).child("Amount").setValue((String.valueOf(Math.round(amt))));
                 UnCatTran.child(Tid).child("Category").setValue("Uncategorised");
                 UnCatTran.child(Tid).child("Shop Name").setValue(shopName);

@@ -32,13 +32,13 @@ public class EditProfileActivity extends AppCompatActivity {
         dob = (DatePicker)findViewById(R.id.userDOB);
         submit = (Button)findViewById(R.id.submitButton);
         userAddr = (EditText)findViewById(R.id.userAddress);
-        userEmail = (EditText)findViewById(R.id.userEmail);
+
         userName = (EditText)findViewById(R.id.userName);
         userPhone = (EditText)findViewById(R.id.userPhone);
 
         Intent intent = getIntent();
         userName.setText(intent.getStringExtra("NAME"));
-        userEmail.setText(intent.getStringExtra("EMAIL"));
+
         userPhone.setText(intent.getStringExtra("PHONE"));
         userAddr.setText(intent.getStringExtra("ADDRESS"));
         day=intent.getStringExtra("DAY");
@@ -77,7 +77,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String Uid=auth.getUid();
         RefUid= mRootRef.child(Uid);
         RefName = RefUid.child("Name");
-        RefEmail=RefUid.child("Email");
+
         RefPhnnum=RefUid.child("Phone Number");
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +94,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String addr = userAddr.getText().toString();
                 String email = userEmail.getText().toString();
                 RefName.setValue(name);
-                RefEmail.setValue(email);
+
                 RefPhnnum.setValue(phone);
                 RefUid.child("Address").setValue(addr);
                 RefUid.child("Day").setValue(day);

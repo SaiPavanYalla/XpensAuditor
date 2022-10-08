@@ -37,10 +37,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //toolbar.setTitle(getString(R.string.app_name));
-        //setSupportActionBar(toolbar);
-
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
         mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
@@ -60,17 +56,15 @@ public class AccountSettingsActivity extends AppCompatActivity {
             }
         };
 
-//        btnChangeEmail = (Button) findViewById(R.id.change_email_button);
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
         btnSendResetEmail = (Button) findViewById(R.id.sending_pass_reset_button);
         btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-//        changeEmail = (Button) findViewById(R.id.changeEmail);
         changePassword = (Button) findViewById(R.id.changePass);
         sendEmail = (Button) findViewById(R.id.send);
         remove = (Button) findViewById(R.id.remove);
         signOut = (Button) findViewById(R.id.sign_out);
         addPreferences= (Button) findViewById(R.id.add_preferences);
-        //AddTran= (Button) findViewById(R.id.addTran);
+
         oldEmail = (EditText) findViewById(R.id.old_email);
         newEmail = (EditText) findViewById(R.id.new_email);
         password = (EditText) findViewById(R.id.password);
@@ -80,7 +74,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         newEmail.setVisibility(View.GONE);
         password.setVisibility(View.GONE);
         newPassword.setVisibility(View.GONE);
-//        changeEmail.setVisibility(View.GONE);
+
         changePassword.setVisibility(View.GONE);
         sendEmail.setVisibility(View.GONE);
         remove.setVisibility(View.GONE);
@@ -101,45 +95,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
             }
         });
 
-//        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                oldEmail.setVisibility(View.GONE);
-//                newEmail.setVisibility(View.VISIBLE);
-//                password.setVisibility(View.GONE);
-//                newPassword.setVisibility(View.GONE);
-//                changeEmail.setVisibility(View.VISIBLE);
-//                changePassword.setVisibility(View.GONE);
-//                sendEmail.setVisibility(View.GONE);
-//                remove.setVisibility(View.GONE);
-//            }
-//        });
-
-//        changeEmail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                progressBar.setVisibility(View.VISIBLE);
-//                if (user != null && !newEmail.getText().toString().trim().equals("")) {
-//                    user.updateEmail(newEmail.getText().toString().trim())
-//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()) {
-//                                        Toast.makeText(AccountSettingsActivity.this, "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
-//                                        signOut();
-//                                        progressBar.setVisibility(View.GONE);
-//                                    } else {
-//                                        Toast.makeText(AccountSettingsActivity.this, "Failed to update email!", Toast.LENGTH_LONG).show();
-//                                        progressBar.setVisibility(View.GONE);
-//                                    }
-//                                }
-//                            });
-//                } else if (newEmail.getText().toString().trim().equals("")) {
-//                    newEmail.setError("Enter email");
-//                    progressBar.setVisibility(View.GONE);
-//                }
-//            }
-//        });
 
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,7 +205,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 // set message, title, and icon
                 .setTitle("Remove User")
                 .setMessage("All data will be lost, do you really want to remove?")
-                //.setIcon(R.drawable.delete)
+
 
                 .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
 
@@ -280,7 +235,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 // set message, title, and icon
                 .setTitle("SignOut")
                 .setMessage("Do you Really want to SignOut ?")
-                //.setIcon(R.drawable.delete)
+
 
                 .setPositiveButton("SignOut", new DialogInterface.OnClickListener() {
 

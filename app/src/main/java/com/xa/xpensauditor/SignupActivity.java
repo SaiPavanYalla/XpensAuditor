@@ -96,43 +96,30 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-               /* if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
-                    return;
-                }*/
-
                 progressBar.setVisibility(View.VISIBLE);
                 //create user
                 auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
+                                    Toast.makeText(SignupActivity.this, "Please enter valid Email and Password" + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-
-
-
 
                                     auth.sendPasswordResetEmail(email)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Toast.makeText(SignupActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(SignupActivity.this, "We have sent you instructions to Set your password!", Toast.LENGTH_SHORT).show();
                                                     } else {
-                                                        Toast.makeText(SignupActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(SignupActivity.this, "Failed to send password set email!", Toast.LENGTH_SHORT).show();
                                                     }
 
                                                     progressBar.setVisibility(View.GONE);
@@ -175,8 +162,7 @@ public class SignupActivity extends AppCompatActivity {
                                     RefHomeNeeds.setValue("");
                                     RefOthers=RefCat.child("Others");
                                     RefOthers.setValue("");
-//                                        RefUncat=RefCat.child("Uncategorised");
-//                                        RefUncat.setValue("");
+
 // todo profile picture
 //                                        filepath=storageReference.child("Profile Image").child(Uid+".jpg");
 //
@@ -197,7 +183,6 @@ public class SignupActivity extends AppCompatActivity {
 //                                            }
 //                                        });
                                     auth.signOut();
-//                                    startActivity(new Intent(SignupActivity.this, SignSetCatBudget.class));
                                     finish();
                                 }
                             }
