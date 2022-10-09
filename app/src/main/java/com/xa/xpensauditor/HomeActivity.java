@@ -63,14 +63,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     FirebaseAuth auth;
     ImageView userImage;
 
-    private Firebase mRootRef,LastRefreshDate;
+    private Firebase mRootRef;
     private Firebase RefUid;
     private Firebase RefName,RefEmail;
     TextView tvHeaderName, tvHeaderMail;
     //todo
     //StorageReference storageReference, filepath,storageRef;
     Uri imageUri = null;
-    String Uid,StrLastRefDate="0";
+    String Uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefUid= mRootRef.child(Uid);
         RefName = RefUid.child("Name");
         RefEmail=RefUid.child("Email");
-        LastRefreshDate = RefUid.child("LastRefreshDate");
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -180,24 +180,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-        LastRefreshDate.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (auth.getCurrentUser()!=null) {
-                    try {
-                        StrLastRefDate = dataSnapshot.getValue().toString().trim();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -323,7 +305,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent i=new Intent(this,SMSReaderActivity.class);
             if(isSmsPermissionGranted())
             {
-                i.putExtra("StrLastRefDate", StrLastRefDate);
                 startActivity(i);
             }
             else
@@ -390,9 +371,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     Intent i = new Intent(this, SMSReaderActivity.class);
-                    i.putExtra("StrLastRefDate", StrLastRefDate);
                     startActivity(i);
-
 
                 } else {
                     Toast.makeText(getApplicationContext(), "SMS read permission is required for this feature to work, Enabled it in under app settings", Toast.LENGTH_LONG).show();

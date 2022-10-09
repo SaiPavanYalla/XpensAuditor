@@ -159,36 +159,61 @@ public class UncategorisedFragment extends Fragment {
                 tagId=TransactionListUF.get(show).getTid();
                 tagDate = TransactionListUF.get(show).getT_date();
                 tagDateSplit = tagDate.split(" ");
+
                 switch (tagDateSplit[1]){
-                    case "JAN":
-                        mm=1;
-                    case "FEB":
-                        mm=2;
-                    case "MAR":
-                        mm=3;
-                    case "APR":
-                        mm=4;
-                    case "MAY":
-                        mm=5;
-                    case "JUN":
-                        mm=6;
-                    case "JUL":
-                        mm=7;
-                    case "AUG":
-                        mm=8;
-                    case "SEP":
-                        mm=9;
-                    case "OCT":
-                        mm=10;
-                    case "NOV":
-                        mm=11;
-                    case "DEC":
-                        mm=12;
+                    case "JAN": {
+                        mm = 1;
+                        break;
+                    }
+                    case "FEB": {
+                        mm = 2;
+                        break;
+                    }
+                    case "MAR": {
+                        mm = 3;
+                        break;
+                    }
+                    case "APR": {
+                        mm = 4;
+                        break;
+                    }
+                    case "MAY": {
+                        mm = 5;
+                        break;
+                    }
+                    case "JUN": {
+                        mm = 6;
+                        break;
+                    }
+                    case "JUL": {
+                        mm = 7;
+                        break;
+                    }
+                    case "AUG": {
+                        mm = 8;
+                        break;
+                    }
+                    case "SEP": {
+                        mm = 9;
+                        break;
+                    }
+                    case "OCT": {
+                        mm = 10;
+                        break;
+                    }
+                    case "NOV": {
+                        mm = 11;
+                        break;
+                    }
+                    case "DEC": {
+                        mm = 12;
+                        break;
+                    }
                 }
                 yyyy=Integer.parseInt(tagDateSplit[2]);
-                RefUid.child("DateRange").child(mm+"-"+yyyy).child(tagId).removeValue();
-                //Log.d("yoDate",tagDate);
-                //Toast.makeText(getActivity(),tagId+"-"+"Delete it",Toast.LENGTH_SHORT).show();
+                Log.d("yocheck",mm+"/"+yyyy+tagId+tagDateSplit[1]);
+                RefUid.child("DateRange").child(mm+"-"+yyyy).child("Transactions").child(tagId).removeValue();
+
 
                 RefTran.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -268,7 +293,6 @@ public class UncategorisedFragment extends Fragment {
                         case 6:
                             shMsg=S.getValue().toString().trim();
                             break;
-
 
                     }
 

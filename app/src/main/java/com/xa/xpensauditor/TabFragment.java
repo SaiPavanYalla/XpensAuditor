@@ -34,15 +34,14 @@ import java.util.Locale;
 
 public class TabFragment extends Fragment {
     private Firebase mRootRef;
-    private Firebase RefUid,RefTran,RefCatTran,RefCatSum, RefCat;
+    private Firebase RefUid,RefTran, RefCat, RefCatTran;
     int pos, currentDay,currentMonth,currentYear;
-    double intSum;
-    private String tagId, delCategory, delAmt, catChangeTo;
-    private TextView textView;
+    private String tagId, delCategory ;
+
 
     private ArrayList<String> CatgTF=new ArrayList<>();
     private ArrayAdapter<String> arrayAdapterTF;
-    private ListView changeCatTF;
+
     private List<Transaction> TransactionList = new ArrayList<>();
     private RecyclerView recyclerView;
     private TransAdapter mAdapter1;
@@ -84,7 +83,6 @@ public class TabFragment extends Fragment {
         RefUid= mRootRef.child(Uid);
         RefTran = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("Transactions");
         RefCatTran = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatTran");
-        RefCatSum = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatSum");
         RefCat = RefUid.child("Categories");
 
         arrayAdapterTF=new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1,CatgTF);
@@ -134,7 +132,7 @@ public class TabFragment extends Fragment {
         mAdapter1.setOnItemClickListener(new TransAdapter.ClickListener() {
             @Override
             public void OnItemClick(int position, View v) {
-                //Toast.makeText(getActivity(),TransactionList.get(position).getTid(),Toast.LENGTH_SHORT).show();
+
                 Intent i = new Intent(getActivity(),SMSDBFetchActivity.class);
                 i.putExtra("indexPos",TransactionList.get(position).getTid());
                 startActivity(i);
@@ -159,41 +157,17 @@ public class TabFragment extends Fragment {
 
                 tagId=TransactionList.get(show).getTid();
                 delCategory = TransactionList.get(show).getT_cat();
-                delAmt = TransactionList.get(show).getT_amt();
-
-                 Toast.makeText(getActivity(),"Deleted transaction",Toast.LENGTH_SHORT).show();
+                
 
                 RefTran.child(tagId).removeValue();
                 RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatTran").child(delCategory).child(tagId).removeValue();
                 RefUid.child("UnCatTran").child(tagId).removeValue();
-                RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatSum").child(delCategory).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String sumCat = dataSnapshot.getValue().toString().trim();
-                        intSum = Double.parseDouble((sumCat));
-                        double newDelAmt =  Double.parseDouble((delAmt));
-                        intSum = Math.round((intSum - newDelAmt)*100.0)/100.0;
-                        if(intSum==0.00) {
-                            dataSnapshot.getRef().removeValue();
-                            mAdapter1.notifyDataSetChanged();
-                        }
-                        else
-                            dataSnapshot.getRef().setValue(String.valueOf(intSum));
-
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
-                });
 
                 TransactionList.clear();
                 prepareTransactionData();
 
 
             }break;
-
         }
         return super.onContextItemSelected(item);
     }
