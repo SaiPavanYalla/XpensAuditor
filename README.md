@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/LICENSE)
 [![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/search?l=java)
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/README.md)
+[![GitHub Release](https://img.shields.io/github/release/SaiPavanYalla/XpensAuditor.svg)](https://github.com/SaiPavanYalla/XpensAuditor/releases)
 #
 
  ## Summary
