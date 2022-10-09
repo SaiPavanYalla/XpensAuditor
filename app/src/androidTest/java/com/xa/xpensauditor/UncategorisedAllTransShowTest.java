@@ -41,7 +41,7 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AllTransShowActivityTest {
+public class UncategorisedAllTransShowTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> mActivityScenarioRule =
@@ -58,7 +58,7 @@ public class AllTransShowActivityTest {
     }
 
     @Test
-    public void allTransShowActivityTest() {
+    public void uncategorisedAllTransShowTest() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.email),
                         childAtPosition(
@@ -96,8 +96,18 @@ public class AllTransShowActivityTest {
                         isDisplayed()));
         textView.check(matches(withText("XpensAuditor")));
         SystemClock.sleep(1000);
+        ViewInteraction tabView = onView(
+                allOf(withContentDescription("UNCATEGORISED TRANSACTION"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.tabs),
+                                        0),
+                                1),
+                        isDisplayed()));
+        tabView.perform(click());
+        SystemClock.sleep(1000);
         ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recycler_view),
+                allOf(withId(R.id.rv_uncat),
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
