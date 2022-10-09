@@ -316,6 +316,5 @@ public class AddTransactionActivity extends AppCompatActivity {
             Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
             startActivity(i);
 
-
     }
 }
