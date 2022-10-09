@@ -120,26 +120,19 @@ public class ContactUsTest {
 
         SystemClock.sleep(2000);
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.tvNumber5), withText("mithilareddy1999@gmail.com"),
-                        withParent(allOf(withId(R.id.RelativeView5),
-                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+        ViewInteraction viewGroup = onView(
+                allOf(withParent(allOf(withId(android.R.id.content),
+                                withParent(withId(androidx.constraintlayout.widget.R.id.decor_content_parent)))),
                         isDisplayed()));
-        textView.check(matches(withText("mithilareddy1999@gmail.com")));
+        viewGroup.check(matches(isDisplayed()));
+        SystemClock.sleep(2000);
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.tvNumber7), withText("sahithi.ammana@gmail.com"),
-                        withParent(allOf(withId(R.id.RelativeView7),
-                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+        ViewInteraction viewGroup2 = onView(
+                allOf(withId(androidx.constraintlayout.widget.R.id.action_bar),
+                        withParent(allOf(withId(androidx.constraintlayout.widget.R.id.action_bar_container),
+                                withParent(withId(androidx.constraintlayout.widget.R.id.decor_content_parent)))),
                         isDisplayed()));
-        textView2.check(matches(withText("sahithi.ammana@gmail.com")));
-
-        ViewInteraction imageButton = onView(
-                allOf(withId(R.id.fab),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        imageButton.check(matches(isDisplayed()));
-
+        viewGroup2.check(matches(isDisplayed()));
         SystemClock.sleep(2000);
 
         pressBack();
