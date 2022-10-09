@@ -54,7 +54,7 @@ public class SuggestActivityTest {
     }
 
     @Test
-    public void suggestActivityTest2() {
+    public void suggestActivityTest() {
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText = onView(
@@ -104,17 +104,19 @@ public class SuggestActivityTest {
         appCompatImageButton.perform(click());
         SystemClock.sleep(2000);
 
-
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(withId(R.id.nav_suggest),
-                        childAtPosition(
-                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
-                                        childAtPosition(
-                                                withId(R.id.nav_view),
-                                                0)),
-                                13),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
+//
+//        ViewInteraction navigationMenuItemView = onView(
+//                allOf(withId(R.id.nav_suggest),
+//                        childAtPosition(
+//                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
+//                                        childAtPosition(
+//                                                withId(R.id.nav_view),
+//                                                0)),
+//                                13),
+//                        isDisplayed()));
+//        navigationMenuItemView.perform(click());
+        onView(withText("Suggestions")).perform(click());
+        //onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_register));
 
         SystemClock.sleep(2000);
 
