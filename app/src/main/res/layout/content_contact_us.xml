@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/RelativeView5"
-            android:background="@android:drawable/dialog_holo_light_frame"
             android:clickable="true"
             android:gravity="center"
             android:onClick="SendMail"
