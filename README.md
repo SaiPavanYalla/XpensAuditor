@@ -20,7 +20,7 @@
 
 ## Roadmap
 
- - 
+ - Issues encountered and solved so far - [Issues] https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed
 
 ## License
 
