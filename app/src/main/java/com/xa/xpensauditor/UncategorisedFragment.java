@@ -228,6 +228,7 @@ public class UncategorisedFragment extends Fragment {
                                     //Toast.makeText(getActivity(), tagId + "-Deleted", Toast.LENGTH_LONG).show();
                                     TransactionListUF.clear();
                                     prepareTransactionData();
+                                    mAdapterUF.notifyDataSetChanged();
                                 }
                             });
                         }
