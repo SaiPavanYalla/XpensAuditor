@@ -15,6 +15,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
+import android.content.Intent;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,8 +116,11 @@ public class SuggestActivityTest {
 //                                13),
 //                        isDisplayed()));
 //        navigationMenuItemView.perform(click());
-        onView(withText("Suggestions")).perform(click());
+        //onView(withText("Suggestions")).perform(click());
+        onView(withId(R.id.nav_suggest)).perform(click());
         //onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_register));
+
+
 
         SystemClock.sleep(2000);
 
