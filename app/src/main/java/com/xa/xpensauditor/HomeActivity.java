@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Firebase mRootRef;
     private Firebase RefUid;
     private Firebase RefName,RefEmail;
+    private static int currentpage=0;
     TextView tvHeaderName, tvHeaderMail;
     //todo
     //StorageReference storageReference, filepath,storageRef;
@@ -184,6 +185,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        viewPager.setCurrentItem(currentpage);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -196,8 +198,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onPageSelected(int position) {
                 if(position==0)
                 {
+                    currentpage=0;
                     Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                     startActivity(intent);
+                }
+                if(position==1)
+                {
+                    currentpage=1;
+                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                    startActivity(intent);
+
                 }
             }
 
