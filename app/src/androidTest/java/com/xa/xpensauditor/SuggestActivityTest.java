@@ -89,12 +89,7 @@ public class SuggestActivityTest {
                         isDisplayed()));
         materialButton.perform(click());
         SystemClock.sleep(2000);
-        ViewInteraction imageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        withParent(allOf(withId(R.id.toolbar),
-                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
-                        isDisplayed()));
-        imageButton.check(matches(isDisplayed()));
+
         SystemClock.sleep(2000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
