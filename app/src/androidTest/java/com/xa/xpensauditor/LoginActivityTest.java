@@ -156,6 +156,44 @@ public class LoginActivityTest {
         SystemClock.sleep(1000);
     }
 
+    @Test
+    public void loginActivityTest_forgotPassword() {
+        SystemClock.sleep(2000);
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.btn_reset_password), withText("Forgot your password?"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                        0),
+                                4),
+                        isDisplayed()));
+        materialButton.perform(click());
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.btn_reset_password), withText("RESET PASSWORD"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
+                        isDisplayed()));
+        button.check(matches(isDisplayed()));
+
+        ViewInteraction materialButton2 = onView(
+                allOf(withId(R.id.btn_back), withText("<< Back"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                        0),
+                                5),
+                        isDisplayed()));
+        materialButton2.perform(click());
+
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.btn_login), withText("LOGIN"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
+                        isDisplayed()));
+        button2.check(matches(isDisplayed()));
+    }
+
+
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
