@@ -17,10 +17,21 @@
  - The app supports multiple interesting features like Rating, Customer Service Feedback, Contact Us
  - The Mailing and SMS services have been configured for the app for ease of sending customer updates, password reset requests and personal expenses 
  - There is a profile set up module where user can update their details and also request for change of password or other settings when required
+ - All the basic CRUD Operations have been implemented as per the USER APIs 
+   - Create User (Sign Up)
+   - Update User (Profile Settings)
+   - Remove User (Delete Profile option)
+   - Read User (Fetch relevant expenses, data of user when loggedin)
 
 ## Roadmap
 
- - Issues encountered and solved so far - [Issues] https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed
+ - Issues encountered and solved so far - [ISSUES] (https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed)
+ - Scope of Improvement :
+ 
+   - Add Preferences in the application can be improved by adding customized bills and choices of customers
+   - Change password feature is implemented. Likewise, change email also needs to be implemented
+   - Feedback and Contact Us can be extendable 
+   - Wherever there can be improvements done we mentioned it with a toast message "To be updated in later version"
 
 ## License
 
