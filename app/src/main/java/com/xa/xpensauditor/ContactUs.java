@@ -20,7 +20,7 @@ public class ContactUs extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_contact_us);
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
     }
@@ -44,29 +44,14 @@ public class ContactUs extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public void SendMailvineeth(View view) {
-        sendmail("vineethdasi22@gmail.com");
-    }
-
-    public void SendMailsunandini(View view) {
-        sendmail("sunandini.medisetti@gmail.com");
-    }
-
-    public void SendMailsahiti(View view) {
-        sendmail("sahithi.ammana@gmail.com");
-    }
-
-    public void SendMailpavan(View view) {
-        sendmail("ysaipavan99@gmail.com");
-    }
-
-    public void SendMailmithila(View view) {
-        sendmail("mithilareddy1999@gmail.com");
-    }
 
     public void callSupport(View view) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:0123456789"));
         startActivity(intent);
+    }
+
+    public void SendMail(View view) {
+        sendmail("xpensauditor@gmail.com");
     }
 }
