@@ -1,5 +1,7 @@
 package com.xa.xpensauditor;
 
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -252,6 +254,9 @@ public class UncategorisedFragment extends Fragment {
 
                     }
                 });
+            }break;
+            case 22:{
+                Toast.makeText(getActivity(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
             }break;
 
         }
