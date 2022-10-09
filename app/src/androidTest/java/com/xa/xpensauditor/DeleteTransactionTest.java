@@ -1,7 +1,6 @@
 package com.xa.xpensauditor;
 
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -17,7 +16,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 import android.os.SystemClock;
@@ -25,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -44,7 +41,7 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class UncategorisedFragmentTest {
+public class DeleteTransactionTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> mActivityScenarioRule =
@@ -61,7 +58,7 @@ public class UncategorisedFragmentTest {
     }
 
     @Test
-    public void uncatTranActivityTest() {
+    public void deleteTransactionTest() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.email),
                         childAtPosition(
@@ -70,7 +67,7 @@ public class UncategorisedFragmentTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("sahithi.ammana@gmail.com"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -80,7 +77,7 @@ public class UncategorisedFragmentTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("sahithi"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
@@ -91,16 +88,6 @@ public class UncategorisedFragmentTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(1000);
-        ViewInteraction tabView = onView(
-                allOf(withContentDescription("UNCATEGORISED TRANSACTION"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.tabs),
-                                        0),
-                                1),
-                        isDisplayed()));
-        tabView.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab),
@@ -120,7 +107,7 @@ public class UncategorisedFragmentTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("22"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("222"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.addShopName),
@@ -130,24 +117,7 @@ public class UncategorisedFragmentTest {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText4.perform(replaceText("rrrtest"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        ViewInteraction appCompatSpinner = onView(
-                allOf(withId(R.id.spinTrans),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatSpinner.perform(click());
-        SystemClock.sleep(1000);
-        DataInteraction appCompatCheckedTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(5);
-        appCompatCheckedTextView.perform(click());
+        appCompatEditText4.perform(replaceText("qqwerty"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.btAddTransaction), withText("Add Transaction"),
@@ -160,18 +130,9 @@ public class UncategorisedFragmentTest {
         materialButton2.perform(click());
         SystemClock.sleep(1000);
         pressBack();
-        ViewInteraction tabView2 = onView(
-                allOf(withContentDescription("UNCATEGORISED TRANSACTION"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.tabs),
-                                        0),
-                                1),
-                        isDisplayed()));
-        tabView2.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.rv_uncat),
+                allOf(withId(R.id.recycler_view),
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
@@ -194,11 +155,11 @@ public class UncategorisedFragmentTest {
         materialTextView.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction textView2 = onView(
-                allOf(withText("UNCATEGORISED TRANSACTION"),
-                        withParent(allOf(withContentDescription("UNCATEGORISED TRANSACTION"),
+                allOf(withText("ALL TRANSACTION"),
+                        withParent(allOf(withContentDescription("ALL TRANSACTION"),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
-        textView2.check(matches(withText("UNCATEGORISED TRANSACTION")));
+        textView2.check(matches(withText("ALL TRANSACTION")));
     }
 
     private static Matcher<View> childAtPosition(
