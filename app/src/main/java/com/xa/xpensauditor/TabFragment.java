@@ -1,5 +1,6 @@
 package com.xa.xpensauditor;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -162,10 +163,10 @@ public class TabFragment extends Fragment {
                 RefTran.child(tagId).removeValue();
                 RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatTran").child(delCategory).child(tagId).removeValue();
                 RefUid.child("UnCatTran").child(tagId).removeValue();
+                mAdapter1.notifyDataSetChanged();//updated
 
                 TransactionList.clear();
                 prepareTransactionData();
-
 
             }break;
         }
