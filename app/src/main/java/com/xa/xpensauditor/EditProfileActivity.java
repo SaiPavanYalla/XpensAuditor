@@ -17,7 +17,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     DatePicker dob;
     Button submit;
-    EditText userName, userEmail, userPhone, userAddr;
+    EditText userName, userPhone, userAddr;
     private Firebase mRootRef;
     private Firebase RefUid;
     private Firebase RefName,RefEmail,RefPhnnum;
@@ -92,7 +92,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 String name = userName.getText().toString();
                 String phone = userPhone.getText().toString();
                 String addr = userAddr.getText().toString();
-                String email = userEmail.getText().toString();
                 RefName.setValue(name);
 
                 RefPhnnum.setValue(phone);
