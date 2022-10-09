@@ -26,10 +26,13 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +44,16 @@ public class SuggestActivityTest {
     @Rule
     public ActivityScenarioRule<LoginActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(LoginActivity.class);
+
+    @After
+    public void signoutandclear()
+    {
+        FirebaseAuth auth;
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            auth.signOut();
+        }
+    }
 
     @Test
     public void suggestActivityTest() {
