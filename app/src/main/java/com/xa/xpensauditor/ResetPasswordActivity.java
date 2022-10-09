@@ -3,6 +3,7 @@ package com.xa.xpensauditor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -59,6 +60,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(ResetPasswordActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 } else {
                                     Toast.makeText(ResetPasswordActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
                                 }

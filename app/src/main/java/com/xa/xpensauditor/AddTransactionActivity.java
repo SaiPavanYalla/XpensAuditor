@@ -298,7 +298,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
         public void onBackPressed() {
-            
+
             Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
             startActivity(i);
 
