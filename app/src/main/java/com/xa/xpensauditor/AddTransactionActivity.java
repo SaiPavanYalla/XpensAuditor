@@ -298,21 +298,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
         public void onBackPressed() {
-            Iterator<String> mapIter1 = catgTrans1.keySet().iterator();
-
-
-            if (mapIter1.hasNext()) {
-
-                while (mapIter1.hasNext()) {
-                    String key = mapIter1.next();
-
-                    Collection<String> val = catgTrans1.getCollection(key);
-                    SumTrans obj = new SumTrans();
-                    RefCatSum1.child(key).setValue(obj.computeSum(val).toString());
-
-                }
-            }
-
+            
             Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
             startActivity(i);
 

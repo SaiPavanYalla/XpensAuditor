@@ -31,16 +31,6 @@
                 android:value="" />
         </activity>
 
-        <receiver
-            android:name=".SMSReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BROADCAST_SMS">
-            <intent-filter android:priority="2147483647">
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name=".Suggest"
             android:exported="false">
@@ -151,13 +141,6 @@
         </activity>
         <activity
             android:name=".AccountSettingsActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
