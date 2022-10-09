@@ -86,8 +86,8 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         InputFilter filter = new InputFilter() {
 
-            final int maxDigitsBeforeDecimalPoint=8;
-            final int maxDigitsAfterDecimalPoint=2;
+            final int maxDigitsBeforeDecimalPoint = 8;
+            final int maxDigitsAfterDecimalPoint = 2;
 
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -95,10 +95,10 @@ public class AddTransactionActivity extends AppCompatActivity {
                 builder.replace(dstart, dend, source
                         .subSequence(start, end).toString());
                 if (!builder.toString().matches(
-                        "(([1-9]{1})([0-9]{0,"+(maxDigitsBeforeDecimalPoint-1)+"})?)?(\\.[0-9]{0,"+maxDigitsAfterDecimalPoint+"})?"
+                        "(([1-9]{1})([0-9]{0," + (maxDigitsBeforeDecimalPoint - 1) + "})?)?(\\.[0-9]{0," + maxDigitsAfterDecimalPoint + "})?"
 
                 )) {
-                    if(source.length()==0)
+                    if (source.length() == 0)
                         return dest.subSequence(dstart, dend);
                     return "";
                 }
@@ -108,45 +108,8 @@ public class AddTransactionActivity extends AppCompatActivity {
         };
 
 
-        Amnt.setFilters(new InputFilter[] { filter });
+        Amnt.setFilters(new InputFilter[]{filter});
 
-//        Amnt.addTextChangedListener(new TextWatcher() {
-//            private String current = "";
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count,
-//                                          int after) {
-//                // TODO Auto-generated method stub
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (!s.toString().equals(current)) {
-//                    Amnt.removeTextChangedListener(this);
-//
-//                    String replaceable = String.format("[%s,.\\s]", NumberFormat.getInstance().getCurrency().getSymbol());
-//                    String cleanString = s.toString().replaceAll(replaceable, "");
-//
-//                    double parsed;
-//                    try {
-//                        parsed = Double.parseDouble((cleanString));
-//                    } catch (NumberFormatException e) {
-//                        parsed = 0.00;
-//                    }
-//                    String formatted = NumberFormat.getInstance().format((parsed/100));
-//
-//                    current = formatted;
-//                    Amnt.setText(formatted);
-//                    Amnt.setSelection(formatted.length());
-//                    Amnt.addTextChangedListener(this);
-//                }
-//            }
-//        });
 
         catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -201,19 +164,19 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
                 if (f) {
-                    Amount = Amnt.getText().toString().trim().replaceAll(",","");
+                    Amount = Amnt.getText().toString().trim().replaceAll(",", "");
                     ShopName = ShpNm.getText().toString().trim();
                     if (!Amount.isEmpty() && !ShopName.isEmpty()) {
-                        Tid = String.valueOf(currentTimeMillis());;
+                        Tid = String.valueOf(currentTimeMillis());
+                        ;
 
-                        RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Amount").setValue(Amount);
-                        RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Category").setValue(SelCat);
-                        RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Shop Name").setValue(ShopName);
-                        RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("ZMessage").setValue("Entered Manually...");
-                        RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Day").setValue(day);
-                        RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Month").setValue(month);
-                        RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions").child(Tid).child("Year").setValue(year);
-
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Amount").setValue(Amount);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Category").setValue(SelCat);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Shop Name").setValue(ShopName);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("ZMessage").setValue("Entered Manually...");
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Day").setValue(day);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Month").setValue(month);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Year").setValue(year);
 
 
                         if (SelCat == "Uncategorised") {
@@ -225,27 +188,26 @@ public class AddTransactionActivity extends AppCompatActivity {
                             UnCatTran.child(Tid).child("Day").setValue(day);
                             UnCatTran.child(Tid).child("Month").setValue(month);
                             UnCatTran.child(Tid).child("Year").setValue(year);
+                        } else {
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Amount").setValue(Amount);
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Category").setValue(SelCat);
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Shop Name").setValue(ShopName);
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("ZMessage").setValue("Entered Manually...");
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Day").setValue(day);
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Month").setValue(month);
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Year").setValue(year);
                         }
-                        else{
-                            RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Amount").setValue(Amount);
-                            RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Category").setValue(SelCat);
-                            RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Shop Name").setValue(ShopName);
-                            RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("ZMessage").setValue("Entered Manually...");
-                            RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Day").setValue(day);
-                            RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Month").setValue(month);
-                            RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatTran").child(SelCat).child(Tid).child("Year").setValue(year);
-                        }
 
 
-                        RefTran1 = RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("Transactions");
+                        RefTran1 = RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions");
 
-                        //RefCatSum1= RefUid.child("DateRange").child(String.valueOf(month+"-"+year)).child("CatSum");
+                        RefCatSum1 = RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatSum");
 
 
-                        Toast.makeText(getApplicationContext(),"Transaction added",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Transaction added", Toast.LENGTH_SHORT).show();
                         Amnt.setText("");
                         ShpNm.setText("");
-                        Toast.makeText(getApplicationContext(),"Add one more transaction or press back",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Add one more transaction or press back", Toast.LENGTH_LONG).show();
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Enter valid Amount and Shopname", Toast.LENGTH_LONG).show();
@@ -255,51 +217,51 @@ public class AddTransactionActivity extends AppCompatActivity {
                 }
 
 
-//                RefTran1.addChildEventListener(new com.firebase.client.ChildEventListener() {
-//                    String amount, cat, shname, shDay, shMonth, shYear;
-//
-//                    @Override
-//                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                        int i = 0;
-//
-//                        for (DataSnapshot S : dataSnapshot.getChildren()) {
-//
-//                            switch (i) {
-//                                case 0:
-//                                    amount = S.getValue().toString().trim();
-//                                    break;
-//                                case 1:
-//                                    cat = S.getValue().toString().trim();
-//                                    break;
-//
-//                            }
-//
-//                            i++;
-//                        }
-//                        catgTrans1.put(cat, amount);
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(FirebaseError firebaseError) {
-//
-//                    }
-//                });
+                RefTran1.addChildEventListener(new com.firebase.client.ChildEventListener() {
+                    String amount, cat, shname, shDay, shMonth, shYear;
+
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        int i = 0;
+
+                        for (DataSnapshot S : dataSnapshot.getChildren()) {
+
+                            switch (i) {
+                                case 0:
+                                    amount = S.getValue().toString().trim();
+                                    break;
+                                case 1:
+                                    cat = S.getValue().toString().trim();
+                                    break;
+
+                            }
+
+                            i++;
+                        }
+                        catgTrans1.put(cat, amount);
+
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
 
 
             }
@@ -332,27 +294,28 @@ public class AddTransactionActivity extends AppCompatActivity {
 
             }
         });
+    }
 
 
+        public void onBackPressed() {
+            Iterator<String> mapIter1 = catgTrans1.keySet().iterator();
 
-//    public void onBackPressed() {
-////        Iterator<String> mapIter1 = catgTrans1.keySet().iterator();
-////
-////
-////        if(mapIter1.hasNext()) {
-////
-////            while (mapIter1.hasNext()) {
-////                String key = mapIter1.next();
-////
-////                Collection<String> val = catgTrans1.getCollection(key);
-////                SumTrans obj = new SumTrans();
-////                RefCatSum1.child(key).setValue(obj.computeSum(val).toString());
-////
-////            }
-//        }
 
-        Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
-        startActivity(i);
+            if (mapIter1.hasNext()) {
+
+                while (mapIter1.hasNext()) {
+                    String key = mapIter1.next();
+
+                    Collection<String> val = catgTrans1.getCollection(key);
+                    SumTrans obj = new SumTrans();
+                    RefCatSum1.child(key).setValue(obj.computeSum(val).toString());
+
+                }
+            }
+
+            Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
+            startActivity(i);
+
 
     }
 }
