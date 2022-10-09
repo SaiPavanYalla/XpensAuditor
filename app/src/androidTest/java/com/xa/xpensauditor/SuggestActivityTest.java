@@ -109,16 +109,19 @@ public class SuggestActivityTest {
                         isDisplayed()));
         checkedTextView.check(matches(isDisplayed()));
         SystemClock.sleep(2000);
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(withId(R.id.nav_suggest),
-                        childAtPosition(
-                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
-                                        childAtPosition(
-                                                withId(R.id.nav_view),
-                                                0)),
-                                13),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
+
+        onView(withId(R.id.nav_suggest)).perform(scrollTo()).perform(click());
+        
+//        ViewInteraction navigationMenuItemView = onView(
+//                allOf(withId(R.id.nav_suggest),
+//                        childAtPosition(
+//                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
+//                                        childAtPosition(
+//                                                withId(R.id.nav_view),
+//                                                0)),
+//                                13),
+//                        isDisplayed()));
+//        navigationMenuItemView.perform(click());
         SystemClock.sleep(2000);
         ViewInteraction editText = onView(
                 allOf(withId(R.id.editText5),
