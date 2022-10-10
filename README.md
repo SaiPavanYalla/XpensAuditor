@@ -10,6 +10,7 @@ a smart way to track your expenses
 [![GitHub Release](https://img.shields.io/github/release/SaiPavanYalla/XpensAuditor.svg)](https://github.com/SaiPavanYalla/XpensAuditor/releases)
 [![Open Issues](https://img.shields.io/github/issues/SaiPavanYalla/XpensAuditor)](https://github.com/SaiPavanYalla/XpensAuditor/issues)
 [![Build-And-Test](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml/badge.svg)](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)
 
 #
 
