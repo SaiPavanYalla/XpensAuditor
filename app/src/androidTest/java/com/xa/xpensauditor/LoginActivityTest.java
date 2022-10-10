@@ -67,7 +67,7 @@ public class LoginActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("vineethdasi22@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
 
         SystemClock.sleep(2000);
 
@@ -79,7 +79,7 @@ public class LoginActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("123456"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
         SystemClock.sleep(2000);
 
         ViewInteraction materialButton = onView(
