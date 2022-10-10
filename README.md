@@ -13,16 +13,15 @@
  
  - This mobile application allows customers to add their expenses and keep track of them. 
  - Takes required minimal amount of data like date of transaction, product name and value
- - Each user needs to create/sign up to access the application, we used firebase authentication to achieve authorization, authentication and accounting
- - The application keeps track of user data and stores it in the firebase realtime database
+ - Each user needs to create/sign up to access the application, Firebase is used to achieve authorization, authentication and accounting
+ - The application keeps track of user data and stores it in the Firebase realtime database
  - The app supports multiple interesting features like Rating, Customer Service Feedback, Contact Us
- - The Mailing and SMS services have been configured for the app for ease of sending customer updates, password reset requests and personal expenses 
- - There is a profile set up module where user can update their details and also request for change of password or other settings when required
- - All the basic CRUD Operations have been implemented as per the USER APIs 
-   - Create User (Sign Up)
-   - Update User (Profile Settings)
-   - Remove User (Delete Profile option)
-   - Read User (Fetch relevant expenses, data of user when loggedin)
+ - The Mailing and SMS services have been configured for the app for ease of sending customer updates, password reset requests and reading personal expenses 
+ - Profile set up module is where user can update their details 
+ - Account Settings are available to change password, send password reset email
+
+## Demo
+https://github.com/SaiPavanYalla/XpensAuditor/blob/main/docs/demo/XpensAuditor_Demo.mp4
 
 ## Roadmap
 
@@ -30,9 +29,10 @@
  - Scope of Improvement :
  
    - Add Preferences in the application can be improved by adding customized bills and choices of customers
+   - 
    - Change password feature is implemented. Likewise, change email also needs to be implemented
    - Feedback and Contact Us can be extendable 
-   - Wherever there can be improvements done we mentioned it with a toast message "To be updated in later version"
+ 
 
 ## License
 
