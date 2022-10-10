@@ -58,8 +58,6 @@ public class ContactUsTest {
 
     @Test
     public void contactUsTest() {
-        SystemClock.sleep(2000);
-
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.email),
                         childAtPosition(
@@ -68,10 +66,8 @@ public class ContactUsTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("vineethdasi22@gmail.com"), closeSoftKeyboard());
-
-        SystemClock.sleep(2000);
-
+        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -80,10 +76,8 @@ public class ContactUsTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("123456"), closeSoftKeyboard());
-
-        SystemClock.sleep(2000);
-
+        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -93,9 +87,14 @@ public class ContactUsTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-
-        SystemClock.sleep(5000);
-
+        SystemClock.sleep(2000);
+        ViewInteraction textView = onView(
+                allOf(withText("XpensAuditor"),
+                        withParent(allOf(withId(R.id.toolbar),
+                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
+                        isDisplayed()));
+        textView.check(matches(withText("XpensAuditor")));
+        SystemClock.sleep(1000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -105,9 +104,13 @@ public class ContactUsTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-
-        SystemClock.sleep(2000);
-
+        SystemClock.sleep(1000);
+        ViewInteraction textView2 = onView(
+                allOf(withId(androidx.recyclerview.R.id.title), withText("Contact Us"),
+                        withParent(withParent(withId(androidx.constraintlayout.widget.R.id.content))),
+                        isDisplayed()));
+        textView2.check(matches(withText("Contact Us")));
+        SystemClock.sleep(1000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Contact Us"),
                         childAtPosition(
@@ -117,27 +120,16 @@ public class ContactUsTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-
-        SystemClock.sleep(2000);
-
-        ViewInteraction viewGroup = onView(
-                allOf(withParent(allOf(withId(android.R.id.content),
-                                withParent(withId(androidx.constraintlayout.widget.R.id.decor_content_parent)))),
+        SystemClock.sleep(1000);
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.tvNumber5), withText("xpensauditor@gmail.com"),
+                        withParent(allOf(withId(R.id.RelativeView5),
+                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
-        viewGroup.check(matches(isDisplayed()));
-        SystemClock.sleep(2000);
-
-        ViewInteraction viewGroup2 = onView(
-                allOf(withId(androidx.constraintlayout.widget.R.id.action_bar),
-                        withParent(allOf(withId(androidx.constraintlayout.widget.R.id.action_bar_container),
-                                withParent(withId(androidx.constraintlayout.widget.R.id.decor_content_parent)))),
-                        isDisplayed()));
-        viewGroup2.check(matches(isDisplayed()));
-        SystemClock.sleep(2000);
-
+        textView3.check(matches(withText("xpensauditor@gmail.com")));
+        SystemClock.sleep(1000);
         pressBack();
-
-        SystemClock.sleep(2000);
+        SystemClock.sleep(1000);
         ViewInteraction overflowMenuButton2 = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -147,9 +139,8 @@ public class ContactUsTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton2.perform(click());
-
-        SystemClock.sleep(2000);
-        ViewInteraction materialTextView33 = onView(
+        SystemClock.sleep(1000);
+        ViewInteraction materialTextView2 = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
                                 childAtPosition(
@@ -157,10 +148,9 @@ public class ContactUsTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialTextView33.perform(click());
-        SystemClock.sleep(2000);
-
-        ViewInteraction materialButton4 = onView(
+        materialTextView2.perform(click());
+        SystemClock.sleep(1000);
+        ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
                                 childAtPosition(
@@ -168,23 +158,22 @@ public class ContactUsTest {
                                         1),
                                 12),
                         isDisplayed()));
-        materialButton4.perform(click());
-        SystemClock.sleep(2000);
-        ViewInteraction textView22 = onView(
-                allOf(withId(android.R.id.message), withText("Do you Really want to SignOut ?"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
-                        isDisplayed()));
-        textView22.check(matches(withText("Do you Really want to SignOut ?")));
-
-        ViewInteraction materialButton5 = onView(
+        materialButton2.perform(click());
+        SystemClock.sleep(1000);
+        ViewInteraction materialButton3 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 3)));
-        materialButton5.perform(scrollTo(), click());
-        SystemClock.sleep(2000);
+        materialButton3.perform(scrollTo(), click());
+        SystemClock.sleep(1000);
+        ViewInteraction imageView2 = onView(
+                allOf(withContentDescription("XpensAuditor"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
+                        isDisplayed()));
+        imageView2.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
