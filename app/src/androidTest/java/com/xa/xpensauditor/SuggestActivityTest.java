@@ -66,7 +66,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -76,7 +76,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -93,7 +93,7 @@ public class SuggestActivityTest {
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         textView.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -104,31 +104,46 @@ public class SuggestActivityTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        SystemClock.sleep(1000);
-        ViewInteraction checkedTextView = onView(
-                allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("Suggestions"),
-                        withParent(allOf(withId(R.id.nav_suggest),
-                                withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
-                        isDisplayed()));
-        checkedTextView.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(withId(R.id.nav_suggest),
-                        childAtPosition(
-                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
-                                        childAtPosition(
-                                                withId(R.id.nav_view),
-                                                0)),
-                                13),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
+//        ViewInteraction checkedTextView = onView(
+//                allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("Suggestions"),
+//                        withParent(allOf(withId(R.id.nav_suggest),
+//                                withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
+//                        isDisplayed()));
+//        checkedTextView.check(matches(isDisplayed()));
+//        SystemClock.sleep(1300);
+//        ViewInteraction navigationMenuItemView = onView(
+//                allOf(withId(R.id.nav_suggest),
+//                        childAtPosition(
+//                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
+//                                        childAtPosition(
+//                                                withId(R.id.nav_view),
+//                                                0)),
+//                                13),
+//                        isDisplayed()));
+//        navigationMenuItemView.perform(click());
+
+//        ViewInteraction navigationMenuItemView2 = onView(
+//                allOf(withId(R.id.nav_suggest),
+//                        childAtPosition(
+//                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
+//                                        childAtPosition(
+//                                                withId(R.id.nav_view),
+//                                                0)),
+//                                6),
+//                        isDisplayed()));
+//        navigationMenuItemView2.perform(click());
+
+        onView(withId(R.id.nav_suggest)).perform(click());
+
+
+        SystemClock.sleep(3000);
         ViewInteraction button = onView(
                 allOf(withId(R.id.button3), withText("DONE"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.button3), withText("DONE"),
                         childAtPosition(
@@ -138,14 +153,14 @@ public class SuggestActivityTest {
                                 2),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction textView2 = onView(
                 allOf(withText("XpensAuditor"),
                         withParent(allOf(withId(R.id.toolbar),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         textView2.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -155,7 +170,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -165,7 +180,7 @@ public class SuggestActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -175,7 +190,7 @@ public class SuggestActivityTest {
                                 12),
                         isDisplayed()));
         materialButton3.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction materialButton4 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -184,7 +199,7 @@ public class SuggestActivityTest {
                                         0),
                                 3)));
         materialButton4.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(3000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
