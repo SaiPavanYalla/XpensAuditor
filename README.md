@@ -8,7 +8,6 @@ a smart way to track your expenses
 [![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/search?l=java)
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/README.md)
 [![GitHub Release](https://img.shields.io/github/release/SaiPavanYalla/XpensAuditor.svg)](https://github.com/SaiPavanYalla/XpensAuditor/releases)
-[![Open Issues](https://img.shields.io/github/issues/SaiPavanYalla/XpensAuditor)](https://github.com/SaiPavanYalla/XpensAuditor/issues)
 [![Build-And-Test](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml/badge.svg)](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml)
 
 #
