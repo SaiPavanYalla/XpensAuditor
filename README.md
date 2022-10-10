@@ -51,7 +51,9 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 - Embedded Emulator/ USB debugging on android device
 
 ## Run the application
-
+### Android Mobile
+ - Download the apk from the latest [release](https://github.com/SaiPavanYalla/XpensAuditor/releases/tag/v1.0.0) 
+### Android Studio
  - Must have android studio installed
  - Clone the github repo
    git clone https://github.com/SaiPavanYalla/XpensAuditor.git
