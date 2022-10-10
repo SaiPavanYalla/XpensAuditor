@@ -1,4 +1,5 @@
 # XpensAuditor
+a smart way to track your expenses
 
 [![Code Coverage](https://codecov.io/gh/SaiPavanYalla/XpensAuditor/branch/main/graphs/badge.svg)](https://codecov.io/gh/SaiPavanYalla/XpensAuditor/branch/main)
 [![DOI](https://zenodo.org/badge/543328644.svg)](https://zenodo.org/badge/latestdoi/543328644)
@@ -7,6 +8,9 @@
 [![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/search?l=java)
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/README.md)
 [![GitHub Release](https://img.shields.io/github/release/SaiPavanYalla/XpensAuditor.svg)](https://github.com/SaiPavanYalla/XpensAuditor/releases)
+[![Open Issues](https://img.shields.io/github/issues/SaiPavanYalla/XpensAuditor)](https://github.com/SaiPavanYalla/XpensAuditor/issues)
+[![Build-And-Test](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml/badge.svg)](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml)
+
 #
 
  ## Summary
@@ -30,10 +34,10 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
  - Issues encountered and solved so far - [ISSUES] (https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed)
  - Scope of Improvement :
  
-   - Add Preferences in the application can be improved by adding customized bills and choices of customers
-   - 
+   - Analysis on detected expenses - Category wise expenses and expenditure graphs
+   - Detect transaction alerts from notifications and emails as well
+   - Add custom categories & Auto detect category by vendor
    - Change password feature is implemented. Likewise, change email also needs to be implemented
-   - Feedback and Contact Us can be extendable 
  
 
 ## License
@@ -43,7 +47,7 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 ## Tools used
 
 - Android Studio
-- Embedded Emulator/ Connection with an android device
+- Embedded Emulator/ USB debugging on android device
 
 ## Run the application
 
