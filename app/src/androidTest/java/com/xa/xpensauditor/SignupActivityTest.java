@@ -51,11 +51,16 @@ public class SignupActivityTest {
     @After
     public void signoutandclear()
     {
+//        FirebaseAuth auth;
+//        auth = FirebaseAuth.getInstance();
+//        if (auth.getCurrentUser() != null) {
+//            String Uid = auth.getUid();
+//            new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/").child(Uid).removeValue();
+//        }
         FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-            String Uid = auth.getUid();
-            new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/").child(Uid).removeValue();
+            auth.signOut();
         }
     }
     @Test
