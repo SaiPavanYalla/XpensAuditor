@@ -151,7 +151,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     auth.getCurrentUser().reload();
                 }
                 if (auth.getCurrentUser()!=null) {
-                    tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
+                    try {
+                        tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
