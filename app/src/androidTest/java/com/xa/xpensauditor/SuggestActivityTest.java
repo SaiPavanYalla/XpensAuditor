@@ -87,73 +87,45 @@ public class SuggestActivityTest {
                         isDisplayed()));
         materialButton.perform(click());
         SystemClock.sleep(2000);
-        ViewInteraction textView = onView(
-                allOf(withText("XpensAuditor"),
-                        withParent(allOf(withId(R.id.toolbar),
-                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
-                        isDisplayed()));
-        textView.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(3000);
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-        SystemClock.sleep(5000);
-//        ViewInteraction checkedTextView = onView(
-//                allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("Suggestions"),
-//                        withParent(allOf(withId(R.id.nav_suggest),
-//                                withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
+//        ViewInteraction textView = onView(
+//                allOf(withText("XpensAuditor"),
+//                        withParent(allOf(withId(R.id.toolbar),
+//                                withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
 //                        isDisplayed()));
-//        checkedTextView.check(matches(isDisplayed()));
-//        SystemClock.sleep(1300);
-//        ViewInteraction navigationMenuItemView = onView(
-//                allOf(withId(R.id.nav_suggest),
+//        textView.check(matches(withText("XpensAuditor")));
+//        SystemClock.sleep(3000);
+//        ViewInteraction appCompatImageButton = onView(
+//                allOf(withContentDescription("Open navigation drawer"),
 //                        childAtPosition(
-//                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
+//                                allOf(withId(R.id.toolbar),
 //                                        childAtPosition(
-//                                                withId(R.id.nav_view),
+//                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
 //                                                0)),
-//                                13),
+//                                1),
 //                        isDisplayed()));
-//        navigationMenuItemView.perform(click());
-
-//        ViewInteraction navigationMenuItemView2 = onView(
-//                allOf(withId(R.id.nav_suggest),
+//        appCompatImageButton.perform(click());
+//        SystemClock.sleep(5000);
+//
+//        onView(withId(R.id.nav_suggest)).perform(click());
+//
+//
+//        SystemClock.sleep(3000);
+//        ViewInteraction button = onView(
+//                allOf(withId(R.id.button3), withText("DONE"),
+//                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
+//                        isDisplayed()));
+//        button.check(matches(isDisplayed()));
+//        SystemClock.sleep(3000);
+//        ViewInteraction materialButton2 = onView(
+//                allOf(withId(R.id.button3), withText("DONE"),
 //                        childAtPosition(
-//                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
-//                                        childAtPosition(
-//                                                withId(R.id.nav_view),
-//                                                0)),
-//                                6),
+//                                childAtPosition(
+//                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+//                                        1),
+//                                2),
 //                        isDisplayed()));
-//        navigationMenuItemView2.perform(click());
-
-        onView(withId(R.id.nav_suggest)).perform(click());
-
-
-        SystemClock.sleep(3000);
-        ViewInteraction button = onView(
-                allOf(withId(R.id.button3), withText("DONE"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-        SystemClock.sleep(3000);
-        ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.button3), withText("DONE"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        1),
-                                2),
-                        isDisplayed()));
-        materialButton2.perform(click());
-        SystemClock.sleep(3000);
+//        materialButton2.perform(click());
+//        SystemClock.sleep(3000);
         ViewInteraction textView2 = onView(
                 allOf(withText("XpensAuditor"),
                         withParent(allOf(withId(R.id.toolbar),
