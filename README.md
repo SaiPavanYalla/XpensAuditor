@@ -21,7 +21,9 @@
  - Account Settings are available to change password, send password reset email
 
 ## Demo
-https://github.com/SaiPavanYalla/XpensAuditor/blob/main/docs/demo/XpensAuditor_Demo.mp4
+
+https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b-9a86-559b14adf898.mp4
+
 
 ## Roadmap
 
