@@ -53,6 +53,7 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 ## Run the application
 ### Android Mobile
  - Download the apk from the latest [release](https://github.com/SaiPavanYalla/XpensAuditor/releases/tag/v1.0.0) 
+ 
 ### Android Studio
  - Must have android studio installed
  - Clone the github repo
@@ -66,12 +67,25 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
  - Application has an existing test suite
  - Navigate to the folder of Android Test and right click and select "Run tests in ...."
  - It runs all the test cases in the package and provides the result and code coverage
+
+## Project Management
+https://www.notion.so/SE-Project-2-3a1517a6d8aa42b590b1f31a288249ce
+
+## Kanban Board
+https://www.notion.so/525c9918752e452cade1c9773fb22a02?v=bbac6938b19a42798e6a6f7382504559
  
 ## Team Members:
 
 This repository is made for CSC 510 Software Engineering Course:
 
-Members
+Members:
+Atharva Gole
+Arnab Datta
+Vishal Sharma
+Dhanya Dasari
+Dakshil Kanakia
+
+Previous Contributors
  - Sahithi Ammana
  - Mithila Reddy Tatigotla
  - Sunandini Medisetti
