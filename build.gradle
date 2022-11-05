@@ -19,6 +19,14 @@ plugins {
     id 'com.android.library' version '7.3.0' apply false
 }
 
+task javadocSite(type: Javadoc) {
+    failOnError false
+    source = sourceSets.main.allJava
+    include 'com/xa/xpensauditor/**'
+    options.noTimestamp true
+    destinationDir = file("${rootDir}/docs/documentation-generation-test")
+}
+
 allprojects {
     repositories {
         // Make sure that you have the following two repositories
