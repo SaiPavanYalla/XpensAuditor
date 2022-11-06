@@ -17,6 +17,17 @@ buildscript {
 plugins {
     id 'com.android.application' version '7.3.0' apply false
     id 'com.android.library' version '7.3.0' apply false
+    id 'java'
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['app/src/main/java']
+        }
+        resources {
+            srcDirs = ['app/src/main/res']
+        }
+    }
 }
 
 task javadocSite(type: Javadoc) {
