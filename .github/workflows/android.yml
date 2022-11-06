@@ -29,7 +29,7 @@ jobs:
 
     - name: Deploy Javadoc site
       run: |
-        git fetch origin mian
+        git fetch
         git checkout main
         git config --global user.email "adatta4@ncsu.edu"
         git config --global user.name "Arnab Datta"
