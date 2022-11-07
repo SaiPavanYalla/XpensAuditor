@@ -13,6 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      run: |
+        git fetch
+        git checkout main
+        git config --global user.email "adatta4@ncsu.edu"
+        git config --global user.name "Arnab Datta"
     - name: set up JDK 11
       uses: actions/setup-java@v3
       with:
@@ -25,12 +30,7 @@ jobs:
       run: ./gradlew build
 
     - name: Generate Javadoc Site
-      run: |
-        git fetch
-        git checkout main
-        git config --global user.email "adatta4@ncsu.edu"
-        git config --global user.name "Arnab Datta"
-        ./gradlew javadocSite
+      run: ./gradlew javadocSite
 
     - name: Deploy Javadoc site
       run: |
