@@ -33,9 +33,8 @@ sourceSets {
 task javadocSite(type: Javadoc) {
     failOnError false
     source = sourceSets.main.allJava
-    include 'com/xa/xpensauditor/**'
     options.noTimestamp true
-    destinationDir = file("${rootDir}/docs/documentation-generation-test")
+    destinationDir = file("${rootDir}/docs/")
 }
 
 allprojects {
