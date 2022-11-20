@@ -88,6 +88,8 @@ dependencies {
     implementation files('library/android.jar')
     androidTestImplementation 'androidx.test.ext:junit:1.1.4-alpha07'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha07'
+    implementation "com.androidplot:androidplot-core:1.5.10"
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
 
 apply plugin: 'jacoco'
