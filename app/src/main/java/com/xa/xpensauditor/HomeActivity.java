@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         }
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpensauditor-g11-default-rtdb.firebaseio.com/");
         mRootRef.keepSynced(true);
         Uid=auth.getUid();
         RefUid= mRootRef.child(Uid);
