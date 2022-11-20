@@ -57,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef = new Firebase("https://xpensauditor-g11-default-rtdb.firebaseio.com/");
         //todo
         //storageReference = FirebaseStorage.getInstance().getReference();
 
