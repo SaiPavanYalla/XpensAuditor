@@ -31,6 +31,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Shop Name"
                 android:id="@+id/addShopName" />
+            
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Shared User Email Addresses (Comma Separated)"
+                android:id="@+id/addSharedUserEmail" />
 
             <Spinner
                 android:id="@+id/spinTrans"
