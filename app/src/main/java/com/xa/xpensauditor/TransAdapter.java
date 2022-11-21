@@ -39,6 +39,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
         holder.tcat.setText(trans.getT_cat());
         holder.tamt.setText("$"+trans.getT_amt());
         holder.tshopname.setText(trans.getT_shopname());
+        holder.tsharedwith.setText(trans.getT_sharedwith());
         holder.tdate.setText(trans.getT_date());
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -64,7 +65,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
 
 
     public class MyViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnCreateContextMenuListener {
-        public TextView tid, tamt, tcat,tshopname,tdate;
+        public TextView tid, tamt, tcat,tshopname,tdate,tsharedwith;
 
 
         public MyViewHolder2(View view) {
@@ -75,6 +76,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
             tamt = (TextView) view.findViewById(R.id.tamt);
             tcat = (TextView) view.findViewById(R.id.tcat);
             tshopname = (TextView) view.findViewById(R.id.tshopname);
+            tsharedwith = (TextView) view.findViewById(R.id.tsharedwith);
             tdate=(TextView) view.findViewById(R.id.tdate);
             view.setOnCreateContextMenuListener(this);
 

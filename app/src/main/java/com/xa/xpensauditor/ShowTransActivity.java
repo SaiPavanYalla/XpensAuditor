@@ -30,7 +30,7 @@ public class ShowTransActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_trans);
 
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpensauditor-g11-default-rtdb.firebaseio.com/");
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -54,7 +54,7 @@ public class ShowTransActivity extends AppCompatActivity {
 
 
         RefTran.addChildEventListener(new ChildEventListener() {
-            String amount,cat,shname,shDay,shMonth,shYear,shMsg;
+            String amount,cat,shname,shDay,shMonth,shYear,shMsg, sharedWith;
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -78,12 +78,16 @@ public class ShowTransActivity extends AppCompatActivity {
                             shMonth=S.getValue().toString().trim();
                             break;
                         case 4:
-                            shname=S.getValue().toString().trim();
+                            String label = (S.getChildrenCount() > 1) ? "Shared With: " : "";
+                            sharedWith=S.getValue().toString().replace("[", label).replace("]", "");
                             break;
                         case 5:
-                            shYear=S.getValue().toString().trim();
+                            shname=S.getValue().toString().trim();
                             break;
                         case 6:
+                            shYear=S.getValue().toString().trim();
+                            break;
+                        case 7:
                             shMsg=S.getValue().toString().trim();
                             break;
                     }
@@ -91,11 +95,12 @@ public class ShowTransActivity extends AppCompatActivity {
                     i++;
                 }
                 String shdate= shDay+" - "+shMonth+" - "+shYear;
-                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
+                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg,sharedWith);
                 amount="";
                 cat="";
                 shname="";
                 shdate="";
+                sharedWith="";
                 transList.add(transaction);
                 mAdapter.notifyDataSetChanged();
             }

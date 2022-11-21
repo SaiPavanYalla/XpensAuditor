@@ -35,7 +35,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         sms=findViewById(R.id.sms);
 
 
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpensauditor-g11-default-rtdb.firebaseio.com/");
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();

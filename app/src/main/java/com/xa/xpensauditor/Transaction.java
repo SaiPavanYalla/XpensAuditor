@@ -1,7 +1,7 @@
 package com.xa.xpensauditor;
 
 public class Transaction {
-    private String tid, t_shopname, t_amt,t_cat,t_date, t_msg;
+    private String tid, t_shopname, t_amt,t_cat,t_date, t_msg, t_sharedwith;
 
     public Transaction() {
     }
@@ -13,14 +13,16 @@ public class Transaction {
         this.t_cat = obj.t_cat;
         this.t_date = obj.t_date;
         this.t_msg = obj.t_msg;
+        this.t_sharedwith = obj.t_sharedwith;
     }
-    public Transaction( String tid, String t_amt, String t_cat,String t_shopname,String t_date, String t_msg) {
+    public Transaction( String tid, String t_amt, String t_cat,String t_shopname,String t_date, String t_msg, String t_sharedwith) {
         this.tid = tid;
         this.t_amt=t_amt;
         this.t_cat=t_cat;
         this.t_shopname=t_shopname;
         this.t_date=t_date;
         this.t_msg = t_msg;
+        this.t_sharedwith = t_sharedwith;
     }
 
     public String getTid() {
@@ -47,6 +49,10 @@ public class Transaction {
         return t_msg;
     }
 
+    public String getT_sharedwith(){
+        return t_sharedwith;
+    }
+
     public void setT_date(String t_date) {
         this.t_date = t_date;
     }
@@ -65,6 +71,10 @@ public class Transaction {
 
     public void setT_msg(String t_msg) {
         this.t_msg = t_msg;
+    }
+
+    public void setT_sharedwith(String t_sharedwith){
+        this.t_sharedwith = t_sharedwith;
     }
 
 }

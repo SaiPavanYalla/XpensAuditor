@@ -39,7 +39,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
-        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef = new Firebase("https://xpensauditor-g11-default-rtdb.firebaseio.com/");
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

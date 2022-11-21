@@ -38,6 +38,13 @@
         android:textSize="20dp"
         android:layout_below="@id/tshopname"
         android:textColor="@color/year" />
+    
+    <TextView
+        android:id="@+id/tsharedwith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_below="@id/tamt"/>
 
     <TextView
         android:id="@+id/tcat"
