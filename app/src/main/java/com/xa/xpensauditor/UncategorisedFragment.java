@@ -267,7 +267,7 @@ public class UncategorisedFragment extends Fragment {
 
     private void prepareTransactionData() {
         RefTran.addChildEventListener(new ChildEventListener() {
-            String amount,cat,shname,shDay,shMonth,shYear,shMsg;
+            String amount,cat,shname,shDay,shMonth,shYear,shMsg, sharedWith;
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -291,12 +291,16 @@ public class UncategorisedFragment extends Fragment {
                             shMonth=S.getValue().toString().trim();
                             break;
                         case 4:
-                            shname=S.getValue().toString().trim();
+                            String label = (S.getChildrenCount() > 1) ? "Shared With: " : "";
+                            sharedWith=S.getValue().toString().replace("[", label).replace("]", "");
                             break;
                         case 5:
-                            shYear=S.getValue().toString().trim();
+                            shname=S.getValue().toString().trim();
                             break;
                         case 6:
+                            shYear=S.getValue().toString().trim();
+                            break;
+                        case 7:
                             shMsg=S.getValue().toString().trim();
                             break;
 
@@ -309,7 +313,7 @@ public class UncategorisedFragment extends Fragment {
                     String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth)-1];
                     String shdate= shDay+" " + monthString.substring(0,3).toUpperCase() +" "+shYear;
 
-                    Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
+                    Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg,sharedWith);
 
                     TransactionListUF.add(transaction);
                     mAdapterUF.notifyDataSetChanged();
