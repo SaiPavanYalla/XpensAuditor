@@ -1,6 +1,6 @@
 package com.xa.xpensauditor;
 
-import static java.lang.HomeActivitycurrentTimeMillis;
+import static java.lang.System.currentTimeMillis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
