@@ -46,7 +46,7 @@ public class SMSReaderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smsreader);
-        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String Uid = auth.getUid();
