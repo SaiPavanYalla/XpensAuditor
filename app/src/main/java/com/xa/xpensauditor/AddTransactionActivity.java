@@ -48,12 +48,14 @@ public class AddTransactionActivity extends AppCompatActivity {
     private Button AddTran;
     private EditText Amnt;
     private EditText ShpNm;
+    private EditText SharedUsersString;
     private Spinner catView;
     String Amount, ShopName, SelCat;
     private DatePicker dateTransac;
     String day, month, year;
     int d, m, y;
     Activity activity;
+    String[] SharedUsersList;
     MultiValueMap<String, String> catgTrans1 = MultiValueMap.multiValueMap(new LinkedHashMap<String, Collection<String>>(), (Class<LinkedHashSet<String>>) (Class<?>) LinkedHashSet.class);
 
     @Override
@@ -76,6 +78,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         Amnt = (EditText) findViewById(R.id.addTransAmt);
         ShpNm = (EditText) findViewById(R.id.addShopName);
         catView = (Spinner) findViewById(R.id.spinTrans);
+        SharedUsersString = (EditText) findViewById(R.id.addSharedUserEmail);
 
         dateTransac = (DatePicker) findViewById(R.id.dateTrans);
         day = String.valueOf(dateTransac.getDayOfMonth());
@@ -166,6 +169,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 if (f) {
                     Amount = Amnt.getText().toString().trim().replaceAll(",", "");
                     ShopName = ShpNm.getText().toString().trim();
+                    SharedUsersList = SharedUsersString.getText().toString().split(",");
                     if (!Amount.isEmpty() && !ShopName.isEmpty()) {
                         Tid = String.valueOf(currentTimeMillis());
                         ;
@@ -173,6 +177,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Amount").setValue(Amount);
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Category").setValue(SelCat);
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Shop Name").setValue(ShopName);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Shared With").setValue(SharedUsersList);
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("ZMessage").setValue("Entered Manually...");
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Day").setValue(day);
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Month").setValue(month);
@@ -184,6 +189,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                             UnCatTran.child(Tid).child("Amount").setValue(Amount);
                             UnCatTran.child(Tid).child("Category").setValue(SelCat);
                             UnCatTran.child(Tid).child("Shop Name").setValue(ShopName);
+                            UnCatTran.child(Tid).child("Shared With").setValue(SharedUsersList);
                             UnCatTran.child(Tid).child("ZMessage").setValue("Entered Manually...");
                             UnCatTran.child(Tid).child("Day").setValue(day);
                             UnCatTran.child(Tid).child("Month").setValue(month);
@@ -192,6 +198,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Amount").setValue(Amount);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Category").setValue(SelCat);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Shop Name").setValue(ShopName);
+                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Shared With").setValue(SharedUsersList);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("ZMessage").setValue("Entered Manually...");
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Day").setValue(day);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Month").setValue(month);
@@ -207,6 +214,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Transaction added", Toast.LENGTH_SHORT).show();
                         Amnt.setText("");
                         ShpNm.setText("");
+                        SharedUsersString.setText("");
                         Toast.makeText(getApplicationContext(), "Add one more transaction or press back", Toast.LENGTH_LONG).show();
 
                     } else {
