@@ -49,6 +49,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     private EditText Amnt;
     private EditText ShpNm;
     private EditText SharedUsersString;
+    private EditText ownCatEditText;
     private Spinner catView;
     String Amount, ShopName, SelCat;
     private DatePicker dateTransac;
@@ -56,6 +57,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     int d, m, y;
     Activity activity;
     String[] SharedUsersList;
+    boolean ownCat;
     MultiValueMap<String, String> catgTrans1 = MultiValueMap.multiValueMap(new LinkedHashMap<String, Collection<String>>(), (Class<LinkedHashSet<String>>) (Class<?>) LinkedHashSet.class);
 
     @Override
@@ -79,6 +81,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         ShpNm = (EditText) findViewById(R.id.addShopName);
         catView = (Spinner) findViewById(R.id.spinTrans);
         SharedUsersString = (EditText) findViewById(R.id.addSharedUserEmail);
+        ownCatEditText = (EditText) findViewById(R.id.addOwnCategory);
 
         dateTransac = (DatePicker) findViewById(R.id.dateTrans);
         day = String.valueOf(dateTransac.getDayOfMonth());
@@ -118,6 +121,14 @@ public class AddTransactionActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SelCat = parent.getItemAtPosition(position).toString();
+                if(SelCat == "Create Your Own Category"){
+                    ownCatEditText.setVisibility(View.VISIBLE);
+                    ownCat = true;
+                }
+                else{
+                    ownCatEditText.setVisibility(View.GONE);
+                    ownCat = false;
+                }
                 // Toast.makeText(getApplicationContext(), "??"+SelCat, Toast.LENGTH_SHORT).show();
             }
 
@@ -170,7 +181,8 @@ public class AddTransactionActivity extends AppCompatActivity {
                     Amount = Amnt.getText().toString().trim().replaceAll(",", "");
                     ShopName = ShpNm.getText().toString().trim();
                     SharedUsersList = SharedUsersString.getText().toString().split(",");
-                    if (!Amount.isEmpty() && !ShopName.isEmpty()) {
+                    SelCat = ownCat ? ownCatEditText.getText().toString() : SelCat;
+                    if (!Amount.isEmpty() && !ShopName.isEmpty() && !SelCat.isEmpty()) {
                         Tid = String.valueOf(currentTimeMillis());
                         ;
 
@@ -218,7 +230,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Add one more transaction or press back", Toast.LENGTH_LONG).show();
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Enter valid Amount and Shopname", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Enter valid Amount, Shopname and Category", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Enter valid date", Toast.LENGTH_LONG).show();
