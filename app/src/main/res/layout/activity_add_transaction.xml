@@ -42,6 +42,13 @@
                 android:id="@+id/spinTrans"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"/>
+            
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Create Your Own Category"
+                android:id="@+id/addOwnCategory"
+                android:visibility="gone" />
 
             <DatePicker
                 android:id="@+id/dateTrans"
