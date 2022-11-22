@@ -41,7 +41,7 @@ public class SignupActivity extends AppCompatActivity {
     private Firebase RefName;
     private Firebase RefEmail;
     private Firebase RefPhnnum;
-    private Firebase RefCat,RefFood,RefHealth,RefTravel,RefEdu,RefBills,RefHomeNeeds,RefOthers,RefUncat,RefAddress;
+    private Firebase RefCat,RefFood,RefHealth,RefTravel,RefEdu,RefBills,RefHomeNeeds,RefOthers,RefUncat,RefAddress,RefOwnCat;
 
     private StorageReference storageReference,filepath;
 
@@ -164,6 +164,8 @@ public class SignupActivity extends AppCompatActivity {
                                     RefHomeNeeds.setValue("");
                                     RefOthers=RefCat.child("Others");
                                     RefOthers.setValue("");
+                                    RefOwnCat=RefCat.child("Create Your Own Category");
+                                    RefOwnCat.setValue("");
 
 // todo profile picture
 //                                        filepath=storageReference.child("Profile Image").child(Uid+".jpg");
