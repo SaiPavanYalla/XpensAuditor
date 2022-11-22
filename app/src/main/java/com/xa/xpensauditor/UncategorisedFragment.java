@@ -78,7 +78,7 @@ public class UncategorisedFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();

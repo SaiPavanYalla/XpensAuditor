@@ -57,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         //todo
         //storageReference = FirebaseStorage.getInstance().getReference();
 
@@ -110,10 +110,9 @@ public class SignupActivity extends AppCompatActivity {
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, task.getException().toString().substring(task.getException().toString().lastIndexOf(":") + 1),
-                                            Toast.LENGTH_SHORT).show();
+                                            Toast.LENGTH_LONG).show();
                                     //Log.d("yotask", task.getException().toString());
                                 } else {
-
                                     auth.sendPasswordResetEmail(email)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
