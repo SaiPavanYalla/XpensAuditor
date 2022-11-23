@@ -69,6 +69,8 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Create empty google services json file
+        run: touch /home/runner/work/XpensAuditor---Group-11/XpensAuditor---Group-11/app/google-services.json
 
       - name: Copy dummy google services json file
         run: cp ${GITHUB_WORKSPACE}/.github/workflows/dummy-google-services.json /home/runner/work/XpensAuditor---Group-11/XpensAuditor---Group-11/app/google-services.json
