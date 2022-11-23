@@ -35,8 +35,8 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
         MailjetRequest request;
         MailjetResponse response;
 
-        String api_key="3fa6a84f570bba92fac4628a585f8d7b";
-        String secret_key="9ad95e56fcbf5481e921d4ee3ec1ce7f";
+        String api_key;
+        String secret_key;
 
         ClientOptions clientOptions = ClientOptions.builder().apiKey(api_key).apiSecretKey(secret_key).build();
 
