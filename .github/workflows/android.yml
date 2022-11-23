@@ -37,7 +37,6 @@ jobs:
         
   test:
     runs-on: macos-latest
-    needs: build
     strategy:
       matrix:
         api-level: [29]
@@ -68,6 +67,9 @@ jobs:
         
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: List contents of location
+        run: ls ${GITHUB_WORKSPACE}; ls ${GITHUB_WORKSPACE}/app
 
       - name: Create empty google services json file
         run: touch ${GITHUB_WORKSPACE}/app/google-services.json
