@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "694710376155",
-    "firebase_url": "https://xpensauditor-g11-default-rtdb.firebaseio.com",
-    "project_id": "xpensauditor-g11",
-    "storage_bucket": "xpensauditor-g11.appspot.com"
+    "project_number": "fake_project_number",
+    "firebase_url": "https://default-url.com",
+    "project_id": "default_project_id",
+    "storage_bucket": "default_storage_bucket.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:694710376155:android:20570fe8d023a16ecf9efe",
+        "mobilesdk_app_id": "1:1:1",
         "android_client_info": {
           "package_name": "com.xa.xpensauditor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "694710376155-0bgt82cr78ud754c7h47k591f1gre90o.apps.googleusercontent.com",
+          "client_id": "test.test.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDdu7klrDbzwzayb-TljnkoSYxiNkIDtSY"
+          "current_key": "default-dummy-key"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "694710376155-0bgt82cr78ud754c7h47k591f1gre90o.apps.googleusercontent.com",
+              "client_id": "default-client-id",
               "client_type": 3
             }
           ]
