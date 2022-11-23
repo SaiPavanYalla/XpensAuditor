@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "fake_project_number",
+    "firebase_url": "https://default-url.com",
+    "project_id": "default_project_id",
+    "storage_bucket": "default_storage_bucket.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1:1",
+        "android_client_info": {
+          "package_name": "com.xa.xpensauditor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "test.test.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "default-dummy-key"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "default-client-id",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
