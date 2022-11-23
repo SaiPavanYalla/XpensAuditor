@@ -292,7 +292,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(this,DashboardActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_settings) {
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
