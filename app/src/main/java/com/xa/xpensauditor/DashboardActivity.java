@@ -39,7 +39,9 @@ import com.xa.xpensauditor.databinding.ActivityDashboardBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -55,8 +57,9 @@ public class DashboardActivity extends AppCompatActivity {
     private Firebase RefUid,RefTran;
     private Firebase RefName,RefEmail,RefPhnnum;
     private Firebase RefCat,RefFood,RefHealth,RefTravel,RefEdu,RefBills,RefHomeNeeds,RefOthers,RefUncat;
-    private HashMap<String, Number> monthlyExpense = new HashMap<String , Number>();
-    private HashMap<String, Number> categoryWiseSpending = new HashMap<String, Number>();
+    private HashMap<String, Integer> expenseHistory = new HashMap<String , Integer>();
+    private HashMap<String, Integer> monthlyExpense = new HashMap<String, Integer>();
+    private ArrayList<String> dates = new ArrayList<String>();
     private List<Transaction> transList = new ArrayList<>();
 
     @Override
@@ -87,11 +90,51 @@ public class DashboardActivity extends AppCompatActivity {
                     for (com.google.firebase.database.DataSnapshot S:task.getResult().getChildren()) {
                         for (com.google.firebase.database.DataSnapshot transaction: S.child("Transactions").getChildren())
                         {
-                            Toast.makeText(DashboardActivity.this, String.valueOf(transaction.getValue()), Toast.LENGTH_LONG).show();
+                            String date = transaction.child("Month").getValue() + "-" + transaction.child("Year").getValue();
+                            String amount = Objects.requireNonNull(transaction.child("Amount").getValue()).toString();
+                            String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
+
+                            //Creating ExpenseHistory hashmap
+                            if (!expenseHistory.containsKey(date))
+                            {
+                                expenseHistory.put(date, Integer.parseInt(amount));
+                                dates.add(date);
+                            }
+                            else {
+                                expenseHistory.put(date, expenseHistory.get(date) + Integer.parseInt(amount));
+                            }
+
                         }
+                        Collections.sort(dates);
+
+                        for (com.google.firebase.database.DataSnapshot transaction: S.child("Transactions").getChildren())
+                        {
+                            String date = transaction.child("Month").getValue() + "-" + transaction.child("Year").getValue();
+                            String amount = Objects.requireNonNull(transaction.child("Amount").getValue()).toString();
+                            String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
+
+                            //Creating MonthlyExpense hashmap
+                            if(date.equals(dates.get(0)))
+                            {
+                                if (!monthlyExpense.containsKey(category))
+                                {
+                                    monthlyExpense.put(category, Integer.parseInt(amount));
+                                }
+                                else
+                                {
+                                    monthlyExpense.put(category, monthlyExpense.get(category) + Integer.parseInt(amount));
+                                }
+                            }
+
+
+                        }
+
                     }
                 }
+                plotExpenseHistory(expenseHistory);
+                plotMonthlyExpense(monthlyExpense);
             }
+
         });
 
 //        RefTran.addChildEventListener(new ChildEventListener() {
@@ -163,11 +206,10 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-        plotExpenseHistory(transList);
-        plotMonthlyExpense(transList);
+
     }
 
-    private void plotExpenseHistory(List<Transaction> transList) {
+    private void plotExpenseHistory(HashMap<String, Integer> expenseHistory) {
         Number[] series1Numbers = {1, 4, 2, 8, 4, 16, 8, 32, 16, 64};
 
         XYSeries series1 = new SimpleXYSeries(
@@ -179,38 +221,23 @@ public class DashboardActivity extends AppCompatActivity {
         expenseHistoryPlot.addSeries(series1, series1Format);
     }
 
-    private void plotMonthlyExpense(List<Transaction> transList) {
-
-        HashMap<String, Number> categoryWiseSpending = new HashMap<String, Number>();
+    private void plotMonthlyExpense(HashMap<String,Integer> monthlyExpense) {
 
 
-        for (Transaction transaction : transList)
-        {
-            String category=transaction.getT_cat();
-            if (categoryWiseSpending.containsKey(category))
-            {
-                Object cellContents = categoryWiseSpending.get(category)+(transaction.getT_amt());
-                Number num=null;
-                num=(Number) cellContents;
-                categoryWiseSpending.put(category, num);
-            }
-            else
-            {
-                Object cellContents = (transaction.getT_amt());
-                Number num=null;
-                num=(Number) cellContents;
-                categoryWiseSpending.put(category, num);
-            }
+        Iterator hmIterator = monthlyExpense.entrySet().iterator();
+
+        while (hmIterator.hasNext()) {
+
+            Map.Entry category
+                    = (Map.Entry)hmIterator.next();
+            Toast.makeText(DashboardActivity.this,  category.getValue().toString(), Toast.LENGTH_LONG).show();
+
+            monthlyExpensePlot.addSegment(new Segment(category.getKey().toString(), (Number)category.getValue()), new SegmentFormatter(Color.RED));
         }
 
-        for (Map.Entry<String,Number> category : categoryWiseSpending.entrySet())
-        {
-            monthlyExpensePlot.addSegment(new Segment(category.getKey(), category.getValue()), new SegmentFormatter(Color.RED));
-        }
-
-//        monthlyExpensePlot.addSegment(new Segment("Segment1", 20), new SegmentFormatter(Color.RED));
-//        monthlyExpensePlot.addSegment(new Segment("Segment2", 25), new SegmentFormatter(Color.BLUE));
-//        monthlyExpensePlot.addSegment(new Segment("Segment3", 30), new SegmentFormatter(Color.GREEN));
-//        monthlyExpensePlot.addSegment(new Segment("Segment4", 25), new SegmentFormatter(Color.YELLOW));
+       monthlyExpensePlot.addSegment(new Segment("Segment1", 20), new SegmentFormatter(Color.RED));
+        monthlyExpensePlot.addSegment(new Segment("Segment2", 25), new SegmentFormatter(Color.BLUE));
+        monthlyExpensePlot.addSegment(new Segment("Segment3", 30), new SegmentFormatter(Color.GREEN));
+        monthlyExpensePlot.addSegment(new Segment("Segment4", 25), new SegmentFormatter(Color.YELLOW));
     }
 }
