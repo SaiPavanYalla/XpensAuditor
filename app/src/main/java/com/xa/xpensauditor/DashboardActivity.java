@@ -60,7 +60,6 @@ public class DashboardActivity extends AppCompatActivity {
     private HashMap<String, Integer> expenseHistory = new HashMap<String , Integer>();
     private HashMap<String, Integer> monthlyExpense = new HashMap<String, Integer>();
     private ArrayList<String> dates = new ArrayList<String>();
-    private List<Transaction> transList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,73 +135,6 @@ public class DashboardActivity extends AppCompatActivity {
             }
 
         });
-
-//        RefTran.addChildEventListener(new ChildEventListener() {
-//            String amount,cat,shname,shDay,shMonth,shYear,shMsg;
-//
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                int i=0;
-//                String tid = dataSnapshot.getKey().toString().trim();
-//
-//                for (DataSnapshot S:dataSnapshot.getChildren()) {
-//
-//                    switch(i)
-//                    {
-//                        case 0:
-//                            amount=S.getValue().toString().trim();
-//                            break;
-//                        case 1:
-//                            cat=S.getValue().toString().trim();
-//                            break;
-//                        case 2:
-//                            shDay=S.getValue().toString().trim();
-//                            break;
-//                        case 3:
-//                            shMonth=S.getValue().toString().trim();
-//                            break;
-//                        case 4:
-//                            shname=S.getValue().toString().trim();
-//                            break;
-//                        case 5:
-//                            shYear=S.getValue().toString().trim();
-//                            break;
-//                        case 6:
-//                            shMsg=S.getValue().toString().trim();
-//                            break;
-//                    }
-//
-//                    i++;
-//                }
-//                String shdate= shDay+" - "+shMonth+" - "+shYear;
-//                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
-//                amount="";
-//                cat="";
-//                shname="";
-//                shdate="";
-//                transList.add(transaction);
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(FirebaseError firebaseError) {
-//
-//            }
-//        });
 
 
 
