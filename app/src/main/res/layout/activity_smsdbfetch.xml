@@ -110,6 +110,14 @@
             </TableRow>
         </TableLayout>
 
+        <Button
+            android:id="@+id/edit_transaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="Edit"
+            android:textColor="@android:color/black" />
+
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
