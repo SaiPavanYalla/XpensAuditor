@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +26,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.core.Tag;
 
 import org.apache.commons.collections4.map.MultiValueMap;
 
@@ -37,6 +39,18 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.UUID;
+
+// add mailjet libraries for sending emails etc.
+import com.mailjet.*;
+import com.mailjet.client.MailjetClient;
+import com.mailjet.client.MailjetRequest;
+import com.mailjet.client.MailjetResponse;
+import com.mailjet.client.ClientOptions;
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.resource.Emailv31;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
@@ -60,6 +74,23 @@ public class AddTransactionActivity extends AppCompatActivity {
     boolean ownCat;
     MultiValueMap<String, String> catgTrans1 = MultiValueMap.multiValueMap(new LinkedHashMap<String, Collection<String>>(), (Class<LinkedHashSet<String>>) (Class<?>) LinkedHashSet.class);
 
+    protected void sendEmailUpdateToSharedUsers(String[] emails, String amount, String shop_name, String category) {
+        Toast.makeText(activity, "TODO - SEND EMAIL TO THE USERS IN THE LIST", Toast.LENGTH_SHORT).show();
+        for(String email: emails) {
+            new EmailSender(email, amount, shop_name, category).execute();
+        }
+        return;
+    }
+
+    public static void printStringList(String[] values) {
+        for(String i: values)
+            printLog(i);
+    }
+
+    public static void printLog(String message) {
+        Log.e("app core error message", message);
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,7 +215,6 @@ public class AddTransactionActivity extends AppCompatActivity {
                     SelCat = ownCat ? ownCatEditText.getText().toString() : SelCat;
                     if (!Amount.isEmpty() && !ShopName.isEmpty() && !SelCat.isEmpty()) {
                         Tid = String.valueOf(currentTimeMillis());
-                        ;
 
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Amount").setValue(Amount);
                         RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Category").setValue(SelCat);
@@ -222,6 +252,17 @@ public class AddTransactionActivity extends AppCompatActivity {
 
                         RefCatSum1 = RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatSum");
 
+                        if ( SharedUsersList.length != 0 ) {
+                            printLog("shared email");
+                            printStringList(SharedUsersList);
+                            printLog("amount: ");
+                            printLog(Amount);
+                            printLog("shop name: ");
+                            printLog(ShopName);
+                            printLog("category : ");
+                            printLog(SelCat);
+                            sendEmailUpdateToSharedUsers(SharedUsersList, Amount, ShopName, SelCat);
+                        }
 
                         Toast.makeText(getApplicationContext(), "Transaction added", Toast.LENGTH_SHORT).show();
                         Amnt.setText("");

@@ -248,16 +248,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.account_settings) {
-
+        if (id == R.id.account_settings || id == R.id.action_settings) {
             Intent i=new Intent(this,AccountSettingsActivity.class);
             startActivity(i);
         }
-        else if(id== R.id.action_settings)
-        {
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
-        }
-
         else if(id==R.id.action_contact_us){
             Intent i=new Intent(this,ContactUs.class);
             startActivity(i);
@@ -299,8 +293,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_settings) {
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
-
+            Intent i=new Intent(this,AccountSettingsActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_logout) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("Are you sure you want to LogOut?");
