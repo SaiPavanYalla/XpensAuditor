@@ -288,7 +288,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_profile) {
-            Intent i=new Intent(this,ProfileActivity.class);
+            Intent i = new Intent(this, ProfileActivity.class);
+            startActivity(i);
+
+        } else if (id == R.id.search_product) {
+            Intent i=new Intent(this,SearchProduct.class);
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
