@@ -12,6 +12,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -66,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private Firebase mRootRef;
     private Firebase RefUid;
-    private Firebase RefName,RefEmail;
+    private Firebase RefName,RefEmail, RefTran;
     private static int currentpage=0;
     TextView tvHeaderName, tvHeaderMail;
     //todo
@@ -190,6 +192,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         viewPager.setCurrentItem(currentpage);
+        RefTran = RefUid.child("Transactions");
+        RefTran.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getChildrenCount() == 0){
+                    String text = "No transactions found. Please add a few.";
+                    SpannableStringBuilder biggerText = new SpannableStringBuilder(text);
+                    biggerText.setSpan(new RelativeSizeSpan(1.5f), 0, text.length(), 0);
+                    Toast.makeText(getApplicationContext(), biggerText, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Toast.makeText(getApplicationContext(), "Failed to load details", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
