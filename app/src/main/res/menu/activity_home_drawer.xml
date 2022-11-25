@@ -25,6 +25,10 @@
             android:icon="@drawable/ic_sync"
             android:title="REFRESH DATA" />
         <item
+            android:id="@+id/search_product"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="SEARCH PRODUCT" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_action_logout"
             android:title="LOGOUT" />

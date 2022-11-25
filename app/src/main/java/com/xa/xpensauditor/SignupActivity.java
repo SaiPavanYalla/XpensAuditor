@@ -29,6 +29,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignupActivity extends AppCompatActivity {
 
     private TextInputEditText inputEmail;
@@ -97,6 +100,14 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                String Phnnum=inputPhnnum.getText().toString().trim();
+                Pattern p = Pattern.compile("^\\d{10}$");
+                Matcher m = p.matcher(Phnnum);
+                if(!m.matches()){
+                    Toast.makeText(getApplicationContext(), "Enter valid Phone Number", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 progressBar.setVisibility(View.VISIBLE);
                 //create user
                 auth.createUserWithEmailAndPassword(email, password)
@@ -130,10 +141,8 @@ public class SignupActivity extends AppCompatActivity {
 
                                     String Uid=auth.getUid();
                                     String name=inputName.getText().toString().trim();
-                                    String Phnnum=inputPhnnum.getText().toString().trim();
-
+                                    
                                     RefUid= mRootRef.child(Uid);
-
                                     RefName = RefUid.child("Name");
                                     RefName.setValue(name);
                                     RefEmail=RefUid.child("Email");
@@ -145,10 +154,7 @@ public class SignupActivity extends AppCompatActivity {
                                     RefUid.child("Day").setValue("0");
                                     RefUid.child("Month").setValue("0");
                                     RefUid.child("Year").setValue("0");
-
-//                                    RefUid.child("LastRefreshDate");
-//                                    RefUid.child("LastRefreshDate").setValue(0);
-
+                                    RefUid.child("LastRefreshDate").setValue(0);
                                     RefCat=RefUid.child("Categories");
                                     RefFood=RefCat.child("Food");
                                     RefFood.setValue("");
@@ -166,26 +172,6 @@ public class SignupActivity extends AppCompatActivity {
                                     RefOthers.setValue("");
                                     RefOwnCat=RefCat.child("Create Your Own Category");
                                     RefOwnCat.setValue("");
-
-// todo profile picture
-//                                        filepath=storageReference.child("Profile Image").child(Uid+".jpg");
-//
-//                                        Uri imuri=getUriToDrawable(getApplicationContext(),R.drawable.def_profile_pic);
-//
-//                                        StorageReference storageReference= FirebaseStorage.getInstance().getReference();
-//
-//                                        final StorageReference ref = storageReference.child("picture.jpg");
-//                                        filepath.putFile(imuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                                            @Override
-//                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                                    @Override
-//                                                    public void onSuccess(Uri uri) {
-//                                                        final Uri downloadUrl = uri;
-//                                                    }
-//                                                });
-//                                            }
-//                                        });
                                     auth.signOut();
                                     finish();
                                 }
