@@ -82,8 +82,6 @@ public class EditTransaction extends AppCompatActivity{
         int oldMonth = Integer.valueOf(splitList[1]);
         int oldYear = Integer.valueOf(splitList[2]);
 
-        // TODO: Remove this print statement
-        System.out.println(transactionID);
         transactionAmt.setText(oldTransactionAmt);
         shopName.setText(oldShopName);
         cat.setText(oldCat);
@@ -94,9 +92,6 @@ public class EditTransaction extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                // TODO: Remove the print Statements
-                System.out.println("Editing the transactions now!!!");
-
                 String currTransactionAmt = transactionAmt.getText().toString();
                 String currShopName = shopName.getText().toString();
                 String currCat = cat.getText().toString();
@@ -105,8 +100,6 @@ public class EditTransaction extends AppCompatActivity{
                 String currYear = String.valueOf(dat.getYear());
                 String currMessage = message.getText().toString();
                 //String[] currSharedUserList = RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Shared With").toString().split(",");
-
-                System.out.printf("Amount: %s \nShop: %s\nCategory: %s\nMessage: %s\nDay: %s\nMonth: %s\nYear: %s\n", currTransactionAmt, currShopName, currCat, currMessage, currDay, currMonth, currYear);
 
                 if(!TextUtils.isEmpty(currTransactionAmt) && !TextUtils.isEmpty(currShopName) && !TextUtils.isEmpty(currCat) && !TextUtils.isEmpty(currDay) && !TextUtils.isEmpty(currMonth) && !TextUtils.isEmpty(currYear)){
 
@@ -131,8 +124,6 @@ public class EditTransaction extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "Transactions edited, timestamp updated!", Toast.LENGTH_SHORT).show();
 
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).removeValue();
-
-                    System.out.println("Removed the existing record");
 
                     startActivity(new Intent(EditTransaction.this, HomeActivity.class));
 

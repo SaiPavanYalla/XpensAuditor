@@ -149,8 +149,6 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Remove the print statement
-                System.out.println("Edit button was clicked!");
 
                 Intent edit_intent = new Intent(getApplicationContext(), EditTransaction.class);
 
