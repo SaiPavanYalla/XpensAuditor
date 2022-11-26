@@ -108,10 +108,6 @@ public class EditTransaction extends AppCompatActivity{
 
                 System.out.printf("Amount: %s \nShop: %s\nCategory: %s\nMessage: %s\nDay: %s\nMonth: %s\nYear: %s\n", currTransactionAmt, currShopName, currCat, currMessage, currDay, currMonth, currYear);
 
-                //RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).removeValue();
-
-                //System.out.println("Removed the existing record");
-
                 if(!TextUtils.isEmpty(currTransactionAmt) && !TextUtils.isEmpty(currShopName) && !TextUtils.isEmpty(currCat) && !TextUtils.isEmpty(currDay) && !TextUtils.isEmpty(currMonth) && !TextUtils.isEmpty(currYear)){
 
                     Tid = String.valueOf(currentTimeMillis());
@@ -134,6 +130,14 @@ public class EditTransaction extends AppCompatActivity{
 
                     Toast.makeText(getApplicationContext(), "Transactions edited, timestamp updated!", Toast.LENGTH_SHORT).show();
 
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).removeValue();
+
+                    System.out.println("Removed the existing record");
+
+                    startActivity(new Intent(EditTransaction.this, HomeActivity.class));
+
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please enter the data!", Toast.LENGTH_SHORT).show();
                 }
 
             }

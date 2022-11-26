@@ -27,6 +27,7 @@ public class SMSDBFetchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smsdbfetch);
+        Firebase.setAndroidContext(this);
         Intent i = getIntent();
         String tid = i.getStringExtra("indexPos");
         //Toast.makeText(getApplicationContext()," yo : "+tid,Toast.LENGTH_SHORT).show();
@@ -55,6 +56,9 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Amount").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() == null){
+                    startActivity(new Intent(SMSDBFetchActivity.this, HomeActivity.class));
+                }
                 smstamnt.setText(dataSnapshot.getValue().toString().trim());
             }
 
