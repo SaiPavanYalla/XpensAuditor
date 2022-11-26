@@ -37,6 +37,12 @@ public class EditTransaction extends AppCompatActivity{
     private TextInputEditText dat;
     private TextInputEditText message;
 
+    private String transactionID;
+    private String oldTransactionAmt;
+    private String oldShopName;
+    private String oldCat;
+    private String oldMessage;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +55,19 @@ public class EditTransaction extends AppCompatActivity{
         cat = findViewById(R.id.cat);
         message = findViewById(R.id.message);
 
+        transactionID = i.getStringExtra("tns_id");
+        oldTransactionAmt = i.getStringExtra("tns_amt");
+        oldShopName = i.getStringExtra("shp_name");
+        oldCat = i.getStringExtra("cat");
+        oldMessage = i.getStringExtra("msg");
+
         // TODO: Remove this print statement
-        System.out.println(i.getStringExtra("tns_id"));
-        transactionAmt.setText(i.getStringExtra("tns_amt"));
-        shopName.setText(i.getStringExtra("shp_name"));
-        cat.setText(i.getStringExtra("cat"));
-        message.setText(i.getStringExtra("msg"));
+        System.out.println(transactionID);
+        transactionAmt.setText(oldTransactionAmt);
+        shopName.setText(oldShopName);
+        cat.setText(oldCat);
+        message.setText(oldMessage);
+
 
     }
 }
