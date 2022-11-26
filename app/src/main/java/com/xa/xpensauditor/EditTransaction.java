@@ -1,5 +1,6 @@
 package com.xa.xpensauditor;
 
+import java.util.*;
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,20 +39,22 @@ public class EditTransaction extends AppCompatActivity{
     private DatePicker dat;
     private TextInputEditText message;
 
-    private String transactionID;
-    private String oldTransactionAmt;
-    private String oldShopName;
-    private String oldCat;
-    private String oldMessage;
-
-    private Button btnEdit;
+    private Firebase mRootRef;
+    private Firebase RefUid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_transaction);
 
-        btnEdit = (Button) findViewById(R.id.btn_edit);
+        Button btnEdit = (Button) findViewById(R.id.btn_edit);
+
+        mRootRef = new Firebase("https://xpensauditor-g11-default-rtdb.firebaseio.com/");
+
+        mRootRef.keepSynced(true);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String Uid = auth.getUid();
+        RefUid = mRootRef.child(Uid);
 
         Intent i = getIntent();
 
@@ -61,11 +64,18 @@ public class EditTransaction extends AppCompatActivity{
         dat = findViewById(R.id.dateTrans);
         message = findViewById(R.id.message);
 
-        transactionID = i.getStringExtra("tns_id");
-        oldTransactionAmt = i.getStringExtra("tns_amt");
-        oldShopName = i.getStringExtra("shp_name");
-        oldCat = i.getStringExtra("cat");
-        oldMessage = i.getStringExtra("msg");
+        String transactionID = i.getStringExtra("tns_id");
+        String oldTransactionAmt = i.getStringExtra("tns_amt");
+        String oldShopName = i.getStringExtra("shp_name");
+        String oldCat = i.getStringExtra("cat");
+        String oldMessage = i.getStringExtra("msg");
+        String oldDateString = i.getStringExtra("dat");
+
+        String[] splitList = oldDateString.split("/");
+
+        int oldDay = Integer.valueOf(splitList[0]);
+        int oldMonth = Integer.valueOf(splitList[1]);
+        int oldYear = Integer.valueOf(splitList[2]);
 
         // TODO: Remove this print statement
         System.out.println(transactionID);
@@ -73,6 +83,7 @@ public class EditTransaction extends AppCompatActivity{
         shopName.setText(oldShopName);
         cat.setText(oldCat);
         message.setText(oldMessage);
+        dat.updateDate(oldYear, oldMonth-1, oldDay);
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +101,9 @@ public class EditTransaction extends AppCompatActivity{
                 String currMessage = message.getText().toString();
 
                 System.out.printf("Amount: %s \nShop: %s\nCategory: %s\nMessage: %s\nDay: %s\nMonth: %s\nYear: %s\n", currTransactionAmt, currShopName, currCat, currMessage, day, month, year);
+
+                //System.out.printf("Old value in DB: %s", RefUid.child("DateRange").child(String.valueOf()))
+
             }
         });
 

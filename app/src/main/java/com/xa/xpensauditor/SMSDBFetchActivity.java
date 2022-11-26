@@ -147,11 +147,14 @@ public class SMSDBFetchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO: Remove the print statement
                 System.out.println("Edit button was clicked!");
+
                 Intent edit_intent = new Intent(getApplicationContext(), EditTransaction.class);
+
                 edit_intent.putExtra("tns_id",smstid.getText().toString());
                 edit_intent.putExtra("tns_amt",smstamnt.getText().toString());
                 edit_intent.putExtra("shp_name",smsshpname.getText().toString());
                 edit_intent.putExtra("cat",smscat.getText().toString());
+                edit_intent.putExtra("dat",smsdate.getText().toString());
                 edit_intent.putExtra("msg",sms.getText().toString());
                 startActivity(edit_intent);
             }
