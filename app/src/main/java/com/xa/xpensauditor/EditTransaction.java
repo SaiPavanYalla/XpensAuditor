@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ public class EditTransaction extends AppCompatActivity{
     private TextInputEditText transactionAmt;
     private TextInputEditText shopName;
     private TextInputEditText cat;
-    private TextInputEditText dat;
+    private DatePicker dat;
     private TextInputEditText message;
 
     private String transactionID;
@@ -43,16 +44,21 @@ public class EditTransaction extends AppCompatActivity{
     private String oldCat;
     private String oldMessage;
 
+    private Button btnEdit;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_transaction);
+
+        btnEdit = (Button) findViewById(R.id.btn_edit);
 
         Intent i = getIntent();
 
         transactionAmt = findViewById(R.id.tns_amt);
         shopName = findViewById(R.id.shp_name);
         cat = findViewById(R.id.cat);
+        dat = findViewById(R.id.dateTrans);
         message = findViewById(R.id.message);
 
         transactionID = i.getStringExtra("tns_id");
@@ -68,6 +74,24 @@ public class EditTransaction extends AppCompatActivity{
         cat.setText(oldCat);
         message.setText(oldMessage);
 
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // TODO: Remove the print Statements
+                System.out.println("Editing the transactions now!!!");
+
+                String currTransactionAmt = transactionAmt.getText().toString();
+                String currShopName = shopName.getText().toString();
+                String currCat = cat.getText().toString();
+                String day = String.valueOf(dat.getDayOfMonth());
+                String month = String.valueOf(dat.getMonth()+1);
+                String year = String.valueOf(dat.getYear());
+                String currMessage = message.getText().toString();
+
+                System.out.printf("Amount: %s \nShop: %s\nCategory: %s\nMessage: %s\nDay: %s\nMonth: %s\nYear: %s\n", currTransactionAmt, currShopName, currCat, currMessage, day, month, year);
+            }
+        });
 
     }
 }
