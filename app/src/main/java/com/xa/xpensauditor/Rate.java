@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Rate extends AppCompatActivity {
@@ -32,26 +36,37 @@ public class Rate extends AppCompatActivity {
         r.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                RefRating.addListenerForSingleValueEvent(new ValueEventListener() {
+                    public void onDataChange(DataSnapshot DS) {
+                        try {
+                            if(DS.getValue() != null && fromUser == true){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Rate.this);
+                                builder.setMessage("You already submitted a rating. Rate Again ?");
+                                builder.setTitle("Already Rated!");
+                                builder.setCancelable(false);
+                                builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                                    Toast.makeText(getApplicationContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_LONG).show();
+                                    RefRating.setValue(String.valueOf(ratingBar.getRating()));
+                                });
+                                builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+                                    dialog.cancel();
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            }
+                            else if (fromUser == true) {
+                                Toast.makeText(getApplicationContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_LONG).show();
+                                RefRating.setValue(String.valueOf(ratingBar.getRating()));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-                if(RefRating != null && fromUser == true){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Rate.this);
-                    builder.setMessage("You already submitted a rating. Rate Again ?");
-                    builder.setTitle("Already Rated!");
-                    builder.setCancelable(false);
-                    builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
-                        Toast.makeText(getApplicationContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_LONG).show();
-                        RefRating.setValue(String.valueOf(ratingBar.getRating()));
-                    });
-                    builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
-                        dialog.cancel();
-                    });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                }
-                else if (fromUser == true) {
-                    Toast.makeText(getApplicationContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_LONG).show();
-                    RefRating.setValue(String.valueOf(ratingBar.getRating()));
-                }
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
             }
         });
     }
