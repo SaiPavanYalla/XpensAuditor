@@ -78,6 +78,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.8'
     implementation "com.firebaseui:firebase-ui-auth:8.0.2"
     implementation 'com.google.firebase:firebase-database:20.0.6'
+    implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.firebase:firebase-client-android:2.4.0'
     implementation 'com.google.firebase:firebase-storage:20.0.2'
@@ -88,6 +89,8 @@ dependencies {
     implementation files('library/android.jar')
     androidTestImplementation 'androidx.test.ext:junit:1.1.4-alpha07'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha07'
+    implementation "com.androidplot:androidplot-core:1.5.10"
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
 
 apply plugin: 'jacoco'

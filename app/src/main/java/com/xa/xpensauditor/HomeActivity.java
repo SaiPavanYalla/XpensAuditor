@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         }
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
         Uid=auth.getUid();
         RefUid= mRootRef.child(Uid);
@@ -292,7 +292,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(this,DashboardActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_settings) {
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();

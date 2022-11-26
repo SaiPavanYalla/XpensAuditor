@@ -62,7 +62,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_transaction);
         activity = this;
 
-        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();
