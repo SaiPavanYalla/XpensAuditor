@@ -51,17 +51,15 @@ public class CreateGroupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_create_group);
         Firebase.setAndroidContext(this);
         //Get Firebase auth instance
         mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
-        btnAddUser = (Button) findViewById(R.id.sign_in_button); //change id to add user button
+        btnAddUser = (Button) findViewById(R.id.btn_invite_member); //change id to add user button
         inputUserEmailAddedToGroup = (TextInputEditText) findViewById(R.id.email);
         inputGroupName = (TextInputEditText) findViewById(R.id.Name);
 
-
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         // Add user email to group
         btnAddUser.setOnClickListener(new View.OnClickListener() {

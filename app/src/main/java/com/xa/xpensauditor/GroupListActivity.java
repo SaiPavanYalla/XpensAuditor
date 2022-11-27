@@ -1,5 +1,6 @@
 package com.xa.xpensauditor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,10 +18,19 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GroupListActivity extends AppCompatActivity {
 
@@ -45,9 +55,48 @@ public class GroupListActivity extends AppCompatActivity {
         final ListView list = findViewById(R.id.grouplist);
         ArrayList<String> groupList = new ArrayList<String>();
 
-//        TODO: Get the list of group names from firebase and populate arrayList
+        Firebase mRootRef;
+        Firebase RefUid, RefEmail;
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
-        groupList.add("Group1");
+        mRootRef.keepSynced(true);
+        com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
+        String Uid=auth.getUid();
+        RefUid= mRootRef.child(Uid);
+        RefEmail=RefUid.child("Email");
+
+        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Toast.makeText(GroupListActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
+                } else {
+                    boolean entryAdded = false;
+                    //Loop over all the database entries to find the groups
+                    for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
+                        if (databaseEntry.child("Group Name").exists()) {
+                            //Loop over all the emails in the group entry to see if the user is a part of that group
+                            for (com.google.firebase.database.DataSnapshot groupEntryChild : task.getResult().getChildren()) {
+                                if (!groupEntryChild.getKey().equals("Group Name")) {
+                                    String userEmailInGroup = groupEntryChild.getValue().toString();
+                                    String loggedInUserEmail = mDatabase.child(Uid).child("Email").toString();
+                                    if (userEmailInGroup.equals(loggedInUserEmail))
+                                    {
+                                        //logged in user is a part of the group
+                                        String groupContainingUser = databaseEntry.child("Group Name").toString();
+                                        groupList.add(groupContainingUser);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+//        groupList.add("Group1");
 
         CustomAdapter customAdapter = new CustomAdapter(GroupListActivity.this, groupList);
         list.setAdapter(customAdapter);
