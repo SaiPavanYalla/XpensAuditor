@@ -38,7 +38,6 @@ public class EditTransaction extends AppCompatActivity{
     private TextInputEditText transactionAmt;
     private TextInputEditText shopName;
     private TextInputEditText cat;
-    private DatePicker dat;
     private TextInputEditText message;
 
     private Firebase mRootRef;
@@ -66,7 +65,6 @@ public class EditTransaction extends AppCompatActivity{
         transactionAmt = findViewById(R.id.tns_amt);
         shopName = findViewById(R.id.shp_name);
         cat = findViewById(R.id.cat);
-        dat = findViewById(R.id.dateTrans);
         message = findViewById(R.id.message);
 
         String transactionID = i.getStringExtra("tns_id");
@@ -86,7 +84,6 @@ public class EditTransaction extends AppCompatActivity{
         shopName.setText(oldShopName);
         cat.setText(oldCat);
         message.setText(oldMessage);
-        dat.updateDate(oldYear, oldMonth-1, oldDay);
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +92,10 @@ public class EditTransaction extends AppCompatActivity{
                 String currTransactionAmt = transactionAmt.getText().toString();
                 String currShopName = shopName.getText().toString();
                 String currCat = cat.getText().toString();
-                String currDay = String.valueOf(dat.getDayOfMonth());
-                String currMonth = String.valueOf(dat.getMonth()+1);
-                String currYear = String.valueOf(dat.getYear());
                 String currMessage = message.getText().toString();
                 //String[] currSharedUserList = RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Shared With").toString().split(",");
 
-                if(!TextUtils.isEmpty(currTransactionAmt) && !TextUtils.isEmpty(currShopName) && !TextUtils.isEmpty(currCat) && !TextUtils.isEmpty(currDay) && !TextUtils.isEmpty(currMonth) && !TextUtils.isEmpty(currYear)){
+                if(!TextUtils.isEmpty(currTransactionAmt) && !TextUtils.isEmpty(currShopName) && !TextUtils.isEmpty(currCat) ){
 
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Amount").setValue(currTransactionAmt);
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Category").setValue(currCat);
