@@ -20,12 +20,16 @@
     <string name="btn_change">Change</string>
     <string name="btn_send">Send</string>
     <string name="btn_remove">Remove</string>
+    <string name="btn_invite_member">Invite Member</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="Name">Name</string>
     <string name="phnum">Mobile Number</string>
     <string name="SP">Verify mail and Set Password</string>
+
+    <string name="GroupName">Group Name</string>
+    <string name="member_email">Enter email to add members</string>
 
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
@@ -39,6 +43,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="add_preferences">Add Preferences</string>
+    <string name="group">Group</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -48,6 +53,28 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="create_new_group">Create New Group</string>
+    <string name="todo">TODO</string>
+    <string name="group_members">Group Members</string>
+    <string name="group_analytics">Group Analytics</string>
+    <string name="add_member_to_group">Add Member to Group</string>
+    <string name="leave_group">Leave Group</string>
+    <string name="add_new_member">Add new member</string>
+    <string name="select_category">Select Category</string>
+    <string name="search">Search Here</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="personal">PERSONAL</string>
+    <string name="group_cap">GROUP</string>
+    <string name="profile">PROFILE</string>
+    <string name="analytics">ANALYTICS</string>
+    <string name="settings">SETTINGS</string>
+    <string name="refresh_data">REFRESH DATA</string>
+    <string name="logout">LOGOUT</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="feedback">Feedback</string>
+    <string name="rate">Rate</string>
+    <string name="suggestions">Suggestions</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

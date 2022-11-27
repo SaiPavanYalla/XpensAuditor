@@ -5,19 +5,26 @@ import static java.lang.System.currentTimeMillis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextDirectionHeuristic;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
@@ -48,7 +55,8 @@ public class AddTransactionActivity extends AppCompatActivity {
     private Button AddTran;
     private EditText Amnt;
     private EditText ShpNm;
-    private Spinner catView;
+    private TextView catView;
+    Dialog dialog;
     String Amount, ShopName, SelCat;
     private DatePicker dateTransac;
     String day, month, year;
@@ -75,14 +83,12 @@ public class AddTransactionActivity extends AppCompatActivity {
         AddTran = (Button) findViewById(R.id.btAddTransaction);
         Amnt = (EditText) findViewById(R.id.addTransAmt);
         ShpNm = (EditText) findViewById(R.id.addShopName);
-        catView = (Spinner) findViewById(R.id.spinTrans);
+        catView = (TextView) findViewById(R.id.textViewCategory);
 
         dateTransac = (DatePicker) findViewById(R.id.dateTrans);
         day = String.valueOf(dateTransac.getDayOfMonth());
         month = String.valueOf(dateTransac.getMonth() + 1);
         year = String.valueOf(dateTransac.getYear());
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Catg);
-        catView.setAdapter(arrayAdapter);
 
         InputFilter filter = new InputFilter() {
 
@@ -110,18 +116,82 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         Amnt.setFilters(new InputFilter[]{filter});
 
-
-        catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        catView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SelCat = parent.getItemAtPosition(position).toString();
-                // Toast.makeText(getApplicationContext(), "??"+SelCat, Toast.LENGTH_SHORT).show();
-            }
+            public void onClick(View v) {
+                // Initialize dialog
+                dialog=new Dialog(AddTransactionActivity.this);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                // set custom dialog
+                dialog.setContentView(R.layout.dialog_searchable_spinner);
 
-                Toast.makeText(getApplicationContext(), "Select a Category", Toast.LENGTH_SHORT).show();
+                // set custom height and width
+                dialog.getWindow().setLayout(650,800);
+
+                // set transparent background
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                // show dialog
+                dialog.show();
+
+                // Initialize and assign variable
+                EditText editTextCat=dialog.findViewById(R.id.edittext_category);
+                ListView listViewCat=dialog.findViewById(R.id.listview_category);
+
+                // Initialize array adapter
+                ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(AddTransactionActivity.this, android.R.layout.simple_list_item_1,Catg);
+
+                // set adapter
+                listViewCat.setAdapter(arrayAdapter);
+                editTextCat.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        arrayAdapter.getFilter().filter(s);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
+                listViewCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        // when item selected from list
+                        // set selected item on textView
+                        catView.setText(arrayAdapter.getItem(position));
+                        SelCat = arrayAdapter.getItem(position);
+                        // Dismiss dialog
+                        dialog.dismiss();
+                    }
+                });
+
+                editTextCat.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        // If the event is a key-down event on the "enter" button
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            // Perform action on key press
+                            Catg.add(editTextCat.getText().toString());
+                            arrayAdapter.notifyDataSetChanged();
+                            catView.setText(editTextCat.getText().toString());
+                            SelCat = editTextCat.getText().toString();
+                            // Dismiss dialog
+                            dialog.dismiss();
+                            Toast.makeText(AddTransactionActivity.this, "Added category - "+editTextCat.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             }
         });
 
@@ -271,7 +341,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String value = dataSnapshot.getKey().trim();
                 Catg.add(value);
-                arrayAdapter.notifyDataSetChanged();
+//                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
