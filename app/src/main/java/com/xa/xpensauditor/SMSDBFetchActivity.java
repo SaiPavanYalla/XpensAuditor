@@ -56,9 +56,9 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Amount").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() == null){
-                    startActivity(new Intent(SMSDBFetchActivity.this, HomeActivity.class));
-                }
+//                if (dataSnapshot.getValue() == null){
+//                    startActivity(new Intent(SMSDBFetchActivity.this, HomeActivity.class));
+//                }
                 smstamnt.setText(dataSnapshot.getValue().toString().trim());
             }
 

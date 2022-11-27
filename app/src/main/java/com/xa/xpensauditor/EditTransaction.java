@@ -103,27 +103,17 @@ public class EditTransaction extends AppCompatActivity{
 
                 if(!TextUtils.isEmpty(currTransactionAmt) && !TextUtils.isEmpty(currShopName) && !TextUtils.isEmpty(currCat) && !TextUtils.isEmpty(currDay) && !TextUtils.isEmpty(currMonth) && !TextUtils.isEmpty(currYear)){
 
-                    Tid = String.valueOf(currentTimeMillis());
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Amount").setValue(currTransactionAmt);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Category").setValue(currCat);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Shop Name").setValue(currShopName);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("ZMessage").setValue(currMessage);
 
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("Transactions").child(Tid).child("Amount").setValue(currTransactionAmt);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("Transactions").child(Tid).child("Category").setValue(currCat);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("Transactions").child(Tid).child("Shop Name").setValue(currShopName);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("Transactions").child(Tid).child("ZMessage").setValue(currMessage);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("Transactions").child(Tid).child("Day").setValue(currDay);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("Transactions").child(Tid).child("Month").setValue(currMonth);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("Transactions").child(Tid).child("Year").setValue(currYear);
-
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("CatTran").child(currCat).child(Tid).child("Amount").setValue(currTransactionAmt);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("CatTran").child(currCat).child(Tid).child("Category").setValue(currCat);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("CatTran").child(currCat).child(Tid).child("Shop Name").setValue(currShopName);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("CatTran").child(currCat).child(Tid).child("ZMessage").setValue(currMessage);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("CatTran").child(currCat).child(Tid).child("Day").setValue(currDay);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("CatTran").child(currCat).child(Tid).child("Month").setValue(currMonth);
-                    RefUid.child("DateRange").child(String.valueOf(currMonth+"-"+currYear)).child("CatTran").child(currCat).child(Tid).child("Year").setValue(currYear);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("Amount").setValue(currTransactionAmt);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("Category").setValue(currCat);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("Shop Name").setValue(currShopName);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("ZMessage").setValue(currMessage);
 
                     Toast.makeText(getApplicationContext(), "Transactions edited, timestamp updated!", Toast.LENGTH_SHORT).show();
-
-                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).removeValue();
 
                     startActivity(new Intent(EditTransaction.this, HomeActivity.class));
 
