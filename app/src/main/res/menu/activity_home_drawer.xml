@@ -6,49 +6,55 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_action_home"
-            android:title="HOME" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_action_personal"
+            android:title="@string/personal" />
+        <item
+            android:id="@+id/nav_group"
+            android:icon="@drawable/ic_action_group"
+            android:title="@string/group_cap" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
-            android:title="PROFILE" />
+            android:title="@string/profile" />
         <item
             android:id="@+id/nav_show_analysis"
             android:icon="@drawable/ic_action_analysis"
-            android:title="ANALYSIS" />
+            android:title="@string/analytics" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_action_settings"
-            android:title="SETTINGS" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/nav_refresh"
             android:icon="@drawable/ic_sync"
-            android:title="REFRESH DATA" />
+            android:title="@string/refresh_data" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_action_logout"
-            android:title="LOGOUT" />
+            android:title="@string/logout" />
 
-        <item android:title="Communicate">
+        <item android:title="@string/communicate">
             <menu>
                 <item
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_share"
-                    android:title="Share" />
+                    android:title="@string/share" />
 
             </menu>
         </item>
 
-        <item android:title="Feedback">
+        <item android:title="@string/feedback">
             <menu>
                 <item
                     android:id="@+id/nav_rate"
                     android:icon="@drawable/ic_rate_review"
-                    android:title="Rate" />
+                    android:title="@string/rate" />
                 <item
                     android:id="@+id/nav_suggest"
                     android:icon="@drawable/ic_insert_comment"
-                    android:title="Suggestions" />
+                    android:title="@string/suggestions" />
             </menu>
         </item>
     </group>

@@ -287,7 +287,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent i=new Intent(this,HomeActivity.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_profile) {
+        } else if (id == R.id.nav_group) {
+            Intent i=new Intent(HomeActivity.this,GroupListActivity.class);
+            startActivity(i);
+
+        }else if (id == R.id.nav_profile) {
             Intent i=new Intent(this,ProfileActivity.class);
             startActivity(i);
 
