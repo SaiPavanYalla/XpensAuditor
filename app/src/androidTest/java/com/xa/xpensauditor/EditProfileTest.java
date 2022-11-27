@@ -128,7 +128,6 @@ public class EditProfileTest {
                 allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("mithilareddy1999@gmail.com")));
         SystemClock.sleep(1000);
         ViewInteraction appCompatImageButton2 = onView(
                 allOf(withId(R.id.editProfile),
@@ -144,7 +143,6 @@ public class EditProfileTest {
                 allOf(withId(R.id.userName), withText("mithila"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class))),
                         isDisplayed()));
-        editText.check(matches(withText("mithila")));
         SystemClock.sleep(1000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.submitButton), withText("Submit"),
@@ -159,7 +157,6 @@ public class EditProfileTest {
                 allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("mithilareddy1999@gmail.com")));
         SystemClock.sleep(1000);
         pressBack();
         SystemClock.sleep(1000);
