@@ -149,13 +149,13 @@ public class ProfileActivity extends AppCompatActivity {
         RefEmail.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot DS) {
+                String n = DS.getValue().toString().trim();
                 try {
-                    String n = DS.getValue().toString().trim();
                     tvHeaderMail.setText(n);
-                    EmailView.setText(n);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                EmailView.setText(n);
             }
 
             @Override
@@ -168,12 +168,9 @@ public class ProfileActivity extends AppCompatActivity {
         RefPhnnum.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot DS) {
-                try {
-                    String n = DS.getValue().toString().trim();
-                    PhnView.setText(n);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                String n = DS.getValue().toString().trim();
+
+                PhnView.setText(n);
             }
 
             @Override
@@ -185,12 +182,9 @@ public class ProfileActivity extends AppCompatActivity {
         RefAddress.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot DS) {
-                try {
-                    String n = DS.getValue().toString().trim();
-                    UserAddress.setText(n);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                String n = DS.getValue().toString().trim();
+
+                UserAddress.setText(n);
             }
 
             @Override
@@ -203,11 +197,7 @@ public class ProfileActivity extends AppCompatActivity {
         RefDay.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot DS) {
-                try {
-                    day = DS.getValue().toString().trim();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                day = DS.getValue().toString().trim();
             }
 
             @Override
@@ -219,11 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
         RefMonth.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot DS) {
-                try {
-                    month = DS.getValue().toString().trim();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                month = DS.getValue().toString().trim();
             }
 
             @Override
@@ -235,12 +221,8 @@ public class ProfileActivity extends AppCompatActivity {
         RefYear.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot DS) {
-                try{
-                    year = DS.getValue().toString().trim();
-                    UserDOB.setText(day + "/" + month + "/" + year);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                year = DS.getValue().toString().trim();
+                UserDOB.setText(day + "/" + month + "/" + year);
             }
 
             @Override

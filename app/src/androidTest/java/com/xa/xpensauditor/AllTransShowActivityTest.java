@@ -67,7 +67,7 @@ public class AllTransShowActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -101,12 +101,15 @@ public class AllTransShowActivityTest {
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
+        recyclerView.perform(actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
         ViewInteraction textView2 = onView(
                 allOf(withText("Transaction Info"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(androidx.appcompat.widget.LinearLayoutCompat.class))),
                         isDisplayed()));
+        textView2.check(matches(withText("Transaction Info")));
         SystemClock.sleep(1000);
+        pressBack();
         SystemClock.sleep(1000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),

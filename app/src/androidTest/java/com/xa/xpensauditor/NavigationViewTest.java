@@ -65,7 +65,7 @@ public class NavigationViewTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -112,10 +112,10 @@ public class NavigationViewTest {
         textView.check(matches(withText("mithila")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.headerEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.headerEmail), withText("xpensauditor@1secmail.com"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("mithilareddy1999@gmail.com")));
+        textView2.check(matches(withText("xpensauditor@1secmail.com")));
 
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_home),

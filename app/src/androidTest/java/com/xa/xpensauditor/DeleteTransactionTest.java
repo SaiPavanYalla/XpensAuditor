@@ -67,7 +67,7 @@ public class DeleteTransactionTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("sahithi.ammana@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -77,7 +77,7 @@ public class DeleteTransactionTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("sahithi"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
@@ -121,11 +121,6 @@ public class DeleteTransactionTest {
         SystemClock.sleep(1000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.btAddTransaction), withText("Add Transaction"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                4),
                         isDisplayed()));
         materialButton2.perform(click());
         SystemClock.sleep(1000);
