@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +21,13 @@ public class SMSDBFetchActivity extends AppCompatActivity {
     TextView smstid,smstamnt,smsshpname,smscat,smsdate,sms;
     private Firebase mRootRef;
     private Firebase RefUid;
+    private Button btnEdit;
     String d,m,y;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smsdbfetch);
+        Firebase.setAndroidContext(this);
         Intent i = getIntent();
         String tid = i.getStringExtra("indexPos");
         //Toast.makeText(getApplicationContext()," yo : "+tid,Toast.LENGTH_SHORT).show();
@@ -40,6 +44,7 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         int month = c.get(Calendar.MONTH)+1;
         int year = c.get(Calendar.YEAR);
 
+        btnEdit = (Button) findViewById(R.id.edit_transaction);
 
         mRootRef=new Firebase("https://xpensauditor-g11-default-rtdb.firebaseio.com/");
 
@@ -138,7 +143,21 @@ public class SMSDBFetchActivity extends AppCompatActivity {
             }
         });
 
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent edit_intent = new Intent(getApplicationContext(), EditTransaction.class);
+
+                edit_intent.putExtra("tns_id",smstid.getText().toString());
+                edit_intent.putExtra("tns_amt",smstamnt.getText().toString());
+                edit_intent.putExtra("shp_name",smsshpname.getText().toString());
+                edit_intent.putExtra("cat",smscat.getText().toString());
+                edit_intent.putExtra("dat",smsdate.getText().toString());
+                edit_intent.putExtra("msg",sms.getText().toString());
+                startActivity(edit_intent);
+            }
+        });
 
     }
 }

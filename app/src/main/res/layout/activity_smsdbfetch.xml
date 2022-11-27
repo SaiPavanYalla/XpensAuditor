@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SMSDBFetchActivity">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:orientation="vertical">
@@ -109,6 +109,14 @@
                     android:id="@+id/sms"/>
             </TableRow>
         </TableLayout>
+
+        <Button
+            android:id="@+id/edit_transaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="Edit"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
