@@ -66,15 +66,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <DatePicker
-            android:id="@+id/dateTrans"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:spinnersShown="true">
-        </DatePicker>
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
