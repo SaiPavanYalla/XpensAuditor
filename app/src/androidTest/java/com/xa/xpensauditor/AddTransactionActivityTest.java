@@ -138,7 +138,6 @@ public class AddTransactionActivityTest {
                                         0),
                                 4),
                         isDisplayed()));
-        materialButton2.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction button2 = onView(
                 allOf(withId(R.id.btAddTransaction), withText("ADD TRANSACTION"),
