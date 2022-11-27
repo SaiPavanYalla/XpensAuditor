@@ -12,6 +12,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.SpannableStringBuilder;
+import android.text.style.RelativeSizeSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -66,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private Firebase mRootRef;
     private Firebase RefUid;
-    private Firebase RefName,RefEmail;
+    private Firebase RefName,RefEmail, RefTran;
     private static int currentpage=0;
     TextView tvHeaderName, tvHeaderMail;
     //todo
@@ -282,7 +284,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_profile) {
-            Intent i=new Intent(this,ProfileActivity.class);
+            Intent i = new Intent(this, ProfileActivity.class);
+            startActivity(i);
+
+        } else if (id == R.id.search_product) {
+            Intent i=new Intent(this,SearchProduct.class);
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {

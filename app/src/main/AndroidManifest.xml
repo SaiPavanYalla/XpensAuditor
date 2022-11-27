@@ -113,6 +113,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".SearchProduct"
+            android:exported="false"
+            android:label="@string/title_search_product"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EditProfileActivity"
             android:exported="false">
             <meta-data
