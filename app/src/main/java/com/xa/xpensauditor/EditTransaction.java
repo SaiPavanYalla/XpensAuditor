@@ -39,6 +39,7 @@ public class EditTransaction extends AppCompatActivity{
     private TextInputEditText shopName;
     private TextInputEditText cat;
     private TextInputEditText message;
+    private TextInputEditText sharedWith;
 
     private Firebase mRootRef;
     private Firebase RefUid;
@@ -64,12 +65,14 @@ public class EditTransaction extends AppCompatActivity{
 
         transactionAmt = findViewById(R.id.tns_amt);
         shopName = findViewById(R.id.shp_name);
+        sharedWith = findViewById(R.id.shared_with);
         cat = findViewById(R.id.cat);
         message = findViewById(R.id.message);
 
         String transactionID = i.getStringExtra("tns_id");
         String oldTransactionAmt = i.getStringExtra("tns_amt");
         String oldShopName = i.getStringExtra("shp_name");
+        String oldSharedWith = i.getStringExtra("shared_with");
         String oldCat = i.getStringExtra("cat");
         String oldMessage = i.getStringExtra("msg");
         String oldDateString = i.getStringExtra("dat");
@@ -82,6 +85,7 @@ public class EditTransaction extends AppCompatActivity{
 
         transactionAmt.setText(oldTransactionAmt);
         shopName.setText(oldShopName);
+        sharedWith.setText(oldSharedWith);
         cat.setText(oldCat);
         message.setText(oldMessage);
 
@@ -91,6 +95,7 @@ public class EditTransaction extends AppCompatActivity{
 
                 String currTransactionAmt = transactionAmt.getText().toString();
                 String currShopName = shopName.getText().toString();
+                String currSharedWith = sharedWith.getText().toString();
                 String currCat = cat.getText().toString();
                 String currMessage = message.getText().toString();
                 //String[] currSharedUserList = RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Shared With").toString().split(",");
@@ -100,11 +105,13 @@ public class EditTransaction extends AppCompatActivity{
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Amount").setValue(currTransactionAmt);
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Category").setValue(currCat);
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Shop Name").setValue(currShopName);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("Shared With").setValue(currSharedWith);
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("Transactions").child(transactionID).child("ZMessage").setValue(currMessage);
 
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("Amount").setValue(currTransactionAmt);
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("Category").setValue(currCat);
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("Shop Name").setValue(currShopName);
+                    RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("Shared With").setValue(currSharedWith);
                     RefUid.child("DateRange").child(String.valueOf(oldMonth+"-"+oldYear)).child("CatTran").child(currCat).child(transactionID).child("ZMessage").setValue(currMessage);
 
                     Toast.makeText(getApplicationContext(), "Transactions edited, timestamp updated!", Toast.LENGTH_SHORT).show();

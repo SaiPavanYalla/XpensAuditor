@@ -73,6 +73,19 @@
             </TableRow>
             <TableRow>
                 <TextView
+                    android:text="Shared With:"
+                    android:textColor="@color/emeraldgreen"
+                    android:padding="3dip" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:id="@+id/smssharedwith"/>
+            </TableRow>
+            <TableRow>
+                <TextView
                     android:text="Category"
                     android:textColor="@color/emeraldgreen"
                     android:padding="3dip" />

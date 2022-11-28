@@ -18,7 +18,7 @@ import java.util.Calendar;
 
 public class SMSDBFetchActivity extends AppCompatActivity {
 
-    TextView smstid,smstamnt,smsshpname,smscat,smsdate,sms;
+    TextView smstid,smstamnt,smsshpname,smscat,smsdate,sms, smssharedwith;
     private Firebase mRootRef;
     private Firebase RefUid;
     private Button btnEdit;
@@ -35,6 +35,7 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         smstid.setText(tid);
         smstamnt=findViewById(R.id.smstamnt);
         smsshpname=findViewById(R.id.smsshpname);
+        smssharedwith=findViewById(R.id.smssharedwith);
         smscat=findViewById(R.id.smscat);
         smsdate=findViewById(R.id.smsdate);
         sms=findViewById(R.id.sms);
@@ -92,6 +93,24 @@ public class SMSDBFetchActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try{
                 smsshpname.setText(dataSnapshot.getValue().toString().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Shared With").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
+                    String label = (dataSnapshot.getChildrenCount() > 1) ? "Shared With: " : "";
+                    String sharedWith=dataSnapshot.getValue().toString().replace("[", label).replace("]", "");
+                    smssharedwith.setText(sharedWith);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -180,6 +199,7 @@ public class SMSDBFetchActivity extends AppCompatActivity {
                 edit_intent.putExtra("tns_id",smstid.getText().toString());
                 edit_intent.putExtra("tns_amt",smstamnt.getText().toString());
                 edit_intent.putExtra("shp_name",smsshpname.getText().toString());
+                edit_intent.putExtra("shared_with",smssharedwith.getText().toString());
                 edit_intent.putExtra("cat",smscat.getText().toString());
                 edit_intent.putExtra("dat",smsdate.getText().toString());
                 edit_intent.putExtra("msg",sms.getText().toString());
