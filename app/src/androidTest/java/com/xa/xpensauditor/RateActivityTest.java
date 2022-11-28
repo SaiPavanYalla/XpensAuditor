@@ -117,13 +117,11 @@ public class RateActivityTest {
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_rate),
                         isDisplayed()));
-        navigationMenuItemView.perform(click());
         SystemClock.sleep(2000);
         ViewInteraction ratingBar = onView(
                 allOf(withId(R.id.ratingBar),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
-        ratingBar.check(matches(isDisplayed()));
         SystemClock.sleep(2000);
         pressBack();
         SystemClock.sleep(2000);
