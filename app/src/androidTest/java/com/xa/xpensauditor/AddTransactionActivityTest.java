@@ -55,7 +55,7 @@ public class AddTransactionActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -65,7 +65,7 @@ public class AddTransactionActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -82,7 +82,7 @@ public class AddTransactionActivityTest {
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         textView.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab),
                         childAtPosition(
@@ -92,13 +92,13 @@ public class AddTransactionActivityTest {
                                 2),
                         isDisplayed()));
         floatingActionButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction button = onView(
                 allOf(withId(R.id.btAddTransaction), withText("ADD TRANSACTION"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.addTransAmt),
                         childAtPosition(
@@ -108,7 +108,7 @@ public class AddTransactionActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("56.00"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.addShopName),
                         childAtPosition(
@@ -118,7 +118,7 @@ public class AddTransactionActivityTest {
                                 1),
                         isDisplayed()));
         appCompatEditText4.perform(replaceText("Belk"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction customEditText = onView(
                 allOf(withClassName(is("android.widget.NumberPicker$CustomEditText")), withText("2022"),
                         childAtPosition(
@@ -129,20 +129,20 @@ public class AddTransactionActivityTest {
                                 0),
                         isDisplayed()));
         customEditText.perform(pressImeActionButton());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.btAddTransaction), withText("Add Transaction"),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction button2 = onView(
                 allOf(withId(R.id.btAddTransaction), withText("ADD TRANSACTION"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         pressBack();
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -152,7 +152,7 @@ public class AddTransactionActivityTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -162,7 +162,7 @@ public class AddTransactionActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -172,7 +172,7 @@ public class AddTransactionActivityTest {
                                 12),
                         isDisplayed()));
         materialButton3.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton4 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -181,7 +181,7 @@ public class AddTransactionActivityTest {
                                         0),
                                 3)));
         materialButton4.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
