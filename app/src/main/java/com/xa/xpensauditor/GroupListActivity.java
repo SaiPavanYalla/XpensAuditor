@@ -83,11 +83,12 @@ public class GroupListActivity extends AppCompatActivity {
                                                           //Loop over all the database entries to find the groups
                                                           for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
                                                               if (databaseEntry.child("Group Name").exists()) {
-                                                                  Toast.makeText(GroupListActivity.this,  "Found a group", Toast.LENGTH_LONG).show();
-                                                                  //Loop over all the emails in the group entry to see if the user is a part of that group
+                                                                  //Loop over all the emails in the found group entry to see if the user is a part of that group
                                                                   for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.getChildren()) {
                                                                       if (!groupEntryChild.getKey().equals("Group Name")) {
+                                                                          //Emails are stored as key value pairs in the group object. If the key is "Group Name", it means that that key value pair does not store a user email
                                                                           String userEmailInGroup = groupEntryChild.getValue().toString();
+                                                                          //RefEmail is the reference to the email field of the logged in user
                                                                           RefEmail.addValueEventListener(new ValueEventListener() {
                                                                               @Override
                                                                               public void onDataChange(com.firebase.client.DataSnapshot DS) {
@@ -125,7 +126,7 @@ public class GroupListActivity extends AppCompatActivity {
                 Intent intent=new Intent(GroupListActivity.this, GroupActivity.class);
                 String groupName = groupNameList.get(position);
 //                TODO: Get the group key from firebase based on groupName
-                String groupKey = "";
+                String groupKey = groupName;
                 intent.putExtra("group_key", groupKey);
                 startActivity(intent);
             }
