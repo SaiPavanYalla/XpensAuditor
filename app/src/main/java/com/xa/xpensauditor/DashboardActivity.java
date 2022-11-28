@@ -81,7 +81,16 @@ public class DashboardActivity extends AppCompatActivity {
         mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
-        String Uid=auth.getUid();
+
+        String Uid;
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey("Uid")) {
+            Uid = extras.getString("Uid");
+        } else {
+            Uid=auth.getUid();
+        }
+
         RefUid= mRootRef.child(Uid);
         RefTran = RefUid.child("Transactions");
         RefCat=RefUid.child("Categories");
