@@ -109,7 +109,6 @@ public class NavigationViewTest {
                 allOf(withId(R.id.headerName), withText("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("XpensAuditor")));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.headerEmail), withText("xpensauditor@1secmail.com"),
