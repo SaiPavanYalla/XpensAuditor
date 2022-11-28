@@ -3,6 +3,7 @@ package com.xa.xpensauditor;
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -35,8 +36,8 @@ import java.util.Objects;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
-    private TextInputEditText inputGroupName;
-    private TextInputEditText inputUserEmailAddedToGroup;
+    private AppCompatEditText inputGroupName;
+    private AppCompatEditText inputUserEmailAddedToGroup;
 
 
     private Firebase mRootRef;
@@ -58,8 +59,8 @@ public class CreateGroupActivity extends AppCompatActivity {
         mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         btnAddUser = (Button) findViewById(R.id.btn_invite_member); //change id to add user button
-        inputUserEmailAddedToGroup = (TextInputEditText) findViewById(R.id.email);
-        inputGroupName = (TextInputEditText) findViewById(R.id.Name);
+        inputUserEmailAddedToGroup = (AppCompatEditText) findViewById(R.id.email);
+        inputGroupName = (AppCompatEditText) findViewById(R.id.Name);
 
 
         // Add user email to group
@@ -134,7 +135,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
 
 }
