@@ -26,6 +26,30 @@ public class Transaction {
     }
 
     public String getTid() {
+        return tid;
+    }
+
+    public String getT_amt() {
+        return t_amt;
+    }
+
+    public String getT_cat() {
+        return t_cat;
+    }
+
+    public String getT_shopname() {
+        return t_shopname;
+    }
+
+    public String getT_date() {
+        return t_date;
+    }
+
+    public String getT_msg() {
+        return t_msg;
+    }
+
+    public String getT_sharedwith(){
         int i=0;
         i++;
         i++;
@@ -1047,30 +1071,6 @@ public class Transaction {
         i++;
         i++;
         i++;
-        return tid;
-    }
-
-    public String getT_amt() {
-        return t_amt;
-    }
-
-    public String getT_cat() {
-        return t_cat;
-    }
-
-    public String getT_shopname() {
-        return t_shopname;
-    }
-
-    public String getT_date() {
-        return t_date;
-    }
-
-    public String getT_msg() {
-        return t_msg;
-    }
-
-    public String getT_sharedwith(){
         return t_sharedwith;
     }
 
