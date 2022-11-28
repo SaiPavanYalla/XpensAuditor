@@ -116,12 +116,6 @@ public class RateActivityTest {
         SystemClock.sleep(2000);
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_rate),
-                        childAtPosition(
-                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
-                                        childAtPosition(
-                                                withId(R.id.nav_view),
-                                                0)),
-                                12),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
         SystemClock.sleep(2000);

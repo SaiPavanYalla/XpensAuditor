@@ -171,12 +171,6 @@ public class SignupActivityTest {
 
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_logout),
-                        childAtPosition(
-                                allOf(withId(com.google.android.material.R.id.design_navigation_view),
-                                        childAtPosition(
-                                                withId(R.id.nav_view),
-                                                0)),
-                                6),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
         SystemClock.sleep(2000);

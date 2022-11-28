@@ -56,7 +56,11 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Amount").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
                 smstamnt.setText(dataSnapshot.getValue().toString().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -69,7 +73,11 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Category").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                smscat.setText(dataSnapshot.getValue().toString().trim());
+                try {
+                    smscat.setText(dataSnapshot.getValue().toString().trim());
+                } catch (Exception e) {
+                e.printStackTrace();
+                }
             }
 
             @Override
@@ -82,7 +90,11 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Shop Name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
                 smsshpname.setText(dataSnapshot.getValue().toString().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -95,7 +107,11 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("ZMessage").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
                 sms.setText(dataSnapshot.getValue().toString().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -108,7 +124,11 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Day").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
                 d=dataSnapshot.getValue().toString().trim();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -121,7 +141,11 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Month").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
                 m=dataSnapshot.getValue().toString().trim();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -133,8 +157,12 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         RefUid.child("DateRange").child(month+"-"+year).child("Transactions").child(tid).child("Year").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
                 y=dataSnapshot.getValue().toString().trim();
                 smsdate.setText(d+"/"+m+"/"+y);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

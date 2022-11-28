@@ -106,10 +106,10 @@ public class NavigationViewTest {
         appCompatImageButton.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction textView = onView(
-                allOf(withId(R.id.headerName), withText("mithila"),
+                allOf(withId(R.id.headerName), withText("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("mithila")));
+        textView.check(matches(withText("XpensAuditor")));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.headerEmail), withText("xpensauditor@1secmail.com"),

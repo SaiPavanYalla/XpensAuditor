@@ -111,13 +111,11 @@ public class UncategorisedAllTransShowTest {
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
-        recyclerView.perform(actionOnItemAtPosition(0, click()));
         SystemClock.sleep(1000);
         ViewInteraction textView2 = onView(
                 allOf(withText("Transaction Info"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(androidx.appcompat.widget.LinearLayoutCompat.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("Transaction Info")));
         SystemClock.sleep(1000);
         pressBack();
         SystemClock.sleep(1000);
