@@ -61,10 +61,10 @@ public class ResetPasswordActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.email), withText("xpensauditor@gmail.com"),
+                allOf(withId(R.id.email), withText("xpensauditor@1secmail.com"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),

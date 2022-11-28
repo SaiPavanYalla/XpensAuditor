@@ -66,7 +66,7 @@ public class EditProfileTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -125,10 +125,10 @@ public class EditProfileTest {
         navigationMenuItemView.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction textView = onView(
-                allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.userEmail), withText("xpensauditor@1secmail.com"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("mithilareddy1999@gmail.com")));
+        textView.check(matches(withText("xpensauditor@1secmail.com")));
         SystemClock.sleep(1000);
         ViewInteraction appCompatImageButton2 = onView(
                 allOf(withId(R.id.editProfile),
@@ -141,10 +141,10 @@ public class EditProfileTest {
         appCompatImageButton2.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction editText = onView(
-                allOf(withId(R.id.userName), withText("mithila"),
+                allOf(withId(R.id.userName), withText("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class))),
                         isDisplayed()));
-        editText.check(matches(withText("mithila")));
+        editText.check(matches(withText("XpensAuditor")));
         SystemClock.sleep(1000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.submitButton), withText("Submit"),
@@ -156,10 +156,10 @@ public class EditProfileTest {
         materialButton2.perform(scrollTo(), click());
         SystemClock.sleep(1000);
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.userEmail), withText("xpensauditor@1secmail.com"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("mithilareddy1999@gmail.com")));
+        textView2.check(matches(withText("xpensauditor@1secmail.com")));
         SystemClock.sleep(1000);
         pressBack();
         SystemClock.sleep(1000);

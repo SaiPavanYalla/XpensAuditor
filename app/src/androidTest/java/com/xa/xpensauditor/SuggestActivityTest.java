@@ -65,7 +65,7 @@ public class SuggestActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
         SystemClock.sleep(3000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
