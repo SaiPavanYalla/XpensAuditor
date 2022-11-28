@@ -72,11 +72,11 @@ jobs:
       - name: List contents of location
         run: ls ${GITHUB_WORKSPACE}; ls ${GITHUB_WORKSPACE}/app
 
-      - name: Create empty google services json file
-        run: touch ${GITHUB_WORKSPACE}/app/google-services.json
+      - name: Download google services json file
+        run: curl -o ${GITHUB_WORKSPACE}/app/google-services.json https://raw.githubusercontent.com/SaiPavanYalla/XpensAuditor/main/app/google-services.json
 
-      - name: Copy dummy google services json file
-        run: cp ${GITHUB_WORKSPACE}/.github/workflows/dummy-google-services.json ${GITHUB_WORKSPACE}/app/google-services.json
+      - name: Cat google services json file
+        run: cat ${GITHUB_WORKSPACE}/app/google-services.json
 
       - name:  Run unit & Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2.26.0
