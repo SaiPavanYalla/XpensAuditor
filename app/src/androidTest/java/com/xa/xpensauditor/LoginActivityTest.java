@@ -117,7 +117,7 @@ public class LoginActivityTest {
                         isDisplayed()));
         overflowMenuButton.perform(click());
 
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -127,7 +127,7 @@ public class LoginActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
 
         ViewInteraction materialButton4 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
@@ -138,7 +138,7 @@ public class LoginActivityTest {
                                 12),
                         isDisplayed()));
         materialButton4.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView2 = onView(
                 allOf(withId(android.R.id.message), withText("Do you Really want to SignOut ?"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
@@ -153,7 +153,7 @@ public class LoginActivityTest {
                                         0),
                                 3)));
         materialButton5.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
     }
 
     @Test

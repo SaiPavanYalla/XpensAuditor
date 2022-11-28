@@ -102,7 +102,7 @@ public class AccountSettingsTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         withParent(withParent(withId(androidx.constraintlayout.widget.R.id.content))),
@@ -118,7 +118,7 @@ public class AccountSettingsTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction button = onView(
                 allOf(withId(R.id.add_preferences), withText("ADD PREFERENCES"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
@@ -152,7 +152,7 @@ public class AccountSettingsTest {
                                 9),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction button5 = onView(
                 allOf(withId(R.id.changePass), withText("CHANGE"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
@@ -168,7 +168,7 @@ public class AccountSettingsTest {
                                 10),
                         isDisplayed()));
         materialButton3.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction button6 = onView(
                 allOf(withId(R.id.send), withText("SEND"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
@@ -184,7 +184,7 @@ public class AccountSettingsTest {
                                 12),
                         isDisplayed()));
         materialButton4.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView2 = onView(
                 allOf(withId(android.R.id.message), withText("Do you Really want to SignOut ?"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
@@ -199,7 +199,7 @@ public class AccountSettingsTest {
                                         0),
                                 3)));
         materialButton5.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction imageView2 = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),

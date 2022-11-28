@@ -68,7 +68,7 @@ public class DeleteTransactionTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -78,7 +78,7 @@ public class DeleteTransactionTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -88,7 +88,7 @@ public class DeleteTransactionTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab),
                         childAtPosition(
@@ -98,7 +98,7 @@ public class DeleteTransactionTest {
                                 2),
                         isDisplayed()));
         floatingActionButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.addTransAmt),
                         childAtPosition(
@@ -108,7 +108,7 @@ public class DeleteTransactionTest {
                                 0),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("222"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.addShopName),
                         childAtPosition(
@@ -118,27 +118,27 @@ public class DeleteTransactionTest {
                                 1),
                         isDisplayed()));
         appCompatEditText4.perform(replaceText("qqwerty"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.btAddTransaction), withText("Add Transaction"),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         pressBack();
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recycler_view),
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
         recyclerView.perform(actionOnItemAtPosition(0, longClick()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView = onView(
                 allOf(withId(android.R.id.title), withText("Select an action"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ListView.class))),
                         isDisplayed()));
         textView.check(matches(withText("Select an action")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(android.R.id.title), withText("Delete"),
                         childAtPosition(
@@ -148,7 +148,7 @@ public class DeleteTransactionTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView2 = onView(
                 allOf(withText("ALL TRANSACTION"),
                         withParent(allOf(withContentDescription("ALL TRANSACTION"),

@@ -68,7 +68,7 @@ public class UncategorisedAllTransShowTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("xpensauditor@1secmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -78,7 +78,7 @@ public class UncategorisedAllTransShowTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -95,7 +95,7 @@ public class UncategorisedAllTransShowTest {
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         textView.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction tabView = onView(
                 allOf(withContentDescription("UNCATEGORISED TRANSACTION"),
                         childAtPosition(
@@ -105,20 +105,20 @@ public class UncategorisedAllTransShowTest {
                                 1),
                         isDisplayed()));
         tabView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.rv_uncat),
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView2 = onView(
                 allOf(withText("Transaction Info"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(androidx.appcompat.widget.LinearLayoutCompat.class))),
                         isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         pressBack();
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -128,7 +128,7 @@ public class UncategorisedAllTransShowTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -138,7 +138,7 @@ public class UncategorisedAllTransShowTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -148,7 +148,7 @@ public class UncategorisedAllTransShowTest {
                                 12),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -157,7 +157,7 @@ public class UncategorisedAllTransShowTest {
                                         0),
                                 3)));
         materialButton3.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
