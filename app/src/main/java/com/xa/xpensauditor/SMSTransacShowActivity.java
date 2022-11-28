@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SMSTransacShowActivity extends AppCompatActivity {
 
-    TextView smstid,smstamnt,smsshpname,smscat,smsdate,sms;
+    TextView smstid,smstamnt,smsshpname,smscat,smsdate,sms,smssharedwith;
     private Firebase mRootRef;
     private Firebase RefUid;
     String d,m,y;
@@ -30,6 +30,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         smstid.setText(tid);
         smstamnt=findViewById(R.id.smstamnt);
         smsshpname=findViewById(R.id.smsshpname);
+        smssharedwith=findViewById(R.id.smssharedwith);
         smscat=findViewById(R.id.smscat);
         smsdate=findViewById(R.id.smsdate);
         sms=findViewById(R.id.sms);
@@ -72,6 +73,20 @@ public class SMSTransacShowActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 smsshpname.setText(dataSnapshot.getValue().toString().trim());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        RefUid.child("UnCatTran").child(tid).child("Shared With").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String label = (dataSnapshot.getChildrenCount() > 1) ? "Shared With: " : "";
+                String sharedWith=dataSnapshot.getValue().toString().replace("[", label).replace("]", "");
+                smssharedwith.setText(sharedWith);
             }
 
             @Override
