@@ -1,0 +1,20 @@
+name: Checkers for XpensAuditor
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+    checkstyle:
+      name: runner / checkstyle
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Checkstyle for Java
+          uses: dbelyaev/action-checkstyle@v0.6.1
+          with:
+            github_token: ${{ secrets.XPENSAUDITOR_CHECKSTYLE }}
+            reporter: github-pr-review
+            level: error
