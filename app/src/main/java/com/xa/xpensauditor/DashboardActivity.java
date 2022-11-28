@@ -131,8 +131,8 @@ public class DashboardActivity extends AppCompatActivity {
                             String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
 
                             //Creating MonthlyExpense hashmap
-                            if(date.equals(dates.get(0)))
-                            {
+//                            if(date.equals(dates.get(0)))
+//                            {
                                 if (!monthlyExpense.containsKey(category))
                                 {
                                     monthlyExpense.put(category, Integer.parseInt(amount));
@@ -141,7 +141,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 {
                                     monthlyExpense.put(category, monthlyExpense.get(category) + Integer.parseInt(amount));
                                 }
-                            }
+//                            }
 
 
                         }
@@ -188,13 +188,15 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void plotMonthlyExpense(HashMap<String, Integer> monthlyExpense) {
-        Integer colors[] = new Integer[] {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.CYAN, Color.GRAY, Color.WHITE};
+        System.out.println(monthlyExpense + " monthlyExpense");
+        Integer colors[] = new Integer[] {Color.RED, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN, Color.DKGRAY};
 
         Iterator hmIterator = monthlyExpense.entrySet().iterator();
 
         int count = 0;
         while (hmIterator.hasNext()) {
             Map.Entry category = (Map.Entry)hmIterator.next();
+
             monthlyExpensePlot.addSegment(new Segment(category.getKey().toString()+ ": $" + category.getValue(), (Number)category.getValue()), new SegmentFormatter(colors[count%colors.length]));
             count++;
         }
