@@ -29,10 +29,6 @@ public class GroupListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbargl);
-        toolbar.setTitle("XpensAuditor");
-        setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabgl);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,21 +38,25 @@ public class GroupListActivity extends AppCompatActivity {
             }
         });
 
-        final ListView list = findViewById(R.id.grouplist);
-        ArrayList<String> groupList = new ArrayList<String>();
+        final ListView groupListView = findViewById(R.id.grouplist);
+        ArrayList<String> groupNameList = new ArrayList<>();
+        ArrayList<String> groupCountList = new ArrayList<>();
 
-//        TODO: Get the list of group names from firebase and populate arrayList
+//        TODO: Get the list of group names and members count from firebase and populate arrayList
 
-        groupList.add("Group1");
+        groupNameList.add("Group 1");
+        groupCountList.add("5");
+        groupNameList.add("Group 2");
+        groupCountList.add("3");
 
-        CustomAdapter customAdapter = new CustomAdapter(GroupListActivity.this, groupList);
-        list.setAdapter(customAdapter);
+        CustomGroupList customGroupList = new CustomGroupList(GroupListActivity.this, groupNameList, groupCountList);
+        groupListView.setAdapter(customGroupList);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        groupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent=new Intent(GroupListActivity.this, GroupActivity.class);
-                String groupName = groupList.get(position);
+                String groupName = groupNameList.get(position);
 //                TODO: Get the group key from firebase based on groupName
                 String groupKey = "";
                 intent.putExtra("group_key", groupKey);
@@ -67,83 +67,33 @@ public class GroupListActivity extends AppCompatActivity {
 
 }
 
-class CustomAdapter implements ListAdapter {
+class CustomGroupList extends ArrayAdapter {
     ArrayList<String> groupNames;
-    Context context;
+    ArrayList<String> groupCount;
+    Activity context;
 
-    public CustomAdapter(Activity context, ArrayList<String> groupNames) {
-
+    public CustomGroupList(Activity context, ArrayList<String> groupNames, ArrayList<String> groupCount) {
+        super(context, R.layout.group_list_row_item, groupNames);
         this.context = context;
         this.groupNames = groupNames;
+        this.groupCount = groupCount;
 
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver dataSetObserver) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver dataSetObserver) {
-
-    }
-
-    @Override
-    public int getCount() {
-        return 0;
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row=convertView;
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = context.getLayoutInflater();
         if(convertView==null)
             row = inflater.inflate(R.layout.group_list_row_item, null, true);
-        TextView textViewGroupName = (TextView) row.findViewById(R.id.textGroupName);
-        ImageView imageFlag = (ImageView) row.findViewById(R.id.imageGroupImage);
+        TextView textGroupName = (TextView) row.findViewById(R.id.textGroupName);
+        TextView textGroupCount = (TextView) row.findViewById(R.id.textGroupCount);
+        ImageView imageGroup = (ImageView) row.findViewById(R.id.imageGroupImage);
 
-        textViewGroupName.setText(groupNames.get(position));
-        imageFlag.setImageResource(R.drawable.ic_avtion_group_list_item);
+        textGroupName.setText(groupNames.get(position));
+        String groupCountStr = groupCount.get(position)+" Group Members";
+        textGroupCount.setText(groupCountStr);
+        imageGroup.setImageResource(R.drawable.ic_avtion_group_list_item);
         return  row;
-    }
-
-    @Override
-    public int getItemViewType(int i) {
-        return 0;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled(int i) {
-        return false;
     }
 }

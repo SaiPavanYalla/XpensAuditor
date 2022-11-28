@@ -7,28 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".GroupListActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:theme="@style/Theme.XpensAuditor.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbargl"
-            android:layout_width = "match_parent"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.XpensAuditor.PopupOverlay"
-            android:layout_height = "?attr/actionBarSize" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <ListView
-        android:id="@+id/grouplist"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#000"
-        android:dividerHeight="1dp"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
+
+        <ListView
+            android:id="@+id/grouplist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#000"
+            android:dividerHeight="1dp"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false" />
+
+    </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabgl"
