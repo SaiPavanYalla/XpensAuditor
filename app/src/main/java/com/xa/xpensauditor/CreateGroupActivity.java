@@ -42,6 +42,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     private Firebase mRootRef;
     private Firebase RefNewGroup;
     private DatabaseReference RefNewUserEmailAddedToGroup;
+    private DatabaseReference RefGroupMemberCount;
     private Firebase RefNewUserEmailAddedToNewGroup;
     private Firebase RefCat,RefFood,RefHealth,RefTravel,RefEdu,RefBills,RefHomeNeeds,RefOthers;
 
@@ -91,6 +92,8 @@ public class CreateGroupActivity extends AppCompatActivity {
                                     String key = databaseEntry.getKey();
                                     RefNewUserEmailAddedToGroup = mDatabase.child(key).push();
                                     RefNewUserEmailAddedToGroup.setValue(userEmailAddedToGroup);
+                                    RefGroupMemberCount = mDatabase.child(key).child("Member Count");
+                                    RefGroupMemberCount.setValue((Integer.parseInt(databaseEntry.child("Member Count").getValue().toString())+1));
                                     entryAdded=true;
                                     break;
                                 }
@@ -99,6 +102,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                             {
                                 RefNewGroup = mRootRef.push();
                                 RefNewGroup.child("Group Name").setValue(groupName);
+                                RefNewGroup.child("Member Count").setValue("1");
                                 RefNewUserEmailAddedToNewGroup = RefNewGroup.push();
                                 RefNewUserEmailAddedToNewGroup.setValue(userEmailAddedToGroup);
                                 RefCat=RefNewGroup.child("Categories");

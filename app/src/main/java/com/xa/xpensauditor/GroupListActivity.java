@@ -20,7 +20,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,10 +42,6 @@ public class GroupListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbargl);
-        toolbar.setTitle("XpensAuditor");
-        setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabgl);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +51,12 @@ public class GroupListActivity extends AppCompatActivity {
             }
         });
 
-        final ListView list = findViewById(R.id.grouplist);
-        ArrayList<String> groupList = new ArrayList<String>();
+        final ListView groupListView = findViewById(R.id.grouplist);
+        ArrayList<String> groupNameList = new ArrayList<>();
+        ArrayList<String> groupCountList = new ArrayList<>();
+
+//        TODO: Get the list of group names and members count from firebase and populate arrayList
+
 
         Firebase mRootRef;
         Firebase RefUid, RefEmail;
@@ -64,48 +67,63 @@ public class GroupListActivity extends AppCompatActivity {
         String Uid=auth.getUid();
         RefUid= mRootRef.child(Uid);
         RefEmail=RefUid.child("Email");
+        String loggedInUserEmail="";
 
         DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
 
+
+
         mDatabase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Toast.makeText(GroupListActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
-                } else {
-                    boolean entryAdded = false;
-                    //Loop over all the database entries to find the groups
-                    for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
-                        if (databaseEntry.child("Group Name").exists()) {
-                            //Loop over all the emails in the group entry to see if the user is a part of that group
-                            for (com.google.firebase.database.DataSnapshot groupEntryChild : task.getResult().getChildren()) {
-                                if (!groupEntryChild.getKey().equals("Group Name")) {
-                                    String userEmailInGroup = groupEntryChild.getValue().toString();
-                                    String loggedInUserEmail = mDatabase.child(Uid).child("Email").toString();
-                                    if (userEmailInGroup.equals(loggedInUserEmail))
-                                    {
-                                        //logged in user is a part of the group
-                                        String groupContainingUser = databaseEntry.child("Group Name").toString();
-                                        groupList.add(groupContainingUser);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
+                                                  @Override
+                                                  public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                                      if (!task.isSuccessful()) {
+                                                          Toast.makeText(GroupListActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
+                                                      } else {
+                                                          boolean entryAdded = false;
+                                                          //Loop over all the database entries to find the groups
+                                                          for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
+                                                              if (databaseEntry.child("Group Name").exists()) {
+                                                                  Toast.makeText(GroupListActivity.this,  "Found a group", Toast.LENGTH_LONG).show();
+                                                                  //Loop over all the emails in the group entry to see if the user is a part of that group
+                                                                  for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.getChildren()) {
+                                                                      if (!groupEntryChild.getKey().equals("Group Name")) {
+                                                                          String userEmailInGroup = groupEntryChild.getValue().toString();
+                                                                          RefEmail.addValueEventListener(new ValueEventListener() {
+                                                                              @Override
+                                                                              public void onDataChange(com.firebase.client.DataSnapshot DS) {
+                                                                                  String loggedInUserEmail = DS.getValue().toString();
+                                                                                  if (userEmailInGroup.equals(loggedInUserEmail)) {
+                                                                                      //logged in user is a part of the group
+                                                                                      String groupContainingUser = Objects.requireNonNull(databaseEntry.child("Group Name").getValue()).toString();
+                                                                                      String numberOfGroupMembers = Objects.requireNonNull(databaseEntry.child("Member Count").getValue()).toString();
+                                                                                      groupNameList.add(groupContainingUser);
+                                                                                      groupCountList.add(numberOfGroupMembers);
+                                                                                      CustomGroupList customGroupList = new CustomGroupList(GroupListActivity.this, groupNameList, groupCountList);
+                                                                                      groupListView.setAdapter(customGroupList);
+                                                                                  }
+                                                                              }
 
-//        groupList.add("Group1");
+                                                                              @Override
+                                                                              public void onCancelled(FirebaseError firebaseError) {
 
-        CustomAdapter customAdapter = new CustomAdapter(GroupListActivity.this, groupList);
-        list.setAdapter(customAdapter);
+                                                                              }
+                                                                          });
+                                                                      }
+                                                                  }
+                                                              }
+                                                          }
+                                                      }
+                                                  }
+                                              });
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+
+        groupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent=new Intent(GroupListActivity.this, GroupActivity.class);
-                String groupName = groupList.get(position);
+                String groupName = groupNameList.get(position);
 //                TODO: Get the group key from firebase based on groupName
                 String groupKey = "";
                 intent.putExtra("group_key", groupKey);
@@ -116,83 +134,33 @@ public class GroupListActivity extends AppCompatActivity {
 
 }
 
-class CustomAdapter implements ListAdapter {
+class CustomGroupList extends ArrayAdapter {
     ArrayList<String> groupNames;
-    Context context;
+    ArrayList<String> groupCount;
+    Activity context;
 
-    public CustomAdapter(Activity context, ArrayList<String> groupNames) {
-
+    public CustomGroupList(Activity context, ArrayList<String> groupNames, ArrayList<String> groupCount) {
+        super(context, R.layout.group_list_row_item, groupNames);
         this.context = context;
         this.groupNames = groupNames;
+        this.groupCount = groupCount;
 
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver dataSetObserver) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver dataSetObserver) {
-
-    }
-
-    @Override
-    public int getCount() {
-        return 0;
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row=convertView;
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = context.getLayoutInflater();
         if(convertView==null)
             row = inflater.inflate(R.layout.group_list_row_item, null, true);
-        TextView textViewGroupName = (TextView) row.findViewById(R.id.textGroupName);
-        ImageView imageFlag = (ImageView) row.findViewById(R.id.imageGroupImage);
+        TextView textGroupName = (TextView) row.findViewById(R.id.textGroupName);
+        TextView textGroupCount = (TextView) row.findViewById(R.id.textGroupCount);
+        ImageView imageGroup = (ImageView) row.findViewById(R.id.imageGroupImage);
 
-        textViewGroupName.setText(groupNames.get(position));
-        imageFlag.setImageResource(R.drawable.ic_avtion_group_list_item);
+        textGroupName.setText(groupNames.get(position));
+        String groupCountStr = groupCount.get(position)+" Group Members";
+        textGroupCount.setText(groupCountStr);
+        imageGroup.setImageResource(R.drawable.ic_avtion_group_list_item);
         return  row;
-    }
-
-    @Override
-    public int getItemViewType(int i) {
-        return 0;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled(int i) {
-        return false;
     }
 }
