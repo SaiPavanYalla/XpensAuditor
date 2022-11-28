@@ -148,7 +148,6 @@ public class ContactUsTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialTextView2.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
@@ -158,7 +157,6 @@ public class ContactUsTest {
                                         1),
                                 12),
                         isDisplayed()));
-        materialButton2.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
@@ -167,13 +165,11 @@ public class ContactUsTest {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 3)));
-        materialButton3.perform(scrollTo(), click());
         SystemClock.sleep(1000);
         ViewInteraction imageView2 = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
-        imageView2.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(

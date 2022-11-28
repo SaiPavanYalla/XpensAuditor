@@ -75,9 +75,6 @@ jobs:
       - name: Download google services json file
         run: curl -o ${GITHUB_WORKSPACE}/app/google-services.json https://raw.githubusercontent.com/SaiPavanYalla/XpensAuditor/main/app/google-services.json
 
-      - name: Cat google services json file
-        run: cat ${GITHUB_WORKSPACE}/app/google-services.json
-
       - name:  Run unit & Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2.26.0
         
@@ -86,7 +83,7 @@ jobs:
           target: ${{ matrix.target }}
           arch: x86
           profile: Nexus 6
-          script: ./gradlew jacocoAllCombinedTestReport
+          script: ./gradlew jacocoAllCombinedTestReport --scan
       
       - name: Upload coverage to Codecov
         run: |
