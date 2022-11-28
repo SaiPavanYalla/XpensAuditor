@@ -28,30 +28,4 @@ public class ContactUs extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
     }
-
-    private void sendmail(String mail) {
-        String mailto = "mailto:"+mail +
-                "?cc=" +
-                "&subject=" + Uri.encode("Support Needed") +
-                "&body=" + Uri.encode("i need support");
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse(mailto));
-
-        try {
-            startActivity(emailIntent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(getApplicationContext(), "Error to open email app", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    public void callSupport(View view) {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:0123456789"));
-        startActivity(intent);
-    }
-
-    public void SendMail(View view) {
-        sendmail("xpensauditor@gmail.com");
-    }
 }
