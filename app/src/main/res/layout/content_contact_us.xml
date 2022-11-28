@@ -24,7 +24,6 @@
             android:id="@+id/RelativeView5"
             android:clickable="true"
             android:gravity="center"
-            android:onClick="SendMail"
             android:padding="@dimen/activity_horizontal_margin">
 
 
