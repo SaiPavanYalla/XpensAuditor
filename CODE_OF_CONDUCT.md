@@ -60,7 +60,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-saipavanyalla@gmail.com.
+spsuarl@ncsu.edu / kajadhav@ncsu.edu / avakeel@ncsu.edu / haparuch@ncsu.edu / pvemuri @ncsu.edu
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
