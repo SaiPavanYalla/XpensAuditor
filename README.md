@@ -9,7 +9,7 @@
 [![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/search?l=java)
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/blob/main/README.md)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11?display_name=tag)
-[![Open Issues](https://img.shields.io/github/issues/SaiPavanYalla/XpensAuditor)](https://github.com/SaiPavanYalla/XpensAuditor/issues)
+![GitHub issues](https://img.shields.io/github/issues/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11)
 [![Build-And-Test](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml/badge.svg)](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml)
 [![GitHub Repo Size](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)
 
