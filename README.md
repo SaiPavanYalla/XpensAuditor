@@ -71,9 +71,9 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 This repository is made for CSC 510 Software Engineering Course:
 
 Members
- - Sahithi Ammana
- - Mithila Reddy Tatigotla
- - Sunandini Medisetti
- - Sai Pavan Yalla
- - Vineeth Dasi
+ - Aditi Vakeel 
+ - Harshitha Paruchuri 
+ - Kaushik Jadhav
+ - Pradyumna Vemuri
+ - Surya Prakash Susarla
 
