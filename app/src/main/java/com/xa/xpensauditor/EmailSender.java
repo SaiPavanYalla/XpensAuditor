@@ -54,6 +54,7 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
         String content = "<h3>You've been added to an expense!</h3><br />You were added to an expense at " + shop + ", costing " + amt + ", for " + cat;
         String id = "xpense_auditor_g11_message";
 
+        // try block
         try {
             request = new MailjetRequest(Emailv31.resource)
                     .property(Emailv31.MESSAGES, new JSONArray()
@@ -69,6 +70,7 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
                                     .put(Emailv31.Message.TEXTPART, textpart)
                                     .put(Emailv31.Message.HTMLPART, content)
                                     .put(Emailv31.Message.CUSTOMID, id)));
+            // catching exceptions
         } catch ( JSONException e ) {
             printLog("json exception when creating the contents for the email , " + e.getMessage());
             return false;
@@ -81,7 +83,9 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
             return false;
         }
         printLog("email response status : " + response.getStatus());
+        
         printLog("email response data : " + response.getData());
+        
         return true;
     }
 
