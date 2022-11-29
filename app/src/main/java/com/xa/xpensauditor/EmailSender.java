@@ -54,6 +54,7 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
         String content = "<h3>You've been added to an expense!</h3><br />You were added to an expense at " + shop + ", costing " + amt + ", for " + cat;
         String id = "xpense_auditor_g11_message";
 
+        // try block
         try {
             request = new MailjetRequest(Emailv31.resource)
                     .property(Emailv31.MESSAGES, new JSONArray()
