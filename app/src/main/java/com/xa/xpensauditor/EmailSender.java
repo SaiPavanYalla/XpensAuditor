@@ -69,6 +69,7 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
                                     .put(Emailv31.Message.TEXTPART, textpart)
                                     .put(Emailv31.Message.HTMLPART, content)
                                     .put(Emailv31.Message.CUSTOMID, id)));
+            // catching exceptions
         } catch ( JSONException e ) {
             printLog("json exception when creating the contents for the email , " + e.getMessage());
             return false;
