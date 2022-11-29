@@ -69,16 +69,34 @@ public class DashboardActivity extends AppCompatActivity {
         expenseHistoryPlot = findViewById(R.id.expense_history_plot);
         monthlyExpensePlot = findViewById(R.id.monthly_expense_plot);
 
+//        monthlyExpensePlot.addSegment(new Segment("Segment1", 20), new SegmentFormatter(Color.RED));
+//        monthlyExpensePlot.addSegment(new Segment("Segment2", 25), new SegmentFormatter(Color.BLUE));
+//        monthlyExpensePlot.clear();
+//        monthlyExpensePlot.addSegment(new Segment("Segment3", 30), new SegmentFormatter(Color.GREEN));
+//        monthlyExpensePlot.addSegment(new Segment("Segment4", 25), new SegmentFormatter(Color.YELLOW));
+
+        Firebase.setAndroidContext(this);
+        //Get Firebase auth instance
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
-        com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
-        String Uid=auth.getUid();
+
+        String Uid;
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey("Uid")) {
+            Uid = extras.getString("Uid");
+        } else {
+            Uid=auth.getUid();
+        }
+
         RefUid= mRootRef.child(Uid);
         RefTran = RefUid.child("Transactions");
         RefCat=RefUid.child("Categories");
         RefUncat=RefCat.child("Uncategorised");
         DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference();
+
         mDatabase.child(Uid).child("DateRange").get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<com.google.firebase.database.DataSnapshot> task) {
@@ -113,8 +131,8 @@ public class DashboardActivity extends AppCompatActivity {
                             String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
 
                             //Creating MonthlyExpense hashmap
-                            if(date.equals(dates.get(0)))
-                            {
+//                            if(date.equals(dates.get(0)))
+//                            {
                                 if (!monthlyExpense.containsKey(category))
                                 {
                                     monthlyExpense.put(category, Integer.parseInt(amount));
@@ -123,53 +141,66 @@ public class DashboardActivity extends AppCompatActivity {
                                 {
                                     monthlyExpense.put(category, monthlyExpense.get(category) + Integer.parseInt(amount));
                                 }
-                            }
+//                            }
 
 
                         }
 
                     }
                 }
+
                 plotExpenseHistory(expenseHistory);
                 plotMonthlyExpense(monthlyExpense);
             }
 
         });
-
-
-
-
     }
 
     private void plotExpenseHistory(HashMap<String, Integer> expenseHistory) {
+        System.out.println(expenseHistory.toString());
         Number[] series1Numbers = {1, 4, 2, 8, 4, 16, 8, 32, 16, 64};
 
-        XYSeries series1 = new SimpleXYSeries(
-                Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.XY_VALS_INTERLEAVED, "Expense occured");
+        Iterator hmIterator = expenseHistory.entrySet().iterator();
+
+        List<Number> xAxis = new ArrayList<>();
+        List<Number> yAxis = new ArrayList<>();
+        int count = 1;
+        while (hmIterator.hasNext()) {
+            Map.Entry month = (Map.Entry)hmIterator.next();
+//            System.out.println(Double.parseDouble(month.getKey().toString().replace("-",".")));
+            xAxis.add(count);
+            yAxis.add((Integer) month.getValue());
+            count++;
+        }
+
+        System.out.println(yAxis.toString());
+
+        expenseHistoryPlot.clear();
+
+        XYSeries series1 = new SimpleXYSeries(xAxis, yAxis, "Expense occured");
 
         LineAndPointFormatter series1Format =
                 new LineAndPointFormatter(Color.RED, Color.RED, null, null);
 
         expenseHistoryPlot.addSeries(series1, series1Format);
+
+        expenseHistoryPlot.redraw();
     }
 
-    private void plotMonthlyExpense(HashMap<String,Integer> monthlyExpense) {
-
+    private void plotMonthlyExpense(HashMap<String, Integer> monthlyExpense) {
+        System.out.println(monthlyExpense + " monthlyExpense");
+        Integer colors[] = new Integer[] {Color.RED, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN, Color.DKGRAY};
 
         Iterator hmIterator = monthlyExpense.entrySet().iterator();
 
+        int count = 0;
         while (hmIterator.hasNext()) {
+            Map.Entry category = (Map.Entry)hmIterator.next();
 
-            Map.Entry category
-                    = (Map.Entry)hmIterator.next();
-            Toast.makeText(DashboardActivity.this,  category.getValue().toString(), Toast.LENGTH_LONG).show();
-
-            monthlyExpensePlot.addSegment(new Segment(category.getKey().toString(), (Number)category.getValue()), new SegmentFormatter(Color.RED));
+            monthlyExpensePlot.addSegment(new Segment(category.getKey().toString()+ ": $" + category.getValue(), (Number)category.getValue()), new SegmentFormatter(colors[count%colors.length]));
+            count++;
         }
 
-       monthlyExpensePlot.addSegment(new Segment("Segment1", 20), new SegmentFormatter(Color.RED));
-        monthlyExpensePlot.addSegment(new Segment("Segment2", 25), new SegmentFormatter(Color.BLUE));
-        monthlyExpensePlot.addSegment(new Segment("Segment3", 30), new SegmentFormatter(Color.GREEN));
-        monthlyExpensePlot.addSegment(new Segment("Segment4", 25), new SegmentFormatter(Color.YELLOW));
+        monthlyExpensePlot.redraw();
     }
 }

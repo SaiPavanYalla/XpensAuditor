@@ -1,5 +1,6 @@
 package com.xa.xpensauditor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,10 +18,22 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GroupListActivity extends AppCompatActivity {
 
@@ -44,13 +57,68 @@ public class GroupListActivity extends AppCompatActivity {
 
 //        TODO: Get the list of group names and members count from firebase and populate arrayList
 
-        groupNameList.add("Group 1");
-        groupCountList.add("5");
-        groupNameList.add("Group 2");
-        groupCountList.add("3");
 
-        CustomGroupList customGroupList = new CustomGroupList(GroupListActivity.this, groupNameList, groupCountList);
-        groupListView.setAdapter(customGroupList);
+        Firebase mRootRef;
+        Firebase RefUid, RefEmail;
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
+
+        mRootRef.keepSynced(true);
+        com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
+        String Uid=auth.getUid();
+        RefUid= mRootRef.child(Uid);
+        RefEmail=RefUid.child("Email");
+        String loggedInUserEmail="";
+
+        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
+
+
+
+        mDatabase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                                  @Override
+                                                  public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                                      if (!task.isSuccessful()) {
+                                                          Toast.makeText(GroupListActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
+                                                      } else {
+                                                          boolean entryAdded = false;
+                                                          //Loop over all the database entries to find the groups
+                                                          for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
+                                                              if (databaseEntry.child("Group Name").exists()) {
+                                                                  //Loop over all the emails in the found group entry to see if the user is a part of that group
+                                                                  for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.getChildren()) {
+                                                                      if (!groupEntryChild.getKey().equals("Group Name")) {
+                                                                          //Emails are stored as key value pairs in the group object. If the key is "Group Name", it means that that key value pair does not store a user email
+                                                                          String userEmailInGroup = groupEntryChild.getValue().toString();
+                                                                          //RefEmail is the reference to the email field of the logged in user
+                                                                          RefEmail.addValueEventListener(new ValueEventListener() {
+                                                                              @Override
+                                                                              public void onDataChange(com.firebase.client.DataSnapshot DS) {
+                                                                                  String loggedInUserEmail = DS.getValue().toString();
+                                                                                  if (userEmailInGroup.equals(loggedInUserEmail)) {
+                                                                                      //logged in user is a part of the group
+                                                                                      String groupContainingUser = Objects.requireNonNull(databaseEntry.child("Group Name").getValue()).toString();
+                                                                                      String numberOfGroupMembers = Objects.requireNonNull(databaseEntry.child("Member Count").getValue()).toString();
+                                                                                      groupNameList.add(groupContainingUser);
+                                                                                      groupCountList.add(numberOfGroupMembers);
+                                                                                      CustomGroupList customGroupList = new CustomGroupList(GroupListActivity.this, groupNameList, groupCountList);
+                                                                                      groupListView.setAdapter(customGroupList);
+                                                                                  }
+                                                                              }
+
+                                                                              @Override
+                                                                              public void onCancelled(FirebaseError firebaseError) {
+
+                                                                              }
+                                                                          });
+                                                                      }
+                                                                  }
+                                                              }
+                                                          }
+                                                      }
+                                                  }
+                                              });
+
+
+
 
         groupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,7 +126,7 @@ public class GroupListActivity extends AppCompatActivity {
                 Intent intent=new Intent(GroupListActivity.this, GroupActivity.class);
                 String groupName = groupNameList.get(position);
 //                TODO: Get the group key from firebase based on groupName
-                String groupKey = "";
+                String groupKey = groupName;
                 intent.putExtra("group_key", groupKey);
                 startActivity(intent);
             }
