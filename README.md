@@ -33,7 +33,7 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 
 ## Roadmap
 
- - Issues encountered and solved so far - [ISSUES](https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed)
+ - Issues encountered and solved so far - [ISSUES](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/issues?q=is%3Aissue+is%3Aclosed)
  - Scope of Improvement :
  
    - Analysis on detected expenses - Category wise expenses and expenditure graphs
@@ -44,7 +44,7 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 
 ## License
 
- This project is licensed under the MIT License. See the [LICENSE](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/LICENSE) file for details
+ This project is licensed under the MIT License. See the [LICENSE](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/blob/main/LICENSE) file for details
  
 ## Tools used
 
