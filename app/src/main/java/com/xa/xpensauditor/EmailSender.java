@@ -82,7 +82,9 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
             return false;
         }
         printLog("email response status : " + response.getStatus());
+        
         printLog("email response data : " + response.getData());
+        
         return true;
     }
 
