@@ -75,10 +75,12 @@ public class EmailSender extends AsyncTask<Void, Integer, Boolean> {
             printLog("json exception when creating the contents for the email , " + e.getMessage());
             return false;
         }
+        
         printLog("created a request with all the contents involved, " + request.toString());
+        
         try {
             response = client.post(request);
-        } catch  (MailjetException e) {
+        }catch  (MailjetException e) {
             printLog("exception when sending the email, " + e.getMessage());
             return false;
         }
