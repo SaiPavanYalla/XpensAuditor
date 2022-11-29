@@ -86,48 +86,45 @@ public class CreateGroupActivity extends AppCompatActivity {
                             Toast.makeText(CreateGroupActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
                         }
                         else {
-                            boolean entryAdded=false;
-                            for (com.google.firebase.database.DataSnapshot databaseEntry:task.getResult().getChildren()) {
-                                if(databaseEntry.child("Group Name").exists() && databaseEntry.child("Group Name").equals(groupName))
-                                {
-                                    String key = databaseEntry.getKey();
-                                    RefNewUserEmailAddedToGroup = mDatabase.child(key).push();
-                                    RefNewUserEmailAddedToGroup.setValue(userEmailAddedToGroup);
-                                    RefGroupMemberCount = mDatabase.child(key).child("Member Count");
-                                    RefGroupMemberCount.setValue((Integer.parseInt(databaseEntry.child("Member Count").getValue().toString())+1));
-                                    entryAdded=true;
-                                    break;
-                                }
-                            }
-                            if (!entryAdded)
+                            RefGroupMemberCount = mDatabase.child(groupName).child("Member Count");
+                            if (!task.getResult().child(groupName).child("Member Count").exists())
                             {
-                                RefNewGroup = mRootRef.push();
-                                RefNewGroup.child("Group Name").setValue(groupName);
-                                RefNewGroup.child("Member Count").setValue("1");
-                                RefNewUserEmailAddedToNewGroup = RefNewGroup.push();
-                                RefNewUserEmailAddedToNewGroup.setValue(userEmailAddedToGroup);
-                                RefCat=RefNewGroup.child("Categories");
-                                RefFood=RefCat.child("Food");
-                                RefFood.setValue("");
-                                RefHealth=RefCat.child("Health");
-                                RefHealth.setValue("");
-                                RefTravel=RefCat.child("Travel");
-                                RefTravel.setValue("");
-                                RefEdu=RefCat.child("Education");
-                                RefEdu.setValue("");
-                                RefBills=RefCat.child("Bills");
-                                RefBills.setValue("");
-                                RefHomeNeeds=RefCat.child("Home Needs");
-                                RefHomeNeeds.setValue("");
-                                RefOthers=RefCat.child("Others");
-                                RefOthers.setValue("");
+                                RefGroupMemberCount.setValue("1");
                             }
+                            else {
+                                    String currentMemberCount = task.getResult().child(groupName).child("Member Count").getValue().toString();
+                                    String newMemberCount = Integer.toString(Integer.parseInt(currentMemberCount)+1);
+                                    Toast.makeText(CreateGroupActivity.this, newMemberCount, Toast.LENGTH_LONG).show();
+                                    RefGroupMemberCount.setValue(newMemberCount);
+                            }
+
+                            RefNewGroup = mRootRef.child(groupName);
+                            RefNewGroup.child("Group Name").setValue(groupName);
+                            RefNewUserEmailAddedToNewGroup = RefNewGroup.push();
+                            RefNewUserEmailAddedToNewGroup.setValue(userEmailAddedToGroup);
+                            RefCat=RefNewGroup.child("Categories");
+                            RefFood=RefCat.child("Food");
+                            RefFood.setValue("");
+                            RefHealth=RefCat.child("Health");
+                            RefHealth.setValue("");
+                            RefTravel=RefCat.child("Travel");
+                            RefTravel.setValue("");
+                            RefEdu=RefCat.child("Education");
+                            RefEdu.setValue("");
+                            RefBills=RefCat.child("Bills");
+                            RefBills.setValue("");
+                            RefHomeNeeds=RefCat.child("Home Needs");
+                            RefHomeNeeds.setValue("");
+                            RefOthers=RefCat.child("Others");
+                            RefOthers.setValue("");
+                            Toast.makeText(CreateGroupActivity.this,"Else Condition ", Toast.LENGTH_LONG).show();
+
                         }
                     }
 
                 });
 
-                finish();
+                //finish();
             }
         });
     }
