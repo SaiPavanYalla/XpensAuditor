@@ -185,6 +185,8 @@ public class AddTransactionActivity extends AppCompatActivity {
 
                 int thisDay = calendar.get(Calendar.DAY_OF_MONTH);
                 //Log.d(TAG, "$ thisDay : " + thisDay);
+                
+                // day, month, year retrieval
                 d = (dateTransac.getDayOfMonth());
                 m = (dateTransac.getMonth() + 1);
                 y = (dateTransac.getYear());
