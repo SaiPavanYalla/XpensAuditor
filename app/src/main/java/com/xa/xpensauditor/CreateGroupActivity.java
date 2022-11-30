@@ -117,7 +117,6 @@ public class CreateGroupActivity extends AppCompatActivity {
                             RefHomeNeeds.setValue("");
                             RefOthers=RefCat.child("Others");
                             RefOthers.setValue("");
-                            Toast.makeText(CreateGroupActivity.this,"Else Condition ", Toast.LENGTH_LONG).show();
 
                         }
                     }

@@ -127,6 +127,7 @@ public class GroupListActivity extends AppCompatActivity {
                 String groupName = groupNameList.get(position);
 //                TODO: Get the group key from firebase based on groupName
                 String groupKey = groupName;
+                Toast.makeText(GroupListActivity.this, groupKey, Toast.LENGTH_LONG).show();
                 intent.putExtra("group_key", groupKey);
                 startActivity(intent);
             }
