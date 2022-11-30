@@ -50,8 +50,6 @@ import java.util.Objects;
 public class GroupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SMS_PERMISSION_CODE =101;
 
-    private ActivityHomeBinding binding;
-
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -80,7 +78,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),GroupTransactionActivity.class);
+                Intent i=new Intent(getApplicationContext(),AddTransactionActivity.class);
                 i.putExtra("group_key",  intent.getExtras().getString("group_key"));
                 startActivity(i);
             }
@@ -93,13 +91,11 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         toggle.syncState();
 
         Firebase.setAndroidContext(this);
-        auth = FirebaseAuth.getInstance();
         mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
-        Uid=auth.getUid();
+        Uid=intent.getExtras().getString("group_key");
         RefUid= mRootRef.child(Uid);
-        RefName = RefUid.child("Name");
-        RefEmail=RefUid.child("Email");
+        RefName = RefUid.child("Group Name");
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -115,43 +111,18 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         RefName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(auth.getCurrentUser()!=null){
-                    auth.getCurrentUser().reload();
+
+                try {
+                    tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (auth.getCurrentUser()!=null) {
-                    try {
-                        tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 Toast.makeText(getApplicationContext(), "Failed to load details", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RefEmail.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(auth.getCurrentUser()!=null){
-                    auth.getCurrentUser().reload();
-                }
-                if (auth.getCurrentUser()!=null) {
-
-                    try {
-                        tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
             }
         });
 
@@ -195,7 +166,11 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
     private void setupViewPager(ViewPager viewPager) {
 
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TabFragment(),"ALL TRANSACTION");
+        Bundle bundle = new Bundle();
+        bundle.putString("group_key", getIntent().getExtras().getString("group_key"));
+        TabFragment fragobj = new TabFragment();
+        fragobj.setArguments(bundle);
+        adapter.addFragment(fragobj,"ALL TRANSACTION");
         viewPager.setAdapter(adapter);
     }
 
@@ -248,5 +223,9 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
+    }
+
+    public String getGroupName() {
+        return getIntent().getExtras().getString("group_key");
     }
 }
