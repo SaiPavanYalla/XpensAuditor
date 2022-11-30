@@ -75,6 +75,10 @@ public class AddTransactionActivity extends AppCompatActivity {
         mRootRef.keepSynced(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String Uid = auth.getUid();
+        if(getIntent().getExtras()!=null && !getIntent().getExtras().getString("group_key").isEmpty())
+        {
+            Uid=getIntent().getExtras().getString("group_key");
+        }
         RefUid = mRootRef.child(Uid);
 
         RefCat = RefUid.child("Categories");
@@ -259,6 +263,9 @@ public class AddTransactionActivity extends AppCompatActivity {
                             UnCatTran.child(Tid).child("Month").setValue(month);
                             UnCatTran.child(Tid).child("Year").setValue(year);
                         } else {
+                            Toast.makeText(getApplicationContext(), "Selcat : "+SelCat, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Tid : "+Tid, Toast.LENGTH_SHORT).show();
+
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Amount").setValue(Amount);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Category").setValue(SelCat);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Shop Name").setValue(ShopName);
@@ -370,6 +377,10 @@ public class AddTransactionActivity extends AppCompatActivity {
         public void onBackPressed() {
 
             Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
+            if(getIntent().getExtras()!=null && !getIntent().getExtras().getString("group_key").isEmpty())
+            {
+                i= new Intent(AddTransactionActivity.this, GroupActivity.class);
+            }
             startActivity(i);
 
     }
