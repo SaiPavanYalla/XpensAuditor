@@ -154,7 +154,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 SelCat = parent.getItemAtPosition(position).toString();
                 if(SelCat == "Create Your Own Category"){
                     ownCatEditText.setVisibility(View.VISIBLE);
-                    ownCat = true;
+                  //  ownCat = true;
                 }
                 else{
                     ownCatEditText.setVisibility(View.GONE);
