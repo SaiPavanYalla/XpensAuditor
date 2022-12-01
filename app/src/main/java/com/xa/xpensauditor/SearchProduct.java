@@ -53,7 +53,7 @@ public class SearchProduct extends AppCompatActivity{
 
         listView.setLongClickable(true);
         adapter = new ListViewAdapter(this, rows);
-       // listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
