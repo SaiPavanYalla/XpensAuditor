@@ -49,7 +49,7 @@ public class SearchProduct extends AppCompatActivity{
         search_button = findViewById(R.id.search_button);
         context = getApplicationContext();
 
-        rows = new ArrayList<>();
+      //  rows = new ArrayList<>();
 
         listView.setLongClickable(true);
         adapter = new ListViewAdapter(this, rows);
