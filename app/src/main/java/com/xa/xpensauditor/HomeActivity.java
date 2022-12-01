@@ -1313,7 +1313,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(this,Visualization_all.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_settings) {
             Intent i=new Intent(this,AccountSettingsActivity.class);
