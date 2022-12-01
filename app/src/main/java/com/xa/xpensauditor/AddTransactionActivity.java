@@ -61,7 +61,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     private ArrayList<String> Catg = new ArrayList<>();
     private Button AddTran;
     private EditText Amnt;
-    //private EditText ShpNm;
+    private EditText ShpNm;
     private EditText SharedUsersString;
     private EditText ownCatEditText;
     private Spinner catView;
