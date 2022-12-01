@@ -123,7 +123,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         InputFilter filter = new InputFilter() {
 
-            //final int maxDigitsBeforeDecimalPoint = 8;
+            final int maxDigitsBeforeDecimalPoint = 8;
             final int maxDigitsAfterDecimalPoint = 2;
 
             @Override
