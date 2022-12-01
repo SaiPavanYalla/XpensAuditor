@@ -47,7 +47,7 @@ public class SearchProduct extends AppCompatActivity{
         listView = findViewById(R.id.list);
         input = findViewById(R.id.input);
         search_button = findViewById(R.id.search_button);
-     //   context = getApplicationContext();
+        context = getApplicationContext();
 
         rows = new ArrayList<>();
 
