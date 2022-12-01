@@ -71,7 +71,7 @@ public class SearchProduct extends AppCompatActivity{
                     makeToast("Enter a valid product name.");
                 } else {
                     new FetchProduct().start();
-                 //   addItem();
+                    addItem();
                 }
             }
         });
