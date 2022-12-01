@@ -87,7 +87,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             printLog(j);
     }
 
-  //  public static void printLog(String message) {
+    public static void printLog(String message) {
         Log.e("app core error message", message);
     }
     
