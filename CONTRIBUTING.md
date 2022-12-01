@@ -10,7 +10,7 @@ Install Git GUI
 
 Guide - https://git-scm.com/downloads/guis/
 
-Project Overview - https://github.com/SaiPavanYalla/XpensAuditor/blob/main/README.md
+Project Overview - https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/blob/main/README.md
 
 **Types of code changes and contributions we accept**
 
