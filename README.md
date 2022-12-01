@@ -2,16 +2,16 @@
 
 ![App Logo](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/blob/main/docs/demo/ic_account-playstore.png)
 
-[![Code Coverage](https://codecov.io/gh/SaiPavanYalla/XpensAuditor/branch/main/graphs/badge.svg)](https://codecov.io/gh/SaiPavanYalla/XpensAuditor/branch/main)
+[![Code Coverage](https://codecov.io/gh/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/branch/main/graphs/badge.svg)](https://codecov.io/gh/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/branch/main)
 [![DOI](https://zenodo.org/badge/566109274.svg)](https://zenodo.org/badge/latestdoi/566109274)
-[![Collaborators](https://img.shields.io/badge/Collaborators-5-orange.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/graphs/contributors)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/LICENSE)
-[![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/search?l=java)
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/README.md)
-[![GitHub Release](https://img.shields.io/github/release/SaiPavanYalla/XpensAuditor.svg)](https://github.com/SaiPavanYalla/XpensAuditor/releases)
-[![Open Issues](https://img.shields.io/github/issues/SaiPavanYalla/XpensAuditor)](https://github.com/SaiPavanYalla/XpensAuditor/issues)
-[![Build-And-Test](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml/badge.svg)](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml)
-[![GitHub Repo Size](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)
+[![Collaborators](https://img.shields.io/badge/Collaborators-5-orange.svg?style=flat)](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/graphs/contributors)
+[![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat)](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/blob/main/LICENSE)
+[![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/search?l=java)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/blob/main/README.md)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11?display_name=tag)
+![GitHub issues](https://img.shields.io/github/issues/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11)
+[![Build & Test](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/actions/workflows/android.yml/badge.svg)](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/actions/workflows/android.yml)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11.svg)](https://img.shields.io/github/repo-size/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11.svg)
 
 #
 
@@ -33,7 +33,7 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 
 ## Roadmap
 
- - Issues encountered and solved so far - [ISSUES](https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed)
+ - Issues encountered and solved so far - [ISSUES](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/issues?q=is%3Aissue+is%3Aclosed)
  - Scope of Improvement :
  
    - Analysis on detected expenses - Category wise expenses and expenditure graphs
@@ -44,7 +44,7 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 
 ## License
 
- This project is licensed under the MIT License. See the [LICENSE](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/LICENSE) file for details
+ This project is licensed under the MIT License. See the [LICENSE](https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11/blob/main/LICENSE) file for details
  
 ## Tools used
 
@@ -52,12 +52,10 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 - Embedded Emulator/ USB debugging on android device
 
 ## Run the application
-### Android Mobile
- - Download the apk from the latest [release](https://github.com/SaiPavanYalla/XpensAuditor/releases/tag/v1.0.0) 
 ### Android Studio
  - Must have android studio installed
  - Clone the github repo
-   git clone https://github.com/SaiPavanYalla/XpensAuditor.git
+   git clone https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11.git
  - Open the cloned repo using android studio
  - Build the application for any dependency inconsistencies and proper functioning of app
  - Expand the file structure and run the app using "Run" option
@@ -73,9 +71,9 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 This repository is made for CSC 510 Software Engineering Course:
 
 Members
- - Sahithi Ammana
- - Mithila Reddy Tatigotla
- - Sunandini Medisetti
- - Sai Pavan Yalla
- - Vineeth Dasi
+ - Aditi Vakeel 
+ - Harshitha Paruchuri 
+ - Kaushik Jadhav
+ - Pradyumna Vemuri
+ - Surya Prakash Susarla
 

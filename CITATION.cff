@@ -1,11 +1,24 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "Yalla"
-  given-names: "Sai Pavan"
-  orcid: "https://orcid.org/0000-0003-4401-4490"
-title: "XpensAuditor"
+- family-names: "Susarla"
+  given-names: "Surya Prakash"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Jadhav"
+  given-names: "Kaushik"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Paruchuri"
+  given-names: "Harshitha"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Vemuri"
+  given-names: "Pradyumna"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Vakeel"
+  given-names: "Aditi"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "XpensAuditor-Group-11"
 version: 1.0.0
-doi: 10.5281/zenodo.1234
-date-released: 2022-10-08
-url: "https://github.com/SaiPavanYalla/XpensAuditor"
+doi: 10.5281/zenodo.7374698
+date-released: 2022-11-29
+url: "https://github.com/NCSU-Fall-2022-SE-Project-Team-11/XpensAuditor---Group-11"
+
