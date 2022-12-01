@@ -145,7 +145,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         };
 
 
-     //   Amnt.setFilters(new InputFilter[]{filter});
+        Amnt.setFilters(new InputFilter[]{filter});
 
 
         catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
