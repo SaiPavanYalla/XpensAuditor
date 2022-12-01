@@ -270,7 +270,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
         int i=0;
-      //  i++;
+        i++;
         i++;
         i++;
         i++;
