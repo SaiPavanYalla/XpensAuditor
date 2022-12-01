@@ -37,7 +37,7 @@ public class SearchProduct extends AppCompatActivity{
     static ListViewAdapter adapter;
     static ArrayList<String> rows;
     static Context context;
-    Handler fetchHandler = new Handler();
+  //  Handler fetchHandler = new Handler();
     ProgressDialog progressDialog;
 
     @Override
