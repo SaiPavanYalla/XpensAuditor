@@ -190,6 +190,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                             // Dismiss dialog
                             dialog.dismiss();
                             Toast.makeText(AddTransactionActivity.this, "Added category - "+editTextCat.getText().toString(), Toast.LENGTH_SHORT).show();
+                            RefCat.child(editTextCat.getText().toString()).setValue("");
 
                             return true;
                         }
