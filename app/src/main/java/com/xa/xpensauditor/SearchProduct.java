@@ -59,7 +59,7 @@ public class SearchProduct extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(SearchProduct.this, clickedItem, Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(SearchProduct.this, clickedItem, Toast.LENGTH_SHORT).show();
             }
         });
 
