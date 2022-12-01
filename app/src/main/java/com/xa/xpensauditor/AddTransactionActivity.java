@@ -148,7 +148,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         Amnt.setFilters(new InputFilter[]{filter});
 
 
-     //   catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SelCat = parent.getItemAtPosition(position).toString();
