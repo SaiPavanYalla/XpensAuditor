@@ -139,13 +139,13 @@ public class AddTransactionActivity extends AppCompatActivity {
                         return dest.subSequence(dstart, dend);
                     return "";
                 }
-            //    return null;
+                return null;
 
             }
         };
 
 
-        Amnt.setFilters(new InputFilter[]{filter});
+     //   Amnt.setFilters(new InputFilter[]{filter});
 
 
         catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
