@@ -69,7 +69,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     private DatePicker dateTransac;
     String day, month, year;
     int d, m, y;
-    Activity activity;
+    //Activity activity;
     String[] SharedUsersList;
     boolean ownCat;
     MultiValueMap<String, String> catgTrans1 = MultiValueMap.multiValueMap(new LinkedHashMap<String, Collection<String>>(), (Class<LinkedHashSet<String>>) (Class<?>) LinkedHashSet.class);
