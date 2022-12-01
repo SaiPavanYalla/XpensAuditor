@@ -139,7 +139,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                         return dest.subSequence(dstart, dend);
                     return "";
                 }
-                return null;
+            //    return null;
 
             }
         };
