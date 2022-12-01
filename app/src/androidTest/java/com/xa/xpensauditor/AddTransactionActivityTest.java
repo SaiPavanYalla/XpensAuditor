@@ -1,6 +1,5 @@
 package com.xa.xpensauditor;
 
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -35,6 +34,7 @@ import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -201,7 +201,6 @@ public class AddTransactionActivityTest {
 
             @Override
             public boolean matchesSafely(View view) {
-                
                 ViewParent parent = view.getParent();
                 return parent instanceof ViewGroup && parentMatcher.matches(parent)
                         && view.equals(((ViewGroup) parent).getChildAt(position));
