@@ -112,7 +112,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         ShpNm = (EditText) findViewById(R.id.addShopName);
         catView = (Spinner) findViewById(R.id.spinTrans);
         SharedUsersString = (EditText) findViewById(R.id.addSharedUserEmail);
-    //    ownCatEditText = (EditText) findViewById(R.id.addOwnCategory);
+     ownCatEditText = (EditText) findViewById(R.id.addOwnCategory);
 
         dateTransac = (DatePicker) findViewById(R.id.dateTrans);
         day = String.valueOf(dateTransac.getDayOfMonth());
