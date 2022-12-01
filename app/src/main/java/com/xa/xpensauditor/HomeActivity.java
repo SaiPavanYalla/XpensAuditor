@@ -280,7 +280,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         i++;
         i++;
         i++;
-      //  i++;
+        i++;
         i++;
         i++;
         i++;
