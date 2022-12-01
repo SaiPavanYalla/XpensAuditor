@@ -54,7 +54,7 @@ import org.json.JSONObject;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
-  //  private Firebase mRootRef;
+    private Firebase mRootRef;
     private Firebase RefUid;
     private Firebase RefTran1, RefCatSum1, RefCat, UnCatTran;
     private String Tid;
