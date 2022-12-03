@@ -239,20 +239,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(this, ContactUs.class);
             startActivity(i);
         } else if (id == R.id.action_sort) {
-//            Intent i=new Intent(this,ContactUs.class);
-            Toast.makeText(getApplicationContext(), "Sort menu", Toast.LENGTH_SHORT).show();
+
         } else if (id == R.id.action_amount_sort) {
             transactionsFragment.sortList(0);
-            Toast.makeText(getApplicationContext(), "Sorting by Amount", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sorted by Amount", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.action_date_sort) {
             transactionsFragment.sortList(1);
-            Toast.makeText(getApplicationContext(), "Sorting by date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sorted by date", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.action_category_sort) {
             transactionsFragment.sortList(2);
-            Toast.makeText(getApplicationContext(), "Sorting by category", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sorted by category", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.action_memo_sort) {
             transactionsFragment.sortList(3);
-            Toast.makeText(getApplicationContext(), "Sorting by memo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sorted by memo", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
