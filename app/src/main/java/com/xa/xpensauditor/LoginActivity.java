@@ -2,11 +2,10 @@ package com.xa.xpensauditor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,19 +32,19 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            startActivity(new Intent(LoginActivity.this, CreateGroupActivity.class));
             finish();
         }
 //
         // set the view now
         setContentView(R.layout.activity_login);
 
-        inputEmail = (EditText) findViewById(R.id.email);
+        inputEmail = (EditText) findViewById(R.id.emailIds);
         inputPassword = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
+        btnReset = (Button) findViewById(R.id.create_group);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();

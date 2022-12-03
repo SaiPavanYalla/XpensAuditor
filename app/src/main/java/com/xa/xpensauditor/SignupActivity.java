@@ -11,23 +11,18 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.firebase.client.Firebase;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -63,13 +58,13 @@ public class SignupActivity extends AppCompatActivity {
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
-        inputEmail = (TextInputEditText) findViewById(R.id.email);
-        inputName = (TextInputEditText) findViewById(R.id.Name);
+        inputEmail = (TextInputEditText) findViewById(R.id.emailIds);
+        inputName = (TextInputEditText) findViewById(R.id.groupName);
         inputPhnnum = (TextInputEditText) findViewById(R.id.phnum);
 
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
+        btnResetPassword = (Button) findViewById(R.id.create_group);
 
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override

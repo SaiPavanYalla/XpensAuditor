@@ -21,9 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,14 +35,44 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
+import java.util.Collections;
+
 import java.util.Objects;
 
 public class GroupListActivity extends AppCompatActivity {
+    private Firebase mRootRef;
+    private Firebase RefUid,RefTran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_list);
+
+        Firebase.setAndroidContext(this);
+
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
+
+        mRootRef.keepSynced(true);
+        com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
+        String Uid=auth.getUid();
+        RefUid = mRootRef.child(Uid);
+
+        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(Uid).child("Groups").get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                      Toast.makeText(GroupListActivity.this, "Couldn't retrieve group list", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(GroupListActivity.this, task.getResult().toString(), Toast.LENGTH_LONG).show();
+//                    task.getResult().getValue();
+                }
+
+            }
+
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabgl);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -63,13 +95,13 @@ public class GroupListActivity extends AppCompatActivity {
         mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
-        com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
-        String Uid=auth.getUid();
+//        com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
+//        String Uid=auth.getUid();
         RefUid= mRootRef.child(Uid);
         RefEmail=RefUid.child("Email");
         String loggedInUserEmail="";
 
-        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -84,7 +116,7 @@ public class GroupListActivity extends AppCompatActivity {
                                                           for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
                                                               if (databaseEntry.child("Group Name").exists()) {
                                                                   //Loop over all the emails in the found group entry to see if the user is a part of that group
-                                                                  for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.getChildren()) {
+                                                                  for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.child("GroupMembers").getChildren()) {
                                                                       if (!groupEntryChild.getKey().equals("Group Name")) {
                                                                           //Emails are stored as key value pairs in the group object. If the key is "Group Name", it means that that key value pair does not store a user email
                                                                           String userEmailInGroup = groupEntryChild.getValue().toString();
@@ -116,9 +148,6 @@ public class GroupListActivity extends AppCompatActivity {
                                                       }
                                                   }
                                               });
-
-
-
 
         groupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

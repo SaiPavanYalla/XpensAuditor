@@ -24,23 +24,23 @@
             android:layout_height="@dimen/logo_w_h"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
-            android:src="@mipmap/ic_launcher"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/ic_launcher" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Name"
+                android:id="@+id/groupName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints="emailAddress"
                 android:hint="@string/GroupName"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:autofillHints="emailAddress" />
+                android:textColor="@android:color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,16 +49,16 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/emailIds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="emailAddress"
                 android:hint="@string/member_email"
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:autofillHints="emailAddress" />
+                android:textColorHint="@android:color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -71,7 +71,7 @@
             android:textColor="@android:color/black" />
 
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
