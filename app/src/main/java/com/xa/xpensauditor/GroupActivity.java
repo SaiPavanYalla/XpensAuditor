@@ -1,17 +1,8 @@
 package com.xa.xpensauditor;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -23,10 +14,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -36,23 +24,17 @@ import androidx.core.view.GravityCompat;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+//import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-
-import com.xa.xpensauditor.databinding.ActivityHomeBinding;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
 
 public class GroupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SMS_PERMISSION_CODE =101;
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+//    private ViewPager viewPager;
     FirebaseAuth auth;
     ImageView userImage;
 
@@ -126,53 +108,53 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
             }
         });
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        viewPager.setCurrentItem(currentpage);
+//        viewPager = (ViewPager) findViewById(R.id.viewpager);
+//        setupViewPager(viewPager);
+//        viewPager.setCurrentItem(currentpage);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if(position==0)
-                {
-                    currentpage=0;
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-                    startActivity(intent);
-                }
-                if(position==1)
-                {
-                    currentpage=1;
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-                    startActivity(intent);
-
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if(position==0)
+//                {
+//                    currentpage=0;
+//                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+//                    startActivity(intent);
+//                }
+//                if(position==1)
+//                {
+//                    currentpage=1;
+//                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+//                    startActivity(intent);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+//
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-
-        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
-        Bundle bundle = new Bundle();
-        bundle.putString("group_key", getIntent().getExtras().getString("group_key"));
-        TabFragment fragobj = new TabFragment();
-        fragobj.setArguments(bundle);
-        adapter.addFragment(fragobj,"ALL TRANSACTION");
-        viewPager.setAdapter(adapter);
-    }
+//    private void setupViewPager(ViewPager viewPager) {
+//
+//        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
+//        Bundle bundle = new Bundle();
+//        bundle.putString("group_key", getIntent().getExtras().getString("group_key"));
+//        AllTransactionsFragment fragobj = new AllTransactionsFragment();
+//        fragobj.setArguments(bundle);
+//        adapter.addFragment(fragobj,"ALL TRANSACTION");
+//        viewPager.setAdapter(adapter);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

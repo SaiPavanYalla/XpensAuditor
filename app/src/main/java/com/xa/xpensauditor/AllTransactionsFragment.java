@@ -1,8 +1,6 @@
 package com.xa.xpensauditor;
 
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,18 +21,14 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.security.acl.Group;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.text.DateFormatSymbols;
-import java.util.Locale;
 
-public class TabFragment extends Fragment {
+public class AllTransactionsFragment extends Fragment {
     private Firebase mRootRef;
     private Firebase RefUid,RefTran, RefCat, RefCatTran;
     int pos, currentDay,currentMonth,currentYear;
@@ -54,11 +45,11 @@ public class TabFragment extends Fragment {
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("pos1", position);
-        TabFragment tabFragment = new TabFragment();
-        tabFragment.setArguments(bundle);
-        return tabFragment;
+        AllTransactionsFragment allTransactionsFragment = new AllTransactionsFragment();
+        allTransactionsFragment.setArguments(bundle);
+        return allTransactionsFragment;
     }
-    public TabFragment() {
+    public AllTransactionsFragment() {
         // Required empty public constructor
     }
 
@@ -67,7 +58,7 @@ public class TabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab, container, false);
+        return inflater.inflate(R.layout.fragment_transactions, container, false);
 
     }
 
