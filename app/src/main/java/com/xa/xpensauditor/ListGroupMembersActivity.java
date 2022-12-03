@@ -36,8 +36,12 @@ public class ListGroupMembersActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),AddMemberToGroupActivity.class);
-                startActivity(i);
+                try {
+                    Intent i = new Intent(getApplicationContext(), AddMemberToGroupActivity.class);
+                    startActivity(i);
+                } catch(Exception e) {
+                    System.out.println("Error: " + e.toString());
+                }
             }
         });
 
