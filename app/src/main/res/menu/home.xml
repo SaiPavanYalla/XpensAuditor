@@ -17,4 +17,35 @@
         android:orderInCategory="100"
         android:title="Contact Us"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:orderInCategory="100"
+        android:title="Sort"
+        android:icon="@drawable/ic_baseline_sort_24"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_amount_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Amount"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_date_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Date"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_category_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Category"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/action_memo_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Memo"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>

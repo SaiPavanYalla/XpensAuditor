@@ -36,20 +36,21 @@ import com.google.firebase.auth.FirebaseAuth;
 //import com.xa.xpensauditor.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int SMS_PERMISSION_CODE =101;
+    private static final int SMS_PERMISSION_CODE = 101;
 
 //    private ActivityHomeBinding binding;
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
-//    private ViewPager viewPager;
+    //    private ViewPager viewPager;
     FirebaseAuth auth;
     ImageView userImage;
 
     private Firebase mRootRef;
     private Firebase RefUid;
-    private Firebase RefName,RefEmail;
-    private static int currentpage=0;
+    private Firebase RefName, RefEmail;
+    private static int currentpage = 0;
+    private AllTransactionsFragment transactionsFragment;
     TextView tvHeaderName, tvHeaderMail;
     //todo
     //StorageReference storageReference, filepath,storageRef;
@@ -69,7 +70,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),AddTransactionActivity.class);
+                Intent i = new Intent(getApplicationContext(), AddTransactionActivity.class);
                 startActivity(i);
             }
         });
@@ -87,20 +88,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         }
-        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
-        Uid=auth.getUid();
-        RefUid= mRootRef.child(Uid);
+        Uid = auth.getUid();
+        RefUid = mRootRef.child(Uid);
         RefName = RefUid.child("Name");
-        RefEmail=RefUid.child("Email");
+        RefEmail = RefUid.child("Email");
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        View navHeaderView =  navigationView.getHeaderView(0);
-        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
-        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
-        userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
+        View navHeaderView = navigationView.getHeaderView(0);
+        tvHeaderName = (TextView) navHeaderView.findViewById(R.id.headerName);
+        tvHeaderMail = (TextView) navHeaderView.findViewById(R.id.headerEmail);
+        userImage = (ImageView) navHeaderView.findViewById(R.id.imageView);
 // todo
 //        storageReference = FirebaseStorage.getInstance().getReference();
 //        storageRef=storageReference.child("Profile Image").child(Uid+".jpg");
@@ -124,7 +125,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragmentContainerView, new AllTransactionsFragment());
+        transactionsFragment = new AllTransactionsFragment();
+        ft.replace(R.id.fragmentContainerView, transactionsFragment);
         ft.commit();
 
 
@@ -134,10 +136,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(auth.getCurrentUser()!=null){
+                if (auth.getCurrentUser() != null) {
                     auth.getCurrentUser().reload();
                 }
-                if (auth.getCurrentUser()!=null) {
+                if (auth.getCurrentUser() != null) {
                     try {
                         tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
                     } catch (Exception e) {
@@ -155,10 +157,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefEmail.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(auth.getCurrentUser()!=null){
+                if (auth.getCurrentUser() != null) {
                     auth.getCurrentUser().reload();
                 }
-                if (auth.getCurrentUser()!=null) {
+                if (auth.getCurrentUser() != null) {
 
                     try {
                         tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
@@ -214,14 +216,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
-//
-//    private void setupViewPager(ViewPager viewPager) {
-//
-//        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
-//        adapter.addFragment(new TabFragment(),"ALL TRANSACTION");
-////        adapter.addFragment(new UncategorisedFragment(),"UNCATEGORISED TRANSACTION");
-//        viewPager.setAdapter(adapter);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -237,19 +231,34 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.account_settings) {
 
-            Intent i=new Intent(this,AccountSettingsActivity.class);
+            Intent i = new Intent(this, AccountSettingsActivity.class);
             startActivity(i);
-        }
-        else if(id== R.id.action_settings)
-        {
+        } else if (id == R.id.action_settings) {
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
-        }
-
-        else if(id==R.id.action_contact_us){
-            Intent i=new Intent(this,ContactUs.class);
+        } else if (id == R.id.action_contact_us) {
+            Intent i = new Intent(this, ContactUs.class);
             startActivity(i);
+        } else if (id == R.id.action_sort) {
+//            Intent i=new Intent(this,ContactUs.class);
+            Toast.makeText(getApplicationContext(), "Sort menu", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_amount_sort) {
+            transactionsFragment.sortList(0);
+            Toast.makeText(getApplicationContext(), "Sorting by Amount", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_date_sort) {
+            transactionsFragment.sortList(1);
+            Toast.makeText(getApplicationContext(), "Sorting by date", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_category_sort) {
+            transactionsFragment.sortList(2);
+            Toast.makeText(getApplicationContext(), "Sorting by category", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_memo_sort) {
+            transactionsFragment.sortList(3);
+            Toast.makeText(getApplicationContext(), "Sorting by memo", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void refreshTransactionList() {
+        transactionsFragment.refreshTransactionList();
     }
 
     @Override
@@ -263,7 +272,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -271,19 +279,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
 
-            Intent i=new Intent(this,HomeActivity.class);
+            Intent i = new Intent(this, HomeActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_group) {
-            Intent i=new Intent(HomeActivity.this,GroupListActivity.class);
+            Intent i = new Intent(HomeActivity.this, GroupListActivity.class);
             startActivity(i);
 
-        }else if (id == R.id.nav_profile) {
-            Intent i=new Intent(this,ProfileActivity.class);
+        } else if (id == R.id.nav_profile) {
+            Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
-            Intent i=new Intent(this,DashboardActivity.class);
+            Intent i = new Intent(this, DashboardActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_settings) {
@@ -299,7 +307,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             auth.signOut();
-                            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                         }
                     });
@@ -314,13 +322,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             AlertDialog alert11 = builder1.create();
             alert11.show();
-        }
-        else if (id == R.id.nav_rate) {
+        } else if (id == R.id.nav_rate) {
             Intent i = new Intent(this, Rate.class);
             startActivity(i);
 
         } else if (id == R.id.nav_suggest) {
-            Intent i=new Intent(this,Suggest.class);
+            Intent i = new Intent(this, Suggest.class);
             startActivity(i);
 
         } else if (id == R.id.nav_share) {
@@ -332,13 +339,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
         } else if (id == R.id.nav_refresh) {
-            Intent i=new Intent(this,SMSReaderActivity.class);
-            if(isSmsPermissionGranted())
-            {
+            Intent i = new Intent(this, SMSReaderActivity.class);
+            if (isSmsPermissionGranted()) {
                 startActivity(i);
-            }
-            else
-            {
+            } else {
                 requestReadAndSendSmsPermission();
             }
 
@@ -351,8 +355,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private AlertDialog AskSignOutOption()
-    {
+    private AlertDialog AskSignOutOption() {
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(getApplicationContext())
                 // set message, title, and icon
                 .setTitle("SignOut")
@@ -363,7 +366,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(DialogInterface dialog, int whichButton) {
                         dialog.dismiss();
                         auth.signOut();
-                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);
                     }
 
@@ -386,7 +389,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void requestReadAndSendSmsPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS},SMS_PERMISSION_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, SMS_PERMISSION_CODE);
     }
 
 

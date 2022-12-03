@@ -91,7 +91,8 @@ public class ShowTransActivity extends AppCompatActivity {
                     i++;
                 }
                 String shdate= shDay+" - "+shMonth+" - "+shYear;
-                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
+                int dateInt = Transaction.getDateInt(shYear, shMonth, shDay);
+                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg, dateInt);
                 amount="";
                 cat="";
                 shname="";
