@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,7 +51,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     private Firebase RefNewUserEmailAddedToNewGroup;
     private Firebase RefCat,RefFood,RefHealth,RefTravel,RefEdu,RefBills,RefHomeNeeds,RefOthers;
 
-    private Button btnAddUser;
+    private Button btnAddUser, btnBack;
     private ProgressBar progressBar;
 
     @Override
@@ -62,7 +63,10 @@ public class CreateGroupActivity extends AppCompatActivity {
         //Get Firebase auth instance
         mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
-        btnAddUser = (Button) findViewById(R.id.btn_invite_member); //change id to add user button
+        btnAddUser = (Button) findViewById(R.id.btn_invite_member);
+        btnBack = (Button) findViewById(R.id.back_button);
+        inputGroupName = (AppCompatEditText) findViewById(R.id.groupName);
+        inputUserEmailAddedToGroup = (AppCompatEditText) findViewById(R.id.emailIds);
 
 
         // Add user email to group
@@ -88,7 +92,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                             Toast.makeText(CreateGroupActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
                         }
                         else {
-                            mDatabase.child(groupName).child("Member Count").setValue(userEmailsAddedToGroup);
+                            mDatabase.child(groupName).child("Member Count").setValue(userEmailsAddedToGroup.length);
 
 //                            if (!task.getResult().child(groupName).child("Member Count").exists())
 //                            {
@@ -123,12 +127,23 @@ public class CreateGroupActivity extends AppCompatActivity {
 //                            RefHomeNeeds.setValue("");
 //                            RefOthers=RefCat.child("Others");
 //                            RefOthers.setValue("");
+
+                            Intent i = new Intent(CreateGroupActivity.this, GroupListActivity.class);
+                            startActivity(i);
                         }
                     }
 
                 });
 
                 //finish();
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CreateGroupActivity.this, GroupListActivity.class);
+                startActivity(i);
             }
         });
     }

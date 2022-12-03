@@ -116,7 +116,7 @@ public class GroupListActivity extends AppCompatActivity {
                                                           for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
                                                               if (databaseEntry.child("Group Name").exists()) {
                                                                   //Loop over all the emails in the found group entry to see if the user is a part of that group
-                                                                  for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.child("Groups").getChildren()) {
+                                                                  for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.child("GroupMembers").getChildren()) {
                                                                       if (!groupEntryChild.getKey().equals("Group Name")) {
                                                                           //Emails are stored as key value pairs in the group object. If the key is "Group Name", it means that that key value pair does not store a user email
                                                                           String userEmailInGroup = groupEntryChild.getValue().toString();
