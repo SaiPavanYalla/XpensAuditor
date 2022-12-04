@@ -3,6 +3,7 @@ package com.xa.xpensauditor;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -45,12 +46,12 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
     ImageView userImage;
 
     private Firebase mRootRef;
-    private Firebase RefUid;
-    private Firebase RefName,RefEmail;
+    private Firebase RefUid, RefPersonalUid;
+    private Firebase RefName,RefEmail, RefNewGroup, RefNewUserEmailAddedToNewGroup;
     private static int currentpage=0;
     TextView tvHeaderName, tvHeaderMail;
     Uri imageUri = null;
-    String Uid;
+    String Uid, personalUid;
 
 
     // String groupKey = intent.getStringExtra("group_key");
@@ -82,6 +83,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
         Uid=intent.getExtras().getString("group_key");
+        personalUid = intent.getExtras().getString("personal_uid");
         RefUid= mRootRef.child(Uid);
         RefName = RefUid.child("Group Name");
 
@@ -176,6 +178,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         if (id == R.id.group_members) {
 
             Intent i=new Intent(this,ListGroupMembersActivity.class);
+            i.putExtra("group_key", Uid);
             startActivity(i);
         }
         else if (id == R.id.group_analytics) {
@@ -191,9 +194,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         }
         else if(id== R.id.leave_group)
         {
-//            TODO: Remove the user from the current group and redirect to home page
-
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+            leaveGroup();
         }
 
         return super.onOptionsItemSelected(item);
@@ -229,21 +230,19 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
                 if (!task.isSuccessful()) {
                     Toast.makeText(GroupActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
                 }
-//                else {
-//                    RefNewGroup = mRootRef.child(Uid);
-//                    RefMemberCount = RefNewGroup.child("Member Count");
-//                    String currentMemberCount = task.getResult().child(groupName).child("Member Count").getValue().toString();
-//                    String newMemberCount = Integer.toString(Integer.parseInt(currentMemberCount)+1);
-//                    Toast.makeText(AddMemberToGroupActivity.this, newMemberCount, Toast.LENGTH_LONG).show();
-//                    mDatabase.child(groupName).child("Member Count").setValue(newMemberCount);
-//
-//
-//                    RefNewUserEmailAddedToNewGroup = RefNewGroup.child("GroupMembers").push();
-//                    RefNewUserEmailAddedToNewGroup.setValue(userEmailsAddedToGroup);
-//
-//                    Intent i = new Intent(AddMemberToGroupActivity.this, GroupListActivity.class);
-//                    startActivity(i);
-//                }
+                else {
+                    RefPersonalUid =mRootRef.child(personalUid);
+                    String email = task.getResult().child(personalUid).child("Email").getValue().toString();
+                    for (com.google.firebase.database.DataSnapshot groupEntryChild : task.getResult().child(Uid).child("GroupMembers").getChildren()) {
+                        String userEmailInGroup = groupEntryChild.getValue().toString();
+                        if(userEmailInGroup.equals(email)){
+                            groupEntryChild.getRef().removeValue();
+                        }
+                    }
+
+                    Intent i = new Intent(GroupActivity.this, GroupListActivity.class);
+                    startActivity(i);
+                }
             }
 
         });

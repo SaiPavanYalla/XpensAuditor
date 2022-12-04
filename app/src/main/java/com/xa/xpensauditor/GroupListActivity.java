@@ -43,6 +43,7 @@ import java.util.Objects;
 public class GroupListActivity extends AppCompatActivity {
     private Firebase mRootRef;
     private Firebase RefUid,RefTran;
+    String Uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class GroupListActivity extends AppCompatActivity {
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
-        String Uid=auth.getUid();
+        Uid=auth.getUid();
         RefUid = mRootRef.child(Uid);
 
         DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
@@ -158,6 +159,7 @@ public class GroupListActivity extends AppCompatActivity {
                 String groupKey = groupName;
                 Toast.makeText(GroupListActivity.this, groupKey, Toast.LENGTH_LONG).show();
                 intent.putExtra("group_key", groupKey);
+                intent.putExtra("personal_uid", Uid);
                 startActivity(intent);
             }
         });

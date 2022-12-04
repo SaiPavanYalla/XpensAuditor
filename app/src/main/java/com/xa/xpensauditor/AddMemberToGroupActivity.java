@@ -47,8 +47,7 @@ public class AddMemberToGroupActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AddMemberToGroupActivity.this, GroupListActivity.class);
-                startActivity(i);
+                finish();
             }
         });
 
@@ -90,8 +89,6 @@ public class AddMemberToGroupActivity extends AppCompatActivity {
                     }
 
                 });
-
-                //finish();
             }
         });
 
