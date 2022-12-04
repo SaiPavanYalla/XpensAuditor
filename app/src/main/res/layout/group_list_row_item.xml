@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <ImageView
+        android:layout_rowSpan="2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:id="@+id/imageGroupImage"
+        android:layout_row="0"
+        android:background="@drawable/ic_action_group_list_item"
+        android:layout_column="0"
+        android:contentDescription="@string/group" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_marginStart="10dp"
+        android:textSize="25sp"
+        android:textColor="#020202"
+        android:id="@+id/textGroupName"
+        android:layout_row="0"
+        android:layout_column="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
+        android:textColor="#7A7474"
+        android:id="@+id/textGroupCount"
+        android:layout_row="1"
+        android:layout_column="1" />
+
+</GridLayout>

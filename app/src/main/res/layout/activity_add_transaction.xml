@@ -22,20 +22,25 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Amount in $"
+                android:hint="@string/amount_in"
                 android:inputType="numberDecimal"
                 android:id="@+id/addTransAmt"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Shop Name"
+                android:hint="Memo"
                 android:id="@+id/addShopName" />
 
-            <Spinner
-                android:id="@+id/spinTrans"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>
+                android:id="@+id/textViewCategory"
+                android:hint="@string/select_category"
+                android:padding="12dp"
+                android:gravity="center_vertical"
+                android:background="@android:drawable/editbox_background"
+                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
             <DatePicker
                 android:id="@+id/dateTrans"
@@ -54,12 +59,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
 
-                android:text="Add Transaction"
+                android:text="@string/add_transaction"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
-
-
-
 
         </LinearLayout>
 

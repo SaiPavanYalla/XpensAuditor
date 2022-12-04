@@ -18,4 +18,5 @@
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
     <color name="emeraldgreen">#50C878</color>
+    <color name="transperent_color">#00000000</color>
 </resources>

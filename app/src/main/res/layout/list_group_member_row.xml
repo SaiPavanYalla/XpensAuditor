@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+    <ImageView
+        android:layout_rowSpan="2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        android:id="@+id/imageViewMember"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:contentDescription="@string/todo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:textColor="#000000"
+        android:id="@+id/textViewName"
+        android:layout_row="0"
+        android:layout_column="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
+        android:textColor="#9F9F9F"
+        android:id="@+id/textViewEmail"
+        android:layout_row="1"
+        android:layout_column="1" />
+</GridLayout>

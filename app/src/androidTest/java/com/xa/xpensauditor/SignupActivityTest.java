@@ -26,7 +26,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.hamcrest.Description;
@@ -55,7 +54,7 @@ public class SignupActivityTest {
 //        auth = FirebaseAuth.getInstance();
 //        if (auth.getCurrentUser() != null) {
 //            String Uid = auth.getUid();
-//            new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/").child(Uid).removeValue();
+//            new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com").child(Uid).removeValue();
 //        }
         FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
@@ -80,7 +79,7 @@ public class SignupActivityTest {
         SystemClock.sleep(2000);
 
         ViewInteraction textInputEditText = onView(
-                allOf(withId(R.id.Name),
+                allOf(withId(R.id.groupName),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -91,7 +90,7 @@ public class SignupActivityTest {
         SystemClock.sleep(2000);
 
         ViewInteraction textInputEditText2 = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -125,7 +124,7 @@ public class SignupActivityTest {
         SystemClock.sleep(8000);
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),

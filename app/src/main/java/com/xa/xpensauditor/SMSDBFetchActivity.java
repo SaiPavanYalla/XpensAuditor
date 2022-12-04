@@ -41,7 +41,7 @@ public class SMSDBFetchActivity extends AppCompatActivity {
         int year = c.get(Calendar.YEAR);
 
 
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = com.google.firebase.auth.FirebaseAuth.getInstance();

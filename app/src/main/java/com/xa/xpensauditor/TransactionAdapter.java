@@ -36,10 +36,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         Transaction trans = transList.get(position);
         holder.tid.setText(trans.getTid());
-        holder.tcat.setText(trans.getT_cat());
-        holder.tamt.setText("$"+trans.getT_amt());
-        holder.tshopname.setText(trans.getT_shopname());
-        holder.tdate.setText(trans.getT_date());
+        holder.tcat.setText(trans.getCategory());
+        holder.tamt.setText("$"+trans.getAmountStr());
+        holder.tshopname.setText(trans.getShopname());
+        holder.tdate.setText(trans.getDateStr());
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

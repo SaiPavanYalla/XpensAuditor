@@ -71,7 +71,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         Toast.makeText(getApplicationContext(),day+month+year,Toast.LENGTH_SHORT).show();
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
         String Uid=auth.getUid();

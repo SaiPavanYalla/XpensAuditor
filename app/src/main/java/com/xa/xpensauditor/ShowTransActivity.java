@@ -30,7 +30,7 @@ public class ShowTransActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_trans);
 
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -91,7 +91,8 @@ public class ShowTransActivity extends AppCompatActivity {
                     i++;
                 }
                 String shdate= shDay+" - "+shMonth+" - "+shYear;
-                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg);
+                int dateInt = Transaction.getDateInt(shYear, shMonth, shDay);
+                Transaction transaction=new Transaction(tid,amount,cat,shname,shdate,shMsg, dateInt);
                 amount="";
                 cat="";
                 shname="";
