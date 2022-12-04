@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +40,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.UUID;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
@@ -136,6 +140,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 // Initialize and assign variable
                 EditText editTextCat=dialog.findViewById(R.id.edittext_category);
                 ListView listViewCat=dialog.findViewById(R.id.listview_category);
+                Button btAddCategory = dialog.findViewById(R.id.btAddCategory);
 
                 // Initialize array adapter
                 ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(AddTransactionActivity.this, android.R.layout.simple_list_item_1, categoryList);
@@ -150,7 +155,14 @@ public class AddTransactionActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        arrayAdapter.getFilter().filter(s);
+                        arrayAdapter.getFilter().filter(s.toString(), new Filter.FilterListener() {
+                            public void onFilterComplete(int count) {
+                                if (count == 0){
+                                    btAddCategory.setVisibility(View.VISIBLE);
+                                }
+                                arrayAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }
 
                     @Override
@@ -171,25 +183,17 @@ public class AddTransactionActivity extends AppCompatActivity {
                     }
                 });
 
-                editTextCat.setOnKeyListener(new View.OnKeyListener() {
+                btAddCategory.setOnClickListener(new View.OnClickListener(){
                     @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        // If the event is a key-down event on the "enter" button
-                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            // Perform action on key press
-                            categoryList.add(editTextCat.getText().toString());
-                            arrayAdapter.notifyDataSetChanged();
-                            categoryTextView.setText(editTextCat.getText().toString());
-                            categoryStr = editTextCat.getText().toString();
-                            // Dismiss dialog
-                            dialog.dismiss();
-                            Toast.makeText(AddTransactionActivity.this, "Added category - "+editTextCat.getText().toString(), Toast.LENGTH_SHORT).show();
-                            RefCat.child(editTextCat.getText().toString()).setValue("");
-
-                            return true;
-                        }
-                        return false;
+                    public void onClick(View v){
+                        categoryList.add(editTextCat.getText().toString());
+                        arrayAdapter.notifyDataSetChanged();
+                        categoryTextView.setText(editTextCat.getText().toString());
+                        categoryStr = editTextCat.getText().toString();
+                        // Dismiss dialog
+                        dialog.dismiss();
+                        Toast.makeText(AddTransactionActivity.this, "Added category - "+editTextCat.getText().toString(), Toast.LENGTH_SHORT).show();
+                        RefCat.child(editTextCat.getText().toString()).setValue("");
                     }
                 });
             }

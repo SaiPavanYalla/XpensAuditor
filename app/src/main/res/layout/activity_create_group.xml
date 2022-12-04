@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@color/colorAccent"
-            android:text="@string/btn_invite_member"
+            android:text="@string/create_group"
             android:textColor="@android:color/black" />
 
         <Button
