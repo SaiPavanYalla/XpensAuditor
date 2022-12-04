@@ -8,11 +8,11 @@
             android:id="@+id/nav_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_action_personal"
+            android:icon="@drawable/ic_action_personal2"
             android:title="@string/personal" />
         <item
             android:id="@+id/nav_group"
-            android:icon="@drawable/ic_action_group"
+            android:icon="@drawable/ic_action_group2"
             android:title="@string/group_cap" />
         <item
             android:id="@+id/nav_profile"
