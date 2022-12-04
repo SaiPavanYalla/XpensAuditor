@@ -119,7 +119,8 @@ class GroupMembersAdaptor implements ListAdapter {
 
         textViewName.setText(names.get(position));
         textViewEmail.setText(emailIds.get(position));
-        imageFlag.setImageResource(R.drawable.ic_action_group_member_item);
+
+//        imageFlag.setImageResource(R.drawable.ic_action_group_member_item);
         return  row;
     }
 
