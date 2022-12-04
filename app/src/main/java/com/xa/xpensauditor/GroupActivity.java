@@ -175,6 +175,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         else if (id == R.id.group_analytics) {
 
             Intent i=new Intent(this,DashboardActivity.class);
+            i.putExtra("group_key", Uid);
             startActivity(i);
         }
         else if (id == R.id.add_people_to_group) {

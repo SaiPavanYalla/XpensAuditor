@@ -173,7 +173,6 @@ class CustomGroupList extends ArrayAdapter {
         this.context = context;
         this.groupNames = groupNames;
         this.groupCount = groupCount;
-
     }
 
     @Override

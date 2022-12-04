@@ -18,9 +18,16 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.RemoteMessage;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -33,7 +40,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-//import com.xa.xpensauditor.databinding.ActivityHomeBinding;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.xa.xpensauditor.databinding.ActivityHomeBinding;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SMS_PERMISSION_CODE = 101;
@@ -48,6 +78,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private Firebase mRootRef;
     private Firebase RefUid;
+    private Firebase RefName, RefEmail;
+    private static int currentpage = 0;
     private Firebase RefName, RefEmail;
     private static int currentpage = 0;
     private AllTransactionsFragment transactionsFragment;
@@ -214,15 +246,59 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        tabLayout = (TabLayout) findViewById(R.id.tabs);
 //        tabLayout.setupWithViewPager(viewPager);
 
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<com.google.firebase.database.DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    boolean entryAdded = false;
+                    //Loop over all the database entries to find the groups
+                    for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
+                        if (databaseEntry.child("Group Name").exists()) {
+                            //Loop over all the emails in the found group entry to see if the user is a part of that group
+                            for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.child("GroupMembers").getChildren()) {
+                                //Emails are stored as key value pairs in the group object. If the key is "Group Name", it means that that key value pair does not store a user email
+                                String userEmailInGroup = groupEntryChild.getValue().toString();
+                                //RefEmail is the reference to the email field of the logged in user
+                                RefEmail.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(com.firebase.client.DataSnapshot DS) {
+                                        String loggedInUserEmail = DS.getValue().toString();
+                                        if (userEmailInGroup.equals(loggedInUserEmail)) {
+                                            //logged in user is a part of the group
+
+                                            String groupContainingUser = Objects.requireNonNull(databaseEntry.child("Group Name").getValue()).toString();
+                                            System.out.println("Groups " + groupContainingUser);
+                                            FirebaseMessaging.getInstance().subscribeToTopic(groupContainingUser.replace(" ", "-"));
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(FirebaseError firebaseError) {
+
+                                    }
+                                });
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+
+
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+@Override
+public boolean onCreateOptionsMenu(Menu menu){
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_menu, menu);
         return true;
-    }
+        }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -271,8 +347,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+@Override
+public boolean onNavigationItemSelected(MenuItem item){
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -388,7 +464,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void requestReadAndSendSmsPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, SMS_PERMISSION_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS},SMS_PERMISSION_CODE);
     }
 
 

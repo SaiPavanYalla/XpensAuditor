@@ -54,10 +54,10 @@ public class DashboardActivity extends AppCompatActivity {
     private PieChart monthlyExpensePlot;
 
     private Firebase mRootRef;
-    private Firebase RefUid,RefTran;
-    private Firebase RefName,RefEmail,RefPhnnum;
-    private Firebase RefCat,RefFood,RefHealth,RefTravel,RefEdu,RefBills,RefHomeNeeds,RefOthers,RefUncat;
-    private HashMap<String, Integer> expenseHistory = new HashMap<String , Integer>();
+    private Firebase RefUid, RefTran;
+    private Firebase RefName, RefEmail, RefPhnnum;
+    private Firebase RefCat, RefFood, RefHealth, RefTravel, RefEdu, RefBills, RefHomeNeeds, RefOthers, RefUncat;
+    private HashMap<String, Integer> expenseHistory = new HashMap<String, Integer>();
     private HashMap<String, Integer> monthlyExpense = new HashMap<String, Integer>();
     private ArrayList<String> dates = new ArrayList<String>();
 
@@ -78,20 +78,21 @@ public class DashboardActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         //Get Firebase auth instance
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
 
         String Uid;
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null && extras.containsKey("Uid")) {
-            Uid = extras.getString("Uid");
+
+        if (extras != null && extras.containsKey("group_key")) {
+            Uid = extras.getString("group_key");
         } else {
-            Uid=auth.getUid();
+            Uid = auth.getUid();
         }
 
-        RefUid= mRootRef.child(Uid);
+        RefUid = mRootRef.child(Uid);
         RefTran = RefUid.child("Transactions");
         RefCat=RefUid.child("Categories");
 //        RefUncat=RefCat.child("Uncategorised");
@@ -102,50 +103,46 @@ public class DashboardActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<com.google.firebase.database.DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Toast.makeText(DashboardActivity.this, Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_LONG).show();
-                }
-                else {
-                    for (com.google.firebase.database.DataSnapshot S:task.getResult().getChildren()) {
-                        for (com.google.firebase.database.DataSnapshot transaction: S.child("Transactions").getChildren())
-                        {
-                            String date = transaction.child("Month").getValue() + "-" + transaction.child("Year").getValue();
-                            String amount = Objects.requireNonNull(transaction.child("Amount").getValue()).toString();
-//                            String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
+                } else {
+                    try {
+                        for (com.google.firebase.database.DataSnapshot S : task.getResult().getChildren()) {
+                            for (com.google.firebase.database.DataSnapshot transaction : S.child("Transactions").getChildren()) {
+                                String date = transaction.child("Month").getValue() + "-" + transaction.child("Year").getValue();
+                                String amount = Objects.requireNonNull(transaction.child("Amount").getValue()).toString();
+                                // String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
 
-                            //Creating ExpenseHistory hashmap
-                            if (!expenseHistory.containsKey(date))
-                            {
-                                expenseHistory.put(date, Integer.parseInt(amount));
-                                dates.add(date);
+                                // Creating ExpenseHistory hashmap
+                                if (!expenseHistory.containsKey(date)) {
+                                    expenseHistory.put(date, Integer.parseInt(amount));
+                                    dates.add(date);
+                                } else {
+                                    expenseHistory.put(date, expenseHistory.get(date) + Integer.parseInt(amount));
+                                }
+
                             }
-                            else {
-                                expenseHistory.put(date, expenseHistory.get(date) + Integer.parseInt(amount));
-                            }
+                            Collections.sort(dates);
 
-                        }
-                        Collections.sort(dates);
+                            for (com.google.firebase.database.DataSnapshot transaction : S.child("Transactions").getChildren()) {
+                                String date = transaction.child("Month").getValue() + "-" + transaction.child("Year").getValue();
+                                String amount = Objects.requireNonNull(transaction.child("Amount").getValue()).toString();
+                                String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
 
-                        for (com.google.firebase.database.DataSnapshot transaction: S.child("Transactions").getChildren())
-                        {
-                            String date = transaction.child("Month").getValue() + "-" + transaction.child("Year").getValue();
-                            String amount = Objects.requireNonNull(transaction.child("Amount").getValue()).toString();
-                            String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
-
-                            //Creating MonthlyExpense hashmap
+                                //Creating MonthlyExpense hashmap
 //                            if(date.equals(dates.get(0)))
 //                            {
-                                if (!monthlyExpense.containsKey(category))
-                                {
+                                if (!monthlyExpense.containsKey(category)) {
                                     monthlyExpense.put(category, Integer.parseInt(amount));
-                                }
-                                else
-                                {
+                                } else {
                                     monthlyExpense.put(category, monthlyExpense.get(category) + Integer.parseInt(amount));
                                 }
 //                            }
 
 
-                        }
+                            }
 
+                        }
+                    } catch (Exception e) {
+                        System.out.println(("Error: " + e.toString()));
                     }
                 }
 
@@ -166,7 +163,7 @@ public class DashboardActivity extends AppCompatActivity {
         List<Number> yAxis = new ArrayList<>();
         int count = 1;
         while (hmIterator.hasNext()) {
-            Map.Entry month = (Map.Entry)hmIterator.next();
+            Map.Entry month = (Map.Entry) hmIterator.next();
 //            System.out.println(Double.parseDouble(month.getKey().toString().replace("-",".")));
             xAxis.add(count);
             yAxis.add((Integer) month.getValue());
@@ -189,15 +186,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void plotMonthlyExpense(HashMap<String, Integer> monthlyExpense) {
         System.out.println(monthlyExpense + " monthlyExpense");
-        Integer colors[] = new Integer[] {Color.RED, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN, Color.DKGRAY};
+        Integer colors[] = new Integer[]{Color.RED, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN, Color.DKGRAY};
 
         Iterator hmIterator = monthlyExpense.entrySet().iterator();
 
         int count = 0;
         while (hmIterator.hasNext()) {
-            Map.Entry category = (Map.Entry)hmIterator.next();
+            Map.Entry category = (Map.Entry) hmIterator.next();
 
-            monthlyExpensePlot.addSegment(new Segment(category.getKey().toString()+ ": $" + category.getValue(), (Number)category.getValue()), new SegmentFormatter(colors[count%colors.length]));
+            monthlyExpensePlot.addSegment(new Segment(category.getKey().toString() + ": $" + category.getValue(), (Number) category.getValue()), new SegmentFormatter(colors[count % colors.length]));
             count++;
         }
 
