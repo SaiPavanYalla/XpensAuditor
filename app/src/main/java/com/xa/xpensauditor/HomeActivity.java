@@ -23,6 +23,9 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.RemoteMessage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,16 +48,33 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.xa.xpensauditor.databinding.ActivityHomeBinding;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import java.util.Objects;
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int SMS_PERMISSION_CODE =101;
+    private static final int SMS_PERMISSION_CODE = 101;
 
     private ActivityHomeBinding binding;
 
@@ -66,8 +86,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private Firebase mRootRef;
     private Firebase RefUid;
-    private Firebase RefName,RefEmail;
-    private static int currentpage=0;
+    private Firebase RefName, RefEmail;
+    private static int currentpage = 0;
     TextView tvHeaderName, tvHeaderMail;
     //todo
     //StorageReference storageReference, filepath,storageRef;
@@ -87,7 +107,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),AddTransactionActivity.class);
+                Intent i = new Intent(getApplicationContext(), AddTransactionActivity.class);
                 startActivity(i);
             }
         });
@@ -105,20 +125,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
         }
-        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
-        Uid=auth.getUid();
-        RefUid= mRootRef.child(Uid);
+        Uid = auth.getUid();
+        RefUid = mRootRef.child(Uid);
         RefName = RefUid.child("Name");
-        RefEmail=RefUid.child("Email");
+        RefEmail = RefUid.child("Email");
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        View navHeaderView =  navigationView.getHeaderView(0);
-        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
-        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
-        userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
+        View navHeaderView = navigationView.getHeaderView(0);
+        tvHeaderName = (TextView) navHeaderView.findViewById(R.id.headerName);
+        tvHeaderMail = (TextView) navHeaderView.findViewById(R.id.headerEmail);
+        userImage = (ImageView) navHeaderView.findViewById(R.id.imageView);
 // todo
 //        storageReference = FirebaseStorage.getInstance().getReference();
 //        storageRef=storageReference.child("Profile Image").child(Uid+".jpg");
@@ -147,10 +167,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(auth.getCurrentUser()!=null){
+                if (auth.getCurrentUser() != null) {
                     auth.getCurrentUser().reload();
                 }
-                if (auth.getCurrentUser()!=null) {
+                if (auth.getCurrentUser() != null) {
                     try {
                         tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
                     } catch (Exception e) {
@@ -168,10 +188,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         RefEmail.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(auth.getCurrentUser()!=null){
+                if (auth.getCurrentUser() != null) {
                     auth.getCurrentUser().reload();
                 }
-                if (auth.getCurrentUser()!=null) {
+                if (auth.getCurrentUser() != null) {
 
                     try {
                         tvHeaderMail.setText(dataSnapshot.getValue().toString().trim());
@@ -200,16 +220,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onPageSelected(int position) {
-                if(position==0)
-                {
-                    currentpage=0;
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                if (position == 0) {
+                    currentpage = 0;
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);
                 }
-                if(position==1)
-                {
-                    currentpage=1;
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                if (position == 1) {
+                    currentpage = 1;
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);
 
                 }
@@ -221,64 +239,106 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<com.google.firebase.database.DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    boolean entryAdded = false;
+                    //Loop over all the database entries to find the groups
+                    for (com.google.firebase.database.DataSnapshot databaseEntry : task.getResult().getChildren()) {
+                        if (databaseEntry.child("Group Name").exists()) {
+                            //Loop over all the emails in the found group entry to see if the user is a part of that group
+                            for (com.google.firebase.database.DataSnapshot groupEntryChild : databaseEntry.child("GroupMembers").getChildren()) {
+                                //Emails are stored as key value pairs in the group object. If the key is "Group Name", it means that that key value pair does not store a user email
+                                String userEmailInGroup = groupEntryChild.getValue().toString();
+                                //RefEmail is the reference to the email field of the logged in user
+                                RefEmail.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(com.firebase.client.DataSnapshot DS) {
+                                        String loggedInUserEmail = DS.getValue().toString();
+                                        if (userEmailInGroup.equals(loggedInUserEmail)) {
+                                            //logged in user is a part of the group
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+                                            String groupContainingUser = Objects.requireNonNull(databaseEntry.child("Group Name").getValue()).toString();
+                                            System.out.println("Groups " + groupContainingUser);
+                                            FirebaseMessaging.getInstance().subscribeToTopic(groupContainingUser.replace(" ", "-"));
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(FirebaseError firebaseError) {
+
+                                    }
+                                });
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
 
-    }
+
+
+
+
+                tabLayout=(TabLayout)findViewById(R.id.tabs);
+                tabLayout.setupWithViewPager(viewPager);
+
+//        FirebaseMessaging.getInstance().subscribeToTopic("abcd");
+//        FirebaseMessaging.getInstance().subscribeToTopic("abcd1");
+//        FirebaseMessaging.getInstance().subscribeToTopic("abcd2");
+
+            }
 
     private void setupViewPager(ViewPager viewPager) {
 
-        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
+        ViewPageAdapter adapter=new ViewPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new TabFragment(),"ALL TRANSACTION");
         adapter.addFragment(new UncategorisedFragment(),"UNCATEGORISED TRANSACTION");
         viewPager.setAdapter(adapter);
-    }
+        }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+@Override
+public boolean onCreateOptionsMenu(Menu menu){
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
+        getMenuInflater().inflate(R.menu.home,menu);
         return true;
-    }
+        }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+@Override
+public boolean onOptionsItemSelected(MenuItem item){
+        int id=item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.account_settings) {
+        if(id==R.id.account_settings){
 
-            Intent i=new Intent(this,AccountSettingsActivity.class);
-            startActivity(i);
-        }
-        else if(id== R.id.action_settings)
-        {
-            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
-        }
-
-        else if(id==R.id.action_contact_us){
-            Intent i=new Intent(this,ContactUs.class);
-            startActivity(i);
+        Intent i=new Intent(this,AccountSettingsActivity.class);
+        startActivity(i);
+        }else if(id==R.id.action_settings){
+        Toast.makeText(getApplicationContext(),"To be updated in later versions",Toast.LENGTH_SHORT).show();
+        }else if(id==R.id.action_contact_us){
+        Intent i=new Intent(this,ContactUs.class);
+        startActivity(i);
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
-    }
+
+@Override
+public void onBackPressed(){
+        DrawerLayout drawer=(DrawerLayout)findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+        drawer.closeDrawer(GravityCompat.START);
+        }else{
+        super.onBackPressed();
+        }
+        }
 
 
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+@Override
+public boolean onNavigationItemSelected(MenuItem item){
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -317,113 +377,108 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         }
                     });
 
-            builder1.setNegativeButton(
-                    "No",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
+        builder1.setNegativeButton(
+        "No",
+        new DialogInterface.OnClickListener(){
+public void onClick(DialogInterface dialog,int id){
+        dialog.cancel();
         }
-        else if (id == R.id.nav_rate) {
-            Intent i = new Intent(this, Rate.class);
-            startActivity(i);
+        });
 
-        } else if (id == R.id.nav_suggest) {
-            Intent i=new Intent(this,Suggest.class);
-            startActivity(i);
+        AlertDialog alert11=builder1.create();
+        alert11.show();
+        }else if(id==R.id.nav_rate){
+        Intent i=new Intent(this,Rate.class);
+        startActivity(i);
 
-        } else if (id == R.id.nav_share) {
+        }else if(id==R.id.nav_suggest){
+        Intent i=new Intent(this,Suggest.class);
+        startActivity(i);
 
-            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-            sharingIntent.setType("text/plain");
-            String shareBody = "I recommend you to try this app and comment about it";
-            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "XpensAuditor");
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-            startActivity(Intent.createChooser(sharingIntent, "Share via"));
-        } else if (id == R.id.nav_refresh) {
-            Intent i=new Intent(this,SMSReaderActivity.class);
-            if(isSmsPermissionGranted())
-            {
-                startActivity(i);
-            }
-            else
-            {
-                requestReadAndSendSmsPermission();
-            }
+        }else if(id==R.id.nav_share){
+
+        Intent sharingIntent=new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody="I recommend you to try this app and comment about it";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"XpensAuditor");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,shareBody);
+        startActivity(Intent.createChooser(sharingIntent,"Share via"));
+        }else if(id==R.id.nav_refresh){
+        Intent i=new Intent(this,SMSReaderActivity.class);
+        if(isSmsPermissionGranted()){
+        startActivity(i);
+        }else{
+        requestReadAndSendSmsPermission();
+        }
 
 
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer=(DrawerLayout)findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+        }
 
-    private AlertDialog AskSignOutOption()
-    {
-        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(getApplicationContext())
-                // set message, title, and icon
-                .setTitle("SignOut")
-                .setMessage("Do you Really want to SignOut ?")
+private AlertDialog AskSignOutOption(){
+        AlertDialog myQuittingDialogBox=new AlertDialog.Builder(getApplicationContext())
+        // set message, title, and icon
+        .setTitle("SignOut")
+        .setMessage("Do you Really want to SignOut ?")
 
-                .setPositiveButton("SignOut", new DialogInterface.OnClickListener() {
+        .setPositiveButton("SignOut",new DialogInterface.OnClickListener(){
 
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                        auth.signOut();
-                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                        startActivity(i);
-                    }
+public void onClick(DialogInterface dialog,int whichButton){
+        dialog.dismiss();
+        auth.signOut();
+        Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+        startActivity(i);
+        }
 
-                })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        })
+        .setNegativeButton("cancel",new DialogInterface.OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
 
-                        dialog.dismiss();
-
-                    }
-                })
-                .create();
-
-        return myQuittingDialogBox;
-    }
-
-
-    public boolean isSmsPermissionGranted() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void requestReadAndSendSmsPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS},SMS_PERMISSION_CODE);
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case SMS_PERMISSION_CODE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Intent i = new Intent(this, SMSReaderActivity.class);
-                    startActivity(i);
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "SMS read permission is required for this feature to work, Enabled it in under app settings", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(this, HomeActivity.class);
-                    startActivity(i);
-                }
-                return;
-            }
+        dialog.dismiss();
 
         }
-    }
-}
+        })
+        .create();
+
+        return myQuittingDialogBox;
+        }
+
+
+public boolean isSmsPermissionGranted(){
+        return ContextCompat.checkSelfPermission(this,Manifest.permission.READ_SMS)==PackageManager.PERMISSION_GRANTED;
+        }
+
+private void requestReadAndSendSmsPermission(){
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_SMS},SMS_PERMISSION_CODE);
+        }
+
+
+@Override
+public void onRequestPermissionsResult(int requestCode,String permissions[],int[]grantResults){
+
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+
+        switch(requestCode){
+        case SMS_PERMISSION_CODE:{
+        // If request is cancelled, the result arrays are empty.
+        if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+
+        Intent i=new Intent(this,SMSReaderActivity.class);
+        startActivity(i);
+
+        }else{
+        Toast.makeText(getApplicationContext(),"SMS read permission is required for this feature to work, Enabled it in under app settings",Toast.LENGTH_LONG).show();
+        Intent i=new Intent(this,HomeActivity.class);
+        startActivity(i);
+        }
+        return;
+        }
+
+        }
+        }
+        }

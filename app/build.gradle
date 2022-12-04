@@ -53,7 +53,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -88,7 +87,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4-alpha07'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha07'
     implementation "com.androidplot:androidplot-core:1.5.10"
+    implementation "com.google.firebase:firebase-messaging:23.1.0"
 //    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
 }
 
 apply plugin: 'jacoco'
