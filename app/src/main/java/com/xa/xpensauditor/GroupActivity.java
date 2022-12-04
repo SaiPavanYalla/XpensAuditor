@@ -53,7 +53,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_group);
         Intent intent = getIntent();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -66,11 +66,11 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         Firebase.setAndroidContext(this);
         mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
@@ -80,25 +80,25 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         RefName = RefUid.child("Group Name");
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-        View navHeaderView =  navigationView.getHeaderView(0);
-        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
-        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
-        userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
-
-        navigationView.setNavigationItemSelectedListener(this);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//
+//        View navHeaderView =  navigationView.getHeaderView(0);
+//        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
+//        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
+//        userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
+//
+//        navigationView.setNavigationItemSelectedListener(this);
 
 
         RefName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                try {
-                    tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    tvHeaderName.setText(dataSnapshot.getValue().toString().trim());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
             }
 
@@ -180,6 +180,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         else if (id == R.id.add_people_to_group) {
 
             Intent i=new Intent(this,AddMemberToGroupActivity.class);
+            i.putExtra("group_key", Uid);
             startActivity(i);
         }
         else if(id== R.id.leave_group)
