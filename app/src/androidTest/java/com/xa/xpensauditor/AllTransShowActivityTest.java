@@ -88,29 +88,29 @@ public class AllTransShowActivityTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
         ViewInteraction textView = onView(
                 allOf(withText("XpensAuditor"),
                         withParent(allOf(withId(R.id.toolbar),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         textView.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recycler_view),
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 0)));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView2 = onView(
                 allOf(withText("Transaction Info"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(androidx.appcompat.widget.LinearLayoutCompat.class))),
                         isDisplayed()));
         textView2.check(matches(withText("Transaction Info")));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         pressBack();
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
@@ -120,7 +120,7 @@ public class AllTransShowActivityTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -130,7 +130,7 @@ public class AllTransShowActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -140,7 +140,7 @@ public class AllTransShowActivityTest {
                                 12),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -149,7 +149,7 @@ public class AllTransShowActivityTest {
                                         0),
                                 3)));
         materialButton3.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),

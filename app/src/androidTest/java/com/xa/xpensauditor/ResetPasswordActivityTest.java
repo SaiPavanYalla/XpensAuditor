@@ -49,7 +49,7 @@ public class ResetPasswordActivityTest {
                                 4),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.emailIds),
                         childAtPosition(
@@ -59,7 +59,7 @@ public class ResetPasswordActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.emailIds), withText("xpensauditor@gmail.com"),
                         childAtPosition(
@@ -69,7 +69,7 @@ public class ResetPasswordActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(pressImeActionButton());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.create_group), withText("Reset Password"),
                         childAtPosition(

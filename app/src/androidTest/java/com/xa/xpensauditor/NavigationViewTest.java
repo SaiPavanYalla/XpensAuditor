@@ -86,7 +86,7 @@ public class NavigationViewTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(allOf(withId(R.id.toolbar),
@@ -104,7 +104,7 @@ public class NavigationViewTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView = onView(
                 allOf(withId(R.id.headerName), withText("Dakshil Kanakia"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
@@ -127,7 +127,7 @@ public class NavigationViewTest {
                                 1),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView3 = onView(
                 allOf(withText("XpensAuditor"),
                         withParent(allOf(withId(R.id.toolbar),
@@ -144,7 +144,7 @@ public class NavigationViewTest {
                                 0),
                         isDisplayed()));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -154,7 +154,7 @@ public class NavigationViewTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -164,7 +164,7 @@ public class NavigationViewTest {
                                 12),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -173,7 +173,7 @@ public class NavigationViewTest {
                                         0),
                                 3)));
         materialButton3.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
