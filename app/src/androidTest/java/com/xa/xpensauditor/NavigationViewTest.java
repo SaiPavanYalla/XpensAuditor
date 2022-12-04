@@ -65,7 +65,7 @@ public class NavigationViewTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("drkanaki@ncsu.edu"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -75,7 +75,7 @@ public class NavigationViewTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("abcd1234"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
@@ -106,16 +106,16 @@ public class NavigationViewTest {
         appCompatImageButton.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction textView = onView(
-                allOf(withId(R.id.headerName), withText("mithila"),
+                allOf(withId(R.id.headerName), withText("Dakshil Kanakia"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("mithila")));
+        textView.check(matches(withText("Dakshil Kanakia")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.headerEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.headerEmail), withText("drkanaki@ncsu.edu"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("mithilareddy1999@gmail.com")));
+        textView2.check(matches(withText("drkanaki@ncsu.edu")));
 
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_home),

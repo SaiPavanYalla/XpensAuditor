@@ -67,7 +67,7 @@ public class RateActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("drkanaki@ncsu.edu"), closeSoftKeyboard());
         SystemClock.sleep(2000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -77,7 +77,7 @@ public class RateActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("abcd1234"), closeSoftKeyboard());
         SystemClock.sleep(2000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
@@ -121,7 +121,7 @@ public class RateActivityTest {
                                         childAtPosition(
                                                 withId(R.id.nav_view),
                                                 0)),
-                                12),
+                                13),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
         SystemClock.sleep(2000);

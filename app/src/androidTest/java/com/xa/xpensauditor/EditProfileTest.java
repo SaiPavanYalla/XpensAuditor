@@ -66,7 +66,7 @@ public class EditProfileTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("drkanaki@ncsu.edu"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -76,7 +76,7 @@ public class EditProfileTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("abcd1234"), closeSoftKeyboard());
         SystemClock.sleep(1000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
@@ -120,15 +120,15 @@ public class EditProfileTest {
                                         childAtPosition(
                                                 withId(R.id.nav_view),
                                                 0)),
-                                2),
+                                3),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction textView = onView(
-                allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.userEmail), withText("drkanaki@ncsu.edu"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("mithilareddy1999@gmail.com")));
+        textView.check(matches(withText("drkanaki@ncsu.edu")));
         SystemClock.sleep(1000);
         ViewInteraction appCompatImageButton2 = onView(
                 allOf(withId(R.id.editProfile),
@@ -141,10 +141,10 @@ public class EditProfileTest {
         appCompatImageButton2.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction editText = onView(
-                allOf(withId(R.id.userName), withText("mithila"),
+                allOf(withId(R.id.userName), withText("Dakshil Kanakia"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class))),
                         isDisplayed()));
-        editText.check(matches(withText("mithila")));
+        editText.check(matches(withText("Dakshil Kanakia")));
         SystemClock.sleep(1000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.submitButton), withText("Submit"),
@@ -156,10 +156,10 @@ public class EditProfileTest {
         materialButton2.perform(scrollTo(), click());
         SystemClock.sleep(1000);
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.userEmail), withText("drkanaki@ncsu.edu"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("mithilareddy1999@gmail.com")));
+        textView2.check(matches(withText("drkanaki@ncsu.edu")));
         SystemClock.sleep(1000);
         pressBack();
         SystemClock.sleep(1000);

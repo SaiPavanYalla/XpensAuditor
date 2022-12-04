@@ -175,7 +175,7 @@ public class SignupActivityTest {
                                         childAtPosition(
                                                 withId(R.id.nav_view),
                                                 0)),
-                                6),
+                                7),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
         SystemClock.sleep(2000);

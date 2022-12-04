@@ -65,7 +65,7 @@ public class SuggestActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("drkanaki@ncsu.edu"), closeSoftKeyboard());
         SystemClock.sleep(3000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -75,7 +75,7 @@ public class SuggestActivityTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("abcd1234"), closeSoftKeyboard());
         SystemClock.sleep(3000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
