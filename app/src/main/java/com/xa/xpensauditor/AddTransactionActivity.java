@@ -2,32 +2,49 @@ package com.xa.xpensauditor;
 
 import static java.lang.System.currentTimeMillis;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextDirectionHeuristic;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.apache.commons.collections4.map.MultiValueMap;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -36,7 +53,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.UUID;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
@@ -48,7 +74,8 @@ public class AddTransactionActivity extends AppCompatActivity {
     private Button AddTran;
     private EditText Amnt;
     private EditText ShpNm;
-    private Spinner catView;
+    private TextView catView;
+    Dialog dialog;
     String Amount, ShopName, SelCat;
     private DatePicker dateTransac;
     String day, month, year;
@@ -62,11 +89,15 @@ public class AddTransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_transaction);
         activity = this;
 
-        mRootRef = new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String Uid = auth.getUid();
+        FirebaseAuth auth = FirebaseAuth.getInstance();String Uid1 = auth.getUid();
+        if (getIntent().getExtras() != null && !getIntent().getExtras().getString("group_key").isEmpty()) {
+            Uid1 = getIntent().getExtras().getString("group_key");
+        }
+
+        final String Uid = Uid1;
         RefUid = mRootRef.child(Uid);
 
         RefCat = RefUid.child("Categories");
@@ -75,14 +106,12 @@ public class AddTransactionActivity extends AppCompatActivity {
         AddTran = (Button) findViewById(R.id.btAddTransaction);
         Amnt = (EditText) findViewById(R.id.addTransAmt);
         ShpNm = (EditText) findViewById(R.id.addShopName);
-        catView = (Spinner) findViewById(R.id.spinTrans);
+        catView = (TextView) findViewById(R.id.textViewCategory);
 
         dateTransac = (DatePicker) findViewById(R.id.dateTrans);
         day = String.valueOf(dateTransac.getDayOfMonth());
         month = String.valueOf(dateTransac.getMonth() + 1);
         year = String.valueOf(dateTransac.getYear());
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Catg);
-        catView.setAdapter(arrayAdapter);
 
         InputFilter filter = new InputFilter() {
 
@@ -110,18 +139,83 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         Amnt.setFilters(new InputFilter[]{filter});
 
-
-        catView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        catView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SelCat = parent.getItemAtPosition(position).toString();
-                // Toast.makeText(getApplicationContext(), "??"+SelCat, Toast.LENGTH_SHORT).show();
-            }
+            public void onClick(View v) {
+                // Initialize dialog
+                dialog = new Dialog(AddTransactionActivity.this);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                // set custom dialog
+                dialog.setContentView(R.layout.dialog_searchable_spinner);
 
-                Toast.makeText(getApplicationContext(), "Select a Category", Toast.LENGTH_SHORT).show();
+                // set custom height and width
+                dialog.getWindow().setLayout(650, 800);
+
+                // set transparent background
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                // show dialog
+                dialog.show();
+
+                // Initialize and assign variable
+                EditText editTextCat = dialog.findViewById(R.id.edittext_category);
+                ListView listViewCat = dialog.findViewById(R.id.listview_category);
+
+                // Initialize array adapter
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddTransactionActivity.this, android.R.layout.simple_list_item_1, Catg);
+
+                // set adapter
+                listViewCat.setAdapter(arrayAdapter);
+                editTextCat.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        arrayAdapter.getFilter().filter(s);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
+                listViewCat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        // when item selected from list
+                        // set selected item on textView
+                        catView.setText(arrayAdapter.getItem(position));
+                        SelCat = arrayAdapter.getItem(position);
+                        // Dismiss dialog
+                        dialog.dismiss();
+                    }
+                });
+
+                editTextCat.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        // If the event is a key-down event on the "enter" button
+                        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            // Perform action on key press
+                            Catg.add(editTextCat.getText().toString());
+                            arrayAdapter.notifyDataSetChanged();
+                            catView.setText(editTextCat.getText().toString());
+                            SelCat = editTextCat.getText().toString();
+                            // Dismiss dialog
+                            dialog.dismiss();
+                            Toast.makeText(AddTransactionActivity.this, "Added category - " + editTextCat.getText().toString(), Toast.LENGTH_SHORT).show();
+                            RefCat.child(editTextCat.getText().toString()).setValue("");
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             }
         });
 
@@ -189,6 +283,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                             UnCatTran.child(Tid).child("Month").setValue(month);
                             UnCatTran.child(Tid).child("Year").setValue(year);
                         } else {
+
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Amount").setValue(Amount);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Category").setValue(SelCat);
                             RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Shop Name").setValue(ShopName);
@@ -208,6 +303,19 @@ public class AddTransactionActivity extends AppCompatActivity {
                         Amnt.setText("");
                         ShpNm.setText("");
                         Toast.makeText(getApplicationContext(), "Add one more transaction or press back", Toast.LENGTH_LONG).show();
+
+                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+                        mDatabase.child(Uid).child("Group Name").get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<com.google.firebase.database.DataSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    boolean entryAdded = false;
+                                    String groupName = task.getResult().getValue().toString();
+                                    notifyUsers(groupName, ShopName, Amount);
+                                }
+                            }
+                        });
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Enter valid Amount and Shopname", Toast.LENGTH_LONG).show();
@@ -271,7 +379,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String value = dataSnapshot.getKey().trim();
                 Catg.add(value);
-                arrayAdapter.notifyDataSetChanged();
+//                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -297,10 +405,60 @@ public class AddTransactionActivity extends AppCompatActivity {
     }
 
 
-        public void onBackPressed() {
+    public void onBackPressed() {
 
-            Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
-            startActivity(i);
+        Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
+        if (getIntent().getExtras() != null && !getIntent().getExtras().getString("group_key").isEmpty()) {
+            i = new Intent(AddTransactionActivity.this, GroupActivity.class);
+        }
+        startActivity(i);
 
     }
+
+    public void notifyUsers(String groupName, String name, String amount) {
+
+        OkHttpClient client = new OkHttpClient();
+        String url = "https://fcm.googleapis.com/fcm/send";
+
+        JSONObject notificationJSON = new JSONObject();
+        JSONObject bodyJSON = new JSONObject();
+
+        try {
+            notificationJSON.put("title", "A new expense was posted on group " + groupName);
+            notificationJSON.put("body", "Name: " + name + " Amount: " + amount);
+
+            bodyJSON.put("to", "/topics/" + groupName.replace(" ", "-"));
+            bodyJSON.put("notification", notificationJSON);
+        } catch (
+                JSONException e) {
+            e.printStackTrace();
+            System.out.println("Error JSON: " + e.toString());
+        }
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        RequestBody body = RequestBody.create(JSON, bodyJSON.toString());
+        Request request;
+
+        request = new Request.Builder()
+                .url(url)
+                .header("Authorization", "key=AAAAl9THbZI:APA91bG0gBooKWzZemcz4bRaJCXvrAmQ_2KqcdS4Dq3gvel24EqnPPNYZ6a7-9KMl5Ud29xGEAGT593c4yp6Q8tCfgPCzcHP0mqn3mAboaG5jQSEj0pIyNjE0n5_nJjiJwqqxM0PGIiH")
+                .header("Content-Type", "application/json")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws
+                    IOException {
+                    System.out.println("Response " + response.code());
+            }
+        });
+    }
+
 }

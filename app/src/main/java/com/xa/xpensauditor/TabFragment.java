@@ -1,6 +1,9 @@
 package com.xa.xpensauditor;
 
 
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +29,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.security.acl.Group;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,6 +71,7 @@ public class TabFragment extends Fragment {
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -76,11 +81,16 @@ public class TabFragment extends Fragment {
         currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
         currentMonth = (calendar.get(Calendar.MONTH)+1);
         currentYear = (calendar.get(Calendar.YEAR));
-        mRootRef=new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/");
+        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
         com.google.firebase.auth.FirebaseAuth auth = FirebaseAuth.getInstance();
         String Uid=auth.getUid();
+        if(getArguments()!=null)
+        {
+            String groupName = getArguments().getString("group_key");
+            Uid=groupName;
+        }
         RefUid= mRootRef.child(Uid);
         RefTran = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("Transactions");
         RefCatTran = RefUid.child("DateRange").child(currentMonth+"-"+currentYear).child("CatTran");

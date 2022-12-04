@@ -60,7 +60,7 @@ public class LoginActivityTest {
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -161,7 +161,7 @@ public class LoginActivityTest {
         SystemClock.sleep(2000);
 
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.btn_reset_password), withText("Forgot your password?"),
+                allOf(withId(R.id.create_group), withText("Forgot your password?"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
@@ -171,13 +171,13 @@ public class LoginActivityTest {
         materialButton.perform(click());
 
         ViewInteraction button = onView(
-                allOf(withId(R.id.btn_reset_password), withText("RESET PASSWORD"),
+                allOf(withId(R.id.create_group), withText("RESET PASSWORD"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 
         ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.btn_back), withText("<< Back"),
+                allOf(withId(R.id.back_button), withText("<< Back"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
