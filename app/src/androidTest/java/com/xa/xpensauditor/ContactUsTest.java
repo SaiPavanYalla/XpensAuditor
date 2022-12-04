@@ -96,13 +96,7 @@ public class ContactUsTest {
         textView.check(matches(withText("XpensAuditor")));
         SystemClock.sleep(5000);
         ViewInteraction overflowMenuButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        2),
-                                0),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         overflowMenuButton.perform(click());
         SystemClock.sleep(5000);
         ViewInteraction textView2 = onView(
@@ -131,13 +125,7 @@ public class ContactUsTest {
         pressBack();
         SystemClock.sleep(5000);
         ViewInteraction overflowMenuButton2 = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        2),
-                                0),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         overflowMenuButton2.perform(click());
         SystemClock.sleep(5000);
         ViewInteraction materialTextView2 = onView(
