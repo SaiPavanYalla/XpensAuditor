@@ -193,7 +193,7 @@ class CustomGroupList extends ArrayAdapter {
         textGroupName.setText(groupNames.get(position));
         String groupCountStr = groupCount.get(position)+" Group Members";
         textGroupCount.setText(groupCountStr);
-        imageGroup.setImageResource(R.drawable.ic_avtion_group_list_item);
+//        imageGroup.setImageResource(R.drawable.ic_avtion_group_list_item);
         return  row;
     }
 }

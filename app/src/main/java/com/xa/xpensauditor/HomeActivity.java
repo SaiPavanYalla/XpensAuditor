@@ -35,6 +35,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 //import com.xa.xpensauditor.databinding.ActivityHomeBinding;
 
+/**
+ * Activity for Home page.
+ */
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SMS_PERMISSION_CODE = 101;
 
@@ -57,6 +60,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     Uri imageUri = null;
     String Uid;
 
+    /**
+     * onCreate for HomeActivity.
+     * @param savedInstanceState For bundling info
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
