@@ -6,11 +6,9 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
@@ -28,7 +26,6 @@ import androidx.test.filters.LargeTest;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +41,7 @@ public class ResetPasswordActivityTest {
     @Test
     public void resetPasswordActivityTest2() {
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.btn_reset_password), withText("Forgot your password?"),
+                allOf(withId(R.id.create_group), withText("Forgot your password?"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
@@ -52,9 +49,9 @@ public class ResetPasswordActivityTest {
                                 4),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -62,9 +59,9 @@ public class ResetPasswordActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.email), withText("xpensauditor@gmail.com"),
+                allOf(withId(R.id.emailIds), withText("xpensauditor@gmail.com"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -72,9 +69,9 @@ public class ResetPasswordActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(pressImeActionButton());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.btn_reset_password), withText("Reset Password"),
+                allOf(withId(R.id.create_group), withText("Reset Password"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),

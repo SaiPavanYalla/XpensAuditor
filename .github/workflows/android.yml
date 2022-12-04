@@ -13,12 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Checkout main
-      run: |
-        git fetch
-        git checkout main
-        git config --global user.email "adatta4@ncsu.edu"
-        git config --global user.name "Arnab Datta"
+#    - name: Checkout main
+#      run: |
+#        git fetch
+#        git checkout main
+#        git config --global user.email "adatta4@ncsu.edu"
+#        git config --global user.name "Arnab Datta"
     - name: set up JDK 11
       uses: actions/setup-java@v3
       with:
