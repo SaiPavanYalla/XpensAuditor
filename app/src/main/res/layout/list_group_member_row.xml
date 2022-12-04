@@ -6,8 +6,8 @@
 
         android:layout_rowSpan="2"
         android:layout_width="80dp"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_action_group_member_item"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_action_group_member_item"
         android:scaleType="fitXY"
         android:id="@+id/imageViewMember"
         android:layout_row="0"
