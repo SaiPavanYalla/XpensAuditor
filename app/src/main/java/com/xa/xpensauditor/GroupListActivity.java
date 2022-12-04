@@ -64,7 +64,7 @@ public class GroupListActivity extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     Toast.makeText(GroupListActivity.this, "Couldn't retrieve group list", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(GroupListActivity.this, task.getResult().toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(GroupListActivity.this, task.getResult().toString(), Toast.LENGTH_LONG).show();
 //                    task.getResult().getValue();
                 }
 

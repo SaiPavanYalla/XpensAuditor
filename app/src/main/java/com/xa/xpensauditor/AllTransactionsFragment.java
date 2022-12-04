@@ -2,6 +2,7 @@ package com.xa.xpensauditor;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -34,6 +36,7 @@ public class AllTransactionsFragment extends Fragment {
     private Firebase RefUid, RefTran, RefCat, RefCatTran;
     int pos, currentDay, currentMonth, currentYear;
     private String tagId, delCategory;
+    public static final String TAG = "ALL_TRANSACTIONS";
 
 
     private ArrayList<String> CatgTF = new ArrayList<>();
@@ -44,6 +47,7 @@ public class AllTransactionsFragment extends Fragment {
     private TransAdapter mAdapter1;
 
     private FragmentTransactionsBinding binding;
+    private Context context;
 
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
@@ -90,6 +94,7 @@ public class AllTransactionsFragment extends Fragment {
         currentDay = (calendar.get(Calendar.DAY_OF_MONTH));
         currentMonth = (calendar.get(Calendar.MONTH) + 1);
         currentYear = (calendar.get(Calendar.YEAR));
+        context = view.getContext();
         mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
         mRootRef.keepSynced(true);
@@ -101,10 +106,10 @@ public class AllTransactionsFragment extends Fragment {
         }
         RefUid = mRootRef.child(Uid);
         RefTran = RefUid.child("DateRange").child(currentMonth + "-" + currentYear).child("Transactions");
-        RefCatTran = RefUid.child("DateRange").child(currentMonth + "-" + currentYear).child("CatTran");
+//        RefCatTran = RefUid.child("DateRange").child(currentMonth + "-" + currentYear).child("CatTran");
         RefCat = RefUid.child("Categories");
 
-        arrayAdapterTF = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, CatgTF);
+        arrayAdapterTF = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, CatgTF);
 
         RefCat.addChildEventListener(new ChildEventListener() {
             @Override
@@ -136,10 +141,9 @@ public class AllTransactionsFragment extends Fragment {
         });
 
 
-//        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView = binding.recyclerView;
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter1 = new TransAdapter(TransactionList);
@@ -164,7 +168,6 @@ public class AllTransactionsFragment extends Fragment {
                 pos = position;
             }
         });
-
     }
 
     @Override
@@ -195,53 +198,13 @@ public class AllTransactionsFragment extends Fragment {
     private void prepareTransactionData() {
 
         RefTran.addChildEventListener(new ChildEventListener() {
-            String amountStr, category, shname, shDay, shMonth, shYear, shMsg;
-
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                int i = 0;
-
-                String tid = dataSnapshot.getKey().toString().trim();
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    //Log.d("yomon",i+":"+S.getValue().toString().trim());
-                    switch (i) {
-                        case 0:
-                            amountStr = data.getValue().toString().trim();
-                            break;
-                        case 1:
-                            category = data.getValue().toString().trim();
-                            break;
-                        case 2:
-                            shDay = data.getValue().toString().trim();
-                            break;
-                        case 3:
-                            shMonth = data.getValue().toString().trim();
-                            break;
-                        case 4:
-                            shname = data.getValue().toString().trim();
-                            break;
-                        case 5:
-                            shYear = data.getValue().toString().trim();
-                            break;
-                        case 6:
-                            shMsg = data.getValue().toString().trim();
-                            break;
-                    }
-                    i++;
-                }
-                try {
-                    String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth) - 1];
-                    String shdate = shDay + " " + monthString.substring(0, 3).toUpperCase() + " " + shYear;
-
-                    int dateInt = Transaction.getDateInt(shYear, shMonth, shDay);
-                    Transaction transaction = new Transaction(tid, amountStr, category, shname, shdate, shMsg, dateInt);
-
+                Transaction transaction = parseTransaction(dataSnapshot);
+                if(transaction != null) {
                     TransactionList.add(transaction);
                     mAdapter1.notifyDataSetChanged();
-                } catch (Exception e) {
-
                 }
-
             }
 
             @Override
@@ -265,11 +228,74 @@ public class AllTransactionsFragment extends Fragment {
             }
         });
 
+    }
 
+    private Transaction parseTransaction(DataSnapshot dataSnapshot) {
+        String amountStr = "";
+        String category = "";
+        String shname = "";
+        String shDay = "";
+        String shMonth = "";
+        String shYear = "";
+        String shMsg = "";
+        int i = 0;
+        String tid = dataSnapshot.getKey().toString().trim();
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+            //Log.d("yomon",i+":"+S.getValue().toString().trim());
+            Log.i(TAG, data.getKey());
+            switch (data.getKey()) {
+                case "Amount":
+                    amountStr = data.getValue().toString().trim();
+                    break;
+                case "Category":
+                    category = data.getValue().toString().trim();
+                    break;
+                case "Day":
+                    shDay = data.getValue().toString().trim();
+                    break;
+                case "Month":
+                    shMonth = data.getValue().toString().trim();
+                    break;
+                case "Shop Name":
+                    shname = data.getValue().toString().trim();
+                    break;
+                case "Year":
+                    shYear = data.getValue().toString().trim();
+                    break;
+                case "ZMessage":
+                    shMsg = data.getValue().toString().trim();
+                    break;
+            }
+            i++;
+        }
+
+        Transaction transaction = null;
+        try {
+            Log.i(TAG, tid);
+            String monthString = new DateFormatSymbols().getMonths()[Integer.parseInt(shMonth) - 1];
+            String shdate = shDay + " " + monthString.substring(0, 3).toUpperCase() + " " + shYear;
+
+            int dateInt = Transaction.getDateInt(shYear, shMonth, shDay);
+            transaction = new Transaction(tid, amountStr, category, shname, shdate, shMsg, dateInt);
+        } catch (Exception e){
+
+        }
+
+        return transaction;
     }
 
     public void loadPrevMonth() {
+        currentMonth -= 1;
+        if (currentMonth <= 0) {
+            currentMonth = 12;
+            currentYear -= 1;
+        }
+        RefTran = RefUid.child("DateRange").child(currentMonth + "-" + currentYear).child("Transactions");
+        mAdapter1.notifyDataSetChanged();
 
+        TransactionList.clear();
+        prepareTransactionData();
+        Toast.makeText(context, "Loading " + currentYear + "-" + currentMonth + " data", Toast.LENGTH_SHORT).show();
     }
 }
 

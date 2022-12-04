@@ -68,6 +68,9 @@
                             android:id="@+id/textView3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:padding="6dp"
                             android:text="Expense History" />
 
                         <com.androidplot.xy.XYPlot
@@ -76,19 +79,23 @@
                             android:layout_width="fill_parent"
                             android:layout_height="300dp"
                             ap:domainTitle="Months"
-                            ap:rangeTitle="Price" />
+                            ap:rangeTitle="Amount" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/monthly_expense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textView4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:padding="6dp"
                             android:text="Monthly Expense" />
 
                         <com.androidplot.pie.PieChart

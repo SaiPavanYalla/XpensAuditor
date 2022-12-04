@@ -94,9 +94,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         RefUid = mRootRef.child(Uid);
         RefTran = RefUid.child("Transactions");
-        RefCat=RefUid.child("Categories");
+        RefCat = RefUid.child("Categories");
 //        RefUncat=RefCat.child("Uncategorised");
-        DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child(Uid).child("DateRange").get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
             @Override
@@ -177,7 +177,7 @@ public class DashboardActivity extends AppCompatActivity {
         XYSeries series1 = new SimpleXYSeries(xAxis, yAxis, "Expense occured");
 
         LineAndPointFormatter series1Format =
-                new LineAndPointFormatter(Color.RED, Color.RED, null, null);
+                new LineAndPointFormatter(Color.parseColor("#f44336"), Color.parseColor("#b71c1c"), null, null);
 
         expenseHistoryPlot.addSeries(series1, series1Format);
 
@@ -186,7 +186,14 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void plotMonthlyExpense(HashMap<String, Integer> monthlyExpense) {
         System.out.println(monthlyExpense + " monthlyExpense");
-        Integer colors[] = new Integer[]{Color.RED, Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN, Color.DKGRAY};
+        String red = "#e53935";
+        String green = "#43a047";
+        String blue = "#0288d1";
+        String magenta = "#c2185b";
+        String cyan = "#0097a7";
+        String orange = "#f57c00";
+        Integer colors[] = new Integer[]{Color.parseColor(red), Color.parseColor(green),
+                Color.parseColor(blue), Color.parseColor(magenta), Color.parseColor(cyan), Color.parseColor(orange)};
 
         Iterator hmIterator = monthlyExpense.entrySet().iterator();
 

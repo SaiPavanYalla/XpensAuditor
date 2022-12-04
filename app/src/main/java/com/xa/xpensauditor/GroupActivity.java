@@ -24,30 +24,31 @@ import androidx.core.view.GravityCompat;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 //import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
+//import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.xa.xpensauditor.databinding.ActivityGroupBinding;
 
 public class GroupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int SMS_PERMISSION_CODE =101;
+    private static final int SMS_PERMISSION_CODE = 101;
 
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-//    private ViewPager viewPager;
-    FirebaseAuth auth;
+//    private Toolbar toolbar;
+//    private TabLayout tabLayout;
+    //    private ViewPager viewPager;
+//    FirebaseAuth auth;
     ImageView userImage;
 
     private Firebase mRootRef;
     private Firebase RefUid;
-    private Firebase RefName,RefEmail;
-    private static int currentpage=0;
+    private Firebase RefName, RefEmail;
+    private static int currentpage = 0;
     TextView tvHeaderName, tvHeaderMail;
     Uri imageUri = null;
     String Uid;
-
-
-    // String groupKey = intent.getStringExtra("group_key");
+    final String GROUP_KEY = "group_key";
+    private AllTransactionsFragment transactionsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,34 +61,36 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),AddTransactionActivity.class);
-                i.putExtra("group_key",  intent.getExtras().getString("group_key"));
+                Intent i = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                String groupKey = getGroupName();
+                i.putExtra(GROUP_KEY, groupKey);
                 startActivity(i);
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         Firebase.setAndroidContext(this);
-        mRootRef=new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
+        mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
-        Uid=intent.getExtras().getString("group_key");
-        RefUid= mRootRef.child(Uid);
+        Uid = intent.getExtras().getString("group_key");
+        System.out.println(Uid + "Uid");
+        RefUid = mRootRef.child(Uid);
         RefName = RefUid.child("Group Name");
 
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//
+//        View navHeaderView = navigationView.getHeaderView(0);
+//        tvHeaderName = (TextView) navHeaderView.findViewById(R.id.headerName);
+//        tvHeaderMail = (TextView) navHeaderView.findViewById(R.id.headerEmail);
+//        userImage = (ImageView) navHeaderView.findViewById(R.id.imageView);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-        View navHeaderView =  navigationView.getHeaderView(0);
-        tvHeaderName = (TextView)navHeaderView.findViewById(R.id.headerName);
-        tvHeaderMail = (TextView)navHeaderView.findViewById(R.id.headerEmail);
-        userImage = (ImageView)navHeaderView.findViewById(R.id.imageView);
-
-        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.setNavigationItemSelectedListener(this);
 
 
         RefName.addValueEventListener(new ValueEventListener() {
@@ -143,18 +146,19 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 //        });
 //
 
+        inflateFragment();
+
     }
 
-//    private void setupViewPager(ViewPager viewPager) {
-//
-//        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
-//        Bundle bundle = new Bundle();
-//        bundle.putString("group_key", getIntent().getExtras().getString("group_key"));
-//        AllTransactionsFragment fragobj = new AllTransactionsFragment();
-//        fragobj.setArguments(bundle);
-//        adapter.addFragment(fragobj,"ALL TRANSACTION");
-//        viewPager.setAdapter(adapter);
-//    }
+    private void inflateFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        transactionsFragment = new AllTransactionsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("group_key", getIntent().getExtras().getString("group_key"));
+        transactionsFragment.setArguments(bundle);
+        ft.replace(R.id.fragmentContainerView, transactionsFragment);
+        ft.commit();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -169,22 +173,18 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 
         if (id == R.id.group_members) {
 
-            Intent i=new Intent(this,ListGroupMembersActivity.class);
+            Intent i = new Intent(this, ListGroupMembersActivity.class);
             startActivity(i);
-        }
-        else if (id == R.id.group_analytics) {
+        } else if (id == R.id.group_analytics) {
 
-            Intent i=new Intent(this,DashboardActivity.class);
+            Intent i = new Intent(this, DashboardActivity.class);
             i.putExtra("group_key", Uid);
             startActivity(i);
-        }
-        else if (id == R.id.add_people_to_group) {
+        } else if (id == R.id.add_people_to_group) {
 
-            Intent i=new Intent(this,AddMemberToGroupActivity.class);
+            Intent i = new Intent(this, AddMemberToGroupActivity.class);
             startActivity(i);
-        }
-        else if(id== R.id.leave_group)
-        {
+        } else if (id == R.id.leave_group) {
 //            TODO: Remove the user from the current group and redirect to home page
             Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
         }
@@ -194,6 +194,7 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public void onBackPressed() {
+//        super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -209,6 +210,6 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
     }
 
     public String getGroupName() {
-        return getIntent().getExtras().getString("group_key");
+        return getIntent().getExtras().getString(GROUP_KEY);
     }
 }

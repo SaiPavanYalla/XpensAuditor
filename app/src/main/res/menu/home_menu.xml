@@ -17,6 +17,11 @@
         android:orderInCategory="100"
         android:title="Contact Us"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_previous_transactions"
+        android:orderInCategory="2"
+        android:title="Previous Transactions"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_sort"

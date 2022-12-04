@@ -80,8 +80,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Firebase RefUid;
     private Firebase RefName, RefEmail;
     private static int currentpage = 0;
-    private Firebase RefName, RefEmail;
-    private static int currentpage = 0;
     private AllTransactionsFragment transactionsFragment;
     TextView tvHeaderName, tvHeaderMail;
     //todo
@@ -287,18 +285,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-
-
-
-
     }
 
-@Override
-public boolean onCreateOptionsMenu(Menu menu){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_menu, menu);
         return true;
-        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -328,6 +322,8 @@ public boolean onCreateOptionsMenu(Menu menu){
         } else if (id == R.id.action_memo_sort) {
             transactionsFragment.sortList(3);
             Toast.makeText(getApplicationContext(), "Sorted by memo", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_previous_transactions) {
+            transactionsFragment.loadPrevMonth();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -347,8 +343,8 @@ public boolean onCreateOptionsMenu(Menu menu){
     }
 
 
-@Override
-public boolean onNavigationItemSelected(MenuItem item){
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -464,7 +460,7 @@ public boolean onNavigationItemSelected(MenuItem item){
     }
 
     private void requestReadAndSendSmsPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS},SMS_PERMISSION_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, SMS_PERMISSION_CODE);
     }
 
 
