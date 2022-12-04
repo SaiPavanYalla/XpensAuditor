@@ -94,7 +94,7 @@ public class DashboardActivity extends AppCompatActivity {
         RefUid= mRootRef.child(Uid);
         RefTran = RefUid.child("Transactions");
         RefCat=RefUid.child("Categories");
-        RefUncat=RefCat.child("Uncategorised");
+//        RefUncat=RefCat.child("Uncategorised");
         DatabaseReference mDatabase=FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child(Uid).child("DateRange").get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
@@ -109,7 +109,7 @@ public class DashboardActivity extends AppCompatActivity {
                         {
                             String date = transaction.child("Month").getValue() + "-" + transaction.child("Year").getValue();
                             String amount = Objects.requireNonNull(transaction.child("Amount").getValue()).toString();
-                            String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
+//                            String category = Objects.requireNonNull(transaction.child("Category").getValue()).toString();
 
                             //Creating ExpenseHistory hashmap
                             if (!expenseHistory.containsKey(date))

@@ -22,6 +22,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
+import com.xa.xpensauditor.databinding.FragmentTransactionsBinding;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +42,8 @@ public class AllTransactionsFragment extends Fragment {
     private List<Transaction> TransactionList = new ArrayList<>();
     private RecyclerView recyclerView;
     private TransAdapter mAdapter1;
+
+    private FragmentTransactionsBinding binding;
 
     public static Fragment getInstance(int position) {
         Bundle bundle = new Bundle();
@@ -66,8 +69,15 @@ public class AllTransactionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transactions, container, false);
+        binding = FragmentTransactionsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        return view;
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @SuppressLint("RestrictedApi")
@@ -126,7 +136,8 @@ public class AllTransactionsFragment extends Fragment {
         });
 
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = binding.recyclerView;
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -169,7 +180,7 @@ public class AllTransactionsFragment extends Fragment {
 
                 RefTran.child(tagId).removeValue();
                 RefUid.child("DateRange").child(currentMonth + "-" + currentYear).child("CatTran").child(delCategory).child(tagId).removeValue();
-                RefUid.child("UnCatTran").child(tagId).removeValue();
+//                RefUid.child("UnCatTran").child(tagId).removeValue();
                 mAdapter1.notifyDataSetChanged();//updated
 
                 TransactionList.clear();
@@ -257,5 +268,8 @@ public class AllTransactionsFragment extends Fragment {
 
     }
 
+    public void loadPrevMonth() {
+
+    }
 }
 

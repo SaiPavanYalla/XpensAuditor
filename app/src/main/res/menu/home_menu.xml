@@ -20,7 +20,7 @@
 
     <item
         android:id="@+id/action_sort"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:title="Sort"
         android:icon="@drawable/ic_baseline_sort_24"
         app:showAsAction="ifRoom">

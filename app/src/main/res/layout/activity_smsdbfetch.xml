@@ -5,109 +5,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SMSDBFetchActivity">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Transaction Info"
-            android:textColor="@color/emeraldgreen"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_margin="10dp"/>
 
         <TableLayout
             android:id="@+id/Table"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:stretchColumns="2"
-            android:shrinkColumns="1">
+            android:outlineAmbientShadowColor="@color/colorSecondaryText"
+            android:outlineSpotShadowColor="@color/colorPrimaryText"
+            android:shrinkColumns="1"
+            android:stretchColumns="2">
+
             <TableRow
-                android:layout_gravity="right">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:orientation="horizontal"
+                android:padding="8px">
+
                 <TextView
+                    android:padding="3dip"
+                    android:text="Memo"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/smsshpname"
+                    android:gravity="left"
+                    android:padding="3dip"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.divider.MaterialDivider />
+
+                <com.google.android.material.divider.MaterialDivider />
+            </TableRow>
+
+            <TableRow
+                android:layout_gravity="right"
+                android:padding="8px">
+
+                <TextView
+                    android:padding="3dip"
                     android:text="Transaction ID"
-                    android:textColor="@color/emeraldgreen"
-                    android:padding="3dip"/>
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="16sp" />
 
-            </TableRow>
-
-            <TableRow>
                 <TextView
+                    android:id="@+id/smstid"
                     android:gravity="left"
                     android:padding="3dip"
-                    android:id="@+id/smstid" />
+                    android:textSize="16sp" />
             </TableRow>
 
-            <TableRow>
+
+            <TableRow
+                android:layout_gravity="right"
+                android:padding="8px">
+
                 <TextView
+                    android:padding="3dip"
                     android:text="Transaction amount"
-                    android:textColor="@color/emeraldgreen"
-                    android:padding="3dip" />
-            </TableRow>
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="16sp" />
 
-            <TableRow>
                 <TextView
+                    android:id="@+id/smstamnt"
                     android:gravity="left"
                     android:padding="3dip"
-                    android:id="@+id/smstamnt"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:text="Shop Name"
-                    android:textColor="@color/emeraldgreen"
-                    android:padding="3dip" />
+                    android:textSize="16sp" />
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                android:layout_gravity="right"
+                android:padding="8px">
+
                 <TextView
-                    android:gravity="left"
                     android:padding="3dip"
-                    android:id="@+id/smsshpname"/>
-            </TableRow>
-            <TableRow>
-                <TextView
                     android:text="Category"
-                    android:textColor="@color/emeraldgreen"
-                    android:padding="3dip" />
-            </TableRow>
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="16sp" />
 
-            <TableRow>
                 <TextView
+                    android:id="@+id/smscat"
                     android:gravity="left"
                     android:padding="3dip"
-                    android:id="@+id/smscat"/>
+                    android:textSize="16sp" />
             </TableRow>
-            <TableRow>
+
+            <TableRow
+                android:layout_gravity="right"
+                android:padding="8px">
+
                 <TextView
+                    android:padding="3dip"
                     android:text="Date"
-                    android:textColor="@color/emeraldgreen"
-                    android:padding="3dip" />
-            </TableRow>
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="16sp" />
 
-            <TableRow>
                 <TextView
+                    android:id="@+id/smsdate"
                     android:gravity="left"
                     android:padding="3dip"
-                    android:id="@+id/smsdate"/>
+                    android:textSize="16sp" />
             </TableRow>
-            <TableRow>
+
+            <TableRow
+                android:layout_gravity="right"
+                android:padding="8px">
+
                 <TextView
+                    android:padding="3dip"
                     android:text="Message"
-                    android:textColor="@color/emeraldgreen"
-                    android:padding="3dip" />
-            </TableRow>
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="16sp" />
 
-            <TableRow>
                 <TextView
+                    android:id="@+id/sms"
+                    android:layout_width="wrap_content"
                     android:gravity="left"
                     android:padding="3dip"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/sms"/>
+                    android:textSize="16sp" />
             </TableRow>
+
         </TableLayout>
 
     </LinearLayout>

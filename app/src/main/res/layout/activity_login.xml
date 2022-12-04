@@ -36,8 +36,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
+                android:textColor="@color/colorPrimaryText"
                 android:autofillHints="emailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +51,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@android:color/white"
                 android:autofillHints="password"/>
         </com.google.android.material.textfield.TextInputLayout>

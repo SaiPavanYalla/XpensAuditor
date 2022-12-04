@@ -59,7 +59,7 @@ public class ContactUsTest {
     @Test
     public void contactUsTest() {
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.emailIds),
+                allOf(withId(R.id.email),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
