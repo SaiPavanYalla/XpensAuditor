@@ -34,9 +34,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Day_wise_visualization extends AppCompatActivity {
     private Firebase mRootRef;
@@ -51,9 +54,9 @@ public class Day_wise_visualization extends AppCompatActivity {
     private Button Vis;
     private String Tid;
     int tot=0;
-
-    static Map<Integer, Integer> hm = new HashMap<>();
-
+    Date date = new Date();
+    static Map<Date, Integer> hm = new HashMap<>();
+    Map<Date, Integer> sortedMap = new TreeMap<Date, Integer>();
     String tot1="Yes";
     FirebaseAuth auth;
     String Uid;
@@ -64,6 +67,7 @@ public class Day_wise_visualization extends AppCompatActivity {
     private Firebase RefTran3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_wise_visualization);
         auth = FirebaseAuth.getInstance();
@@ -127,7 +131,7 @@ System.out.println("Day_Wise   "+m2 +"    "+y2);
                     List<DataEntry> data = new ArrayList<>();
                     String dayy,dumm;
                     int dayy1,dumm1;
-                    int dayyy;
+                    int dayyy,dayyy1;
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -137,33 +141,54 @@ System.out.println("Day_Wise   "+m2 +"    "+y2);
                             System.out.println(" Finallyyy   "+amm);
                             int am1=Integer.valueOf(amm);
                             tot=am1+tot;
-      dumm=snapshot.child("Day").getValue().toString();
+                            dumm=snapshot.child("Day").getValue().toString();
+                            dayyy1=Integer.valueOf(dumm);
+                            Calendar c1 = Calendar.getInstance();
+                            c1.set(y2, m2-1, dayyy1, 0, 0);
+                            Date date = new GregorianCalendar(y2, m2-1, dayyy1).getTime();
+
+
       dumm1=Integer.valueOf(dumm);
-      System.out.println("dummmmm   "+dumm1+"    "+dayyy);
-      if(dayyy==dumm1){
+      System.out.println("dummmmm   "+dumm1+"    "+date);
+
+      if(sortedMap.containsKey(date)){
           System.out.println("inside");
           int temp=0;
-          temp=hm.get(dayyy);
+          temp=sortedMap.get(date);
       temp=temp+am1;
           System.out.println("dummmmm1   "+dayyy+"    "+temp);
-      hm.put(dayyy,temp);
+          sortedMap.put(date,temp);
+          System.out.println("Dates printing-4   ");
       }
       else{
-      dayy=snapshot.child("Day").getValue().toString();
-      dayyy=Integer.parseInt(dayy);
-     hm.put(dayyy,am1);}
+          sortedMap.put(date,am1);}
                  }
 
-                        ArrayList<Integer> sortedKeys
-                                = new ArrayList<Integer>(hm.keySet());
-
-                        Collections.sort(sortedKeys);
+//                        ArrayList<Integer> sortedKeys
+//                                = new ArrayList<Integer>(hm.keySet());
+//
+//                        Collections.sort(sortedKeys);
 
                         // Display the TreeMap which is naturally sorted
-                        for (Integer x : sortedKeys) {
-                            data.add(new ValueDataEntry(x,hm.get(x)));
+//                        for (Integer x : sortedKeys) {
+//                            data.add(new ValueDataEntry(x,hm.get(x)));
+//                        }
+                        System.out.println("Dates printing-1   ");
+
+                        for (Map.Entry< Date,Integer> entry :
+                                sortedMap.entrySet()) {
+                            System.out.println("Dates printing  "+entry.getValue()+"  "+entry.getKey());
+
+                            Integer strtype=Integer.parseInt(String.valueOf(entry.getValue()));
+                            data.add(new ValueDataEntry(String.valueOf(entry.getKey()),strtype));
                         }
-hm.clear();
+                        for (Map.Entry< Date,Integer> entry :
+                                sortedMap.entrySet()) {
+                            Integer strtype=Integer.parseInt(String.valueOf(entry.getValue()));
+                            data.add(new ValueDataEntry(String.valueOf(entry.getKey()),strtype));
+                        }
+
+                            sortedMap.clear();
                         Column column = cartesian.column(data);
                         column.tooltip()
                                 .titleFormat("{%X}")
