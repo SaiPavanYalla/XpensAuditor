@@ -105,13 +105,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ShowTransActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ResetPasswordActivity"
             android:exported="false">
             <meta-data

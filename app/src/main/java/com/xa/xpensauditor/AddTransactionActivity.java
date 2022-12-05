@@ -311,9 +311,15 @@ public class AddTransactionActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<com.google.firebase.database.DataSnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    boolean entryAdded = false;
-                                    String groupName = task.getResult().getValue().toString();
-                                    notifyUsers(groupName, shopNameStr, amountStr);
+                                    try {
+                                        boolean entryAdded = false;
+                                        String groupName = task.getResult().getValue().toString();
+                                        notifyUsers(groupName, shopNameStr, amountStr);
+                                    } catch(Exception e) {
+
+                                    } catch (Error e) {
+
+                                    }
                                 }
                             }
                         });

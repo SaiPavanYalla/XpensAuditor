@@ -181,10 +181,29 @@ public class AddTransactionActivityTest {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.addTransAmt)));
         appCompatEditText.perform(replaceText("234"), closeSoftKeyboard());
-
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText1 = onView(
                 allOf(withId(R.id.addShopName)));
         appCompatEditText1.perform(replaceText("Walmart"), closeSoftKeyboard());
+    }
+
+    public static void addCategory(){
+        ViewInteraction addCategory = onView(
+                allOf(withId(R.id.textViewCategory)));
+        addCategory.perform(click());
+        SystemClock.sleep(5000);
+        ViewInteraction selectcategory = onView(
+                allOf(withText("Education")));
+        selectcategory.check(matches(isDisplayed()));
+        selectcategory.perform(click());
+        SystemClock.sleep(5000);
+
+        ViewInteraction pressbutton = onView(
+                allOf(withId(R.id.btAddTransaction)));
+        pressbutton.perform(click());
+        SystemClock.sleep(5000);
+        pressBack();
+        SystemClock.sleep(5000);
     }
 
     @Test
@@ -192,7 +211,7 @@ public class AddTransactionActivityTest {
         login();
         clickfab();
         addAmount();
-        pressBack();
+        addCategory();
         signout();
     }
 
