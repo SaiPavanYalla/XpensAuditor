@@ -1,16 +1,16 @@
 # XpensAuditor
 a smart way to track your expenses
 
-[![Code Coverage](https://codecov.io/gh/SaiPavanYalla/XpensAuditor/branch/main/graphs/badge.svg)](https://codecov.io/gh/SaiPavanYalla/XpensAuditor/branch/main)
+[![Code Coverage](https://codecov.io/gh/AtharvaGole/XpensAuditor/branch/main/graphs/badge.svg)](https://codecov.io/gh/AtharvaGole/XpensAuditor/branch/main)
 [![DOI](https://zenodo.org/badge/543328644.svg)](https://zenodo.org/badge/latestdoi/543328644)
-[![Collaborators](https://img.shields.io/badge/Collaborators-5-orange.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/graphs/contributors)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/LICENSE)
-[![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/SaiPavanYalla/XpensAuditor/search?l=java)
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/SaiPavanYalla/XpensAuditor/blob/main/README.md)
-[![GitHub Release](https://img.shields.io/github/release/SaiPavanYalla/XpensAuditor.svg)](https://github.com/SaiPavanYalla/XpensAuditor/releases)
-[![Open Issues](https://img.shields.io/github/issues/SaiPavanYalla/XpensAuditor)](https://github.com/SaiPavanYalla/XpensAuditor/issues)
-[![Build-And-Test](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml/badge.svg)](https://github.com/SaiPavanYalla/XpensAuditor/actions/workflows/android.yml)
-[![GitHub Repo Size](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)](https://img.shields.io/github/repo-size/SaiPavanYalla/XpensAuditor.svg)
+[![Collaborators](https://img.shields.io/badge/Collaborators-5-orange.svg?style=flat)](https://github.com/AtharvaGole/XpensAuditor/graphs/contributors)
+[![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat)](https://github.com/AtharvaGole/XpensAuditor/blob/main/LICENSE)
+[![Language](https://img.shields.io/badge/Language-Java-blue.svg?style=flat)](https://github.com/AtharvaGole/XpensAuditor/search?l=java)
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/AtharvaGole/XpensAuditor/blob/main/README.md)
+[![GitHub Release](https://img.shields.io/github/release/AtharvaGole/XpensAuditor.svg)](https://github.com/AtharvaGole/XpensAuditor/releases)
+[![Open Issues](https://img.shields.io/github/issues/AtharvaGole/XpensAuditor)](https://github.com/AtharvaGole/XpensAuditor/issues)
+[![Build-And-Test](https://github.com/AtharvaGole/XpensAuditor/actions/workflows/android.yml/badge.svg)](https://github.com/AtharvaGole/XpensAuditor/actions/workflows/android.yml)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/AtharvaGole/XpensAuditor.svg)](https://img.shields.io/github/repo-size/AtharvaGole/XpensAuditor.svg)
 
 #
 
@@ -52,12 +52,12 @@ https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b
 
 ## Run the application
 ### Android Mobile
- - Download the apk from the latest [release](https://github.com/SaiPavanYalla/XpensAuditor/releases/tag/v1.0.0) 
+ - Download the apk from the latest [release](https://github.com/AtharvaGole/XpensAuditor/releases/tag/v1.0.0) 
  
 ### Android Studio
  - Must have android studio installed
  - Clone the github repo
-   git clone https://github.com/SaiPavanYalla/XpensAuditor.git
+   git clone https://github.com/AtharvaGole/XpensAuditor.git
  - Open the cloned repo using android studio
  - Build the application for any dependency inconsistencies and proper functioning of app
  - Expand the file structure and run the app using "Run" option
