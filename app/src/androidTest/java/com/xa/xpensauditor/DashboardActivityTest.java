@@ -55,6 +55,7 @@ public class DashboardActivityTest {
             auth.signOut();
         }
     }
+
     public static void opendrawer(){
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
