@@ -7,6 +7,7 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.assertion.ViewAssertions.selectedDescendantsMatch;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -74,7 +75,7 @@ public class GroupListActivityTest {
         SystemClock.sleep(5000);
     }
 
-    public static void selectgroup(){
+    public static void pressgroup(){
         ViewInteraction checkedTextView = onView(
                 allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("GROUP")));
 
@@ -201,13 +202,20 @@ public class GroupListActivityTest {
         SystemClock.sleep(5000);
     }
 
+    public static void selectgroup(){
+        ViewInteraction searchgroup = onView(
+                allOf(withText("abcd")));
+        searchgroup.perform(click());
+        SystemClock.sleep(5000);
+        pressBack();
+    }
 
     @Test
     public void groupListActivityTest() {
         login();
         opendrawer();
+        pressgroup();
         selectgroup();
-
         pressBack();
         signout();
     }

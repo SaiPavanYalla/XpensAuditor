@@ -173,8 +173,8 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 
         if (id == R.id.group_members) {
 
-            Intent i = new Intent(this, ListGroupMembersActivity.class);
-            startActivity(i);
+//            Intent i = new Intent(this, ListGroupMembersActivity.class);
+//            startActivity(i);
         } else if (id == R.id.group_analytics) {
 
             Intent i = new Intent(this, DashboardActivity.class);
