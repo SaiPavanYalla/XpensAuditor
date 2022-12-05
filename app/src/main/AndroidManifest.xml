@@ -68,28 +68,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SMSReaderActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Suggest"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SMSTransacShowActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SMSDBFetchActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

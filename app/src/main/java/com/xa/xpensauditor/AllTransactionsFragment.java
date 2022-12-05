@@ -157,9 +157,9 @@ public class AllTransactionsFragment extends Fragment {
             @Override
             public void OnItemClick(int position, View v) {
 
-                Intent i = new Intent(getActivity(), SMSDBFetchActivity.class);
-                i.putExtra("indexPos", TransactionList.get(position).getTid());
-                startActivity(i);
+//                Intent i = new Intent(getActivity(), SMSDBFetchActivity.class);
+//                i.putExtra("indexPos", TransactionList.get(position).getTid());
+//                startActivity(i);
             }
 
             @Override

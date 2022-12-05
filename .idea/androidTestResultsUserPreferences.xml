@@ -17,6 +17,20 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-1415179380">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="RZ8N10ZLJ8J" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-A307FN" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1352257798">
           <value>
             <AndroidTestResultsTableState>
@@ -40,6 +54,20 @@
                   <entry key="Tests" value="360" />
                   <entry key="adb-R5CT31L3C5T-ERkDDf._adb-tls-connect._tcp." value="120" />
                   <entry key="samsung&#10; SM-S908U1" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="-1181261797">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="RZ8N10ZLJ8J" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-A307FN" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -216,6 +244,20 @@
                   <entry key="Tests" value="360" />
                   <entry key="adb-R5CT31L3C5T-ERkDDf._adb-tls-connect._tcp." value="120" />
                   <entry key="samsung&#10; SM-S908U1" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1843867893">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="RZ8N10ZLJ8J" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-A307FN" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>

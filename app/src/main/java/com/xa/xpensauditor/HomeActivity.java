@@ -410,12 +410,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
         } else if (id == R.id.nav_refresh) {
-            Intent i = new Intent(this, SMSReaderActivity.class);
-            if (isSmsPermissionGranted()) {
-                startActivity(i);
-            } else {
-                requestReadAndSendSmsPermission();
-            }
+//            Intent i = new Intent(this, SMSReaderActivity.class);
+//            if (isSmsPermissionGranted()) {
+//                startActivity(i);
+//            } else {
+//                requestReadAndSendSmsPermission();
+//            }
 
 
         }
@@ -474,8 +474,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    Intent i = new Intent(this, SMSReaderActivity.class);
-                    startActivity(i);
+//                    Intent i = new Intent(this, SMSReaderActivity.class);
+//                    startActivity(i);
 
                 } else {
                     Toast.makeText(getApplicationContext(), "SMS read permission is required for this feature to work, Enabled it in under app settings", Toast.LENGTH_LONG).show();
