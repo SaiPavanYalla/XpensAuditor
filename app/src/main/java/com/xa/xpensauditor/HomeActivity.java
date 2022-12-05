@@ -418,32 +418,4 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    private AlertDialog AskSignOutOption() {
-        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(getApplicationContext())
-                // set message, title, and icon
-                .setTitle("SignOut")
-                .setMessage("Do you Really want to SignOut ?")
-
-                .setPositiveButton("SignOut", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                        auth.signOut();
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
-                    }
-
-                })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-
-                    }
-                })
-                .create();
-
-        return myQuittingDialogBox;
-    }
 }

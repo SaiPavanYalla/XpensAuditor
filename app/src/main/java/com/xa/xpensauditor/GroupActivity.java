@@ -77,10 +77,12 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
         Firebase.setAndroidContext(this);
         mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
         mRootRef.keepSynced(true);
-        Uid = intent.getExtras().getString("group_key");
-        System.out.println(Uid + "Uid");
-        RefUid = mRootRef.child(Uid);
-        RefName = RefUid.child("Group Name");
+        try {
+            Uid = intent.getExtras().getString("group_key");
+            System.out.println(Uid + "Uid");
+            RefUid = mRootRef.child(Uid);
+            RefName = RefUid.child("Group Name");
+
 
 //
 //        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -147,7 +149,11 @@ public class GroupActivity extends AppCompatActivity implements NavigationView.O
 //
 
         inflateFragment();
+        } catch (Exception e) {
 
+        } catch (Error e) {
+
+        }
     }
 
     private void inflateFragment() {
