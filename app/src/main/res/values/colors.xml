@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#50C878</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
     <color name="colorPrimaryDark">#50C878</color>
     <color name="colorAccent">#f77e71</color>
     <color name="transcolordark">#FF000000</color>
@@ -17,6 +19,6 @@
     <color name="title">#222222</color>
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
-    <color name="emeraldgreen">#50C878</color>
+    <color name="emeraldgreen">#f77e71</color>
     <color name="transperent_color">#00000000</color>
 </resources>

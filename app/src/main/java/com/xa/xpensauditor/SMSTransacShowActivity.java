@@ -42,7 +42,10 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         String Uid=auth.getUid();
         RefUid= mRootRef.child(Uid);
 
-        RefUid.child("UnCatTran").child(tid).child("Amount").addValueEventListener(new ValueEventListener() {
+        String CAT_KEY = "CatTran";
+        Firebase childObj = RefUid.child(CAT_KEY).child(tid);
+
+        childObj.child("Amount").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 smstamnt.setText(dataSnapshot.getValue().toString().trim());
@@ -55,7 +58,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         });
 
 
-        RefUid.child("UnCatTran").child(tid).child("Category").addValueEventListener(new ValueEventListener() {
+        childObj.child("Category").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 smscat.setText(dataSnapshot.getValue().toString().trim());
@@ -68,7 +71,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         });
 
 
-        RefUid.child("UnCatTran").child(tid).child("Shop Name").addValueEventListener(new ValueEventListener() {
+        childObj.child("Shop Name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 smsshpname.setText(dataSnapshot.getValue().toString().trim());
@@ -81,7 +84,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         });
 
 
-        RefUid.child("UnCatTran").child(tid).child("ZMessage").addValueEventListener(new ValueEventListener() {
+        childObj.child("ZMessage").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 sms.setText(dataSnapshot.getValue().toString().trim());
@@ -94,7 +97,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         });
 
 
-        RefUid.child("UnCatTran").child(tid).child("Day").addValueEventListener(new ValueEventListener() {
+        childObj.child("Day").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 d=dataSnapshot.getValue().toString().trim();
@@ -107,7 +110,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
         });
 
 
-        RefUid.child("UnCatTran").child(tid).child("Month").addValueEventListener(new ValueEventListener() {
+        childObj.child("Month").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 m=dataSnapshot.getValue().toString().trim();
@@ -119,7 +122,7 @@ public class SMSTransacShowActivity extends AppCompatActivity {
             }
         });
 
-        RefUid.child("UnCatTran").child(tid).child("Year").addValueEventListener(new ValueEventListener() {
+        childObj.child("Year").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 y=dataSnapshot.getValue().toString().trim();

@@ -1,17 +1,12 @@
 package com.xa.xpensauditor;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -38,13 +33,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+//import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -76,11 +68,11 @@ import java.util.Objects;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SMS_PERMISSION_CODE = 101;
 
-    private ActivityHomeBinding binding;
+//    private ActivityHomeBinding binding;
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    //    private ViewPager viewPager;
     FirebaseAuth auth;
     ImageView userImage;
 
@@ -88,6 +80,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Firebase RefUid;
     private Firebase RefName, RefEmail;
     private static int currentpage = 0;
+    private AllTransactionsFragment transactionsFragment;
     TextView tvHeaderName, tvHeaderMail;
     //todo
     //StorageReference storageReference, filepath,storageRef;
@@ -161,6 +154,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //        } catch (IOException e ) {}
 
 
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        transactionsFragment = new AllTransactionsFragment();
+        ft.replace(R.id.fragmentContainerView, transactionsFragment);
+        ft.commit();
+
+
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -207,37 +206,43 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        viewPager.setCurrentItem(currentpage);
+//        viewPager = (ViewPager) findViewById(R.id.viewpager);
+//        setupViewPager(viewPager);
+//        viewPager.setCurrentItem(currentpage);
+//
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if(position==0)
+//                {
+//                    currentpage=0;
+//                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+//                    startActivity(intent);
+//                }
+//                if(position==1)
+//                {
+//                    currentpage=1;
+//                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+//                    startActivity(intent);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    currentpage = 0;
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-                }
-                if (position == 1) {
-                    currentpage = 1;
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+//
+//        tabLayout = (TabLayout) findViewById(R.id.tabs);
+//        tabLayout.setupWithViewPager(viewPager);
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.get().addOnCompleteListener(new OnCompleteListener<com.google.firebase.database.DataSnapshot>() {
@@ -280,83 +285,84 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+    }
 
-
-
-
-                tabLayout=(TabLayout)findViewById(R.id.tabs);
-                tabLayout.setupWithViewPager(viewPager);
-
-//        FirebaseMessaging.getInstance().subscribeToTopic("abcd");
-//        FirebaseMessaging.getInstance().subscribeToTopic("abcd1");
-//        FirebaseMessaging.getInstance().subscribeToTopic("abcd2");
-
-            }
-
-    private void setupViewPager(ViewPager viewPager) {
-
-        ViewPageAdapter adapter=new ViewPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TabFragment(),"ALL TRANSACTION");
-        adapter.addFragment(new UncategorisedFragment(),"UNCATEGORISED TRANSACTION");
-        viewPager.setAdapter(adapter);
-        }
-
-@Override
-public boolean onCreateOptionsMenu(Menu menu){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home,menu);
+        getMenuInflater().inflate(R.menu.home_menu, menu);
         return true;
-        }
+    }
 
-@Override
-public boolean onOptionsItemSelected(MenuItem item){
-        int id=item.getItemId();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if(id==R.id.account_settings){
+        if (id == R.id.account_settings) {
 
-        Intent i=new Intent(this,AccountSettingsActivity.class);
-        startActivity(i);
-        }else if(id==R.id.action_settings){
-        Toast.makeText(getApplicationContext(),"To be updated in later versions",Toast.LENGTH_SHORT).show();
-        }else if(id==R.id.action_contact_us){
-        Intent i=new Intent(this,ContactUs.class);
-        startActivity(i);
+            Intent i = new Intent(this, AccountSettingsActivity.class);
+            startActivity(i);
+        } else if (id == R.id.action_settings) {
+            Toast.makeText(getApplicationContext(), "To be updated in later versions", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_contact_us) {
+            Intent i = new Intent(this, ContactUs.class);
+            startActivity(i);
+        } else if (id == R.id.action_sort) {
+
+        } else if (id == R.id.action_amount_sort) {
+            transactionsFragment.sortList(0);
+            Toast.makeText(getApplicationContext(), "Sorted by Amount", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_date_sort) {
+            transactionsFragment.sortList(1);
+            Toast.makeText(getApplicationContext(), "Sorted by date", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_category_sort) {
+            transactionsFragment.sortList(2);
+            Toast.makeText(getApplicationContext(), "Sorted by category", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_memo_sort) {
+            transactionsFragment.sortList(3);
+            Toast.makeText(getApplicationContext(), "Sorted by memo", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_previous_transactions) {
+            transactionsFragment.loadPrevMonth();
         }
         return super.onOptionsItemSelected(item);
-        }
+    }
 
-@Override
-public void onBackPressed(){
-        DrawerLayout drawer=(DrawerLayout)findViewById(R.id.drawer_layout);
-        if(drawer.isDrawerOpen(GravityCompat.START)){
-        drawer.closeDrawer(GravityCompat.START);
-        }else{
-        super.onBackPressed();
+    public void refreshTransactionList() {
+        transactionsFragment.refreshTransactionList();
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-        }
+    }
 
 
-@Override
-public boolean onNavigationItemSelected(MenuItem item){
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
 
-            Intent i=new Intent(this,HomeActivity.class);
+            Intent i = new Intent(this, HomeActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_group) {
-            Intent i=new Intent(HomeActivity.this,GroupListActivity.class);
+            Intent i = new Intent(HomeActivity.this, GroupListActivity.class);
             startActivity(i);
 
-        }else if (id == R.id.nav_profile) {
-            Intent i=new Intent(this,ProfileActivity.class);
+        } else if (id == R.id.nav_profile) {
+            Intent i = new Intent(this, ProfileActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_show_analysis) {
-            Intent i=new Intent(this,DashboardActivity.class);
+            Intent i = new Intent(this, DashboardActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_settings) {
@@ -372,113 +378,113 @@ public boolean onNavigationItemSelected(MenuItem item){
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             auth.signOut();
-                            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                         }
                     });
 
-        builder1.setNegativeButton(
-        "No",
-        new DialogInterface.OnClickListener(){
-public void onClick(DialogInterface dialog,int id){
-        dialog.cancel();
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else if (id == R.id.nav_rate) {
+            Intent i = new Intent(this, Rate.class);
+            startActivity(i);
+
+        } else if (id == R.id.nav_suggest) {
+            Intent i = new Intent(this, Suggest.class);
+            startActivity(i);
+
+        } else if (id == R.id.nav_share) {
+
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = "I recommend you to try this app and comment about it";
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "XpensAuditor");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+        } else if (id == R.id.nav_refresh) {
+            Intent i = new Intent(this, SMSReaderActivity.class);
+            if (isSmsPermissionGranted()) {
+                startActivity(i);
+            } else {
+                requestReadAndSendSmsPermission();
+            }
+
+
         }
-        });
-
-        AlertDialog alert11=builder1.create();
-        alert11.show();
-        }else if(id==R.id.nav_rate){
-        Intent i=new Intent(this,Rate.class);
-        startActivity(i);
-
-        }else if(id==R.id.nav_suggest){
-        Intent i=new Intent(this,Suggest.class);
-        startActivity(i);
-
-        }else if(id==R.id.nav_share){
-
-        Intent sharingIntent=new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        String shareBody="I recommend you to try this app and comment about it";
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"XpensAuditor");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,shareBody);
-        startActivity(Intent.createChooser(sharingIntent,"Share via"));
-        }else if(id==R.id.nav_refresh){
-        Intent i=new Intent(this,SMSReaderActivity.class);
-        if(isSmsPermissionGranted()){
-        startActivity(i);
-        }else{
-        requestReadAndSendSmsPermission();
-        }
 
 
-        }
-
-
-        DrawerLayout drawer=(DrawerLayout)findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-        }
+    }
 
-private AlertDialog AskSignOutOption(){
-        AlertDialog myQuittingDialogBox=new AlertDialog.Builder(getApplicationContext())
-        // set message, title, and icon
-        .setTitle("SignOut")
-        .setMessage("Do you Really want to SignOut ?")
+    private AlertDialog AskSignOutOption() {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(getApplicationContext())
+                // set message, title, and icon
+                .setTitle("SignOut")
+                .setMessage("Do you Really want to SignOut ?")
 
-        .setPositiveButton("SignOut",new DialogInterface.OnClickListener(){
+                .setPositiveButton("SignOut", new DialogInterface.OnClickListener() {
 
-public void onClick(DialogInterface dialog,int whichButton){
-        dialog.dismiss();
-        auth.signOut();
-        Intent i=new Intent(getApplicationContext(),LoginActivity.class);
-        startActivity(i);
-        }
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                        auth.signOut();
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(i);
+                    }
 
-        })
-        .setNegativeButton("cancel",new DialogInterface.OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
-        dialog.dismiss();
+                        dialog.dismiss();
 
-        }
-        })
-        .create();
+                    }
+                })
+                .create();
 
         return myQuittingDialogBox;
+    }
+
+
+    public boolean isSmsPermissionGranted() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestReadAndSendSmsPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, SMS_PERMISSION_CODE);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case SMS_PERMISSION_CODE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Intent i = new Intent(this, SMSReaderActivity.class);
+                    startActivity(i);
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "SMS read permission is required for this feature to work, Enabled it in under app settings", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(this, HomeActivity.class);
+                    startActivity(i);
+                }
+                return;
+            }
+
         }
-
-
-public boolean isSmsPermissionGranted(){
-        return ContextCompat.checkSelfPermission(this,Manifest.permission.READ_SMS)==PackageManager.PERMISSION_GRANTED;
-        }
-
-private void requestReadAndSendSmsPermission(){
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_SMS},SMS_PERMISSION_CODE);
-        }
-
-
-@Override
-public void onRequestPermissionsResult(int requestCode,String permissions[],int[]grantResults){
-
-        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
-
-        switch(requestCode){
-        case SMS_PERMISSION_CODE:{
-        // If request is cancelled, the result arrays are empty.
-        if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
-
-        Intent i=new Intent(this,SMSReaderActivity.class);
-        startActivity(i);
-
-        }else{
-        Toast.makeText(getApplicationContext(),"SMS read permission is required for this feature to work, Enabled it in under app settings",Toast.LENGTH_LONG).show();
-        Intent i=new Intent(this,HomeActivity.class);
-        startActivity(i);
-        }
-        return;
-        }
-
-        }
-        }
-        }
+    }
+}

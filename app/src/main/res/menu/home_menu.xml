@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/account_settings"
+        android:orderInCategory="100"
+        android:title="Account Settings"
+        android:icon="@drawable/ic_account"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="Preference Settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_contact_us"
+        android:orderInCategory="100"
+        android:title="Contact Us"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_previous_transactions"
+        android:orderInCategory="2"
+        android:title="Previous Transactions"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:orderInCategory="1"
+        android:title="Sort"
+        android:icon="@drawable/ic_baseline_sort_24"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_amount_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Amount"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_date_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Date"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_category_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Category"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/action_memo_sort"
+                android:orderInCategory="100"
+                android:title="Sort by Memo"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+</menu>

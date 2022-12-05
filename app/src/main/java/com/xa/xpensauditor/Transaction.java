@@ -1,70 +1,82 @@
 package com.xa.xpensauditor;
 
 public class Transaction {
-    private String tid, t_shopname, t_amt,t_cat,t_date, t_msg;
+    private String tid, shopname, amountStr, category, dateStr, message;
+    private int dateInt;
 
     public Transaction() {
     }
 
-    public Transaction(Transaction obj){
-        this.tid = obj.tid;
-        this.t_amt = obj.t_amt;
-        this.t_shopname = obj.t_shopname;
-        this.t_cat = obj.t_cat;
-        this.t_date = obj.t_date;
-        this.t_msg = obj.t_msg;
+    public static int getDateInt(String year, String month, String date) {
+        month = Integer.parseInt(month) < 10 ? "0" + month : month;
+        int dateInt = Integer.parseInt(year + month + date);
+        return dateInt;
     }
-    public Transaction( String tid, String t_amt, String t_cat,String t_shopname,String t_date, String t_msg) {
+
+    public Transaction(Transaction obj) {
+        this.tid = obj.tid;
+        this.amountStr = obj.amountStr;
+        this.shopname = obj.shopname;
+        this.category = obj.category;
+        this.dateStr = obj.dateStr;
+        this.message = obj.message;
+    }
+
+    public Transaction(String tid, String t_amt, String t_cat, String t_shopname, String t_date, String t_msg, int dateInt) {
         this.tid = tid;
-        this.t_amt=t_amt;
-        this.t_cat=t_cat;
-        this.t_shopname=t_shopname;
-        this.t_date=t_date;
-        this.t_msg = t_msg;
+        this.amountStr = t_amt;
+        this.category = t_cat;
+        this.shopname = t_shopname;
+        this.dateStr = t_date;
+        this.message = t_msg;
+        this.dateInt = dateInt;
     }
 
     public String getTid() {
         return tid;
     }
 
-    public String getT_amt() {
-        return t_amt;
+    public String getAmountStr() {
+        return amountStr;
     }
 
-    public String getT_cat() {
-        return t_cat;
+    public String getCategory() {
+        return category;
     }
 
-    public String getT_shopname() {
-        return t_shopname;
+    public String getShopname() {
+        return shopname;
     }
 
-    public String getT_date() {
-        return t_date;
+    public String getDateStr() {
+        return dateStr;
     }
 
-    public String getT_msg() {
-        return t_msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setT_date(String t_date) {
-        this.t_date = t_date;
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
     }
 
-    public void setT_amt(String t_amt) {
-        this.t_amt = t_amt;
+    public void setAmountStr(String amountStr) {
+        this.amountStr = amountStr;
     }
 
-    public void setT_cat(String t_cat) {
-        this.t_cat = t_cat;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public void setT_shopname(String t_shopname) {
-        this.t_shopname = t_shopname;
+    public void setShopname(String shopname) {
+        this.shopname = shopname;
     }
 
-    public void setT_msg(String t_msg) {
-        this.t_msg = t_msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
+    public int getDateInt() {
+        return this.dateInt;
+    }
 }

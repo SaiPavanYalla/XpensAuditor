@@ -12,14 +12,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@android:color/white">
+        android:background="@color/graylight">
 
         <ListView
             android:id="@+id/grouplist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#000"
-            android:dividerHeight="1dp"
+            android:divider="#fff"
+            android:dividerHeight="0dp"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:background="@color/emeraldgreen"
+        android:background="@color/colorAccent"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_add"
         android:contentDescription="@string/create_new_group" />

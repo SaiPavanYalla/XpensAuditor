@@ -68,26 +68,26 @@ public class AddTransactionActivity extends AppCompatActivity {
 
     private Firebase mRootRef;
     private Firebase RefUid;
-    private Firebase RefTran1, RefCatSum1, RefCat, UnCatTran;
-    private String Tid;
-    private ArrayList<String> Catg = new ArrayList<>();
-    private Button AddTran;
-    private EditText Amnt;
-    private EditText ShpNm;
-    private TextView catView;
+    private Firebase RefTran1, RefCatSum1, RefCat; //, UnCatTran;
+    private String tid;
+    private ArrayList<String> categoryList = new ArrayList<>();
+    private Button addButton;
+    private EditText amountEditText;
+    private EditText shopNameEditText;
+    private TextView categoryTextView;
     Dialog dialog;
-    String Amount, ShopName, SelCat;
-    private DatePicker dateTransac;
+    String amountStr, shopNameStr, categoryStr;
+    private DatePicker transactionDatePicker;
     String day, month, year;
     int d, m, y;
-    Activity activity;
+//    Activity activity;
     MultiValueMap<String, String> catgTrans1 = MultiValueMap.multiValueMap(new LinkedHashMap<String, Collection<String>>(), (Class<LinkedHashSet<String>>) (Class<?>) LinkedHashSet.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
-        activity = this;
+//        activity = this;
 
         mRootRef = new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com");
 
@@ -101,17 +101,18 @@ public class AddTransactionActivity extends AppCompatActivity {
         RefUid = mRootRef.child(Uid);
 
         RefCat = RefUid.child("Categories");
-        UnCatTran = RefUid.child("UnCatTran");
+//        UnCatTran = RefUid.child("UnCatTran");
 
-        AddTran = (Button) findViewById(R.id.btAddTransaction);
-        Amnt = (EditText) findViewById(R.id.addTransAmt);
-        ShpNm = (EditText) findViewById(R.id.addShopName);
-        catView = (TextView) findViewById(R.id.textViewCategory);
+        addButton = (Button) findViewById(R.id.btAddTransaction);
+        amountEditText = (EditText) findViewById(R.id.addTransAmt);
+        shopNameEditText = (EditText) findViewById(R.id.addShopName);
 
-        dateTransac = (DatePicker) findViewById(R.id.dateTrans);
-        day = String.valueOf(dateTransac.getDayOfMonth());
-        month = String.valueOf(dateTransac.getMonth() + 1);
-        year = String.valueOf(dateTransac.getYear());
+        categoryTextView = (TextView) findViewById(R.id.textViewCategory);
+
+        transactionDatePicker = (DatePicker) findViewById(R.id.dateTrans);
+        day = String.valueOf(transactionDatePicker.getDayOfMonth());
+        month = String.valueOf(transactionDatePicker.getMonth() + 1);
+        year = String.valueOf(transactionDatePicker.getYear());
 
         InputFilter filter = new InputFilter() {
 
@@ -137,9 +138,9 @@ public class AddTransactionActivity extends AppCompatActivity {
         };
 
 
-        Amnt.setFilters(new InputFilter[]{filter});
+        amountEditText.setFilters(new InputFilter[]{filter});
 
-        catView.setOnClickListener(new View.OnClickListener() {
+        categoryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Initialize dialog
@@ -149,7 +150,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.dialog_searchable_spinner);
 
                 // set custom height and width
-                dialog.getWindow().setLayout(650, 800);
+                dialog.getWindow().setLayout(720,1080);
 
                 // set transparent background
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -162,7 +163,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 ListView listViewCat = dialog.findViewById(R.id.listview_category);
 
                 // Initialize array adapter
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddTransactionActivity.this, android.R.layout.simple_list_item_1, Catg);
+                ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(AddTransactionActivity.this, android.R.layout.simple_list_item_1, categoryList);
 
                 // set adapter
                 listViewCat.setAdapter(arrayAdapter);
@@ -188,8 +189,8 @@ public class AddTransactionActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         // when item selected from list
                         // set selected item on textView
-                        catView.setText(arrayAdapter.getItem(position));
-                        SelCat = arrayAdapter.getItem(position);
+                        categoryTextView.setText(arrayAdapter.getItem(position));
+                        categoryStr = arrayAdapter.getItem(position);
                         // Dismiss dialog
                         dialog.dismiss();
                     }
@@ -202,10 +203,10 @@ public class AddTransactionActivity extends AppCompatActivity {
                         if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
                             // Perform action on key press
-                            Catg.add(editTextCat.getText().toString());
+                            categoryList.add(editTextCat.getText().toString());
                             arrayAdapter.notifyDataSetChanged();
-                            catView.setText(editTextCat.getText().toString());
-                            SelCat = editTextCat.getText().toString();
+                            categoryTextView.setText(editTextCat.getText().toString());
+                            categoryStr = editTextCat.getText().toString();
                             // Dismiss dialog
                             dialog.dismiss();
                             Toast.makeText(AddTransactionActivity.this, "Added category - " + editTextCat.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -220,10 +221,10 @@ public class AddTransactionActivity extends AppCompatActivity {
         });
 
 
-        AddTran.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean f = false;
+                Boolean flag = false;
                 Calendar calendar = Calendar.getInstance();
 
                 int thisYear = calendar.get(Calendar.YEAR);
@@ -234,22 +235,22 @@ public class AddTransactionActivity extends AppCompatActivity {
 
                 int thisDay = calendar.get(Calendar.DAY_OF_MONTH);
                 //Log.d(TAG, "$ thisDay : " + thisDay);
-                d = (dateTransac.getDayOfMonth());
-                m = (dateTransac.getMonth() + 1);
-                y = (dateTransac.getYear());
+                d = (transactionDatePicker.getDayOfMonth());
+                m = (transactionDatePicker.getMonth() + 1);
+                y = (transactionDatePicker.getYear());
                 day = String.valueOf(d);
                 month = String.valueOf(m);
                 year = String.valueOf(y);
                 if (thisYear > y) {
-                    f = true;
+                    flag = true;
                 } else {
                     if (thisYear == y) {
                         if (thisMonth > m) {
-                            f = true;
+                            flag = true;
                         } else {
                             if (thisMonth == m) {
                                 if (thisDay >= d) {
-                                    f = true;
+                                    flag = true;
                                 }
                             }
                         }
@@ -257,41 +258,41 @@ public class AddTransactionActivity extends AppCompatActivity {
                 }
 
 
-                if (f) {
-                    Amount = Amnt.getText().toString().trim().replaceAll(",", "");
-                    ShopName = ShpNm.getText().toString().trim();
-                    if (!Amount.isEmpty() && !ShopName.isEmpty()) {
-                        Tid = String.valueOf(currentTimeMillis());
+                if (flag) {
+                    amountStr = amountEditText.getText().toString().trim().replaceAll(",", "");
+                    shopNameStr = shopNameEditText.getText().toString().trim();
+                    if (!amountStr.isEmpty() && !shopNameStr.isEmpty()) {
+                        tid = String.valueOf(currentTimeMillis());
                         ;
 
-                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Amount").setValue(Amount);
-                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Category").setValue(SelCat);
-                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Shop Name").setValue(ShopName);
-                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("ZMessage").setValue("Entered Manually...");
-                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Day").setValue(day);
-                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Month").setValue(month);
-                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(Tid).child("Year").setValue(year);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(tid).child("Amount").setValue(amountStr);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(tid).child("Category").setValue(categoryStr);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(tid).child("Shop Name").setValue(shopNameStr);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(tid).child("ZMessage").setValue("Entered Manually...");
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(tid).child("Day").setValue(day);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(tid).child("Month").setValue(month);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions").child(tid).child("Year").setValue(year);
 
 
-                        if (SelCat == "Uncategorised") {
-                            UnCatTran.child(Tid);
-                            UnCatTran.child(Tid).child("Amount").setValue(Amount);
-                            UnCatTran.child(Tid).child("Category").setValue(SelCat);
-                            UnCatTran.child(Tid).child("Shop Name").setValue(ShopName);
-                            UnCatTran.child(Tid).child("ZMessage").setValue("Entered Manually...");
-                            UnCatTran.child(Tid).child("Day").setValue(day);
-                            UnCatTran.child(Tid).child("Month").setValue(month);
-                            UnCatTran.child(Tid).child("Year").setValue(year);
-                        } else {
+//                        if (selCat == "Uncategorised") {
+//                            UnCatTran.child(Tid);
+//                            UnCatTran.child(Tid).child("Amount").setValue(Amount);
+//                            UnCatTran.child(Tid).child("Category").setValue(selCat);
+//                            UnCatTran.child(Tid).child("Shop Name").setValue(ShopName);
+//                            UnCatTran.child(Tid).child("ZMessage").setValue("Entered Manually...");
+//                            UnCatTran.child(Tid).child("Day").setValue(day);
+//                            UnCatTran.child(Tid).child("Month").setValue(month);
+//                            UnCatTran.child(Tid).child("Year").setValue(year);
+//                        } else {
 
-                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Amount").setValue(Amount);
-                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Category").setValue(SelCat);
-                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Shop Name").setValue(ShopName);
-                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("ZMessage").setValue("Entered Manually...");
-                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Day").setValue(day);
-                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Month").setValue(month);
-                            RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(SelCat).child(Tid).child("Year").setValue(year);
-                        }
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(categoryStr).child(tid).child("Amount").setValue(amountStr);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(categoryStr).child(tid).child("Category").setValue(categoryStr);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(categoryStr).child(tid).child("Shop Name").setValue(shopNameStr);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(categoryStr).child(tid).child("ZMessage").setValue("Entered Manually...");
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(categoryStr).child(tid).child("Day").setValue(day);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(categoryStr).child(tid).child("Month").setValue(month);
+                        RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("CatTran").child(categoryStr).child(tid).child("Year").setValue(year);
+//                        }
 
 
                         RefTran1 = RefUid.child("DateRange").child(String.valueOf(month + "-" + year)).child("Transactions");
@@ -300,8 +301,8 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
                         Toast.makeText(getApplicationContext(), "Transaction added", Toast.LENGTH_SHORT).show();
-                        Amnt.setText("");
-                        ShpNm.setText("");
+                        amountEditText.setText("");
+                        shopNameEditText.setText("");
                         Toast.makeText(getApplicationContext(), "Add one more transaction or press back", Toast.LENGTH_LONG).show();
 
                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -312,7 +313,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     boolean entryAdded = false;
                                     String groupName = task.getResult().getValue().toString();
-                                    notifyUsers(groupName, ShopName, Amount);
+                                    notifyUsers(groupName, shopNameStr, amountStr);
                                 }
                             }
                         });
@@ -378,7 +379,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String value = dataSnapshot.getKey().trim();
-                Catg.add(value);
+                categoryList.add(value);
 //                arrayAdapter.notifyDataSetChanged();
             }
 
@@ -405,14 +406,15 @@ public class AddTransactionActivity extends AppCompatActivity {
     }
 
 
-    public void onBackPressed() {
+        public void onBackPressed() {
+            super.onBackPressed();
 
-        Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
-        if (getIntent().getExtras() != null && !getIntent().getExtras().getString("group_key").isEmpty()) {
-            i = new Intent(AddTransactionActivity.this, GroupActivity.class);
-        }
-        startActivity(i);
-
+            Intent i = new Intent(AddTransactionActivity.this, HomeActivity.class);
+            if(getIntent().getExtras()!=null && !getIntent().getExtras().getString("group_key").isEmpty())
+            {
+                i= new Intent(AddTransactionActivity.this, GroupActivity.class);
+            }
+            startActivity(i);
     }
 
     public void notifyUsers(String groupName, String name, String amount) {

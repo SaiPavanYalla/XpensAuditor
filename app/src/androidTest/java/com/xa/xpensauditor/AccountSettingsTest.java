@@ -88,19 +88,11 @@ public class AccountSettingsTest {
         materialButton.perform(click());
         SystemClock.sleep(5000);
         ViewInteraction imageView = onView(
-                allOf(withContentDescription("More options"),
-                        withParent(withParent(withId(R.id.toolbar))),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         imageView.check(matches(isDisplayed()));
 
         ViewInteraction overflowMenuButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        2),
-                                0),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         overflowMenuButton.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction textView = onView(

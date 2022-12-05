@@ -136,13 +136,7 @@ public class NavigationViewTest {
         textView3.check(matches(withText("XpensAuditor")));
 
         ViewInteraction overflowMenuButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        2),
-                                0),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         overflowMenuButton.perform(click());
         SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
