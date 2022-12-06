@@ -39,16 +39,8 @@ a smart way to track your expenses
 ## Demo
 
 [Link to Demo Video](https://drive.google.com/file/d/1uOYYxBSlLLNwlBKz2-shEShyU4YVj-L6/view?usp=sharing)
-## Roadmap
-
- - Issues encountered and solved so far - [ISSUES](https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed)
- - Scope of Improvement :
- 
-   - Analysis on detected expenses - Category wise expenses and expenditure graphs
-   - Detect transaction alerts from notifications and emails as well
-   - Add custom categories & Auto detect category by vendor
-   - Change password feature is implemented. Likewise, change email also needs to be implemented
- 
+## System Architecture
+https://drive.google.com/open?id=1mRdHw7UnHanh18nPPL1aBqFDI3dj_Gr9&usp=drive_copy 
 
 ## License
 
