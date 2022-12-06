@@ -40,7 +40,7 @@ a smart way to track your expenses
 
 [Link to Demo Video](https://drive.google.com/file/d/1uOYYxBSlLLNwlBKz2-shEShyU4YVj-L6/view?usp=sharing)
 ## System Architecture
-https://drive.google.com/open?id=1mRdHw7UnHanh18nPPL1aBqFDI3dj_Gr9&usp=drive_copy 
+<img width="968" alt="Note Dec 5, 2022 png" src="https://user-images.githubusercontent.com/44353511/205783646-0a733c40-00b9-46a8-ab2c-9285e138088d.png">
 
 ## License
 
