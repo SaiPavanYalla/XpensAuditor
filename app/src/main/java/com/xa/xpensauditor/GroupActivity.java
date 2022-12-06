@@ -31,6 +31,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.firebase.auth.FirebaseAuth;
 import com.xa.xpensauditor.databinding.ActivityGroupBinding;
 
+/**
+ * This class shows the second Pie Chart in the Analysis Page
+ */
+
 public class GroupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SMS_PERMISSION_CODE = 101;
 

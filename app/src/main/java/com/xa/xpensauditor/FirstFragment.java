@@ -11,6 +11,10 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.xa.xpensauditor.databinding.FragmentFirstBinding;
 
+/**
+ * This class is the first line chart in the Analysis Page
+ */
+
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;

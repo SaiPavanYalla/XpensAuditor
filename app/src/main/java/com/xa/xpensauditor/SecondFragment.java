@@ -11,6 +11,10 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.xa.xpensauditor.databinding.FragmentSecondBinding;
 
+/**
+ * This class is the second pie chart in the Analysis page
+ */
+
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
