@@ -28,11 +28,18 @@ a smart way to track your expenses
  ## New Features
  
  - Ability to create Groups and track Group expenses
+ - ![Page4](https://user-images.githubusercontent.com/44353511/205784651-950673a8-49c8-47e9-bbe8-96546964af48.png)
+ - ![Page5](https://user-images.githubusercontent.com/44353511/205784767-19919eba-3f74-42db-8618-59415223c424.png)
  - Analytics for Users and Groups
+ - ![Page7](https://user-images.githubusercontent.com/44353511/205784840-12bac317-eb2b-4d14-b388-40b35326b386.png)
  - Push Notifications when Group Transactions are created
+ - ![Page6](https://user-images.githubusercontent.com/44353511/205784815-2160e6ed-2cf8-4c31-941b-8d1ff74f4066.png)
  - Sorting Transactions by Date, Amount, Category and Memo
+ - ![Page3](https://user-images.githubusercontent.com/44353511/205784539-4f16c5d7-0993-4a69-947a-6c00952179fe.png)
  - Ability to view past transactions of previous months
  - Ability to create custom categories
+ - ![Page2](https://user-images.githubusercontent.com/44353511/205784340-ad0c2668-3fbc-4aa5-9f15-4e06563987cb.png)
+
  - UI refresh
  
 
