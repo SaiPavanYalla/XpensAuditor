@@ -27,8 +27,7 @@ a smart way to track your expenses
 
 ## Demo
 
-https://user-images.githubusercontent.com/112219214/194787499-0125447e-f68d-444b-9a86-559b14adf898.mp4
-
+https://user-images.githubusercontent.com/44353511/205779670-8e048acf-6904-49a3-ba5c-8b0e541f0e59.mp4
 
 ## Roadmap
 
