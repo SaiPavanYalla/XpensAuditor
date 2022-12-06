@@ -27,8 +27,7 @@ a smart way to track your expenses
 
 ## Demo
 
-[https://user-images.githubusercontent.com/44353511/205779670-8e048acf-6904-49a3-ba5c-8b0e541f0e59.mp4
-](https://drive.google.com/file/d/1uOYYxBSlLLNwlBKz2-shEShyU4YVj-L6/view?usp=sharing)
+[Link to Demo Video](https://drive.google.com/file/d/1uOYYxBSlLLNwlBKz2-shEShyU4YVj-L6/view?usp=sharing)
 ## Roadmap
 
  - Issues encountered and solved so far - [ISSUES](https://github.com/SaiPavanYalla/XpensAuditor/issues?q=is%3Aissue+is%3Aclosed)
