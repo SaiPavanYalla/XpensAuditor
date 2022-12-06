@@ -24,6 +24,17 @@ a smart way to track your expenses
  - The Mailing and SMS services have been configured for the app for ease of sending customer updates, password reset requests and reading personal expenses 
  - Profile set up module is where user can update their details 
  - Account Settings are available to change password, send password reset email
+ 
+ ## New Features
+ 
+ - Ability to create Groups and track Group expenses
+ - Analytics for Users and Groups
+ - Push Notifications when Group Transactions are created
+ - Sorting Transactions by Date, Amount, Category and Memo
+ - Ability to view past transactions of previous months
+ - Ability to create custom categories
+ - UI refresh
+ 
 
 ## Demo
 
