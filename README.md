@@ -48,7 +48,7 @@ a smart way to track your expenses
 ## System Architecture
 <img width="968" alt="Note Dec 5, 2022 png" src="https://user-images.githubusercontent.com/44353511/205783646-0a733c40-00b9-46a8-ab2c-9285e138088d.png">
 
-##Scalability
+## Scalability
 Currently the application stores User and Group data on Firebase Real-Time Database. Every smartphone with the app running needs to establish a connection to the database in order to sync data with the cloud. The app will run even without an internet connection, but in order to view the latest transactions of a group, you will need to query data from the database. The free version of Firebase Real-Time Database can support up to 100 concurrent connections, but this can easily be scaled up if we choose to go for a paid subscription from Firebase. The number of concurrent users in a Group can be scaled up to 200,000 per database easily without any impact on the performance of the app. 
 
 You can see a list of the paid plans at Firebase below - https://firebase.google.com/pricing?authuser=3&hl=en 
