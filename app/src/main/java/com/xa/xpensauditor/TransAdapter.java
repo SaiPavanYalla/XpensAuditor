@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder2> {
@@ -16,11 +17,11 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
 
     private int position;
 
-    public int getPosition(){
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(int position){
+    public void setPosition(int position) {
         this.position = position;
     }
 
@@ -31,15 +32,67 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
         return new TransAdapter.MyViewHolder2(itemView);
     }
 
+    public void refreshTransactionList() {
+        this.notifyDataSetChanged();
+    }
+
+    public void sort(int sortType) {
+        switch (sortType) {
+            case 0:
+                // SORT BY AMOUNT
+                this.transList.sort(new Comparator<Transaction>() {
+                    @Override
+                    public int compare(Transaction transaction, Transaction t1) {
+                        int tAmount = (int) (Float.parseFloat(transaction.getAmountStr()) * 100);
+                        int t1Amount = (int) (Float.parseFloat(t1.getAmountStr()) * 100);
+                        return t1Amount - tAmount;
+                    }
+                });
+                this.notifyDataSetChanged();
+                break;
+            case 1:
+                // SORT BY DATE
+                this.transList.sort(new Comparator<Transaction>() {
+                    @Override
+                    public int compare(Transaction transaction, Transaction t1) {
+                        return transaction.getDateInt() - t1.getDateInt();
+                    }
+                });
+                this.notifyDataSetChanged();
+                break;
+            case 2:
+                // SORT BY CATEGORY
+                this.transList.sort(new Comparator<Transaction>() {
+                    @Override
+                    public int compare(Transaction transaction, Transaction t1) {
+                        return transaction.getCategory().compareTo(t1.getCategory());
+                    }
+                });
+                this.notifyDataSetChanged();
+                break;
+            case 3:
+                // SORT BY MEMO
+                this.transList.sort(new Comparator<Transaction>() {
+                    @Override
+                    public int compare(Transaction transaction, Transaction t1) {
+                        return transaction.getShopname().compareTo(t1.getShopname());
+                    }
+                });
+                this.notifyDataSetChanged();
+                break;
+            default:
+        }
+    }
+
     @Override
     public void onBindViewHolder(final TransAdapter.MyViewHolder2 holder, int position) {
 
         Transaction trans = transList.get(position);
-        holder.tid.setText(trans.getTid());
-        holder.tcat.setText(trans.getT_cat());
-        holder.tamt.setText("$"+trans.getT_amt());
-        holder.tshopname.setText(trans.getT_shopname());
-        holder.tdate.setText(trans.getT_date());
+        holder.tId.setText(trans.getTid());
+        holder.tCategory.setText(trans.getCategory());
+        holder.tAmount.setText("$" + trans.getAmountStr());
+        holder.tShopname.setText(trans.getShopname());
+        holder.tDate.setText(trans.getDateStr());
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -64,51 +117,51 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
 
 
     public class MyViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnCreateContextMenuListener {
-        public TextView tid, tamt, tcat,tshopname,tdate;
+        public TextView tId, tAmount, tCategory, tShopname, tDate;
 
 
         public MyViewHolder2(View view) {
             super(view);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
-            tid = (TextView) view.findViewById(R.id.tid);
-            tamt = (TextView) view.findViewById(R.id.tamt);
-            tcat = (TextView) view.findViewById(R.id.tcat);
-            tshopname = (TextView) view.findViewById(R.id.tshopname);
-            tdate=(TextView) view.findViewById(R.id.tdate);
+            tId = (TextView) view.findViewById(R.id.tid);
+            tAmount = (TextView) view.findViewById(R.id.tamt);
+            tCategory = (TextView) view.findViewById(R.id.tcat);
+            tShopname = (TextView) view.findViewById(R.id.tshopname);
+            tDate = (TextView) view.findViewById(R.id.tdate);
             view.setOnCreateContextMenuListener(this);
 
         }
 
 
         @Override
-        public void onClick(View v)
-        {
-            mClickListener.OnItemClick(getAdapterPosition(),v);
+        public void onClick(View v) {
+            mClickListener.OnItemClick(getAdapterPosition(), v);
         }
 
         @Override
-        public boolean onLongClick(View v){
-            mClickListener.OnItemLongClick(getAdapterPosition(),v);
+        public boolean onLongClick(View v) {
+            mClickListener.OnItemLongClick(getAdapterPosition(), v);
             return false;
         }
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.setHeaderTitle("Select an action");
-            menu.add(getAdapterPosition(),11,0,"Delete");
+            menu.add(getAdapterPosition(), 11, 0, "Delete");
 
         }
     }
 
-    public void setOnItemClickListener(TransAdapter.ClickListener clickListener){
+    public void setOnItemClickListener(TransAdapter.ClickListener clickListener) {
         TransAdapter.mClickListener = clickListener;
 
     }
 
 
-    public interface ClickListener{
+    public interface ClickListener {
         void OnItemClick(int position, View v);
+
         void OnItemLongClick(int position, View v);
     }
 

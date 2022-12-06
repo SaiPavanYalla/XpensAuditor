@@ -58,14 +58,14 @@ public class AccountSettingsTest {
     @Test
     public void accountSettingsTest() {
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("drkanaki@ncsu.edu"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -75,7 +75,7 @@ public class AccountSettingsTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("abcd1234"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
@@ -88,19 +88,11 @@ public class AccountSettingsTest {
         materialButton.perform(click());
         SystemClock.sleep(5000);
         ViewInteraction imageView = onView(
-                allOf(withContentDescription("More options"),
-                        withParent(withParent(withId(R.id.toolbar))),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         imageView.check(matches(isDisplayed()));
 
         ViewInteraction overflowMenuButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        2),
-                                0),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         overflowMenuButton.perform(click());
         SystemClock.sleep(1000);
         ViewInteraction textView = onView(

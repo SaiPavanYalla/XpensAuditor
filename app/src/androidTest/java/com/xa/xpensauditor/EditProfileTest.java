@@ -59,15 +59,15 @@ public class EditProfileTest {
     @Test
     public void editProfileTest() {
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("mithilareddy1999@gmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        appCompatEditText.perform(replaceText("drkanaki@ncsu.edu"), closeSoftKeyboard());
+        SystemClock.sleep(5000);
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
                         childAtPosition(
@@ -76,8 +76,8 @@ public class EditProfileTest {
                                         0),
                                 0),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        appCompatEditText2.perform(replaceText("abcd1234"), closeSoftKeyboard());
+        SystemClock.sleep(5000);
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
                         childAtPosition(
@@ -87,14 +87,14 @@ public class EditProfileTest {
                                 3),
                         isDisplayed()));
         materialButton.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         withParent(allOf(withId(R.id.toolbar),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
         imageButton.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction appCompatImageButton = onView(
                 allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
@@ -105,14 +105,14 @@ public class EditProfileTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction checkedTextView = onView(
                 allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("PROFILE"),
                         withParent(allOf(withId(R.id.nav_profile),
                                 withParent(withId(com.google.android.material.R.id.design_navigation_view)))),
                         isDisplayed()));
         checkedTextView.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_profile),
                         childAtPosition(
@@ -120,16 +120,16 @@ public class EditProfileTest {
                                         childAtPosition(
                                                 withId(R.id.nav_view),
                                                 0)),
-                                2),
+                                3),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView = onView(
-                allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.userEmail), withText("drkanaki@ncsu.edu"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("mithilareddy1999@gmail.com")));
-        SystemClock.sleep(1000);
+        textView.check(matches(withText("drkanaki@ncsu.edu")));
+        SystemClock.sleep(5000);
         ViewInteraction appCompatImageButton2 = onView(
                 allOf(withId(R.id.editProfile),
                         childAtPosition(
@@ -139,13 +139,13 @@ public class EditProfileTest {
                                 0),
                         isDisplayed()));
         appCompatImageButton2.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction editText = onView(
-                allOf(withId(R.id.userName), withText("mithila"),
+                allOf(withId(R.id.userName), withText("Dakshil Kanakia"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class))),
                         isDisplayed()));
-        editText.check(matches(withText("mithila")));
-        SystemClock.sleep(1000);
+        editText.check(matches(withText("Dakshil Kanakia")));
+        SystemClock.sleep(5000);
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.submitButton), withText("Submit"),
                         childAtPosition(
@@ -154,25 +154,19 @@ public class EditProfileTest {
                                         0),
                                 2)));
         materialButton2.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.userEmail), withText("mithilareddy1999@gmail.com"),
+                allOf(withId(R.id.userEmail), withText("drkanaki@ncsu.edu"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView2.check(matches(withText("mithilareddy1999@gmail.com")));
-        SystemClock.sleep(1000);
+        textView2.check(matches(withText("drkanaki@ncsu.edu")));
+        SystemClock.sleep(5000);
         pressBack();
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction overflowMenuButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        2),
-                                0),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -182,7 +176,7 @@ public class EditProfileTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -192,7 +186,7 @@ public class EditProfileTest {
                                 12),
                         isDisplayed()));
         materialButton3.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton4 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -201,7 +195,7 @@ public class EditProfileTest {
                                         0),
                                 3)));
         materialButton4.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction imageView = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),

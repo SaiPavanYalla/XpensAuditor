@@ -26,7 +26,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.hamcrest.Description;
@@ -55,7 +54,7 @@ public class SignupActivityTest {
 //        auth = FirebaseAuth.getInstance();
 //        if (auth.getCurrentUser() != null) {
 //            String Uid = auth.getUid();
-//            new Firebase("https://xpensauditor-default-rtdb.firebaseio.com/").child(Uid).removeValue();
+//            new Firebase("https://xpense-auditor-default-rtdb.firebaseio.com").child(Uid).removeValue();
 //        }
         FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
@@ -77,10 +76,10 @@ public class SignupActivityTest {
 //                        isDisplayed()));
 //        materialButton.perform(click());
 
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
 
         ViewInteraction textInputEditText = onView(
-                allOf(withId(R.id.Name),
+                allOf(withId(R.id.groupName),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -88,10 +87,10 @@ public class SignupActivityTest {
                                 0),
                         isDisplayed()));
         textInputEditText.perform(replaceText("vineeth"), closeSoftKeyboard());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
 
         ViewInteraction textInputEditText2 = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -111,7 +110,7 @@ public class SignupActivityTest {
                                 0),
                         isDisplayed()));
         textInputEditText3.perform(replaceText("1234567890"), closeSoftKeyboard());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
 
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.sign_up_button), withText("Verify mail and Set Password"),
@@ -122,10 +121,10 @@ public class SignupActivityTest {
                                 3),
                         isDisplayed()));
         materialButton2.perform(click());
-        SystemClock.sleep(8000);
+        SystemClock.sleep(10000);
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.email),
+                allOf(withId(R.id.emailIds),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("com.google.android.material.textfield.TextInputLayout")),
@@ -133,7 +132,7 @@ public class SignupActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText(email), closeSoftKeyboard());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -144,7 +143,7 @@ public class SignupActivityTest {
                                 0),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
 
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),
@@ -167,7 +166,7 @@ public class SignupActivityTest {
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
 
         ViewInteraction navigationMenuItemView = onView(
                 allOf(withId(R.id.nav_logout),
@@ -176,10 +175,10 @@ public class SignupActivityTest {
                                         childAtPosition(
                                                 withId(R.id.nav_view),
                                                 0)),
-                                6),
+                                7),
                         isDisplayed()));
         navigationMenuItemView.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(5000);
 
         ViewInteraction materialButton4 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes"),
@@ -189,7 +188,7 @@ public class SignupActivityTest {
                                         0),
                                 3)));
         materialButton4.perform(scrollTo(), click());
-        SystemClock.sleep(4000);
+        SystemClock.sleep(5000);
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.btn_login), withText("LOGIN"),

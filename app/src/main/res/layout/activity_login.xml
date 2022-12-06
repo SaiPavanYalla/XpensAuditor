@@ -30,14 +30,13 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/emailIds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
+                android:textColor="@color/colorPrimaryText"
                 android:autofillHints="emailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +51,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@android:color/white"
                 android:autofillHints="password"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,7 +68,7 @@
             android:textColor="@android:color/black" />
 
         <Button
-            android:id="@+id/btn_reset_password"
+            android:id="@+id/create_group"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"

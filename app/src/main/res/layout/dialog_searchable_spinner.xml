@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_category"
+        android:textColor="@color/ap_black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_category"
+        android:hint="@string/search"
+        android:padding="12dp"
+        android:textColor="@color/ap_black"
+        android:textColorHint="@color/ap_gray"
+        android:singleLine="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:autofillHints="Medicines"
+        android:inputType="textShortMessage" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview_category"
+        />
+
+</LinearLayout>

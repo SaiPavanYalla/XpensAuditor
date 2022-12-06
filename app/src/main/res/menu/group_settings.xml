@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/group_members"
+        android:orderInCategory="100"
+        android:title="@string/group_members"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/group_analytics"
+        android:orderInCategory="100"
+        android:title="@string/group_analytics"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/add_people_to_group"
+        android:orderInCategory="100"
+        android:title="@string/add_member_to_group"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/leave_group"
+        android:orderInCategory="100"
+        android:title="@string/leave_group"
+        app:showAsAction="never" />
+</menu>

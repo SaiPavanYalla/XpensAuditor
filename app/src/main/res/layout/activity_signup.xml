@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Name"
+                android:id="@+id/groupName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Name"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
+                android:id="@+id/emailIds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -83,7 +83,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_reset_password"
+            android:id="@+id/create_group"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"

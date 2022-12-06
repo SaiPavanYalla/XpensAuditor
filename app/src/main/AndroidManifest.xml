@@ -24,29 +24,44 @@
         android:theme="@style/Theme.XpensAuditor"
         tools:targetApi="31">
         <activity
-            android:name=".SMSReaderActivity"
+            android:name=".CreateGroupActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.XpensAuditor.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GroupListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AddMemberToGroupActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GroupActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Suggest"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SMSTransacShowActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SMSDBFetchActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -78,13 +93,6 @@
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.XpensAuditor.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ShowTransActivity"
-            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -139,6 +147,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <service
+            android:name=".PushNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

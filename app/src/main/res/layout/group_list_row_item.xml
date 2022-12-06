@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/imageGroupImage"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_row="0"
+            android:layout_rowSpan="2"
+            android:layout_column="0"
+            android:contentDescription="@string/group"
+            android:padding="8dp"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/textGroupName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginStart="10dp"
+            android:paddingTop="4dp"
+            android:textColor="#020202"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textGroupCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginStart="10dp"
+            android:textColor="#7A7474"
+            android:textSize="16sp" />
+
+    </GridLayout>
+</androidx.cardview.widget.CardView>

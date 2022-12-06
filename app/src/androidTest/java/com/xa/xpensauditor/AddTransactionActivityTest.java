@@ -28,10 +28,13 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,120 +47,54 @@ public class AddTransactionActivityTest {
     public ActivityScenarioRule<LoginActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(LoginActivity.class);
 
-    @Test
-    public void addTransactionActivityTest() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.email),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("com.google.android.material.textfield.TextInputLayout")),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText.perform(replaceText("xpensauditor@gmail.com"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.password),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("com.google.android.material.textfield.TextInputLayout")),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText("defaultpw9"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.btn_login), withText("LOGIN"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        0),
-                                3),
-                        isDisplayed()));
-        materialButton.perform(click());
-        SystemClock.sleep(3000);
-        ViewInteraction textView = onView(
-                allOf(withText("XpensAuditor"),
+    @After
+    public void signoutandclear() {
+        FirebaseAuth auth;
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            auth.signOut();
+        }
+    }
+
+    public static void opendrawer(){
+        ViewInteraction imageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
                         withParent(allOf(withId(R.id.toolbar),
                                 withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class)))),
                         isDisplayed()));
-        textView.check(matches(withText("XpensAuditor")));
-        SystemClock.sleep(1000);
-        ViewInteraction floatingActionButton = onView(
-                allOf(withId(R.id.fab),
+        imageButton.check(matches(isDisplayed()));
+        SystemClock.sleep(5000);
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Open navigation drawer"),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.drawer_layout),
-                                        0),
-                                2),
-                        isDisplayed()));
-        floatingActionButton.perform(click());
-        SystemClock.sleep(1000);
-        ViewInteraction button = onView(
-                allOf(withId(R.id.btAddTransaction), withText("ADD TRANSACTION"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.addTransAmt),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText3.perform(replaceText("56.00"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.addShopName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
+                                                0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText4.perform(replaceText("Belk"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        ViewInteraction customEditText = onView(
-                allOf(withClassName(is("android.widget.NumberPicker$CustomEditText")), withText("2022"),
-                        childAtPosition(
-                                allOf(withClassName(is("android.widget.NumberPicker")),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        customEditText.perform(pressImeActionButton());
-        SystemClock.sleep(1000);
-        ViewInteraction materialButton2 = onView(
-                allOf(withId(R.id.btAddTransaction), withText("Add Transaction"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        0),
-                                4),
-                        isDisplayed()));
-        materialButton2.perform(click());
-        SystemClock.sleep(1000);
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.btAddTransaction), withText("ADD TRANSACTION"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-        SystemClock.sleep(1000);
-        pressBack();
-        SystemClock.sleep(1000);
+        appCompatImageButton.perform(click());
+        SystemClock.sleep(5000);
+    }
+
+    public static void selectgroup(){
+        ViewInteraction checkedTextView = onView(
+                allOf(withId(com.google.android.material.R.id.design_menu_item_text), withText("GROUP")));
+
+        checkedTextView.check(matches(isDisplayed()));
+        SystemClock.sleep(5000);
+        ViewInteraction navigationMenuItemView = onView(
+                allOf(withId(R.id.nav_group)));
+        navigationMenuItemView.perform(click());
+        SystemClock.sleep(5000);
+    }
+
+    public static void signout(){
+        SystemClock.sleep(5000);
         ViewInteraction overflowMenuButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        2),
-                                0),
-                        isDisplayed()));
+                allOf(withContentDescription("More options")));
         overflowMenuButton.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialTextView = onView(
                 allOf(withId(androidx.recyclerview.R.id.title), withText("Account Settings"),
                         childAtPosition(
@@ -167,7 +104,7 @@ public class AddTransactionActivityTest {
                                 0),
                         isDisplayed()));
         materialTextView.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.sign_out), withText("Sign Out"),
                         childAtPosition(
@@ -177,7 +114,7 @@ public class AddTransactionActivityTest {
                                 12),
                         isDisplayed()));
         materialButton3.perform(click());
-        SystemClock.sleep(1000);
+        SystemClock.sleep(5000);
         ViewInteraction materialButton4 = onView(
                 allOf(withId(android.R.id.button1), withText("SignOut"),
                         childAtPosition(
@@ -186,12 +123,96 @@ public class AddTransactionActivityTest {
                                         0),
                                 3)));
         materialButton4.perform(scrollTo(), click());
-        SystemClock.sleep(1000);
-        ViewInteraction imageView = onView(
+        SystemClock.sleep(5000);
+        ViewInteraction imageView3 = onView(
                 allOf(withContentDescription("XpensAuditor"),
                         withParent(withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class))),
                         isDisplayed()));
-        imageView.check(matches(isDisplayed()));
+        imageView3.check(matches(isDisplayed()));
+    }
+
+    public static void clickfab(){
+        SystemClock.sleep(5000);
+        ViewInteraction fabButton = onView(
+                allOf(withId(R.id.fab)));
+        fabButton.perform(click());
+        SystemClock.sleep(5000);
+    }
+    public static void login(){
+        SystemClock.sleep(5000);
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.emailIds),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("com.google.android.material.textfield.TextInputLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatEditText.perform(replaceText("drkanaki@ncsu.edu"), closeSoftKeyboard());
+
+        SystemClock.sleep(5000);
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.password),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("com.google.android.material.textfield.TextInputLayout")),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatEditText2.perform(replaceText("abcd1234"), closeSoftKeyboard());
+        SystemClock.sleep(5000);
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.btn_login), withText("LOGIN"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                        0),
+                                3),
+                        isDisplayed()));
+        materialButton.perform(click());
+
+        SystemClock.sleep(5000);
+    }
+
+    public static void addAmount(){
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.addTransAmt)));
+        appCompatEditText.perform(replaceText("234"), closeSoftKeyboard());
+        SystemClock.sleep(5000);
+        ViewInteraction appCompatEditText1 = onView(
+                allOf(withId(R.id.addShopName)));
+        appCompatEditText1.perform(replaceText("Walmart"), closeSoftKeyboard());
+    }
+
+    public static void addCategory(){
+        ViewInteraction addCategory = onView(
+                allOf(withId(R.id.textViewCategory)));
+        addCategory.perform(click());
+        SystemClock.sleep(5000);
+        ViewInteraction selectcategory = onView(
+                allOf(withText("Education")));
+        selectcategory.check(matches(isDisplayed()));
+        selectcategory.perform(click());
+        SystemClock.sleep(5000);
+
+        ViewInteraction pressbutton = onView(
+                allOf(withId(R.id.btAddTransaction)));
+        pressbutton.perform(click());
+        SystemClock.sleep(5000);
+        pressBack();
+        SystemClock.sleep(5000);
+    }
+
+    @Test
+    public void addTransactionActivityTest() {
+        login();
+        clickfab();
+        addAmount();
+        addCategory();
+        signout();
     }
 
     private static Matcher<View> childAtPosition(
